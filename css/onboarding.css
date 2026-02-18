@@ -143,6 +143,31 @@
   margin-top: var(--sp-2);
 }
 
+.mute-btn {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: none;
+  border: none;
+  font-family: var(--font-headline);
+  font-size: 8px;
+  letter-spacing: 0.5px;
+  color: var(--paper);
+  opacity: 0.45;
+  cursor: pointer;
+  z-index: 10;
+  padding: 4px 6px;
+  transition: opacity 0.2s;
+}
+
+.mute-btn:hover {
+  opacity: 0.8;
+}
+
+.mute-btn.muted {
+  opacity: 0.25;
+}
+
 .start-byline {
   font-family: var(--font-headline);
   font-size: 5px;

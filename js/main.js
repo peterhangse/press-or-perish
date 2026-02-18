@@ -519,12 +519,14 @@ function addMuteButton() {
   const startScreen = document.getElementById('screen-start');
   const btn = document.createElement('button');
   btn.id = 'mute-btn';
-  btn.textContent = AudioManager.isMuted() ? '🔇' : '🔊';
-  btn.style.cssText = 'position:absolute;top:8px;left:8px;background:none;border:none;font-size:20px;cursor:pointer;z-index:10;opacity:0.7;padding:4px;';
+  btn.className = 'mute-btn';
+  btn.textContent = AudioManager.isMuted() ? '♪ off' : '♪ on';
   btn.addEventListener('click', () => {
     const muted = AudioManager.toggleMute();
-    btn.textContent = muted ? '🔇' : '🔊';
+    btn.textContent = muted ? '♪ off' : '♪ on';
+    btn.classList.toggle('muted', muted);
   });
+  if (AudioManager.isMuted()) btn.classList.add('muted');
   startScreen.appendChild(btn);
 }
 

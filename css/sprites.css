@@ -1,0 +1,163 @@
+/* ============================================
+   SPRITE SYSTEM — CSS pixel art
+   Grid: 15×20 units @ 8px/unit = 120×160px
+   ============================================ */
+
+/* ── Base pixel block ── */
+.p {
+  position: absolute;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* ── Sprite container ── */
+.sprite-container {
+  position: relative;
+  width: 120px;
+  height: 160px;
+  overflow: hidden;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* ── Sprite body wrapper — idle sway ── */
+.sprite-body {
+  position: absolute;
+  inset: 0;
+  animation: sprite-idle 4s ease-in-out infinite;
+}
+
+@keyframes sprite-idle {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  25%      { transform: translateX(1px) translateY(0); }
+  50%      { transform: translateX(0) translateY(-1px); }
+  75%      { transform: translateX(-1px) translateY(0); }
+}
+
+/* ── Eye blink animation ── */
+.sprite-eye {
+  animation: sprite-blink 4s ease-in-out infinite;
+}
+
+@keyframes sprite-blink {
+  0%, 92%  { transform: scaleY(1); }
+  94%      { transform: scaleY(0.1); }
+  96%      { transform: scaleY(1); }
+  /* Double blink */
+  97%      { transform: scaleY(0.1); }
+  99%      { transform: scaleY(1); }
+  100%     { transform: scaleY(1); }
+}
+
+/* NPC portraits — 120×160 display */
+.npc-sprite {
+  width: 120px;
+  height: 160px;
+  image-rendering: pixelated;
+  position: relative;
+}
+
+/* Expression overlay — changes with interview state */
+.npc-sprite .expression {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  image-rendering: pixelated;
+  transition: opacity 0.3s ease;
+}
+.npc-sprite .expression.hidden { opacity: 0; }
+
+/* ── SKIN TONES ── */
+.s-light { background: #d4a574; }
+.s-mid   { background: #c8956a; }
+.s-worn  { background: #b87a50; }
+.s-pale  { background: #dbb898; }
+.s-dark  { background: #8a6040; }
+
+/* ── HAIR ── */
+.h-dark-brown { background: #2a1a0a; }
+.h-brown      { background: #5a3a18; }
+.h-grey       { background: #7a7068; }
+.h-silver     { background: #aaa09a; }
+.h-blonde     { background: #c8a040; }
+.h-black      { background: #1a1208; }
+
+/* ── EYES ── */
+.e-dark  { background: #1a1208; }
+.e-blue  { background: #4a6a8a; }
+.e-green { background: #4a7a4a; }
+.e-white { background: #e8e0d0; }
+
+/* ── CLOTHES ── */
+.c-worker-blue   { background: #2a4a6a; }
+.c-worker-grey   { background: #5a5850; }
+.c-suit-dark     { background: #1e2830; }
+.c-suit-navy     { background: #1a2a4a; }
+.c-cardigan-wine { background: #5a2030; }
+.c-shirt-white   { background: #c8c0b0; }
+.c-shirt-check   { background: #5a6858;
+  background-image:
+    linear-gradient(45deg, rgba(0,0,0,.08) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.08) 75%),
+    linear-gradient(45deg, rgba(0,0,0,.08) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.08) 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 4px 4px;
+}
+.c-uniform-blue  { background: #283a58; }
+.c-uniform-dark  { background: #1e2838; }
+.c-blouse-grey   { background: #8a8880; }
+
+/* ── EXTRAS / ACCESSORIES ── */
+.x-bandage  { background: #d4c9a8; }
+.x-tie-red  { background: #8a2020; }
+.x-tie-grey { background: #5a5a58; }
+.x-collar   { background: #d0c8b0; }
+.x-mustache { background: #2a1a0a; }
+.x-glasses  { background: transparent; border: 1px solid #2a1a08; }
+.x-badge    { background: #c8a820; }
+.x-sweat    { background: rgba(140, 180, 220, 0.6); border-radius: 50%; }
+.x-shadow   { background: rgba(0, 0, 0, 0.25); }
+.x-blush    { background: rgba(180, 80, 80, 0.25); }
+
+/* ── FALLBACK — placeholder initials ── */
+.pixel-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--paper-dark);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pixel-placeholder::after {
+  content: attr(data-initials);
+  font-family: var(--font-numbers);
+  font-size: 32px;
+  color: var(--ink-faded);
+  letter-spacing: 2px;
+}
+
+/* ── LEGACY pixel-person silhouette ── */
+.pixel-person {
+  width: 100%; height: 100%;
+  position: relative; overflow: hidden;
+}
+.pixel-person::before {
+  content: '';
+  position: absolute;
+  top: 15%; left: 50%; transform: translateX(-50%);
+  width: 32px; height: 32px;
+  background: var(--ink-faded); border-radius: 4px;
+}
+.pixel-person::after {
+  content: '';
+  position: absolute;
+  top: 42%; left: 50%; transform: translateX(-50%);
+  width: 48px; height: 56px;
+  background: var(--ink-faded); border-radius: 2px;
+}
+.pixel-person.neutral::before  { background: #5a5040; }
+.pixel-person.guarded::before  { background: #6a4030; }
+.pixel-person.open::before     { background: #406a40; }
+.pixel-person.hostile::before  { background: #6a2020; }

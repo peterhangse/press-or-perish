@@ -1,0 +1,36 @@
+{
+  "desk_notes": {
+    "day_1": "Welcome, {name}. Prove I didn't make a mistake.",
+    "day_2": "Regionbladet sold 200 more copies yesterday. Step it up.",
+    "day_3": "Halfway. I need results, not excuses.",
+    "day_4": "One day left after today. Give me something I can be proud of.",
+    "day_5": "Last day. Everything rides on this.",
+    "warning": "We're behind. Every point counts now.",
+    "danger": "I'm already writing your termination letter, {name}. Change my mind.",
+    "default": "Deliver."
+  },
+  "result_quotes": {
+    "critical": "{name}, you know what happens if this continues.",
+    "bad": "Not enough, {name}. We're losing readers every day.",
+    "warning": "We're still behind. Regionbladet doesn't rest.",
+    "neutral": "Tomorrow again.",
+    "good": "Hmph. Not bad, {name}. Do it again tomorrow.",
+    "great": "...Good work. Don't tell anyone I said that."
+  },
+  "gameover_fired": {
+    "text": "Pack your things, {name}. I already called the temp agency.",
+    "name": "Gunnar Ek"
+  },
+  "gameover_survived": {
+    "barely": "You survived the week, {name}. Barely. See you Monday — if I don't find someone better.",
+    "decent": "Not bad for a Stockholm kid, {name}. You can stay. For now.",
+    "dominant": "Hmm. Maybe I was wrong about you, {name}. *looks away* Maybe.",
+    "name": "Gunnar Ek"
+  },
+  "onboarding": {
+    "intro": "Welcome! It's good to have someone young on the team.",
+    "rules": "Every morning you'll find today's leads on the desk. Pick one — just one — and dig.",
+    "threat": "If we fall fifteen points behind Regionbladet... there's no job left.",
+    "start": "Got it? Good. Get to work."
+  }
+}

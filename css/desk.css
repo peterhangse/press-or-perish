@@ -1,0 +1,429 @@
+/* ============================================
+   MORNING DESK SCREEN — 70s Nordic Noir
+   ============================================ */
+
+#screen-desk {
+  background:
+    /* Wood grain texture */
+    repeating-linear-gradient(
+      2deg,
+      transparent 0px,
+      transparent 3px,
+      rgba(0,0,0,0.06) 3px,
+      rgba(0,0,0,0.06) 4px
+    ),
+    /* Warm lamp glow from upper right */
+    radial-gradient(ellipse at 85% 10%, rgba(245,228,160,0.12) 0%, transparent 50%),
+    /* Subtle vignette */
+    radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.3) 100%),
+    /* Base wood color */
+    linear-gradient(180deg, #3a2a18 0%, #2a1f12 30%, #241a0e 100%);
+  padding: 0;
+  position: relative;
+}
+
+/* Desk edge shadow at bottom */
+#screen-desk::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.4));
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* — Top bar with window — */
+.desk-top-bar {
+  height: 60px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 var(--sp-3);
+  /* Darker wall behind the window */
+  background:
+    linear-gradient(180deg, #1a1208 0%, #221a0e 70%, transparent 100%);
+}
+
+.desk-window {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 50px;
+  border: 2px solid #4a3a28;
+  border-top: none;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(135,206,235,0.08);
+}
+
+.desk-window-sky {
+  width: 100%;
+  height: 100%;
+  transition: background-color 1s ease;
+}
+
+.desk-window-sky.morning   { background: var(--window-morning); }
+.desk-window-sky.afternoon { background: var(--window-afternoon); }
+.desk-window-sky.evening   { background: var(--window-evening); }
+
+/* — Boss note (pinned top) — */
+.boss-note {
+  position: absolute;
+  top: 4px;
+  right: 56px;
+  background: #ffe680;
+  padding: var(--sp-1) var(--sp-2);
+  font-family: var(--font-body);
+  font-size: 8px;
+  color: var(--ink);
+  max-width: 120px;
+  line-height: 1.3;
+  transform: rotate(2deg);
+  box-shadow: 1px 1px 2px var(--shadow);
+  border-bottom: 1px solid #d4c060;
+  z-index: 5;
+}
+
+.boss-note-name {
+  font-weight: bold;
+  font-size: 7px;
+  margin-bottom: 2px;
+}
+
+/* — Lead cards area — */
+.desk-leads {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: min-content;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  align-content: start;
+}
+
+/* Coffee ring stain on desk */
+.desk-leads::before {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid rgba(80, 50, 20, 0.15);
+  background: radial-gradient(circle, rgba(80, 50, 20, 0.06) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Pencil scratch marks */
+.desk-leads::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  width: 40px;
+  height: 2px;
+  background: rgba(60, 40, 20, 0.12);
+  transform: rotate(-3deg);
+  pointer-events: none;
+  z-index: 0;
+  box-shadow:
+    6px 8px 0 rgba(60, 40, 20, 0.08),
+    -2px 14px 0 rgba(60, 40, 20, 0.06);
+}
+
+/* — Individual lead card — */
+.lead-card {
+  background:
+    /* Subtle paper fiber texture */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"),
+    var(--paper);
+  border: 1px solid var(--ink-faded);
+  padding: var(--sp-1) var(--sp-2);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  z-index: 1;
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+  overflow: hidden;
+  /* Physical paper on desk — heavier shadow, slight wear */
+  box-shadow:
+    1px 2px 4px rgba(0,0,0,0.25),
+    0 0 0 0.5px rgba(0,0,0,0.1);
+  /* Deal-in animation */
+  opacity: 0;
+  animation: card-deal 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+/* Staggered deal timing — cards dealt one by one */
+.lead-card:nth-child(1)  { animation-delay: 0.05s; }
+.lead-card:nth-child(2)  { animation-delay: 0.1s; }
+.lead-card:nth-child(3)  { animation-delay: 0.15s; }
+.lead-card:nth-child(4)  { animation-delay: 0.2s; }
+.lead-card:nth-child(5)  { animation-delay: 0.25s; }
+.lead-card:nth-child(6)  { animation-delay: 0.3s; }
+.lead-card:nth-child(7)  { animation-delay: 0.35s; }
+.lead-card:nth-child(8)  { animation-delay: 0.4s; }
+
+@keyframes card-deal {
+  0%   { opacity: 0; transform: translateY(-20px) rotate(3deg) scale(0.9); }
+  70%  { opacity: 1; transform: translateY(2px) rotate(-0.5deg) scale(1.01); }
+  100% { opacity: 1; transform: translateY(0) rotate(var(--card-rot, 0deg)) scale(1); }
+}
+
+/* Scattered paper feel — each card slightly askew via custom property */
+.lead-card:nth-child(1)  { --card-rot: -0.4deg; }
+.lead-card:nth-child(2)  { --card-rot: 0.6deg; }
+.lead-card:nth-child(3)  { --card-rot: -0.2deg; }
+.lead-card:nth-child(4)  { --card-rot: 0.5deg; }
+.lead-card:nth-child(5)  { --card-rot: 0.3deg; }
+.lead-card:nth-child(6)  { --card-rot: -0.7deg; }
+.lead-card:nth-child(7)  { --card-rot: 0.4deg; }
+.lead-card:nth-child(8)  { --card-rot: -0.5deg; }
+
+/* Dog-ear fold mark on some cards */
+.lead-card:nth-child(odd)::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, transparent 50%, var(--paper-dark) 50%);
+  pointer-events: none;
+}
+
+.lead-card:hover {
+  border-color: var(--ink);
+  transform: translateY(-2px) rotate(0deg) !important;
+  box-shadow:
+    2px 4px 8px rgba(0,0,0,0.35),
+    0 0 0 1px rgba(0,0,0,0.08);
+}
+
+.lead-card.selected {
+  border-color: var(--selected);
+  box-shadow:
+    0 2px 10px rgba(212, 168, 64, 0.4),
+    0 0 0 2px var(--selected);
+  z-index: 2;
+  transform: translateY(-1px) rotate(0deg) !important;
+}
+
+.lead-card.locked {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Top row: badge + difficulty */
+.lead-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+/* Source type badge — colored tag */
+.lead-badge {
+  font-family: var(--font-numbers);
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 1px 6px;
+  border-radius: 2px;
+  color: var(--paper);
+  line-height: 1.4;
+}
+
+.lead-badge.letter   { background: #8a6a2a; }
+.lead-badge.document { background: #4a6a3a; }
+.lead-badge.street   { background: #5a3a6a; }
+
+/* Difficulty dots */
+.lead-diff {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.diff-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  border: 1px solid var(--ink-faded);
+  background: transparent;
+}
+
+.diff-dot.filled {
+  background: var(--ink-faded);
+}
+
+/* Lead headline */
+.lead-headline {
+  font-family: var(--font-headline);
+  font-size: 12px;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.lead-text {
+  font-family: var(--font-body);
+  font-size: 8px;
+  color: var(--ink-faded);
+  line-height: 1.3;
+  flex: 1;
+}
+
+.lead-npc {
+  font-family: var(--font-body);
+  font-size: 7px;
+  color: var(--ink-light);
+  font-style: italic;
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+/* Bottom action bar — heavy desk edge like Papers Please counter */
+.desk-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-4) var(--sp-8);
+  background:
+    /* Metal strip */
+    linear-gradient(180deg,
+      rgba(60,50,30,0.4) 0%,
+      rgba(0,0,0,0.2) 2px,
+      #1e1508 2px,
+      #161004 100%
+    );
+  border-top: 2px solid rgba(80, 60, 30, 0.4);
+  gap: var(--sp-8);
+  position: relative;
+  z-index: 2;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.desk-selected-label {
+  font-family: var(--font-body);
+  font-size: 9px;
+  color: var(--paper-dim);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.desk-investigate-btn {
+  background: linear-gradient(180deg, #4a3a24 0%, #2a1f12 100%);
+  color: var(--paper);
+  border: 2px solid var(--lamp-dim);
+  padding: var(--sp-4) var(--sp-16);
+  font-family: var(--font-headline);
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  /* Heavy physical button — raised off desk */
+  box-shadow:
+    0 4px 0 #0d0a04,
+    0 5px 8px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(245,228,160,0.1);
+  transform: translateY(0);
+  transition: transform 60ms ease, box-shadow 60ms ease, background 0.15s, opacity 0.15s;
+}
+
+.desk-investigate-btn:hover:not(:disabled) {
+  background: linear-gradient(180deg, #5a4a34 0%, #3a2f1a 100%);
+  box-shadow:
+    0 4px 0 #0d0a04,
+    0 6px 10px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(245,228,160,0.15);
+  transform: translateY(-1px);
+}
+
+.desk-investigate-btn:active:not(:disabled) {
+  /* STAMPED down */
+  box-shadow:
+    0 1px 0 #0d0a04,
+    0 1px 2px rgba(0,0,0,0.4);
+  transform: translateY(3px);
+  transition: transform 30ms ease, box-shadow 30ms ease;
+}
+
+.desk-investigate-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+  box-shadow: none;
+  transform: translateY(2px);
+}
+
+/* Legacy (hidden) */
+.lead-preview { display: none; }
+.lead-difficulty { display: none; }
+
+/* — Day Zero fly-in boss note — */
+.flyin-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.flyin-note {
+  background: #ffe680;
+  padding: 16px 20px;
+  max-width: 280px;
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.4);
+  border-bottom: 2px solid #d4c060;
+  transform: scale(0.3) translateY(60px);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.3s ease,
+              top 0.5s ease,
+              left 0.5s ease,
+              max-width 0.5s ease,
+              padding 0.5s ease;
+}
+
+.flyin-note.visible {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+.flyin-note.fly-to-corner {
+  position: absolute;
+  top: 4px;
+  right: 56px;
+  left: auto;
+  transform: scale(0.55) rotate(2deg);
+  opacity: 0;
+  max-width: 120px;
+  padding: 4px 8px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Fade-in for the pinned note after fly animation */
+.boss-note.fade-in {
+  animation: noteReveal 0.3s ease forwards;
+}
+
+@keyframes noteReveal {
+  from { opacity: 0; transform: rotate(2deg) scale(0.9); }
+  to   { opacity: 1; transform: rotate(2deg) scale(1); }
+}

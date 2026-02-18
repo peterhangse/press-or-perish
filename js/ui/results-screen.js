@@ -1,0 +1,304 @@
+/**
+ * RESULTS SCREEN — End-of-day comparison: Your paper vs. Regionbladet
+ */
+
+import * as CompetitorAI from '../engine/competitor-ai.js';
+
+/**
+ * Show end-of-day results
+ * @param {Object} opts
+ * @param {string} opts.playerHeadline - Player's chosen headline
+ * @param {number} opts.playerScore - Player's total points today
+ * @param {number} opts.competitorScore - Competitor's score today
+ * @param {string} opts.competitorHeadline - Competitor's headline
+ * @param {number} opts.deficitBefore - Deficit before today
+ * @param {number} opts.deficitAfter - Deficit after today
+ * @param {number} opts.baseValue - Story base value
+ * @param {number} opts.tierBonus - Tier bonus (tier*2)
+ * @param {number} opts.day - Current day
+ * @param {string} opts.bossQuote - Boss reaction quote
+ * @param {Function} opts.onContinue - Callback when player continues
+ */
+export function render(opts) {
+  const container = document.getElementById('screen-results');
+  container.innerHTML = '';
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'results-container';
+
+  // ═══ PHASE 1: Your story scoring + "Go to sleep" ═══
+  const phase1 = document.createElement('div');
+  phase1.className = 'results-phase results-phase-1';
+
+  const title1 = document.createElement('div');
+  title1.className = 'results-title';
+  title1.textContent = opts.isDayZero ? 'STORY FILED' : `DAY ${opts.day} — STORY FILED`;
+  phase1.appendChild(title1);
+
+  // Scoring breakdown (your story only)
+  const breakdown = document.createElement('div');
+  breakdown.className = 'results-breakdown';
+  addNewsValueRow(breakdown, opts.baseValue);
+  addInterviewBonusRow(breakdown, opts.tier || 0, opts.tierBonus);
+  addBreakdownRow(breakdown, 'Your total', `${opts.playerScore}`, 'positive', true);
+  phase1.appendChild(breakdown);
+
+  // Go to sleep button
+  const sleepBtn = document.createElement('button');
+  sleepBtn.className = 'btn-paper results-sleep-btn';
+  sleepBtn.textContent = 'Go to sleep';
+  sleepBtn.addEventListener('click', () => {
+    sleepBtn.remove();
+    showPhase2(wrapper, opts);
+  });
+  phase1.appendChild(sleepBtn);
+
+  wrapper.appendChild(phase1);
+  container.appendChild(wrapper);
+}
+
+/**
+ * Phase 2: Headlines slide in, then comparison, deficit, boss quote
+ */
+function showPhase2(wrapper, opts) {
+  // Update title
+  const title = wrapper.querySelector('.results-title');
+  if (title) title.textContent = opts.isDayZero ? 'TRIAL DAY — RESULTS' : `DAY ${opts.day} — RESULTS`;
+
+  // Side-by-side comparison container
+  const comparison = document.createElement('div');
+  comparison.className = 'results-comparison';
+
+  // Player's paper — slides in first
+  const yours = buildPaperCard(
+    'YOUR PAPER',
+    'Småstads Tidning',
+    opts.playerHeadline,
+    opts.playerScore,
+    true
+  );
+  yours.classList.add('results-slide-in-left');
+  comparison.appendChild(yours);
+
+  // Competitor's paper — slides in second (delayed)
+  const theirs = buildPaperCard(
+    'THE COMPETITION',
+    CompetitorAI.getCompetitorName(),
+    opts.competitorHeadline,
+    opts.competitorScore,
+    false
+  );
+  theirs.classList.add('results-slide-in-right');
+  comparison.appendChild(theirs);
+
+  // Insert comparison after the breakdown
+  const breakdown = wrapper.querySelector('.results-breakdown');
+  breakdown.parentNode.insertBefore(comparison, breakdown);
+
+  // Phase 2 bottom section — appears after headlines
+  const phase2Bottom = document.createElement('div');
+  phase2Bottom.className = 'results-phase results-phase-2';
+  phase2Bottom.style.opacity = '0';
+
+  // Competitor row in breakdown
+  const compBreakdown = document.createElement('div');
+  compBreakdown.className = 'results-breakdown';
+  addBreakdownRow(compBreakdown, CompetitorAI.getCompetitorName(), `${opts.competitorScore}`, '');
+  const delta = opts.playerScore - opts.competitorScore;
+  addBreakdownRow(compBreakdown, 'Today\'s change', `${delta > 0 ? '+' : ''}${delta}`, delta > 0 ? 'positive' : delta < 0 ? 'negative' : '', true);
+  phase2Bottom.appendChild(compBreakdown);
+
+  // Deficit update
+  const deficitRow = document.createElement('div');
+  deficitRow.className = 'results-deficit';
+
+  const defLabel = document.createElement('span');
+  defLabel.className = 'results-deficit-label';
+  defLabel.textContent = 'Deficit: ';
+
+  const defBefore = document.createElement('span');
+  defBefore.className = 'results-deficit-value';
+  defBefore.textContent = opts.deficitBefore;
+
+  const arrow = document.createElement('span');
+  arrow.className = 'results-deficit-arrow';
+  arrow.textContent = ' → ';
+
+  const defAfter = document.createElement('span');
+  defAfter.className = `results-deficit-value ${opts.deficitAfter > 0 ? 'positive' : opts.deficitAfter < 0 ? 'negative' : ''}`;
+  defAfter.style.color = opts.deficitAfter < 0 ? (opts.deficitAfter <= -10 ? 'var(--deficit-red)' : opts.deficitAfter <= -5 ? 'var(--deficit-warn)' : 'var(--deficit-red)') : opts.deficitAfter > 0 ? 'var(--deficit-safe)' : '';
+  defAfter.textContent = opts.deficitAfter;
+
+  deficitRow.appendChild(defLabel);
+  deficitRow.appendChild(defBefore);
+  deficitRow.appendChild(arrow);
+  deficitRow.appendChild(defAfter);
+  phase2Bottom.appendChild(deficitRow);
+
+  // Boss quote
+  if (opts.bossQuote) {
+    const quote = document.createElement('div');
+    quote.className = 'results-boss-quote';
+    quote.textContent = `"${opts.bossQuote}" — Gunnar`;
+    phase2Bottom.appendChild(quote);
+  }
+
+  // Competitor shock message (Day Zero only)
+  if (opts.competitorShock) {
+    const shock = document.createElement('div');
+    shock.className = 'results-boss-quote';
+    shock.style.color = 'var(--deficit-red)';
+    shock.textContent = opts.competitorShock;
+    phase2Bottom.appendChild(shock);
+  }
+
+  // Continue button
+  const btn = document.createElement('button');
+  btn.className = 'btn-paper results-continue';
+  if (opts.isDayZero) {
+    btn.textContent = 'Begin for real →';
+  } else {
+    btn.textContent = opts.day < 5 ? 'Next day →' : 'Final results';
+  }
+  btn.addEventListener('click', () => {
+    if (opts.onContinue) opts.onContinue();
+  });
+  phase2Bottom.appendChild(btn);
+
+  wrapper.appendChild(phase2Bottom);
+
+  // Staggered reveal: your paper (0ms) → competitor (600ms) → bottom section (1200ms)
+  setTimeout(() => {
+    phase2Bottom.style.transition = 'opacity 0.5s ease';
+    phase2Bottom.style.opacity = '1';
+  }, 1200);
+}
+
+/**
+ * Build a newspaper card for comparison
+ */
+function buildPaperCard(label, paperName, headline, score, isYours) {
+  const card = document.createElement('div');
+  card.className = `results-paper ${isYours ? 'yours' : ''}`;
+
+  const nameEl = document.createElement('div');
+  nameEl.className = 'results-paper-name';
+  nameEl.textContent = label;
+
+  const paperEl = document.createElement('div');
+  paperEl.style.cssText = 'font-family: var(--font-headline); font-size: 9px; color: var(--ink-faded);';
+  paperEl.textContent = paperName;
+
+  const headlineEl = document.createElement('div');
+  headlineEl.className = 'results-paper-headline';
+  headlineEl.textContent = headline;
+
+  const scoreEl = document.createElement('div');
+  scoreEl.className = 'results-paper-score';
+  scoreEl.textContent = score;
+
+  const scoreLabel = document.createElement('div');
+  scoreLabel.className = 'results-paper-label';
+  scoreLabel.textContent = 'POINTS';
+
+  card.appendChild(nameEl);
+  card.appendChild(paperEl);
+  card.appendChild(headlineEl);
+  card.appendChild(scoreEl);
+  card.appendChild(scoreLabel);
+  return card;
+}
+
+/**
+ * Add a row to the scoring breakdown
+ */
+function addBreakdownRow(container, label, value, colorClass, isTotal = false) {
+  const row = document.createElement('div');
+  row.className = `breakdown-row ${isTotal ? 'total' : ''}`;
+
+  const labelEl = document.createElement('span');
+  labelEl.textContent = label;
+
+  const valEl = document.createElement('span');
+  valEl.className = `breakdown-value ${colorClass}`;
+  valEl.textContent = value;
+
+  row.appendChild(labelEl);
+  row.appendChild(valEl);
+  container.appendChild(row);
+}
+
+/**
+ * Add the news value row with dots matching the base value (2-8 dots)
+ */
+function addNewsValueRow(container, baseValue) {
+  const row = document.createElement('div');
+  row.className = 'breakdown-row';
+
+  const labelEl = document.createElement('span');
+  labelEl.textContent = 'News value';
+
+  const rightSide = document.createElement('span');
+  rightSide.style.cssText = 'display:flex; align-items:center; gap:6px;';
+
+  const dots = document.createElement('span');
+  dots.style.cssText = 'display:flex; gap:2px; align-items:center;';
+  for (let i = 0; i < baseValue; i++) {
+    const dot = document.createElement('span');
+    dot.style.cssText = 'width:5px; height:5px; border-radius:50%; display:inline-block; background:var(--paper-aged);';
+    dots.appendChild(dot);
+  }
+
+  const valEl = document.createElement('span');
+  valEl.className = 'breakdown-value positive';
+  valEl.textContent = `+${baseValue}`;
+
+  rightSide.appendChild(dots);
+  rightSide.appendChild(valEl);
+
+  row.appendChild(labelEl);
+  row.appendChild(rightSide);
+  container.appendChild(row);
+}
+
+/**
+ * Add the interview bonus row with detail dots
+ * tier 0 = no details, tier 1 = 1 dot, tier 2 = 2 dots, tier 3 = 3 dots
+ */
+function addInterviewBonusRow(container, tier, bonus) {
+  const row = document.createElement('div');
+  row.className = 'breakdown-row';
+
+  const labelEl = document.createElement('span');
+  labelEl.textContent = 'Interview bonus';
+
+  const rightSide = document.createElement('span');
+  rightSide.style.cssText = 'display:flex; align-items:center; gap:6px;';
+
+  // Detail dots — 3 slots, filled based on tier
+  const dots = document.createElement('span');
+  dots.style.cssText = 'display:flex; gap:3px; align-items:center;';
+  for (let i = 0; i < 3; i++) {
+    const dot = document.createElement('span');
+    dot.style.cssText = `width:6px; height:6px; border-radius:50%; border:1px solid; display:inline-block;`;
+    if (i < tier) {
+      dot.style.background = 'var(--deficit-safe)';
+      dot.style.borderColor = 'var(--deficit-safe)';
+    } else {
+      dot.style.background = 'transparent';
+      dot.style.borderColor = 'var(--ink-faded)';
+    }
+    dots.appendChild(dot);
+  }
+
+  const valEl = document.createElement('span');
+  valEl.className = 'breakdown-value positive';
+  valEl.textContent = `+${bonus}`;
+
+  rightSide.appendChild(dots);
+  rightSide.appendChild(valEl);
+
+  row.appendChild(labelEl);
+  row.appendChild(rightSide);
+  container.appendChild(row);
+}

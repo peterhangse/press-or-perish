@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Press or Perish!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/onboarding.css">
+  <link rel="stylesheet" href="css/desk.css">
+  <link rel="stylesheet" href="css/interview.css">
+  <link rel="stylesheet" href="css/publish.css">
+  <link rel="stylesheet" href="css/results.css">
+  <link rel="stylesheet" href="css/transition.css">
+  <link rel="stylesheet" href="css/sprites.css">
+</head>
+<body>
+  <!-- Game wrapper — scales HUD + canvas together -->
+  <div id="game-wrapper">
+
+    <!-- HUD bar — sits above the canvas in the "black area" -->
+    <div id="hud-bar">
+      <div id="game-clock">
+        <span class="clock-time" id="clock-time">08:00</span>
+        <span class="clock-phase" id="clock-phase">Morning</span>
+      </div>
+      <div id="week-strip"></div>
+      <div id="deficit-meter">
+        <div class="deficit-label">DEFICIT</div>
+        <div class="deficit-bar">
+          <div class="deficit-fill" id="deficit-fill"></div>
+        </div>
+        <div class="deficit-value" id="deficit-value">0</div>
+        <div class="deficit-warning" id="deficit-warning">15 from perishing</div>
+      </div>
+    </div>
+
+    <!-- 640x360 game canvas -->
+    <div id="game-canvas">
+
+      <!-- Screen container — one visible at a time -->
+      <div id="screen-container">
+      <!-- START SCREEN -->
+      <div class="screen" id="screen-start">
+        <div class="start-title">PRESS OR PERISH</div>
+        <div class="start-masthead">Småstads Tidning</div>
+        <div class="start-subtitle">— Est. 1923 —</div>
+        <div class="start-date">November 1974</div>
+        <button class="start-btn" id="btn-new-run">New Game</button>
+        <button class="start-btn start-btn-secondary" id="btn-tutorial">Tutorial</button>
+        <div class="start-bestscore" id="start-bestscore"></div>
+      </div>
+
+      <!-- ONBOARDING SCREENS -->
+      <div class="screen" id="screen-onboarding"></div>
+
+      <!-- DAY TRANSITION -->
+      <div class="screen" id="screen-transition"></div>
+
+      <!-- MORNING DESK -->
+      <div class="screen" id="screen-desk"></div>
+
+      <!-- INTERVIEW -->
+      <div class="screen" id="screen-interview"></div>
+
+      <!-- PUBLISH + SLEEP -->
+      <div class="screen" id="screen-publish"></div>
+
+      <!-- RESULTS -->
+      <div class="screen" id="screen-results"></div>
+
+      <!-- GAME OVER -->
+      <div class="screen" id="screen-gameover"></div>
+    </div>
+
+      <!-- Flash overlay for hard cuts -->
+      <div id="flash-overlay"></div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,687 @@
+/* ============================================
+   START SCREEN + ONBOARDING
+   ============================================ */
+
+/* — START SCREEN — */
+#screen-start {
+  background: var(--desk);
+  justify-content: center;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.start-title {
+  font-family: var(--font-headline);
+  font-size: 28px;
+  color: var(--paper);
+  text-align: center;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.start-masthead {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  color: var(--ink-light);
+  text-align: center;
+  letter-spacing: 1px;
+  margin-top: -8px;
+}
+
+.start-subtitle {
+  font-family: var(--font-body);
+  font-size: 9px;
+  color: var(--ink-faded);
+  margin-top: -8px;
+}
+
+.start-date {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--ink-faded);
+}
+
+.start-btn {
+  background: linear-gradient(180deg, var(--paper) 0%, var(--paper-aged) 100%);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  padding: var(--sp-2) var(--sp-6);
+  font-family: var(--font-headline);
+  font-size: 16px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-top: var(--sp-4);
+  /* Heavy typewriter key — raised */
+  box-shadow:
+    0 4px 0 #1a1208,
+    0 6px 10px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+  transform: translateY(0);
+  transition: transform 60ms ease, box-shadow 60ms ease, background 0.1s;
+}
+
+.start-btn:hover {
+  background: linear-gradient(180deg, var(--paper-aged) 0%, var(--paper-dark) 100%);
+  box-shadow:
+    0 4px 0 #1a1208,
+    0 7px 12px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+  transform: translateY(-1px);
+}
+
+.start-btn:active {
+  box-shadow:
+    0 1px 0 #1a1208,
+    0 1px 2px rgba(0,0,0,0.4);
+  transform: translateY(3px);
+  transition: transform 30ms ease, box-shadow 30ms ease;
+}
+
+.start-btn-secondary {
+  font-size: 11px;
+  padding: var(--sp-1) var(--sp-4);
+  margin-top: 0;
+  background: transparent;
+  color: var(--ink-light);
+  border: 1px solid var(--ink-faded);
+  box-shadow:
+    0 2px 0 rgba(0,0,0,0.2),
+    0 3px 4px rgba(0,0,0,0.15);
+}
+
+.start-btn-secondary:hover {
+  background: rgba(232, 223, 200, 0.1);
+  color: var(--paper-aged);
+  border-color: var(--ink-light);
+}
+
+.start-bestscore {
+  font-family: var(--font-body);
+  font-size: 9px;
+  color: var(--ink-faded);
+  margin-top: var(--sp-2);
+}
+
+/* — NAME PROMPT (New Game shortcut) — */
+.name-prompt-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 16, 10, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.name-prompt-card {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  padding: var(--sp-4) var(--sp-6);
+  text-align: center;
+  box-shadow: 3px 4px 12px rgba(0,0,0,0.4);
+  max-width: 280px;
+  width: 100%;
+  animation: paper-drop 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.name-prompt-label {
+  font-family: var(--font-headline);
+  font-size: 11px;
+  color: var(--ink);
+  letter-spacing: 2px;
+  margin-bottom: var(--sp-3);
+}
+
+.name-prompt-input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid var(--ink);
+  background: transparent;
+  font-family: var(--font-headline);
+  font-size: 14px;
+  color: var(--ink);
+  text-align: center;
+  padding: 4px 4px 6px;
+  letter-spacing: 1px;
+  outline: none;
+  margin-bottom: var(--sp-3);
+}
+.name-prompt-input::placeholder {
+  color: var(--ink-faded);
+  font-style: italic;
+  font-size: 10px;
+  letter-spacing: 0;
+}
+
+.name-prompt-btn {
+  font-size: 12px;
+  padding: var(--sp-1) var(--sp-4);
+  letter-spacing: 2px;
+}
+
+/* — ONBOARDING — */
+#screen-onboarding {
+  background: var(--desk);
+  justify-content: center;
+  align-items: center;
+  perspective: 600px;
+  overflow: hidden;
+}
+
+.onboarding-container {
+  width: 440px;
+  padding: var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+/* ── Paper entrance animations ── */
+
+/* Slide from off-screen right, as if tossed onto a desk */
+@keyframes paper-slide-in {
+  0%   { opacity: 0; transform: translateX(300px) rotate(6deg); }
+  60%  { opacity: 1; transform: translateX(-8px) rotate(-1deg); }
+  80%  { transform: translateX(3px) rotate(0.5deg); }
+  100% { opacity: 1; transform: translateX(0) rotate(0deg); }
+}
+
+/* Drop from above, paper falling onto desk */
+@keyframes paper-drop {
+  0%   { opacity: 0; transform: translateY(-200px) rotate(-3deg) scale(0.9); }
+  50%  { opacity: 1; transform: translateY(8px) rotate(1deg) scale(1.01); }
+  70%  { transform: translateY(-3px) rotate(-0.5deg) scale(1); }
+  100% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+}
+
+/* Rejection stamp slam */
+@keyframes stamp-slam {
+  0%   { opacity: 0; transform: rotate(-12deg) scale(3); }
+  40%  { opacity: 1; transform: rotate(-12deg) scale(0.9); }
+  60%  { transform: rotate(-12deg) scale(1.1); }
+  100% { opacity: 0.85; transform: rotate(-12deg) scale(1); }
+}
+
+/* Shabby ad — slides in slowly from left, crumpled feeling */
+@keyframes paper-slide-left {
+  0%   { opacity: 0; transform: translateX(-250px) rotate(-2deg); }
+  70%  { opacity: 1; transform: translateX(5px) rotate(0.8deg); }
+  100% { opacity: 1; transform: translateX(0) rotate(0.5deg); }
+}
+
+/* Button fade-in from below */
+@keyframes btn-fade-up {
+  0%   { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Diploma */
+.diploma {
+  background: var(--paper);
+  padding: var(--sp-6) var(--sp-4);
+  border: 3px double var(--ink);
+  text-align: center;
+  max-width: 380px;
+  animation: paper-drop 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  box-shadow: 2px 3px 8px rgba(0,0,0,0.3);
+  position: relative;
+  overflow: visible;
+}
+
+.diploma-header {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  color: var(--ink);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--ink-faded);
+  padding-bottom: var(--sp-2);
+}
+
+.diploma-body {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--ink);
+  line-height: 1.6;
+  margin-bottom: var(--sp-2);
+}
+
+/* Player name input — handwritten on the diploma */
+.diploma-name-row {
+  margin: var(--sp-1) auto var(--sp-2);
+  max-width: 200px;
+}
+
+.diploma-name-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--ink-faded);
+  background: transparent;
+  font-family: var(--font-headline);
+  font-size: 13px;
+  color: var(--ink);
+  text-align: center;
+  padding: 2px 4px 3px;
+  letter-spacing: 1px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.diploma-name-input::placeholder {
+  color: var(--ink-faded);
+  font-style: italic;
+  font-size: 10px;
+  letter-spacing: 0;
+}
+.diploma-name-input:focus {
+  border-bottom-color: var(--ink);
+}
+
+.diploma-detail {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 9px;
+  color: var(--ink-faded);
+}
+
+/* 70s University Stamp */
+.diploma-stamp {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  width: 64px;
+  height: 64px;
+  transform: rotate(-14deg);
+  opacity: 0;
+  animation: stamp-slam 0.45s 0.8s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes stamp-slam {
+  0%   { opacity: 0; transform: rotate(-14deg) scale(2.2); }
+  50%  { opacity: 0.85; transform: rotate(-14deg) scale(0.92); }
+  100% { opacity: 0.7; transform: rotate(-14deg) scale(1); }
+}
+
+.diploma-stamp-ring {
+  width: 100%;
+  height: 100%;
+  border: 3px solid #6a2c2c;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow:
+    inset 0 0 0 2px transparent,
+    inset 0 0 0 4px #6a2c2c33;
+  /* Distressed look via rough edges */
+  filter: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='r'%3E%3CfeTurbulence baseFrequency='0.04' numOctaves='4' seed='3'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='1.5'/%3E%3C/filter%3E%3C/svg%3E#r");
+}
+
+.diploma-stamp-ring::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1.5px solid #6a2c2c;
+  border-radius: 50%;
+}
+
+.diploma-stamp-inner {
+  font-family: var(--font-headline);
+  font-size: 7px;
+  color: #6a2c2c;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.diploma-stamp-year {
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  display: block;
+  margin-top: 1px;
+}
+
+.diploma-footer {
+  font-family: var(--font-headline);
+  font-size: 11px;
+  color: var(--ink);
+  margin-top: var(--sp-4);
+  letter-spacing: 1px;
+}
+
+/* Job ads */
+.job-ad {
+  background: var(--paper);
+  padding: var(--sp-4);
+  border: 2px solid var(--ink);
+  max-width: 380px;
+  box-shadow: 2px 3px 8px rgba(0,0,0,0.3);
+}
+
+.job-ad.prestigious {
+  border-color: var(--ink);
+  background: var(--paper);
+  animation: paper-slide-in 0.65s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.job-ad.shabby {
+  border: 1px dashed var(--ink-faded);
+  background: var(--paper-aged);
+  animation: paper-slide-left 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  box-shadow: 1px 2px 6px rgba(0,0,0,0.2);
+}
+
+.job-ad-header {
+  font-family: var(--font-headline);
+  font-size: 16px;
+  color: var(--ink);
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+
+.shabby .job-ad-header {
+  font-size: 11px;
+  color: var(--ink-faded);
+}
+
+.job-ad-tagline {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 8px;
+  color: var(--ink-faded);
+  margin-bottom: var(--sp-2);
+}
+
+.job-ad-body {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--ink);
+  line-height: 1.5;
+  margin-bottom: var(--sp-2);
+}
+
+.shabby .job-ad-body {
+  font-size: 9px;
+  color: var(--ink-faded);
+}
+
+.job-ad-salary {
+  font-family: var(--font-numbers);
+  font-size: 14px;
+  color: var(--deficit-safe);
+  letter-spacing: 1px;
+}
+
+.shabby .job-ad-salary {
+  font-size: 10px;
+  color: var(--ink-faded);
+}
+
+/* Rejection letter */
+.rejection-letter {
+  background: var(--paper);
+  padding: var(--sp-4);
+  border: 1px solid var(--ink-faded);
+  max-width: 400px;
+  position: relative;
+  animation: paper-drop 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  box-shadow: 2px 3px 8px rgba(0,0,0,0.25);
+}
+
+.rejection-stamp {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-family: var(--font-headline);
+  font-size: 14px;
+  color: var(--deficit-red);
+  letter-spacing: 2px;
+  border: 2px solid var(--deficit-red);
+  padding: 2px 6px;
+  animation: stamp-slam 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) 0.3s both;
+}
+
+/* Acceptance letter */
+.acceptance-letter {
+  background: var(--paper-aged);
+  padding: var(--sp-4);
+  border: 1px solid var(--ink-faded);
+  max-width: 400px;
+  animation: paper-slide-left 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  box-shadow: 1px 2px 6px rgba(0,0,0,0.2);
+}
+
+.acceptance-header {
+  font-family: var(--font-headline);
+  font-size: 12px;
+  color: var(--ink-faded);
+  margin-bottom: var(--sp-2);
+}
+
+.acceptance-body {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.acceptance-sender {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 9px;
+  color: var(--ink-faded);
+  margin-top: var(--sp-3);
+  text-align: right;
+}
+
+.rejection-header {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  color: var(--ink);
+  margin-bottom: var(--sp-2);
+}
+
+.rejection-body {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.rejection-sender {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 9px;
+  color: var(--ink-faded);
+  margin-top: var(--sp-3);
+  text-align: right;
+}
+
+/* Boss dialogue in onboarding — persistent frame + talk bubbles */
+.onboarding-boss {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: flex-start;
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Left column: portrait + name tag, slides in once */
+.boss-left-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  animation: boss-slide-in 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+@keyframes boss-slide-in {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.boss-portrait {
+  width: 48px;
+  height: 64px;
+  background: var(--paper-dark);
+  border: 1px solid var(--ink-faded);
+  flex-shrink: 0;
+  image-rendering: pixelated;
+}
+
+.boss-name-tag {
+  font-family: var(--font-headline);
+  font-size: 8px;
+  color: var(--paper);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Speech zone — holds the animated bubble */
+.boss-speech-zone {
+  flex: 1;
+  min-height: 60px;
+}
+
+/* Individual speech bubble — slides in from left each time */
+.boss-bubble {
+  background: var(--paper);
+  padding: var(--sp-3);
+  border: 1px solid var(--ink-faded);
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--ink);
+  line-height: 1.5;
+  position: relative;
+  border-radius: 2px;
+  opacity: 0;
+  animation: bubble-in 0.4s cubic-bezier(0.22, 0.61, 0.36, 1) 0.15s forwards;
+}
+
+@keyframes bubble-in {
+  from { opacity: 0; transform: translateX(-16px) scale(0.96); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+/* Speech bubble arrow pointing left toward portrait */
+.boss-bubble::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 14px;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 6px solid var(--ink-faded);
+}
+.boss-bubble::after {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 15px;
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-right: 5px solid var(--paper);
+}
+
+/* Mood variants */
+.boss-bubble-warm {
+  border-color: var(--deficit-safe);
+}
+.boss-bubble-warm::before { border-right-color: var(--deficit-safe); }
+
+.boss-bubble-serious {
+  border-color: var(--deficit-warn);
+}
+.boss-bubble-serious::before { border-right-color: var(--deficit-warn); }
+
+.boss-bubble-intense {
+  border-color: var(--deficit-red);
+}
+.boss-bubble-intense::before { border-right-color: var(--deficit-red); }
+
+/* Onboarding continue button */
+.onboarding-continue {
+  align-self: center;
+  margin-top: var(--sp-3);
+  opacity: 0;
+  animation: btn-fade-up 0.4s ease 0.5s forwards;
+}
+
+/* ── Title card: PRESS OR PERISH — Nordic Noir ── */
+.title-card-container {
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: var(--desk);
+}
+
+.title-card {
+  font-family: var(--font-headline);
+  font-size: 42px;
+  color: var(--paper);
+  letter-spacing: 6px;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 20px rgba(232, 223, 200, 0.3),
+    0 0 60px rgba(232, 223, 200, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Each word starts invisible, slams in */
+.title-word {
+  opacity: 0;
+  transform: scale(1.8);
+  filter: blur(6px);
+  transition: none;
+  display: inline-block;
+}
+
+.title-word.visible {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+  animation: word-slam 0.35s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+@keyframes word-slam {
+  0%   { opacity: 0; transform: scale(2); filter: blur(6px); }
+  40%  { opacity: 1; transform: scale(0.92); filter: blur(0); }
+  70%  { transform: scale(1.04); }
+  100% { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
+.title-word-or {
+  font-size: 24px;
+  letter-spacing: 2px;
+  color: var(--ink-light);
+}
+
+/* Noir fadeout — sinks into darkness */
+.title-card.fade-out .title-word {
+  animation: noir-title-out 2s ease forwards;
+}
+
+@keyframes noir-title-out {
+  0%   { opacity: 1; transform: scale(1); filter: blur(0); }
+  40%  { opacity: 0.7; transform: scale(0.98); }
+  70%  { opacity: 0.3; filter: blur(2px); }
+  100% { opacity: 0; transform: scale(0.9) translateY(10px); filter: blur(6px); }
+}

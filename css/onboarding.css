@@ -142,12 +142,13 @@
 
 .start-byline {
   position: absolute;
-  bottom: 8px;
-  right: 12px;
-  font-family: var(--font-body);
-  font-size: 7px;
-  color: rgba(255, 255, 255, 0.25);
+  bottom: 4px;
+  right: 6px;
+  font-family: var(--font-headline);
+  font-size: 5px;
+  color: var(--paper);
   letter-spacing: 0.5px;
+  opacity: 0.4;
 }
 
 /* — NAME PROMPT (New Game shortcut) — */

@@ -520,10 +520,11 @@ function addMuteButton() {
   const btn = document.createElement('button');
   btn.id = 'mute-btn';
   btn.className = 'mute-btn';
-  btn.textContent = AudioManager.isMuted() ? '♪ off' : '♪ on';
+  const label = () => AudioManager.isMuted() ? '<span class="mute-note">\u266a</span> off' : '<span class="mute-note">\u266a</span> on';
+  btn.innerHTML = label();
   btn.addEventListener('click', () => {
     const muted = AudioManager.toggleMute();
-    btn.textContent = muted ? '♪ off' : '♪ on';
+    btn.innerHTML = muted ? '<span class="mute-note">\u266a</span> off' : '<span class="mute-note">\u266a</span> on';
     btn.classList.toggle('muted', muted);
   });
   if (AudioManager.isMuted()) btn.classList.add('muted');

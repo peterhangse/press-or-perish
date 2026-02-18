@@ -48,22 +48,25 @@ async function boot() {
   document.getElementById('btn-new-run').addEventListener('click', () => { AudioManager.stop(); startNewRun(); });
   document.getElementById('btn-tutorial').addEventListener('click', () => { AudioManager.stop(); startTutorial(); });
 
-  // Add mute button
+  // Add mute button (hidden until title is clicked)
   addMuteButton();
+  const muteBtn = document.getElementById('mute-btn');
+  if (muteBtn) muteBtn.style.display = 'none';
 
-  // Try autoplay immediately (works in some browsers)
-  AudioManager.play();
-
-  // Fallback: retry on first user interaction (needed for most browsers)
-  const unlockAudio = () => {
-    AudioManager.retryPlay();
-    document.removeEventListener('click', unlockAudio);
-    document.removeEventListener('keydown', unlockAudio);
-    document.removeEventListener('touchstart', unlockAudio);
-  };
-  document.addEventListener('click', unlockAudio);
-  document.addEventListener('keydown', unlockAudio);
-  document.addEventListener('touchstart', unlockAudio);
+  // Title logo-button: click to start music + reveal menu
+  const titleEl = document.getElementById('start-title');
+  const revealEl = document.getElementById('start-reveal');
+  titleEl.addEventListener('click', () => {
+    if (titleEl.classList.contains('settled')) return;
+    // Start music
+    AudioManager.play();
+    // Settle title and reveal menu
+    titleEl.classList.add('settled');
+    setTimeout(() => {
+      revealEl.classList.add('visible');
+      if (muteBtn) muteBtn.style.display = '';
+    }, 400);
+  });
 
   // Wire onboarding complete event
   document.addEventListener('onboarding-complete', (e) => {

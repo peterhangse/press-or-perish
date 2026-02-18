@@ -182,23 +182,29 @@ function showQ1Options() {
  */
 function handleQ1(archetype, questionText) {
   const dialogue = document.getElementById('interview-dialogue');
+  const questions = document.getElementById('interview-questions');
+
+  // Hide Q1 options while NPC responds
+  questions.innerHTML = '';
 
   // Show player's question
   addDialogueLine(dialogue, 'You', questionText, 'player');
 
   // Get Q1 response from story data
   const branch = currentStory.interview.branches[archetype];
-  addDialogueLine(dialogue, currentNPC.name, branch.q1_response, 'npc');
 
-  // Add note from Q1 answer
-  addNote(summarizeResponse(branch.q1_response));
+  // Typewrite NPC response, then continue
+  typewriteDialogue(dialogue, currentNPC.name, branch.q1_response, 'npc', () => {
+    // Add note from Q1 answer
+    addNote(branch.q1_note || summarizeResponse(branch.q1_response));
 
-  // Update expression hint
-  const hint = document.getElementById('npc-expression-hint');
-  hint.textContent = branch.expression_hint || '';
+    // Update expression hint
+    const hint = document.getElementById('npc-expression-hint');
+    hint.textContent = branch.expression_hint || '';
 
-  // Show Q2 options
-  showQ2Options(archetype);
+    // Show Q2 options
+    showQ2Options(archetype);
+  });
 }
 
 /**
@@ -244,6 +250,9 @@ function handleQ2(q1Archetype, q2Index, questionText) {
   const dialogue = document.getElementById('interview-dialogue');
   const questions = document.getElementById('interview-questions');
 
+  // Hide Q2 options while NPC responds
+  questions.innerHTML = '';
+
   // Remove opening line only — keep Q1 exchange visible
   const openingLine = dialogue.querySelector('.dialogue-line.npc');
   if (openingLine) openingLine.remove();
@@ -254,46 +263,43 @@ function handleQ2(q1Archetype, q2Index, questionText) {
   // Resolve the interview via lookup table
   const result = InterviewEngine.resolveInterview(currentStory, q1Archetype, q2Index);
 
-  // Show NPC response
-  addDialogueLine(dialogue, currentNPC.name, result.response, 'npc');
+  // Typewrite NPC response, then show result
+  typewriteDialogue(dialogue, currentNPC.name, result.response, 'npc', () => {
+    // Add note from Q2 answer
+    addNote(result.note || summarizeResponse(result.response));
 
-  // Add note from Q2 answer
-  addNote(summarizeResponse(result.response));
+    // Update expression
+    const hint = document.getElementById('npc-expression-hint');
+    hint.textContent = getExpressionText(result.expression);
 
-  // Update expression
-  const hint = document.getElementById('npc-expression-hint');
-  hint.textContent = getExpressionText(result.expression);
-
-  // Show result and clear questions
-  questions.innerHTML = '';
-
-  // Simple continue button (no tier/points display)
-  const continueBtn = document.createElement('button');
-  continueBtn.className = 'btn-paper';
-  continueBtn.textContent = 'Write article →';
-  continueBtn.style.marginTop = '6px';
-  continueBtn.addEventListener('click', () => {
-    if (onComplete) {
-      // Rubber stamp flash
-      const container = document.getElementById('screen-interview');
-      const stamp = document.createElement('div');
-      stamp.className = 'stamp-flash green';
-      stamp.textContent = 'FILED';
-      container.appendChild(stamp);
-      
-      setTimeout(() => {
-        const headlines = InterviewEngine.getHeadlines(currentStory, result.tier);
-        onComplete({
-          tier: result.tier,
-          points: result.points,
-          headlines,
-          q1Archetype,
-          q2Index,
-        });
-      }, 350);
-    }
+    // Simple continue button (no tier/points display)
+    const continueBtn = document.createElement('button');
+    continueBtn.className = 'btn-paper';
+    continueBtn.textContent = 'Write article →';
+    continueBtn.style.marginTop = '6px';
+    continueBtn.addEventListener('click', () => {
+      if (onComplete) {
+        // Rubber stamp flash
+        const container = document.getElementById('screen-interview');
+        const stamp = document.createElement('div');
+        stamp.className = 'stamp-flash green';
+        stamp.textContent = 'FILED';
+        container.appendChild(stamp);
+        
+        setTimeout(() => {
+          const headlines = InterviewEngine.getHeadlines(currentStory, result.tier);
+          onComplete({
+            tier: result.tier,
+            points: result.points,
+            headlines,
+            q1Archetype,
+            q2Index,
+          });
+        }, 350);
+      }
+    });
+    questions.appendChild(continueBtn);
   });
-  questions.appendChild(continueBtn);
 }
 
 /**
@@ -345,7 +351,7 @@ function typewriteDialogue(container, speaker, text, type, onDone) {
       textEl.textContent += (i > 0 ? ' ' : '') + words[i];
       i++;
       container.scrollTop = container.scrollHeight;
-      setTimeout(nextWord, 40 + Math.random() * 40);
+      setTimeout(nextWord, 70 + Math.random() * 50);
     } else {
       // Remove cursor
       textEl.classList.remove('typewriter-cursor');

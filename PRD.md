@@ -3,6 +3,20 @@
 
 ---
 
+## 0. DEPLOY — "Push it live"
+
+```bash
+cd "/Users/gmpethan/Documents/deploy/Game (press or perish)"
+git add -A && git commit -m "describe your change" && git push
+```
+
+- **Live site:** https://press-or-perish.web.app
+- **GitHub repo:** https://github.com/peterhangse/press-or-perish
+- **Auto-deploy:** Push to `main` → GitHub Action → Firebase Hosting (~1 min)
+- **Local test:** `python3 -m http.server 8091` → http://localhost:8091
+
+---
+
 ## 1. GAME OVERVIEW
 
 **Genre:** Roguelike journalism game

@@ -140,6 +140,16 @@
   margin-top: var(--sp-2);
 }
 
+.start-byline {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font-family: var(--font-body);
+  font-size: 7px;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 0.5px;
+}
+
 /* — NAME PROMPT (New Game shortcut) — */
 .name-prompt-overlay {
   position: absolute;

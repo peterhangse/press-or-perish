@@ -262,7 +262,7 @@
     "category": "crime",
     "npc_id": "birgitta_ekberg",
     "npc_name": "Birgitta Ekberg",
-    "npc_title": "Anna's Mother",
+    "npc_title": "Council member (FP), Anna's mother",
     "interview": {
       "opening_line": "Thank you for coming. The police say she's probably just 'hanging out with friends'. But Anna doesn't do that. She always comes home.",
       "q1_options": [
@@ -1015,7 +1015,7 @@
     "category": "human_interest",
     "npc_id": "gunnar_ek",
     "npc_name": "Gunnar Ek",
-    "npc_title": "Retiree and Church Neighbor",
+    "npc_title": "Farmer and church neighbor",
     "interview": {
       "opening_line": "I haven't slept properly in three months. THREE MONTHS! It rings at half past three in the morning!",
       "q1_options": [
@@ -7541,7 +7541,7 @@
     "category": "crime",
     "npc_id": "erik_persson",
     "npc_name": "Erik Persson",
-    "npc_title": "Former player, Småstads IF",
+    "npc_title": "Farmer, former player Småstads IF",
     "interview": {
       "opening_line": "I quit playing last spring. My kidneys aren't doing well. And I think I know why.",
       "q1_options": [
@@ -8043,7 +8043,7 @@
     "category": "human_interest",
     "npc_id": "birgitta_ekberg",
     "npc_name": "Birgitta Ekberg",
-    "npc_title": "Daughter of Solhaga resident",
+    "npc_title": "Council member (FP), daughter of resident",
     "interview": {
       "opening_line": "My mother is 84 years old and she's starving. In Sweden. 1975. How is that possible?",
       "q1_options": [
@@ -8294,7 +8294,7 @@
     "category": "corruption",
     "npc_id": "margareta_lund",
     "npc_name": "Margareta Lund",
-    "npc_title": "Member of the nature conservation society",
+    "npc_title": "Teacher, nature conservation member",
     "interview": {
       "opening_line": "I found the barrels in September. Since then I've mapped the entire area. It's worse than I thought.",
       "q1_options": [
@@ -8545,7 +8545,7 @@
     "category": "human_interest",
     "npc_id": "helena_strand",
     "npc_name": "Helena Strand",
-    "npc_title": "Volunteer, Red Cross",
+    "npc_title": "Healthcare assistant, Red Cross volunteer",
     "interview": {
       "opening_line": "They're living in Bengtsson's old barn. The Morales family — two children, one is three years old. It's minus five outside.",
       "q1_options": [
@@ -9047,7 +9047,7 @@
     "category": "breaking_news",
     "npc_id": "karl_lindstrom",
     "npc_name": "Karl Lindström",
-    "npc_title": "Municipal worker, lives in the countryside",
+    "npc_title": "Municipal worker, technical services",
     "interview": {
       "opening_line": "My neighbor had a heart attack at three in the morning. The dispatch center said: 'The ambulance is not in service. Call a taxi.'",
       "q1_options": [
@@ -9298,7 +9298,7 @@
     "category": "corruption",
     "npc_id": "gosta_nilsson",
     "npc_name": "Gösta Nilsson",
-    "npc_title": "Retired land surveyor",
+    "npc_title": "Retired police officer",
     "interview": {
       "opening_line": "I was a land surveyor in this municipality for 28 years. Never seen anything like it. Or — well, yes. But never this brazen.",
       "q1_options": [
@@ -9800,7 +9800,7 @@
     "category": "crime",
     "npc_id": "inga_johansson",
     "npc_name": "Inga Johansson",
-    "npc_title": "Mother of the victim",
+    "npc_title": "Retired nurse, mother of the victim",
     "interview": {
       "opening_line": "Tommy was drunk. I won't lie about that. But the way he looked the next morning... you don't do that to a person.",
       "q1_options": [

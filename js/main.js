@@ -48,15 +48,22 @@ async function boot() {
   document.getElementById('btn-new-run').addEventListener('click', () => { AudioManager.stop(); startNewRun(); });
   document.getElementById('btn-tutorial').addEventListener('click', () => { AudioManager.stop(); startTutorial(); });
 
-  // Start music on first interaction + add mute button
+  // Add mute button
   addMuteButton();
-  const startMusic = () => {
-    AudioManager.play();
-    document.removeEventListener('click', startMusic);
-    document.removeEventListener('keydown', startMusic);
+
+  // Try autoplay immediately (works in some browsers)
+  AudioManager.play();
+
+  // Fallback: retry on first user interaction (needed for most browsers)
+  const unlockAudio = () => {
+    AudioManager.retryPlay();
+    document.removeEventListener('click', unlockAudio);
+    document.removeEventListener('keydown', unlockAudio);
+    document.removeEventListener('touchstart', unlockAudio);
   };
-  document.addEventListener('click', startMusic);
-  document.addEventListener('keydown', startMusic);
+  document.addEventListener('click', unlockAudio);
+  document.addEventListener('keydown', unlockAudio);
+  document.addEventListener('touchstart', unlockAudio);
 
   // Wire onboarding complete event
   document.addEventListener('onboarding-complete', (e) => {
@@ -511,8 +518,7 @@ function addMuteButton() {
   btn.id = 'mute-btn';
   btn.textContent = AudioManager.isMuted() ? '🔇' : '🔊';
   btn.style.cssText = 'position:absolute;top:8px;left:8px;background:none;border:none;font-size:20px;cursor:pointer;z-index:10;opacity:0.7;padding:4px;';
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation();
+  btn.addEventListener('click', () => {
     const muted = AudioManager.toggleMute();
     btn.textContent = muted ? '🔇' : '🔊';
   });

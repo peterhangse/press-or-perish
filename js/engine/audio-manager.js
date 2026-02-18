@@ -9,6 +9,8 @@ let audio = null;
 let maxVolume = DEFAULT_VOLUME;
 let muted = false;
 let fadeInterval = null;
+let playing = false;
+let needsInteraction = false;
 
 /**
  * Initialize the audio element
@@ -24,18 +26,32 @@ function init() {
 }
 
 /**
- * Start playing with fade-in
+ * Start playing with fade-in.
+ * If browser blocks autoplay, sets a flag so retryPlay() can try again.
  */
 function play() {
   init();
-  if (muted) {
-    audio.volume = 0;
-    audio.play().catch(() => {});
-    return;
-  }
   audio.volume = 0;
-  audio.play().catch(() => {});
-  fadeIn();
+  const promise = audio.play();
+  if (promise) {
+    promise.then(() => {
+      playing = true;
+      needsInteraction = false;
+      if (!muted) fadeIn();
+    }).catch(() => {
+      // Autoplay blocked — need user interaction first
+      needsInteraction = true;
+      playing = false;
+    });
+  }
+}
+
+/**
+ * Retry play after user interaction (called from click/keydown handler)
+ */
+function retryPlay() {
+  if (!needsInteraction) return;
+  play();
 }
 
 /**
@@ -114,4 +130,4 @@ function isMuted() {
   return muted;
 }
 
-export { play, stop, toggleMute, isMuted };
+export { play, stop, retryPlay, toggleMute, isMuted };

@@ -17,6 +17,7 @@ import * as PublishScreen from './ui/publish-screen.js';
 import * as ResultsScreen from './ui/results-screen.js';
 import * as TransitionScreen from './ui/transition-screen.js';
 import * as GameOverScreen from './ui/gameover-screen.js';
+import * as AudioManager from './engine/audio-manager.js';
 
 // — Game data cache —
 let gameData = null;
@@ -44,8 +45,18 @@ async function boot() {
   Components.buildWeekStrip();
 
   // Wire start screen
-  document.getElementById('btn-new-run').addEventListener('click', startNewRun);
-  document.getElementById('btn-tutorial').addEventListener('click', startTutorial);
+  document.getElementById('btn-new-run').addEventListener('click', () => { AudioManager.stop(); startNewRun(); });
+  document.getElementById('btn-tutorial').addEventListener('click', () => { AudioManager.stop(); startTutorial(); });
+
+  // Start music on first interaction + add mute button
+  addMuteButton();
+  const startMusic = () => {
+    AudioManager.play();
+    document.removeEventListener('click', startMusic);
+    document.removeEventListener('keydown', startMusic);
+  };
+  document.addEventListener('click', startMusic);
+  document.addEventListener('keydown', startMusic);
 
   // Wire onboarding complete event
   document.addEventListener('onboarding-complete', (e) => {
@@ -489,6 +500,23 @@ function showNamePrompt(callback) {
   startScreen.appendChild(overlay);
   
   setTimeout(() => input.focus(), 100);
+}
+
+/**
+ * Add mute button to start screen
+ */
+function addMuteButton() {
+  const startScreen = document.getElementById('screen-start');
+  const btn = document.createElement('button');
+  btn.id = 'mute-btn';
+  btn.textContent = AudioManager.isMuted() ? '🔇' : '🔊';
+  btn.style.cssText = 'position:absolute;top:8px;left:8px;background:none;border:none;font-size:20px;cursor:pointer;z-index:10;opacity:0.7;padding:4px;';
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const muted = AudioManager.toggleMute();
+    btn.textContent = muted ? '🔇' : '🔊';
+  });
+  startScreen.appendChild(btn);
 }
 
 // — BOOT —

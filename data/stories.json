@@ -60,17 +60,17 @@
               "response": "It's the safety guard. It came loose in the spring. Bengtsson said a new one costs too much — he's planning to sell. Nobody's supposed to know the place is falling apart. All repairs were stopped in March.",
               "expression": "open",
               "feedback": "Full story — sale + deliberate negligence. Strong.",
-              "note": "All repairs were stopped in March"
+              "note": "Bengtsson said a new one costs too much"
             },
             {
               "tier": 2,
               "response": "Erik broke his arm in June. Sven got stitches in August. All the same machine. The union knows but Bengtsson threatens to shut down if they say anything.",
               "expression": "open",
               "feedback": "Good — you got the pattern, but missed the financial connection.",
-              "note": "Erik broke his arm in June"
+              "note": "The union knows but Bengtsson threatens to shut down..."
             }
           ],
-          "q1_note": "It's not the first time someone's been injured in..."
+          "q1_note": "We've reported it but"
         },
         "direct": {
           "q1_response": "Three accidents, yeah. Everyone knows. But nobody writes about it. Bengtsson owns half the town, doesn't he.",
@@ -92,7 +92,7 @@
               "response": "Bengtsson sits on the municipal council. His brother is the building inspector. Who are you supposed to complain to? They protect each other.",
               "expression": "defiant",
               "feedback": "Corruption link — strong, but you missed the sale plan.",
-              "note": "Bengtsson sits on the municipal council"
+              "note": "His brother is the building inspector"
             },
             {
               "tier": 1,
@@ -106,10 +106,10 @@
               "response": "Afraid? I've got three kids. Of course I'm afraid. But you know what — word is he's going to sell to some Gothenburg company anyway. We're out regardless.",
               "expression": "nervous",
               "feedback": "The sale hint came through — but not the details.",
-              "note": "Word is he's going to sell to some Gothenburg..."
+              "note": "Word is he's going to sell to some Gothenburg company..."
             }
           ],
-          "q1_note": "Three accidents, yeah"
+          "q1_note": "Bengtsson owns half the town, doesn't he"
         },
         "pressure": {
           "q1_response": "Wh— wait a minute. Who have you been talking to? I didn't say I wanted to be interviewed.",
@@ -138,7 +138,7 @@
               "response": "Are you threatening me? We're done here. Leave.",
               "expression": "hostile",
               "feedback": "Interview terminated. You got no information at all.",
-              "note": "We're done here"
+              "note": "Are you threatening me. We're done here"
             },
             {
               "tier": 2,
@@ -170,7 +170,7 @@
               "response": "I was feeding the planks and the guard was gone. Has been gone since April. We taped up a warning but Bengtsson tore it down. 'Takes too long to run with the guard on' he said.",
               "expression": "neutral",
               "feedback": "Strong testimony — he spoke freely without pressure.",
-              "note": "Has been gone since April"
+              "note": "We taped up a warning but Bengtsson tore it down"
             },
             {
               "tier": 1,
@@ -184,10 +184,10 @@
               "response": "*long pause* Bengtsson removed all the safety equipment in March. We found emails — his secretary showed me — where he writes to the buyers that 'the equipment is in top condition'. All lies. Three injuries and he sells the place as if nothing happened. The insurance company doesn't know either.",
               "expression": "open",
               "feedback": "Jackpot — documented evidence trail, insurance fraud, all through patience.",
-              "note": "Bengtsson removed all the safety equipment in..."
+              "note": "Bengtsson removed all the safety equipment in March"
             }
           ],
-          "q1_note": "Are you just going to stand there"
+          "q1_note": "What do you actually want to know"
         }
       }
     },
@@ -304,24 +304,24 @@
               "response": "Now that you ask... she mentioned a teacher. Mr. Svensson. Said he asked her to stay after school sometimes for 'extra help'. I didn't think about it then but... and yesterday she was supposed to stay after school.",
               "expression": "nervous",
               "feedback": "Complete — you got the critical connection by letting her talk freely.",
-              "note": "Said he asked her to stay after school sometimes..."
+              "note": "Yesterday she was supposed to stay after school"
             },
             {
               "tier": 1,
               "response": "She always walks along Storgatan and then through the park. The police haven't even searched the park properly.",
               "expression": "guarded",
               "feedback": "Geographic info — useful but not the core of the story.",
-              "note": "She always walks along Storgatan and then through..."
+              "note": "The police haven't even searched the park properly"
             },
             {
               "tier": 2,
               "response": "Lisa, her best friend, said Anna seemed scared the past week. Didn't want to be alone. And she had stopped eating lunch at school — sat instead in the hallway outside the teachers' room.",
               "expression": "nervous",
               "feedback": "Behavioral change + school connection — strong clues.",
-              "note": "Lisa, her best friend, said Anna seemed scared..."
+              "note": "Sat instead in the hallway outside the teachers' room"
             }
           ],
-          "q1_note": "Cleans her room without being asked"
+          "q1_note": "Something has happened, I know it"
         },
         "direct": {
           "q1_response": "Thursday at three she was supposed to be home. She left school at quarter to three according to the janitor. After that — nothing.",
@@ -343,24 +343,24 @@
               "response": "The janitor, Göte, said she was talking to a teacher at the gate. He couldn't see which one. But Anna seemed... reluctant, Göte said. Like she was hesitating.",
               "expression": "guarded",
               "feedback": "Eyewitness at the right moment — you know a teacher was involved.",
-              "note": "The janitor, Göte, said she was talking to a..."
+              "note": "Reluctant, Göte said"
             },
             {
               "tier": 1,
               "response": "They 'checked' on Friday. Two patrol cars for twenty minutes. That's it. Commissioner Lund said that 'teenage girls hide sometimes'.",
               "expression": "defiant",
               "feedback": "Police failure — good angle but you missed the school connection.",
-              "note": "They 'checked' on Friday"
+              "note": "Commissioner Lund said that 'teenage girls hide..."
             },
             {
               "tier": 3,
               "response": "Diary... yes. I found it last night under the mattress. I didn't look inside — it's private — but... *hesitates* She wrote 'S is doing it again' on the cover. In red. I don't know what it means.",
               "expression": "nervous",
               "feedback": "Diary with initial + desperation. Explosive. Bold to ask the right question.",
-              "note": "I found it last night under the mattress"
+              "note": "I don't know what it means"
             }
           ],
-          "q1_note": "Thursday at three she was supposed to be home"
+          "q1_note": "She left school at quarter to three according to the..."
         },
         "pressure": {
           "q1_response": "Why? I... I don't know. Maybe because we're not important enough. Anna's father left three years ago. We have no name, no connections.",
@@ -389,17 +389,17 @@
               "response": "*long silence* There's a teacher. Svensson. Anna said he was 'creepy'. I told her to talk to the principal. Now I wonder if the principal even listened.",
               "expression": "nervous",
               "feedback": "You got the name — but through pressure, not trust. It shows.",
-              "note": "Anna said he was 'creepy'"
+              "note": "Now I wonder if the principal even listened"
             },
             {
               "tier": 3,
               "response": "*breaks down* Anna told me last summer. That a teacher was touching her. I went to the principal. He said it was a 'misunderstanding'. I should have gone to the police. And now she's gone. It's my fault.",
               "expression": "open",
               "feedback": "The full picture — abuse, cover-up by the school, police inaction. Enormous.",
-              "note": "Anna told me last summer"
+              "note": "It's my fault"
             }
           ],
-          "q1_note": "Maybe because we're not important enough"
+          "q1_note": "We have no name, no connections"
         },
         "silence": {
           "q1_response": "*waits, nervously* Aren't you going to ask anything? I... I don't know where to start.",
@@ -421,21 +421,21 @@
               "response": "What worries me... is that the school is lying. The principal called me yesterday and said 'Anna was frequently absent'. That's not true. She doesn't have a single absence. Why are they lying?",
               "expression": "defiant",
               "feedback": "The school's lies — strong angle, you let her steer.",
-              "note": "The principal called me yesterday and said 'Anna..."
+              "note": "She doesn't have a single absence"
             },
             {
               "tier": 1,
               "response": "Anna plays the flute. She dreams of Stockholm. She folds paper cranes when she's nervous. She deserves better than being a brief notice in the paper.",
               "expression": "guarded",
               "feedback": "Human portrait — good writing but weak news basis.",
-              "note": "She dreams of Stockholm"
+              "note": "She deserves better than being a brief notice in the..."
             },
             {
               "tier": 3,
               "response": "*starts crying* I didn't tell the police that... Anna said 'he' threatened her. That if she told anyone, 'nobody would believe her anyway, because he's a teacher'. I should have listened. God, I should have listened.",
               "expression": "open",
               "feedback": "Through silence you got what she didn't dare tell the police. Journalism at its best.",
-              "note": "That if she told anyone, 'nobody would believe..."
+              "note": "Anna said 'he' threatened her"
             }
           ],
           "q1_note": "I don't know where to start"
@@ -555,14 +555,14 @@
               "response": "Choice? The bank called every week. Then the commissioner showed up with an offer. 'Take it or leave it,' he said. I took it.",
               "expression": "guarded",
               "feedback": "You got a personal story but no concrete news.",
-              "note": "The bank called every week"
+              "note": "Then the commissioner showed up with an offer"
             },
             {
               "tier": 2,
               "response": "They said 'industrial area' but I heard it's mostly planned as parking and storage for the municipality's own vehicles. The land was worth twice as much if they had zoned it for housing.",
               "expression": "neutral",
               "feedback": "Zoning manipulation — land undervalued through zone category. Good!",
-              "note": "The land was worth twice as much if they had..."
+              "note": "The land was worth twice as much if they had zoned it..."
             },
             {
               "tier": 1,
@@ -572,7 +572,7 @@
               "note": "The municipality's lawyer handled everything"
             }
           ],
-          "q1_note": "My grandfather broke the land"
+          "q1_note": "It hurts to sell but the kids don't want to take over..."
         },
         "direct": {
           "q1_response": "They gave me 180,000. Neighbor Olsson got 300,000 for a similar plot last year. I'm no expert but that feels... low.",
@@ -601,17 +601,17 @@
               "response": "The contract? They said it was confidential until the deal was closed. I didn't get a copy.",
               "expression": "guarded",
               "feedback": "The secrecy is a story but you need more.",
-              "note": "They said it was confidential until the deal was..."
+              "note": "I didn't get a copy"
             },
             {
               "tier": 2,
               "response": "I asked the same thing. The realtor in Ystad said the land is easily worth 350,000 with that location. The municipality never commissioned an external valuation.",
               "expression": "neutral",
               "feedback": "Price discrepancy + no external valuation = viable story.",
-              "note": "The realtor in Ystad said the land is easily..."
+              "note": "The realtor in Ystad said the land is easily worth..."
             }
           ],
-          "q1_note": "Neighbor Olsson got 300,000 for a similar plot..."
+          "q1_note": "Neighbor Olsson got 300,000 for a similar plot last..."
         },
         "pressure": {
           "q1_response": "Friends? We play cards sometimes. What do you mean by that?",
@@ -633,14 +633,14 @@
               "response": "Promise? No. Money. That was all. Period.",
               "expression": "hostile",
               "feedback": "Blocked — he shut down. The pressure came too early.",
-              "note": "Money"
+              "note": "Money. That was all"
             },
             {
               "tier": 2,
               "response": "*blushes* That... he's been doing that for ten years, yes. But that has nothing to do with the land deal. Or does it?",
               "expression": "nervous",
               "feedback": "Conflict of interest confirmed — but by accident rather than trust.",
-              "note": "He's been doing that for ten years, yes"
+              "note": "That has nothing to do with the land deal"
             },
             {
               "tier": 0,
@@ -650,7 +650,7 @@
               "note": "I have nothing more to say"
             }
           ],
-          "q1_note": "We play cards sometimes"
+          "q1_note": "We play cards sometimes. What do you mean by that"
         },
         "silence": {
           "q1_response": "*fidgets* I know it looks strange. That I sold for too little money to a friend. But I had no choice.",
@@ -672,14 +672,14 @@
               "response": "The bank threatened foreclosure. Björk said 'take my offer or the municipality buys after the auction for even less'. So I signed.",
               "expression": "nervous",
               "feedback": "Extortion — the municipality exploited his debt. Strong angle.",
-              "note": "The bank threatened foreclosure"
+              "note": "So I signed"
             },
             {
               "tier": 1,
               "response": "That the price is too low. Everyone knows it. But nobody says anything because Björk decides on building permits and everyone needs Björk.",
               "expression": "guarded",
               "feedback": "Power structure — but no figures or evidence.",
-              "note": "Nobody says anything because Björk decides on..."
+              "note": "Nobody says anything because Björk decides on building..."
             },
             {
               "tier": 1,
@@ -806,14 +806,14 @@
               "response": "Yes indeed! Sister-in-law! Everyone knows it. Ulla-Karin Persson is her name. Married to the judge's brother Stig. It's well known in the whole district.",
               "expression": "open",
               "feedback": "You got the family connection confirmed. Small but fun story.",
-              "note": "Ulla-Karin Persson is her name"
+              "note": "Married to the judge's brother Stig"
             },
             {
               "tier": 1,
               "response": "Arne Björkqvist was furious — he competed with his German shepherd. Agneta simply went home. At least five people were upset.",
               "expression": "open",
               "feedback": "Multiple dissatisfied — it strengthens the story a bit.",
-              "note": "Arne Björkqvist was furious"
+              "note": "He competed with his German shepherd"
             },
             {
               "tier": 0,
@@ -823,7 +823,7 @@
               "note": "The Småstad Kennel Club"
             }
           ],
-          "q1_note": "We had a dog show at Folkets Park"
+          "q1_note": "The judge's sister-in-law"
         },
         "direct": {
           "q1_response": "The judge was Rolf Danielsson from Eksjö. And his sister-in-law Ulla-Karin won with her poodle. Obvious conflict of interest!",
@@ -852,14 +852,14 @@
               "response": "It was Gösta on the board who invited him. They're hunting buddies. The whole thing was decided in advance if you ask me.",
               "expression": "guarded",
               "feedback": "You got the selection chain. Enough for a brief.",
-              "note": "It was Gösta on the board who invited him"
+              "note": "The whole thing was decided in advance if you ask me"
             },
             {
               "tier": 0,
               "response": "Complaint? To whom? The kennel club has no appeals process. That's why I'm talking to you!",
               "expression": "neutral",
               "feedback": "No formal process — the story has no legs.",
-              "note": "The kennel club has no appeals process"
+              "note": "That's why I'm talking to you"
             }
           ],
           "q1_note": "The judge was Rolf Danielsson from Eksjö"
@@ -891,17 +891,17 @@
               "response": "Everyone SAW it! But nobody dares say anything because Gösta on the board decides who gets to participate next year.",
               "expression": "nervous",
               "feedback": "Rumors but no named witnesses.",
-              "note": "Nobody dares say anything because Gösta on the..."
+              "note": "Nobody dares say anything because Gösta on the board..."
             },
             {
               "tier": 0,
               "response": "I want Bella to get the ribbon she deserves! And for Rolf to never judge again!",
               "expression": "defiant",
               "feedback": "Emotion without facts — no story.",
-              "note": "I want Bella to get the ribbon she deserves"
+              "note": "For Rolf to never judge again"
             }
           ],
-          "q1_note": "I didn't get angry"
+          "q1_note": "On my Bella's behalf"
         },
         "silence": {
           "q1_response": "...Listen, are you going to write something down or what? I'm not standing here for my health!",
@@ -923,14 +923,14 @@
               "response": "*sighs deeply* Okay. Rolf Danielsson judged. His sister-in-law won. Arne Björkqvist and I protested but Gösta on the board dismissed us.",
               "expression": "neutral",
               "feedback": "Compact summary — all names in place.",
-              "note": "Arne Björkqvist and I protested but Gösta on the..."
+              "note": "Arne Björkqvist and I protested but Gösta on the board..."
             },
             {
               "tier": 0,
               "response": "The full picture? It's SIMPLE! Rigged results, questionable judge, wishy-washy board. Don't laugh!",
               "expression": "hostile",
               "feedback": "No new details — mostly frustration.",
-              "note": "Rigged results, questionable judge, wishy-washy..."
+              "note": "Rigged results, questionable judge, wishy-washy board"
             },
             {
               "tier": 1,
@@ -1064,7 +1064,7 @@
               "response": "The old mechanism worked fine. But the church board wanted something modern. Ordered from some German company. The cheapest bid of course.",
               "expression": "neutral",
               "feedback": "Background on the problem — substandard procurement.",
-              "note": "The church board wanted something modern"
+              "note": "Ordered from some German company"
             },
             {
               "tier": 0,
@@ -1074,7 +1074,7 @@
               "note": "It rings whenever it wants, I can swear to that"
             }
           ],
-          "q1_note": "The new bell tower mechanism they installed in May"
+          "q1_note": "My wife Ingrid cries at night"
         },
         "direct": {
           "q1_response": "Talked to him? I've YELLED at him! Vicar Falk says 'the repairman is coming next week'. He's been saying that since July.",
@@ -1103,7 +1103,7 @@
               "response": "Mrs. Alm called the environmental board. They said churches are exempt from noise disturbance regulations. But this isn't about NORMAL bell ringing!",
               "expression": "defiant",
               "feedback": "Legal loophole — interesting angle.",
-              "note": "Alm called the environmental board"
+              "note": "They said churches are exempt from noise disturbance..."
             },
             {
               "tier": 1,
@@ -1135,7 +1135,7 @@
               "response": "The nights... *yawns* I hear it chiming and then I can't fall back asleep. Ingrid can't either. We're retirees. We deserve some peace.",
               "expression": "neutral",
               "feedback": "Human touch but nothing new.",
-              "note": "Ingrid can't either"
+              "note": "We deserve some peace"
             },
             {
               "tier": 1,
@@ -1149,7 +1149,7 @@
               "response": "Yes! Since May. The old one worked for fifty years. The new one hasn't worked properly a single night.",
               "expression": "defiant",
               "feedback": "Timeframe and contrast — useful.",
-              "note": "Since May"
+              "note": "The new one hasn't worked properly a single night"
             }
           ],
           "q1_note": "Have you ever— No, sorry"
@@ -1174,7 +1174,7 @@
               "response": "The bell mechanism from May. Broken. Rings whenever it wants. Vicar Falk promises but does nothing. We're eight families not sleeping. Write that.",
               "expression": "neutral",
               "feedback": "Concise and clear — all facts in one sentence.",
-              "note": "The bell mechanism from May"
+              "note": "Vicar Falk promises but does nothing"
             },
             {
               "tier": 0,
@@ -1188,10 +1188,10 @@
               "response": "The church board that ordered the junk. The municipality that doesn't care. And Falk who dodges. They should all take responsibility.",
               "expression": "defiant",
               "feedback": "Three levels of accountability — gives the story structure.",
-              "note": "The church board that ordered the junk"
+              "note": "Falk who dodges"
             }
           ],
-          "q1_note": "I came all the way here even though I can barely..."
+          "q1_note": "I came all the way here even though I can barely keep..."
         }
       }
     },
@@ -1315,17 +1315,17 @@
               "response": "Sometimes you turn a blind eye. It's a small town. You can't report everyone.",
               "expression": "guarded",
               "feedback": "Vague — no specific story.",
-              "note": "Sometimes you turn a blind eye"
+              "note": "You can't report everyone"
             },
             {
               "tier": 1,
               "response": "The police? Janne understood. He said he could register it without filing a report. So it's in the paperwork but nothing happens.",
               "expression": "neutral",
               "feedback": "The police handling is an interesting detail.",
-              "note": "He said he could register it without filing a..."
+              "note": "He said he could register it without filing a report"
             }
           ],
-          "q1_note": "It was the Pettersson boy"
+          "q1_note": "I didn't have the heart to report him"
         },
         "direct": {
           "q1_response": "Because the kid needed food more than he needed punishment. Of course I'm not going to report a fourteen-year-old for taking a chocolate bar.",
@@ -1347,7 +1347,7 @@
               "response": "Shoplifting? It happens maybe once a year. Nothing serious.",
               "expression": "neutral",
               "feedback": "No story — nothing's happening.",
-              "note": "It happens maybe once a year"
+              "note": "Nothing serious"
             },
             {
               "tier": 1,
@@ -1364,7 +1364,7 @@
               "note": "Some old biddy always has something to say about..."
             }
           ],
-          "q1_note": "Of course I'm not going to report a..."
+          "q1_note": "Of course I'm not going to report a fourteen-year-old..."
         },
         "pressure": {
           "q1_response": "Unusual? Listen, I've been running this store for twenty years. I know how to handle a fourteen-year-old.",
@@ -1386,14 +1386,14 @@
               "response": "A boy took a chocolate bar. I talked to him. He apologized. End of story.",
               "expression": "hostile",
               "feedback": "Shut down — you got the minimum.",
-              "note": "A boy took a chocolate bar"
+              "note": "End of story"
             },
             {
               "tier": 0,
               "response": "Janne Karlsson? He does his job. I do mine. There's no conflict.",
               "expression": "guarded",
               "feedback": "Nothing to work with.",
-              "note": "Janne Karlsson"
+              "note": "There's no conflict"
             },
             {
               "tier": 1,
@@ -1403,7 +1403,7 @@
               "note": "I know Tommy doesn't need a mark on his record"
             }
           ],
-          "q1_note": "I've been running this store for twenty years"
+          "q1_note": "I know how to handle a fourteen-year-old"
         },
         "silence": {
           "q1_response": "...Right. You're not going to give up, are you? *sighs* Sit down. Want some coffee?",
@@ -1425,24 +1425,24 @@
               "response": "Tommy came in, took a chocolate bar and a Fanta, put them in his pocket. I saw it in the mirror. Stopped him at the door. He cried. Fourteen years old and he cried. I couldn't call the police.",
               "expression": "open",
               "feedback": "Detailed account — good journalism through listening.",
-              "note": "Tommy came in, took a chocolate bar and a Fanta..."
+              "note": "I saw it in the mirror"
             },
             {
               "tier": 0,
               "response": "It's a small town. You sort things out between yourselves. Not through the newspaper.",
               "expression": "guarded",
               "feedback": "He doesn't want to — respect it or push further.",
-              "note": "You sort things out between yourselves"
+              "note": "Not through the newspaper"
             },
             {
               "tier": 1,
               "response": "He's doing fine now. Sweeps the floor at my place on Saturdays. I pay him in food and a little money. That's better than a police report, right?",
               "expression": "grateful",
               "feedback": "Beautiful follow-up — the shopkeeper as the community's safety net.",
-              "note": "Sweeps the floor at my place on Saturdays"
+              "note": "I pay him in food and a little money"
             }
           ],
-          "q1_note": "You're not going to give up, are you"
+          "q1_note": "You're not going to give up, are you. Want some coffee"
         }
       }
     },
@@ -1559,24 +1559,24 @@
               "response": "It was a joint decision between the municipality and the Road Administration. Municipal chairman Björk pushed hard for a southern route — it happened to benefit his area.",
               "expression": "open",
               "feedback": "Political connection — the municipal chairman steered the route. Good lead.",
-              "note": "It was a joint decision between the municipality..."
+              "note": "Municipal chairman Björk pushed hard for a southern..."
             },
             {
               "tier": 2,
               "response": "The preliminary study? *dry laugh* It was done by Markgrund AB. Do you know who owns that? Sven Björk's brother-in-law. That report was worth as much as the paper it was written on.",
               "expression": "open",
               "feedback": "Strong connection — rigged preliminary study. This explains everything.",
-              "note": "Sven Björk's brother-in-law"
+              "note": "That report was worth as much as the paper it was..."
             },
             {
               "tier": 1,
               "response": "Roughly half and half. But the rerouting was unnecessary — the original route would have worked with some extra ground work.",
               "expression": "neutral",
               "feedback": "Good facts but without the personal connection.",
-              "note": "The rerouting was unnecessary"
+              "note": "The original route would have worked with some extra..."
             }
           ],
-          "q1_note": "The soil conditions were worse than we thought"
+          "q1_note": "Then the citizen protests that moved the route"
         },
         "direct": {
           "q1_response": "Six million... yes. The soil conditions were unforeseen. And the new route that the politicians demanded was more expensive.",
@@ -1598,24 +1598,24 @@
               "response": "Municipal chairman Björk and his technical committee. They wanted a southern route past Björkåsen. It was in the municipality's interest, they said.",
               "expression": "guarded",
               "feedback": "Political trail confirmed — but no conflict of interest links.",
-              "note": "Municipal chairman Björk and his technical..."
+              "note": "Municipal chairman Björk and his technical committee"
             },
             {
               "tier": 1,
               "response": "That... is a good question. The information stayed at the civil servant level. I reported upward but it got stuck at the county office.",
               "expression": "nervous",
               "feedback": "Information gap — someone held it back.",
-              "note": "I reported upward but it got stuck at the county..."
+              "note": "I reported upward but it got stuck at the county office"
             },
             {
               "tier": 2,
               "response": "Markgrund AB. They were procured by the municipality, not by us. I protested — they had never done road surveys before. But someone in the municipality insisted.",
               "expression": "nervous",
               "feedback": "Rigged procurement — strong lead.",
-              "note": "They were procured by the municipality, not by us"
+              "note": "Someone in the municipality insisted"
             }
           ],
-          "q1_note": "The soil conditions were unforeseen"
+          "q1_note": "The new route that the politicians demanded was more..."
         },
         "pressure": {
           "q1_response": "...What documents? Where did you get them? Those are internal records.",
@@ -1637,7 +1637,7 @@
               "response": "We... didn't conceal anything. But municipal chairman Björk said we shouldn't 'worry the council unnecessarily'. Those were his words. I wanted to inform them.",
               "expression": "nervous",
               "feedback": "Direct quote from the municipal chairman — cover-up confirmed.",
-              "note": "Municipal chairman Björk said we shouldn't 'worry..."
+              "note": "Municipal chairman Björk said we shouldn't 'worry the..."
             },
             {
               "tier": 2,
@@ -1651,7 +1651,7 @@
               "response": "I'd be happy to comment. But I need to talk to my superiors first. Call me tomorrow.",
               "expression": "guarded",
               "feedback": "He wants to comment but doesn't dare alone — half-good.",
-              "note": "I need to talk to my superiors first"
+              "note": "Call me tomorrow"
             }
           ],
           "q1_note": "Those are internal records"
@@ -1676,7 +1676,7 @@
               "response": "Björk's. The municipal chairman's. He decided the route, he chose the consulting firm, he told us to keep quiet about the costs. It's all in my memos.",
               "expression": "open",
               "feedback": "Complete chain — one man directed everything.",
-              "note": "He decided the route, he chose the consulting..."
+              "note": "He decided the route, he chose the consulting firm, he..."
             },
             {
               "tier": 1,
@@ -1690,10 +1690,10 @@
               "response": "*long silence* I wanted to build a good road. But you can't build well if the foundation is bad. And the foundation — the soil report — was a lie.",
               "expression": "neutral",
               "feedback": "Poetic but lacks details.",
-              "note": "The foundation"
+              "note": "The soil report"
             }
           ],
-          "q1_note": "Everyone knows the road project is a scandal"
+          "q1_note": "I was just following orders"
         }
       }
     },
@@ -1810,24 +1810,24 @@
               "response": "Look! *shows jar* Lisa saved it. It's some kind of larva, I think. I haven't dared open it properly. You can have someone examine it.",
               "expression": "open",
               "feedback": "Physical evidence — if it checks out, it's strong.",
-              "note": "Lisa saved it"
+              "note": "You can have someone examine it"
             },
             {
               "tier": 2,
               "response": "YES! That's exactly it! The municipality switched to Matab this autumn. The cheapest option. The food comes chilled from Norrköping and is reheated in the school's microwave. The old system was torn out.",
               "expression": "open",
               "feedback": "System change — procurement, central kitchen gone, new supplier. Strong story.",
-              "note": "The municipality switched to Matab this autumn"
+              "note": "The food comes chilled from Norrköping and is reheated..."
             },
             {
               "tier": 1,
               "response": "There are twelve families who've written to the principal. And I know at least ten more who are grumbling. But people don't dare complain — it 'causes trouble' for the children.",
               "expression": "defiant",
               "feedback": "Quantification and culture of silence — good.",
-              "note": "There are twelve families who've written to the..."
+              "note": "It 'causes trouble' for the children"
             }
           ],
-          "q1_note": "The food smells bad, it's cold, and the portions..."
+          "q1_note": "The food smells bad, it's cold, and the portions have..."
         },
         "direct": {
           "q1_response": "The food is rotten. Literally. Cold, pre-packaged, and delivered from Norrköping by a company called Matab. The school's own kitchen was shut down this summer.",
@@ -1856,17 +1856,17 @@
               "response": "Tilda in the kitchen — the one who got fired — said the school's own kitchen cost 3:50 per portion. Matab charges 4:25. It got MORE EXPENSIVE and worse!",
               "expression": "open",
               "feedback": "Cost comparison — the savings narrative falls apart.",
-              "note": "Said the school's own kitchen cost 3:50 per..."
+              "note": "Said the school's own kitchen cost 3:50 per portion"
             },
             {
               "tier": 0,
               "response": "She said 'it's a municipal matter, talk to the board'. Just passes the buck. Nobody takes responsibility.",
               "expression": "guarded",
               "feedback": "Typical bureaucratic deflection — no new info.",
-              "note": "She said 'it's a municipal matter, talk to the..."
+              "note": "She said 'it's a municipal matter, talk to the board'"
             }
           ],
-          "q1_note": "Cold, pre-packaged, and delivered from Norrköping..."
+          "q1_note": "Cold, pre-packaged, and delivered from Norrköping by a..."
         },
         "pressure": {
           "q1_response": "Picky?! My Lisa EATS everything — fermented herring, liver, blood pudding! There's nothing wrong with the children!",
@@ -1888,21 +1888,21 @@
               "response": "The kitchen was shut down this summer. Now the food comes in plastic containers from some company in Norrköping. The kids say it tastes like cardboard.",
               "expression": "neutral",
               "feedback": "Basic facts — the system change.",
-              "note": "W the food comes in plastic containers from some..."
+              "note": "The kids say it tastes like cardboard"
             },
             {
               "tier": 1,
               "response": "Lisa saved the mashed potatoes yesterday. There was some kind of larva in it. I have it at home — you can take it to the environmental office!",
               "expression": "open",
               "feedback": "Evidence exists — can be investigated further.",
-              "note": "Lisa saved the mashed potatoes yesterday"
+              "note": "You can take it to the environmental office"
             },
             {
               "tier": 0,
               "response": "The principal passes the buck to the municipality. The municipality says 'we're following the procurement process'. Nobody does anything.",
               "expression": "defiant",
               "feedback": "Frustration but no new facts.",
-              "note": "The principal passes the buck to the municipality"
+              "note": "Nobody does anything"
             }
           ],
           "q1_note": "My Lisa EATS everything"
@@ -1934,17 +1934,17 @@
               "response": "In June the municipality shut down the school kitchen. Tilda and Yvonne were fired. In August Matab started delivering. Ingemar Holm on the school board pushed it through. His brother Torbjörn drives Matab's trucks. And the food is worse AND more expensive.",
               "expression": "defiant",
               "feedback": "The whole chain — shutdown, conflict of interest, cost, quality. Complete.",
-              "note": "In August Matab started delivering"
+              "note": "His brother Torbjörn drives Matab's trucks"
             },
             {
               "tier": 1,
               "response": "Talk to Tilda Ågren — she was the cook at the school for fifteen years. Fired in June. She knows everything about the food and the costs.",
               "expression": "neutral",
               "feedback": "Good source to follow up.",
-              "note": "Talk to Tilda Ågren"
+              "note": "She knows everything about the food and the costs"
             }
           ],
-          "q1_note": "I have a lunch box from the school in my bag if..."
+          "q1_note": "I have a lunch box from the school in my bag if you..."
         }
       }
     },
@@ -2061,24 +2061,24 @@
               "response": "A man. Tall, thin. Dark jacket. Ran toward the grove, not toward the road. As if he didn't want to be seen.",
               "expression": "nervous",
               "feedback": "Physical description and escape route — confirms someone was there.",
-              "note": "Ran toward the grove, not toward the road"
+              "note": "As if he didn't want to be seen"
             },
             {
               "tier": 2,
               "response": "That was the STRANGE thing. Eriksson came out after ten minutes — not until the neighbors had already called the fire department. And he wasn't in his pajamas. He was fully dressed. At half past ten on a Wednesday.",
               "expression": "open",
               "feedback": "Eriksson was dressed in the middle of the night. Was he expecting the fire?",
-              "note": "At half past ten on a Wednesday"
+              "note": "Eriksson came out after ten minutes"
             },
             {
               "tier": 1,
               "response": "No. I called the station but they said the investigation was closed. 'Old electrical wiring' they said. But that barn HAS no electricity — I know that, I've lived here for forty years.",
               "expression": "defiant",
               "feedback": "The barn has no electricity — but the fire cause was listed as electrical fault. Big gap.",
-              "note": "I called the station but they said the..."
+              "note": "I know that, I've lived here for forty years"
             }
           ],
-          "q1_note": "It was Wednesday, around half past ten"
+          "q1_note": "Running from Eriksson's barn"
         },
         "direct": {
           "q1_response": "A man. Tall, dark clothes. I didn't see the face. But he ran straight toward the grove — not toward the road, but straight into the forest.",
@@ -2107,7 +2107,7 @@
               "response": "Now that you ask... Eriksson's brother Håkan was visiting over the weekend before. They seemed to be arguing. I heard shouting from the yard.",
               "expression": "guarded",
               "feedback": "Family conflict just before the fire — possible motive.",
-              "note": "Eriksson's brother Håkan was visiting over the..."
+              "note": "Eriksson's brother Håkan was visiting over the weekend..."
             },
             {
               "tier": 2,
@@ -2117,7 +2117,7 @@
               "note": "My husband Olle talked to Eriksson this summer"
             }
           ],
-          "q1_note": "He ran straight toward the grove"
+          "q1_note": "Not toward the road, but straight into the forest"
         },
         "pressure": {
           "q1_response": "Accident? With someone running away from it? I may be old but I'm not stupid.",
@@ -2146,14 +2146,14 @@
               "response": "I don't want to accuse anyone... but Eriksson has been struggling financially. The barn had been empty since he sold the cows.",
               "expression": "guarded",
               "feedback": "Financial motive hinted at.",
-              "note": "The barn had been empty since he sold the cows"
+              "note": "Eriksson has been struggling financially"
             },
             {
               "tier": 2,
               "response": "He re-insured the barn this spring. My Olle said Eriksson bragged that 'the barn was worth more than the house'. On p-a-p-e-r, as he put it. And now it burned down.",
               "expression": "nervous",
               "feedback": "Insurance angle directly stated. Combined with the person who ran — strong.",
-              "note": "My Olle said Eriksson bragged that 'the barn was..."
+              "note": "My Olle said Eriksson bragged that 'the barn was worth..."
             }
           ],
           "q1_note": "I may be old but I'm not stupid"
@@ -2178,7 +2178,7 @@
               "response": "What worries me is that the police never even came here. Nobody asked me anything. They closed the case in one day. ONE day.",
               "expression": "nervous",
               "feedback": "The police never investigated — systematic failure.",
-              "note": "What worries me is that the police never even..."
+              "note": "They closed the case in one day"
             },
             {
               "tier": 2,
@@ -2312,24 +2312,24 @@
               "response": "Most people think it's needed. The Center Party had opinions about the location but voted yes in the end.",
               "expression": "neutral",
               "feedback": "No controversy — flat story.",
-              "note": "The Center Party had opinions about the location..."
+              "note": "The Center Party had opinions about the location but..."
             },
             {
               "tier": 1,
               "response": "The estimate is 800,000. State grants cover half. But it requires demolishing the Alm villa — it's been empty since Mrs. Alm passed away.",
               "expression": "open",
               "feedback": "Demolition of a culturally historic building — that could spark debate.",
-              "note": "The estimate is 800,000"
+              "note": "It's been empty since Mrs"
             },
             {
               "tier": 0,
               "response": "It was suggested to use the gravel lot by the station but that's owned by SJ. The square was the easiest option.",
               "expression": "neutral",
               "feedback": "Alternatives existed but were rejected — nothing controversial.",
-              "note": "It was suggested to use the gravel lot by the..."
+              "note": "The square was the easiest option"
             }
           ],
-          "q1_note": "It was Björk who brought it up in September"
+          "q1_note": "Cars park along Storgatan and it's chaos during..."
         },
         "direct": {
           "q1_response": "Småstad is growing. We get four hundred extra cars at midsummer. Storgatan can't handle it. A parking lot by the square is logical.",
@@ -2351,24 +2351,24 @@
               "response": "The Alm villa has to go. It's been empty for three years. Culturally interesting, sure — but not protected.",
               "expression": "neutral",
               "feedback": "The demolition of a heritage building — good angle.",
-              "note": "It's been empty for three years"
+              "note": "Not protected"
             },
             {
               "tier": 0,
               "response": "We're getting bids from three firms. Standard municipal procurement.",
               "expression": "neutral",
               "feedback": "Bureaucracy — no story.",
-              "note": "We're getting bids from three firms"
+              "note": "Standard municipal procurement"
             },
             {
               "tier": 1,
               "response": "Eva Ström from the Center Party filed a reservation. She wanted to preserve the Alm villa. But she was alone.",
               "expression": "guarded",
               "feedback": "A dissenting voice — could build a debate piece.",
-              "note": "Eva Ström from the Center Party filed a..."
+              "note": "Eva Ström from the Center Party filed a reservation"
             }
           ],
-          "q1_note": "We get four hundred extra cars at midsummer"
+          "q1_note": "A parking lot by the square is logical"
         },
         "pressure": {
           "q1_response": "Controversial? We live in a democracy. The majority voted yes. Period.",
@@ -2397,17 +2397,17 @@
               "response": "The villa? It's been empty since Mrs. Alm passed. The roof leaks. It costs more to renovate than to demolish.",
               "expression": "neutral",
               "feedback": "Argument for demolition — but the cultural angle remains.",
-              "note": "It's been empty since Mrs"
+              "note": "It costs more to renovate than to demolish"
             },
             {
               "tier": 1,
               "response": "Björk owns land? I... don't know. But that would have been recorded as a conflict of interest. *shifts uncomfortably*",
               "expression": "nervous",
               "feedback": "He didn't know — or knew and got nervous. Interesting.",
-              "note": "That would have been recorded as a conflict of..."
+              "note": "That would have been recorded as a conflict of interest"
             }
           ],
-          "q1_note": "The majority voted yes"
+          "q1_note": "We live in a democracy. The majority voted yes"
         },
         "silence": {
           "q1_response": "...Are we just going to sit here? *laughs uncertainly* Well then, ask away.",
@@ -2429,7 +2429,7 @@
               "response": "We need parking, Björk made the proposal, we voted yes. Simple matter.",
               "expression": "neutral",
               "feedback": "Short and nothing new.",
-              "note": "We need parking, Björk made the proposal, we..."
+              "note": "We need parking, Björk made the proposal, we voted yes"
             },
             {
               "tier": 1,
@@ -2446,7 +2446,7 @@
               "note": "Most don't care which building is in the way"
             }
           ],
-          "q1_note": "Are we just going to sit here"
+          "q1_note": "Are we just going to sit here. Well then, ask away"
         }
       }
     },
@@ -2563,7 +2563,7 @@
               "response": "The recreation board said the money was needed for 'other activities'. You know what that was? The municipal commissioner's conference trip to Båstad. It was in the official records.",
               "expression": "defiant",
               "feedback": "Reallocation to a conference trip — good contrast angle.",
-              "note": "The recreation board said the money was needed..."
+              "note": "The municipal commissioner's conference trip to Båstad"
             },
             {
               "tier": 1,
@@ -2580,7 +2580,7 @@
               "note": "The Lions Club"
             }
           ],
-          "q1_note": "95,000 kronor per year"
+          "q1_note": "The ice machine costs a fortune to run"
         },
         "direct": {
           "q1_response": "95,000. Revoked by the recreation board. They said we didn't have sufficient 'youth activities'. We have SIXTY young people!",
@@ -2619,7 +2619,7 @@
               "note": "Berit and I in the office go through everything"
             }
           ],
-          "q1_note": "95,000"
+          "q1_note": "Revoked by the recreation board"
         },
         "pressure": {
           "q1_response": "Mismanaged?! I work here for FREE! All coaches are volunteers! Every krona goes to the kids!",
@@ -2641,7 +2641,7 @@
               "response": "*calms down* We received 95,000 from the municipality. 60,000 went to electricity. 20,000 to machine maintenance. 15,000 to equipment for kids who don't have any. Where's the mismanagement?",
               "expression": "neutral",
               "feedback": "Detailed accounting — refutes the municipality's picture.",
-              "note": "60,000 went to electricity"
+              "note": "15,000 to equipment for kids who don't have any"
             },
             {
               "tier": 1,
@@ -2655,10 +2655,10 @@
               "response": "Ove Karlsson. His kid plays football. The new football hall got OUR money. And you know what? The football hall costs twice as much to run but THAT one isn't questioned.",
               "expression": "open",
               "feedback": "Reallocation, injustice, and conflict of interest — strong story.",
-              "note": "The new football hall got OUR money"
+              "note": "The football hall costs twice as much to run but THAT..."
             }
           ],
-          "q1_note": "All coaches are volunteers"
+          "q1_note": "Every krona goes to the kids"
         },
         "silence": {
           "q1_response": "*looks around the empty rink* Last week this place was full of kids. Today it's just me and the ice. They know it might be over.",
@@ -2680,14 +2680,14 @@
               "response": "Little Kalle Svensson — nine years old, best player I've ever seen. Lives with his mum in the council flats. Can't afford his own equipment. We give him everything. If we close, he's out on the street.",
               "expression": "open",
               "feedback": "A human face — strong for human interest.",
-              "note": "Nine years old, best player I've ever seen"
+              "note": "Little Kalle Svensson"
             },
             {
               "tier": 1,
               "response": "They have nowhere to go. The youth center closed last year. The ice rink is the only thing left in winter. Småstad becomes a desert for the kids.",
               "expression": "nervous",
               "feedback": "Structural problem — good context.",
-              "note": "The youth center closed last year"
+              "note": "Småstad becomes a desert for the kids"
             },
             {
               "tier": 1,
@@ -2697,7 +2697,7 @@
               "note": "My dad built this rink in 1956"
             }
           ],
-          "q1_note": "Last week this place was full of kids"
+          "q1_note": "They know it might be over"
         }
       }
     },
@@ -2814,14 +2814,14 @@
               "response": "I think it was directed AT Björk. The note was sticking out of the cat's collar. Placed right in front of his parking spot, not by the entrance.",
               "expression": "nervous",
               "feedback": "Targeted threat against the municipal commissioner — not random.",
-              "note": "I think it was directed AT Björk"
+              "note": "Placed right in front of his parking spot, not by the..."
             },
             {
               "tier": 1,
               "response": "It was a black cat. Not strangled or anything — it looked like it had been hit by a car. But someone placed it there on purpose. And the NOTE...",
               "expression": "guarded",
               "feedback": "Cat maybe not killed — but the message was placed deliberately.",
-              "note": "T strangled or anything"
+              "note": "Someone placed it there on purpose"
             },
             {
               "tier": 2,
@@ -2831,7 +2831,7 @@
               "note": "Just me and Sonja at reception"
             }
           ],
-          "q1_note": "It said 'NEXT TIME IT WON'T BE A CAT'"
+          "q1_note": "In capital letters"
         },
         "direct": {
           "q1_response": "In front of Björk's parking spot. Seven o'clock this morning. A dead black cat with a note wrapped around its collar: 'NEXT TIME IT WON'T BE A CAT' and then 'Björk'.",
@@ -2853,24 +2853,24 @@
               "response": "No. Björk told me to throw the cat away and not talk about it. And that... well, that's what I did. Until now.",
               "expression": "guarded",
               "feedback": "Björk wanted to hush it up — but why? Half-facts.",
-              "note": "Björk told me to throw the cat away and not talk..."
+              "note": "Björk told me to throw the cat away and not talk about..."
             },
             {
               "tier": 2,
               "response": "He went white in the face. Took the note. Went inside and called — not the police, because I had Janne's number right there. He called someone in Gothenburg. Closed the door.",
               "expression": "nervous",
               "feedback": "Björk called Gothenburg — not the police. Someone from outside who's threatening.",
-              "note": "T the police, because I had Janne's number right..."
+              "note": "He called someone in Gothenburg"
             },
             {
               "tier": 1,
               "response": "Now that you ask... last month I found a smashed window at the municipal building. Björk said it was 'the wind'. But the window was on the second floor and it had NOT been windy.",
               "expression": "open",
               "feedback": "Previous incident — pattern of threats against Björk.",
-              "note": "Last month I found a smashed window at the..."
+              "note": "The window was on the second floor and it had NOT been..."
             }
           ],
-          "q1_note": "In front of Björk's parking spot"
+          "q1_note": "A dead black cat with a note wrapped around its..."
         },
         "pressure": {
           "q1_response": "A prank?! Someone put a DEAD CAT with a death threat in front of the municipal commissioner's spot! Is that a prank?",
@@ -2892,7 +2892,7 @@
               "response": "I found it at half six. Black cat, note around the neck. 'NEXT TIME IT WON'T BE A CAT' and then Björk's name. Björk told me to remove it and keep quiet.",
               "expression": "defiant",
               "feedback": "Basic facts — but cover-up attempt.",
-              "note": "'NEXT TIME IT WON'T BE A CAT' and then Björk's..."
+              "note": "'NEXT TIME IT WON'T BE A CAT' and then Björk's name"
             },
             {
               "tier": 0,
@@ -2909,7 +2909,7 @@
               "note": "I heard Björk arguing on the phone three weeks ago"
             }
           ],
-          "q1_note": "Someone put a DEAD CAT with a death threat in..."
+          "q1_note": "Someone put a DEAD CAT with a death threat in front of..."
         },
         "silence": {
           "q1_response": "*looks around* ...I shouldn't be talking about this. Björk told me to keep my mouth shut. But it's been eating at me. Poor cat.",
@@ -2931,24 +2931,24 @@
               "response": "'NEXT TIME IT WON'T BE A CAT'. And his name. Björk. Someone is threatening the municipal commissioner and he DOESN'T WANT the police to know.",
               "expression": "nervous",
               "feedback": "The threat plus the silence — something doesn't add up.",
-              "note": "'NEXT TIME IT WON'T BE A CAT'"
+              "note": "Someone is threatening the municipal commissioner and..."
             },
             {
               "tier": 2,
               "response": "He said 'it's MY problem, not the municipality's'. My problem. As if he knows exactly who did it. And three weeks ago I heard him arguing with some Ricky about money.",
               "expression": "open",
               "feedback": "Björk knows who it is. Debts, threats, secrets. Big story.",
-              "note": "Three weeks ago I heard him arguing with some..."
+              "note": "Three weeks ago I heard him arguing with some Ricky..."
             },
             {
               "tier": 1,
               "response": "Worried? I'm TERRIFIED. If someone threatens the municipal commissioner with dead animals — what do they do to an ordinary town messenger who talks?",
               "expression": "nervous",
               "feedback": "Olle's fear shows the threat feels real.",
-              "note": "If someone threatens the municipal commissioner..."
+              "note": "If someone threatens the municipal commissioner with..."
             }
           ],
-          "q1_note": "Björk told me to keep my mouth shut"
+          "q1_note": "It's been eating at me"
         }
       }
     },
@@ -3072,14 +3072,14 @@
               "response": "Fifteen children every day. At least. They do homework, read, or just SIT here because it's warm and safe. Emmy Nilsson — her mother works nights. Emmy is here until we close every evening.",
               "expression": "open",
               "feedback": "A human face — the children are the strongest argument.",
-              "note": "They do homework, read, or just SIT here because..."
+              "note": "Emmy Nilsson"
             },
             {
               "tier": 2,
               "response": "They save 200,000. But do you know what the conference trip to Båstad cost? 230,000. They shut down a library to fund the municipal commissioner's conference.",
               "expression": "open",
               "feedback": "Direct link — conference vs. library. Very strong contrast.",
-              "note": "They save 200,000"
+              "note": "They shut down a library to fund the municipal..."
             }
           ],
           "q1_note": "4,000 registered borrowers"
@@ -3121,7 +3121,7 @@
               "note": "'In light of upcoming austerity measures...'..."
             }
           ],
-          "q1_note": "The library costs 180,000"
+          "q1_note": "We close on March first unless the council changes its..."
         },
         "pressure": {
           "q1_response": "Digitalization? In Småstad? We haven't even paved Björkvägen! What digitalization are they talking about?",
@@ -3143,7 +3143,7 @@
               "response": "We're the only place where everyone is welcome. Pensioners read the newspaper. Children do homework. The Yousef immigrant family learns Swedish here every Tuesday. Close us and what's left?",
               "expression": "open",
               "feedback": "The library's social function — strong argument.",
-              "note": "The Yousef immigrant family learns Swedish here..."
+              "note": "The Yousef immigrant family learns Swedish here every..."
             },
             {
               "tier": 0,
@@ -3157,7 +3157,7 @@
               "response": "The real reason? Björk wants to save money for his conference and his parking lot. The library has no powerful friends in the council. We're easy to sacrifice.",
               "expression": "defiant",
               "feedback": "Political prioritization exposed — the library is sacrificed for prestige.",
-              "note": "Björk wants to save money for his conference and..."
+              "note": "The library has no powerful friends in the council"
             }
           ],
           "q1_note": "We haven't even paved Björkvägen"
@@ -3182,7 +3182,7 @@
               "response": "Emil Johansson learned to read here in 1965. Now he's a teacher in Jönköping. Last week he called and asked if we still had his favorite book. We did. That's what a library IS.",
               "expression": "open",
               "feedback": "A story that captures the library's soul — strong quotes.",
-              "note": "Last week he called and asked if we still had his..."
+              "note": "Emil Johansson learned to read here in 1965"
             },
             {
               "tier": 1,
@@ -3196,7 +3196,7 @@
               "response": "Hope? *falls silent for a long time* If you write and people read... I have a copy of the budget proposal. And an expense list from Björk's conference trip — 230,000 on hotels and dinners. Our library costs 180,000. You understand.",
               "expression": "open",
               "feedback": "Documentation — the budget comparison. Strong contrast that could overturn the decision.",
-              "note": "Our library costs 180,000"
+              "note": "I have a copy of the budget proposal"
             }
           ],
           "q1_note": "I've worked here since 1962"
@@ -3323,17 +3323,17 @@
               "response": "Yes, actually — we're collecting for Erik's family. He injured his back in the spring and has been at home ever since. The social insurance office is dragging their feet. The union is covering the difference.",
               "expression": "open",
               "feedback": "Good — you found the human angle behind the bazaar.",
-              "note": "He injured his back in the spring and has been at..."
+              "note": "He injured his back in the spring and has been at home..."
             },
             {
               "tier": 1,
               "response": "It's been held since 1952! Arne Pettersson started it, he was the union chairman back then. Times were tough after the war, people needed community.",
               "expression": "neutral",
               "feedback": "Nice history, but doesn't give the article any extra drive.",
-              "note": "It's been held since 1952"
+              "note": "Arne Pettersson started it, he was the union chairman..."
             }
           ],
-          "q1_note": "The children get to meet Santa"
+          "q1_note": "Svenssons Furniture donated a rocking chair"
         },
         "direct": {
           "q1_response": "Well, it's not free exactly. The raffle permit costs money, and we've rented equipment. But all surplus goes to the union local.",
@@ -3355,7 +3355,7 @@
               "response": "The budget is about 4,000 kronor. But this year we've got sponsorship from Svenssons and Konsum, so we'll probably break even. And all the surplus this year is earmarked for Erik Blom — the one who injured his back.",
               "expression": "open",
               "feedback": "Concrete finances and human interest — good combination.",
-              "note": "The budget is about 4,000 kronor"
+              "note": "This year we've got sponsorship from Svenssons and..."
             },
             {
               "tier": 1,
@@ -3394,7 +3394,7 @@
               "response": "Okay... yes, there'll be sausage grilling and a raffle. Santa comes at three o'clock. That's all I have to say.",
               "expression": "guarded",
               "feedback": "She closed up a bit. You got the basics but nothing more.",
-              "note": "There'll be sausage grilling and a raffle"
+              "note": "That's all I have to say"
             },
             {
               "tier": 0,
@@ -3408,10 +3408,10 @@
               "response": "Volunteers? Well, it was a bit hit and miss. But Maj from the sewing circle stepped up, and Gustavsson got sausages at half price. People pitch in when it matters.",
               "expression": "neutral",
               "feedback": "Some organizational details, but no real story.",
-              "note": "Maj from the sewing circle stepped up, and..."
+              "note": "Maj from the sewing circle stepped up, and Gustavsson..."
             }
           ],
-          "q1_note": "That's not true at all"
+          "q1_note": "We had a full house"
         },
         "silence": {
           "q1_response": "...Not saying anything? Oh well, I can tell you anyway. We've been planning for three months, you know!",
@@ -3440,17 +3440,17 @@
               "response": "The best part? The children getting to meet Santa! Gunnar dresses up every year, he's been doing it since '67.",
               "expression": "open",
               "feedback": "Charming but superficial.",
-              "note": "Gunnar dresses up every year, he's been doing it..."
+              "note": "Gunnar dresses up every year, he's been doing it since..."
             },
             {
               "tier": 1,
               "response": "People keep working. It's business as usual, I suppose. A bit wearing perhaps, but we don't complain.",
               "expression": "neutral",
               "feedback": "Mood report without substance.",
-              "note": "It's business as usual, I suppose"
+              "note": "A bit wearing perhaps, but we don't complain"
             }
           ],
-          "q1_note": "Oh well, I can tell you anyway"
+          "q1_note": "We've been planning for three months, you know"
         }
       }
     },
@@ -3567,14 +3567,14 @@
               "response": "The municipality said they'd send people, but it's been three hours now. Nobody's shown up. I had to set up barricades myself with chairs and planks.",
               "expression": "neutral",
               "feedback": "Basic — you know the municipality is late, but nothing sensational.",
-              "note": "The municipality said they'd send people, but..."
+              "note": "I had to set up barricades myself with chairs and..."
             },
             {
               "tier": 2,
               "response": "Happened before? It leaked at the same intersection last summer! And the drinking water pipe on Björkgatan was patched with temporary tape — it's still there! The pipe network is from the 1930s and nobody wants to pay to replace it.",
               "expression": "open",
               "feedback": "Good — you got a systemic problem, not just a one-off incident.",
-              "note": "The pipe network is from the 1930s and nobody..."
+              "note": "The pipe network is from the 1930s and nobody wants to..."
             },
             {
               "tier": 1,
@@ -3584,7 +3584,7 @@
               "note": "Nilsson in 4B has no water at all"
             }
           ],
-          "q1_note": "I live right across the street so I heard it..."
+          "q1_note": "At first I thought it was something with the radiator..."
         },
         "direct": {
           "q1_response": "The pipe burst at six this morning. The municipality knows about it — I called right away. But the technical department says their only excavator is in for service. So we wait.",
@@ -3606,24 +3606,24 @@
               "response": "One machine, yes! The other one was sold last year to save money. The municipal commissioner said 'we can rent when needed' — but it's Sunday and no rental company is open. Genius.",
               "expression": "defiant",
               "feedback": "Good connection to the cutbacks — gives the article a political dimension.",
-              "note": "The other one was sold last year to save money"
+              "note": "The municipal commissioner said 'we can rent when..."
             },
             {
               "tier": 1,
               "response": "At least until tomorrow, I think. But it depends on whether they can even find spare parts. The pipes are so old that standard parts don't fit.",
               "expression": "guarded",
               "feedback": "Practical info but no explosive content.",
-              "note": "It depends on whether they can even find spare..."
+              "note": "The pipes are so old that standard parts don't fit"
             },
             {
               "tier": 1,
               "response": "Bergström at the dry cleaners is screaming about damages. The bakery couldn't open. The shopkeepers' association is apparently going to write to the municipality.",
               "expression": "neutral",
               "feedback": "Reactions, but no analysis of why it happened.",
-              "note": "Bergström at the dry cleaners is screaming about..."
+              "note": "The shopkeepers' association is apparently going to..."
             }
           ],
-          "q1_note": "The pipe burst at six this morning"
+          "q1_note": "The technical department says their only excavator is..."
         },
         "pressure": {
           "q1_response": "Replace them? *laughs bitterly* Everyone knows the pipes are scrap. But you can't quote me on that — I work for the municipality.",
@@ -3659,10 +3659,10 @@
               "response": "*looks around* ...There's an inspection report from last year. The engineer wrote that the pipes were in 'urgent need of replacement'. The report was put in a drawer. Check the technical office.",
               "expression": "nervous",
               "feedback": "Empathy after pressure — you got a document trail to follow.",
-              "note": "...There's an inspection report from last year"
+              "note": "The report was put in a drawer"
             }
           ],
-          "q1_note": "Everyone knows the pipes are scrap"
+          "q1_note": "I work for the municipality"
         },
         "silence": {
           "q1_response": "...You want to know something, don't you? I can see it in your eyes. *sighs* Oh well.",
@@ -3684,21 +3684,21 @@
               "response": "I've worked for the municipality for 22 years. And I've watched this town fall apart, piece by piece. The pipes were already groaning in the '60s. Last year the engineer said it was 'urgent' — but the report disappeared into a desk drawer. Nobody wants to pay.",
               "expression": "open",
               "feedback": "Patience paid off — Rune opened up about systematic neglect.",
-              "note": "I've worked for the municipality for 22 years"
+              "note": "The report disappeared into a desk drawer"
             },
             {
               "tier": 1,
               "response": "22 years. I've seen worse, actually. But it gets worse every year. The money never stretches to maintenance.",
               "expression": "neutral",
               "feedback": "Atmosphere but no evidence.",
-              "note": "It gets worse every year"
+              "note": "The money never stretches to maintenance"
             },
             {
               "tier": 1,
               "response": "They should shut down the whole block and dig everything up. But that costs millions and the politicians don't dare. So we patch and mend.",
               "expression": "guarded",
               "feedback": "Opinion, but no concrete details.",
-              "note": "That costs millions and the politicians don't dare"
+              "note": "They should shut down the whole block and dig..."
             }
           ],
           "q1_note": "I can see it in your eyes"
@@ -3818,14 +3818,14 @@
               "response": "Doris? *wipes his eye* She would have laughed herself silly. We always competed — her with the roses, me with the vegetables. She always said 'the day you break 100 kilos I'll buy a cake'. Now it weighed 212. But there's nobody to eat cake with. I thought... maybe the newspaper could tell the story. So someone knows.",
               "expression": "open",
               "feedback": "Beautiful story about love and grief — textbook human interest.",
-              "note": "She always said 'the day you break 100 kilos I'll..."
+              "note": "Maybe the newspaper could tell the story"
             },
             {
               "tier": 1,
               "response": "Sure, neighbor Bengt has a balance scale from his farm. We rolled the pumpkin up with an old cart. 212 kilos it showed!",
               "expression": "open",
               "feedback": "Number confirmed, but you missed the emotion behind it.",
-              "note": "Neighbor Bengt has a balance scale from his farm"
+              "note": "212 kilos it showed"
             },
             {
               "tier": 1,
@@ -3835,7 +3835,7 @@
               "note": "It's Atlantic Giant, seeds from a cousin in Skåne"
             }
           ],
-          "q1_note": "I use Doris's old recipe"
+          "q1_note": "She was a gardener, my wife, before she passed away"
         },
         "direct": {
           "q1_response": "212 kilos, indeed! Bengt Olofsson's balance scale — he has one for animal feed. We rolled the pumpkin up with a wheelbarrow. Took twenty minutes!",
@@ -3864,7 +3864,7 @@
               "response": "Well, you can't eat that much pumpkin. Maybe I'll donate it to the school? The children could use it in science class.",
               "expression": "neutral",
               "feedback": "Nice detail but no aha-moments.",
-              "note": "Maybe I'll donate it to the school"
+              "note": "The children could use it in science class"
             },
             {
               "tier": 1,
@@ -3874,7 +3874,7 @@
               "note": "Doris would have been proud"
             }
           ],
-          "q1_note": "Bengt Olofsson's balance scale"
+          "q1_note": "Took twenty minutes"
         },
         "pressure": {
           "q1_response": "Exaggerated?! Come and see for yourself! I don't lie — what would I gain from it? An old man with a pumpkin!",
@@ -3896,14 +3896,14 @@
               "response": "Pfft. Bengt was a witness. Call him if you don't believe me. I've got better things to do.",
               "expression": "guarded",
               "feedback": "You got a witness name but no good rapport.",
-              "note": "Call him if you don't believe me"
+              "note": "Bengt was a witness"
             },
             {
               "tier": 0,
               "response": "Forget it. Go home. I thought the newspaper was interested, but you just want to mock an old man.",
               "expression": "hostile",
               "feedback": "You ruined the interview. Nothing to write about.",
-              "note": "I thought the newspaper was interested, but you..."
+              "note": "I thought the newspaper was interested, but you just..."
             },
             {
               "tier": 2,
@@ -3913,7 +3913,7 @@
               "note": "She said the day I broke 100 kilos she'd bake a..."
             }
           ],
-          "q1_note": "Come and see for yourself"
+          "q1_note": "An old man with a pumpkin"
         },
         "silence": {
           "q1_response": "...Well? Want to see the pumpkin or what? I made coffee too. Doris always served guests.",
@@ -3935,21 +3935,21 @@
               "response": "The garden? That's my life's work, that is. 400 square meters. Doris tended the flowers, I did the vegetables. Now I do everything myself. It keeps me going.",
               "expression": "neutral",
               "feedback": "Nice portrait, but without the emotional core.",
-              "note": "400 square meters"
+              "note": "Now I do everything myself"
             },
             {
               "tier": 3,
               "response": "That's Doris. My wife. She died in February — cancer. *long pause* We had a contest. She said 'the day you grow a pumpkin weighing 100 kilos I'll buy a princess cake'. Now it weighed 212 kilos and I have nobody to celebrate with. So I called the newspaper. Someone has to know that Doris's recipe works. That she lives on in the compost, maybe that sounds strange, but...",
               "expression": "open",
               "feedback": "Jackpot. Patience gave you the whole story — love, loss and a pumpkin as a monument.",
-              "note": "She died in February"
+              "note": "She said 'the day you grow a pumpkin weighing 100..."
             },
             {
               "tier": 1,
               "response": "Doris was a gardener. Best in the whole village with roses. She taught me everything. Without her compost recipe this pumpkin would never have grown.",
               "expression": "open",
               "feedback": "Nice background but not the full emotion.",
-              "note": "Best in the whole village with roses"
+              "note": "She taught me everything"
             }
           ],
           "q1_note": "Doris always served guests"
@@ -4069,24 +4069,24 @@
               "response": "Well... *hesitant* Some of the grid is old, yes. We have about 30 percent cables from the '40s and '50s still in use. The budget allows replacing maybe five percent per year. Do the math.",
               "expression": "open",
               "feedback": "Good — you got numbers on the systemic problem.",
-              "note": "We have about 30 percent cables from the '40s and..."
+              "note": "We have about 30 percent cables from the '40s and '50s..."
             },
             {
               "tier": 1,
               "response": "We got about fifty calls. Mostly elderly who were worried. The tow truck had to drive out to Mrs. Söderström, she had oxygen at home. Everything worked out in the end.",
               "expression": "neutral",
               "feedback": "Human angle but no structural questions.",
-              "note": "The tow truck had to drive out to Mrs"
+              "note": "Everything worked out in the end"
             },
             {
               "tier": 1,
               "response": "We have a maintenance plan. It's followed as best we can with the resources we have. But I can't promise it'll never happen again.",
               "expression": "guarded",
               "feedback": "Standard response — nothing to dig into.",
-              "note": "We have a maintenance plan"
+              "note": "It's followed as best we can with the resources we have"
             }
           ],
-          "q1_note": "A cable in the transformer station on..."
+          "q1_note": "From 1948, actually"
         },
         "direct": {
           "q1_response": "The cable from 1948 blew. We had an on-call technician but it was just one — it takes time to troubleshoot five kilometers of power lines in November.",
@@ -4108,7 +4108,7 @@
               "response": "We had two technicians before the budget cuts last spring. Now we have one. The municipal board deemed the utility 'oversized'. I protested in writing. It's in the minutes.",
               "expression": "defiant",
               "feedback": "Good — documented protest plus budget cuts give the article backbone.",
-              "note": "We had two technicians before the budget cuts..."
+              "note": "It's in the minutes"
             },
             {
               "tier": 1,
@@ -4122,10 +4122,10 @@
               "response": "The nursing home has backup power, so they managed. The school was closed, it was night. But the grocery store lost goods in the freezer section.",
               "expression": "neutral",
               "feedback": "Practical info — good for a brief, not for an investigation.",
-              "note": "The school was closed, it was night"
+              "note": "The grocery store lost goods in the freezer section"
             }
           ],
-          "q1_note": "It takes time to troubleshoot five kilometers of..."
+          "q1_note": "It takes time to troubleshoot five kilometers of power..."
         },
         "pressure": {
           "q1_response": "Predictable? Listen now — I've submitted three budget requests for new cables. Every time the municipal board said no. Don't blame the utility.",
@@ -4164,7 +4164,7 @@
               "note": "Show people that we asked for 4.2 million and got..."
             }
           ],
-          "q1_note": "I've submitted three budget requests for new..."
+          "q1_note": "Every time the municipal board said no"
         },
         "silence": {
           "q1_response": "...Still there? Well, I suppose you want more than the press release?",
@@ -4193,7 +4193,7 @@
               "response": "*long silence* What we didn't write was that the backup power at the nursing home almost didn't start. The diesel was old. If it hadn't kicked in... well, Mrs. Söderström has oxygen. You understand.",
               "expression": "nervous",
               "feedback": "Patience got you what wasn't in the press release — potential danger.",
-              "note": "If it hadn't kicked in"
+              "note": "You understand"
             },
             {
               "tier": 1,
@@ -4320,21 +4320,21 @@
               "response": "We're singing Wallin psalms, of course. And a piece by Hugo Alfvén that our conductor Margareta has arranged. It'll be beautiful!",
               "expression": "open",
               "feedback": "Repertoire — nice but no story.",
-              "note": "A piece by Hugo Alfvén that our conductor..."
+              "note": "A piece by Hugo Alfvén that our conductor Margareta..."
             },
             {
               "tier": 2,
               "response": "Oh! Astrid Persson cried. She's 82 and has been singing in the choir since 1946. She said: 'I never thought I'd see Storkyrkan.' We're collecting separately for her ticket — she only has her pension.",
               "expression": "open",
               "feedback": "Good — you found the human story in Astrid.",
-              "note": "She's 82 and has been singing in the choir since..."
+              "note": "She said: 'I never thought I'd see Storkyrkan.' We're..."
             },
             {
               "tier": 1,
               "response": "The choir started in 1932. We're 24 members. It's the lifeblood of the congregation, I'd say. Without the choir the church would be quieter.",
               "expression": "neutral",
               "feedback": "Background but nothing dramatic.",
-              "note": "The choir started in 1932"
+              "note": "It's the lifeblood of the congregation, I'd say"
             }
           ],
           "q1_note": "Then the letter came in October"
@@ -4359,14 +4359,14 @@
               "response": "We applied for a municipal cultural grant — 5,000. The answer? Rejected. 'Religious activities are not prioritized.' But last year they gave 12,000 to the ski club for a trip to Falun. Apparently that's more 'culture'.",
               "expression": "defiant",
               "feedback": "Good angle — unfair cultural policy. The ski club comparison gives the article edge.",
-              "note": "'Religious activities are not prioritized.' But..."
+              "note": "'Religious activities are not prioritized.' But last..."
             },
             {
               "tier": 1,
               "response": "We applied but were rejected. Now we're selling gingerbread cookies and collecting donations at the service. It usually works out.",
               "expression": "neutral",
               "feedback": "Information without drama.",
-              "note": "We applied but were rejected"
+              "note": "It usually works out"
             },
             {
               "tier": 1,
@@ -4412,10 +4412,10 @@
               "response": "*relaxes* Thank you. Yes, it's important. Astrid Persson — she's 82 — has been singing in the choir since '46. She told me with tears in her eyes that she never thought she'd see Storkyrkan. I promised her we'd get there. Whatever it costs.",
               "expression": "open",
               "feedback": "Empathy after pressure — you got the personal promise to Astrid.",
-              "note": "Has been singing in the choir since '46"
+              "note": "Astrid Persson"
             }
           ],
-          "q1_note": "We have challenges, like all congregations"
+          "q1_note": "This is a gift, not an expense"
         },
         "silence": {
           "q1_response": "...Well then. *smiles* You're more interested in the story than the facts, I suspect. So am I.",
@@ -4437,24 +4437,24 @@
               "response": "The choir is community. On Thursday evenings we gather and sing, then we drink coffee. For some it's the highlight of the week. Loneliness is the great threat in a small town.",
               "expression": "open",
               "feedback": "Beautiful but general — a mood piece without edge.",
-              "note": "On Thursday evenings we gather and sing, then we..."
+              "note": "On Thursday evenings we gather and sing, then we drink..."
             },
             {
               "tier": 3,
               "response": "*long silence* Astrid. Astrid Persson. She's 82. Her husband died in 1971. She lives alone in the cottage by the stream. The choir is all she has. When the letter came... *hesitation* she couldn't speak, just cried. I promised her she'd stand in Storkyrkan and sing before... well. Before it's too late. We're collecting money separately for her ticket. She only has the state pension. 327 kronor a month.",
               "expression": "open",
               "feedback": "Jackpot — the whole story about Astrid, the promise and the human core. Patience rewarded.",
-              "note": "327 kronor a month"
+              "note": "Her husband died in 1971"
             },
             {
               "tier": 1,
               "response": "I hope it gives us confidence. That a small choir from Småstad can stand in Storkyrkan — it proves we're good enough.",
               "expression": "neutral",
               "feedback": "Nice message but no story to hang the article on.",
-              "note": "That a small choir from Småstad can stand in..."
+              "note": "That a small choir from Småstad can stand in Storkyrkan"
             }
           ],
-          "q1_note": "You're more interested in the story than the..."
+          "q1_note": "You're more interested in the story than the facts, I..."
         }
       }
     },
@@ -4571,24 +4571,24 @@
               "response": "I see them at the clinic. Headaches, dizziness, numbness in the hands. All from lacquering and mixing. It started around the same time they switched solvents in 1972. The cheaper stuff — I don't know the name — but the smell... you can detect it from the parking lot.",
               "expression": "open",
               "feedback": "Good — you connected the symptoms to the solvent switch. Strong foundation.",
-              "note": "It started around the same time they switched..."
+              "note": "It started around the same time they switched solvents..."
             },
             {
               "tier": 1,
               "response": "Threatened directly? No. But the foreman told Gunnar that 'anyone who complains can look for work elsewhere'. That's enough. Everyone knows.",
               "expression": "guarded",
               "feedback": "You got the atmosphere but not the chemical connection.",
-              "note": "The foreman told Gunnar that 'anyone who..."
+              "note": "The foreman told Gunnar that 'anyone who complains can..."
             },
             {
               "tier": 2,
               "response": "In 1972 they switched chemical suppliers. Cheaper, Svanström said. Then people started getting sick. First one, then two, then the whole lacquering department. I kept a logbook — privately. I have it at home.",
               "expression": "nervous",
               "feedback": "Logbook — potentially explosive. Good that you won her trust.",
-              "note": "In 1972 they switched chemical suppliers"
+              "note": "I kept a logbook"
             }
           ],
-          "q1_note": "Everyone's afraid of losing their job"
+          "q1_note": "It's pretty much the only workplace in town"
         },
         "direct": {
           "q1_response": "What's going on is poisoning. Period. I know that sounds dramatic, but that's what it is. People are being systematically sickened by the chemicals.",
@@ -4610,7 +4610,7 @@
               "response": "Proof? I've kept a logbook for three years. Every patient from the factory, symptoms, department, date. The pattern is crystal clear — lacquering and mixing, all with the same symptoms. But Doctor Engström refuses to write 'solvent' as the cause. He writes 'stress-related'. Every time.",
               "expression": "defiant",
               "feedback": "Logbook plus diagnosis cover-up — you have two strong leads.",
-              "note": "Doctor Engström refuses to write 'solvent' as the..."
+              "note": "Doctor Engström refuses to write 'solvent' as the cause"
             },
             {
               "tier": 1,
@@ -4627,7 +4627,7 @@
               "note": "If it closes, Småstad dies"
             }
           ],
-          "q1_note": "What's going on is poisoning"
+          "q1_note": "People are being systematically sickened by the..."
         },
         "pressure": {
           "q1_response": "Covering up? *looks around quickly* Keep your voice down. I sent you that report, but I can't be connected to this.",
@@ -4656,17 +4656,17 @@
               "response": "Responsibility? I'm risking my job, my home — everything! And you show up moralizing? We're done. I've never met you.",
               "expression": "hostile",
               "feedback": "You scared away your only source. Catastrophic.",
-              "note": "I'm risking my job, my home"
+              "note": "I've never met you"
             },
             {
               "tier": 2,
               "response": "*exhales* ...I have a logbook. Three years of notes. Every patient, symptoms, department. The pattern is... it's clear. Lacquering and mixing. Same thing, over and over. Doctor Engström writes 'stress' for everyone. But it's not stress. It's poison.",
               "expression": "nervous",
               "feedback": "Empathy after pressure — you got the logbook and the diagnosis criticism. Crucial breakthrough.",
-              "note": "Doctor Engström writes 'stress' for everyone"
+              "note": "It's poison"
             }
           ],
-          "q1_note": "I sent you that report, but I can't be connected..."
+          "q1_note": "I sent you that report, but I can't be connected to..."
         },
         "silence": {
           "q1_response": "...You're just sitting there? *nervous laugh* Okay. You're waiting for me to... right. *sits down* It's about the chemicals.",
@@ -4695,7 +4695,7 @@
               "response": "I've seen them come in, one after another. Same symptoms. Same department. That's not normal. But nobody does anything.",
               "expression": "guarded",
               "feedback": "General picture but no specific data.",
-              "note": "I've seen them come in, one after another"
+              "note": "Nobody does anything"
             },
             {
               "tier": 3,
@@ -4705,7 +4705,7 @@
               "note": "Svanström switched suppliers in '72 to save money"
             }
           ],
-          "q1_note": "You're waiting for me to"
+          "q1_note": "It's about the chemicals"
         }
       }
     },
@@ -4822,14 +4822,14 @@
               "response": "It happened too fast... green truck, I think. Big. But the license plate? No, I couldn't catch it.",
               "expression": "nervous",
               "feedback": "Basic eyewitness account, but no details for identification.",
-              "note": "It happened too fast"
+              "note": "It happened too fast. green truck, I think"
             },
             {
               "tier": 2,
               "response": "Stopped? He braked after the intersection, looked in the rearview mirror and DROVE OFF! Hit and run! But guess what — Gustavsson at the tobacco shop said he recognized the logo. 'Sträng Transport' he thought. They deliver to the factory every day.",
               "expression": "open",
               "feedback": "Good — hit-and-run plus identification of the trucking company. Strong evidence.",
-              "note": "'Sträng Transport' he thought"
+              "note": "Gustavsson at the tobacco shop said he recognized the..."
             },
             {
               "tier": 1,
@@ -4839,7 +4839,7 @@
               "note": "In September it was close again"
             }
           ],
-          "q1_note": "The truck came from Industrivägen and drove..."
+          "q1_note": "The truck came from Industrivägen and drove straight..."
         },
         "direct": {
           "q1_response": "14:45. The truck came from the south on Industrivägen. High speed — maybe 60 in a 30 zone. Red light. Two passenger cars had to swerve, one ended up on the sidewalk by the school. The children were ten meters away.",
@@ -4914,10 +4914,10 @@
               "response": "*takes a deep breath* ...You're right. The children. My Elsa is five. She was standing one meter from the curb. The truck didn't even swerve. Green, with a logo — 'Sträng Transport' it says. I know because they drive by every day to the mill. And the driver — I saw him in the rearview mirror. He KNEW. He looked and drove on.",
               "expression": "nervous",
               "feedback": "Empathy after pressure — you got identification, hit-and-run AND the human drama.",
-              "note": "'Sträng Transport' it says"
+              "note": "I saw him in the rearview mirror"
             }
           ],
-          "q1_note": "Do you think I'm making this up"
+          "q1_note": "I was there, I had my grandchildren with me"
         },
         "silence": {
           "q1_response": "...*wipes her tears* Sorry. It's so much. My whole body is shaking. I've never seen anything like it.",
@@ -4946,17 +4946,17 @@
               "response": "Elsa, my granddaughter — she's five. I was holding her hand. The truck passed so close I felt the wind. *pause* Green truck. 'Sträng Transport'. They drive to the mill every day — too fast, always. I've called the municipality three times about that intersection. Never an answer.",
               "expression": "open",
               "feedback": "Patience paid off — both identification and a systemic issue with the intersection.",
-              "note": "I've called the municipality three times about..."
+              "note": "'Sträng Transport'"
             },
             {
               "tier": 1,
               "response": "Maybe it will help. I want people to know that intersection is dangerous. It's been close before. Someday it'll end badly.",
               "expression": "neutral",
               "feedback": "Abstract worry — no concrete facts.",
-              "note": "Maybe it will help"
+              "note": "Someday it'll end badly"
             }
           ],
-          "q1_note": "Sorry"
+          "q1_note": "I've never seen anything like it"
         }
       }
     },
@@ -5073,14 +5073,14 @@
               "response": "We were 35 people. It was a west coast dinner — shrimp, cod, dessert. And some wine, of course. It's Christmas!",
               "expression": "open",
               "feedback": "35 people, 14,200 kr — you can do the math. 406 kr per person. But you didn't dig deeper.",
-              "note": "We were 35 people"
+              "note": "It's Christmas"
             },
             {
               "tier": 2,
               "response": "Yes, three courses. And then there was karaoke, I think. Although... now I remember — the council chairman also ordered a 'separate lounge' for the municipal board. That bill may have ended up on the same account. But it was a different party, really.",
               "expression": "nervous",
               "feedback": "Good — you got her to reveal the double billing almost by accident.",
-              "note": "The council chairman also ordered a 'separate..."
+              "note": "The council chairman also ordered a 'separate lounge'..."
             },
             {
               "tier": 1,
@@ -5112,7 +5112,7 @@
               "response": "Itemized? *flips nervously* I have... the hotel's invoice just says 'conference/dinner package'. No details. But... *hesitates* it's usually itemized. That is odd, actually.",
               "expression": "nervous",
               "feedback": "Good — you got her to realize the invoice doesn't add up. A lead to follow.",
-              "note": "The hotel's invoice just says 'conference/dinner..."
+              "note": "That is odd, actually"
             },
             {
               "tier": 1,
@@ -5126,10 +5126,10 @@
               "response": "Last year? *goes quiet* It was 8,900. And we were the same number. *long pause* I don't know why it increased so much. The chairman said 'we deserve it'. But 5,300 more... for what?",
               "expression": "nervous",
               "feedback": "Good — price comparison reveals something doesn't add up.",
-              "note": "5,300 more"
+              "note": "The chairman said 'we deserve it'"
             }
           ],
-          "q1_note": "14,200 is for the entire event"
+          "q1_note": "It's not unreasonable"
         },
         "pressure": {
           "q1_response": "Home care? Those are completely different budget lines. You can't compare like that! That's not serious.",
@@ -5151,21 +5151,21 @@
               "response": "I handle the bookkeeping correctly. If you have questions about priorities, talk to the council chairman. Not me.",
               "expression": "guarded",
               "feedback": "Defensive — she deflects. Nothing new.",
-              "note": "If you have questions about priorities, talk to..."
+              "note": "If you have questions about priorities, talk to the..."
             },
             {
               "tier": 0,
               "response": "Don't threaten me with the freedom of information act. Send a written request to the registrar. Goodbye.",
               "expression": "hostile",
               "feedback": "She shut the door. You only have the account statement left.",
-              "note": "Don't threaten me with the freedom of information..."
+              "note": "Send a written request to the registrar"
             },
             {
               "tier": 2,
               "response": "*lowers her voice* ...No. Things don't add up. The hotel invoice just says 'package'. Last year it was itemized. And the amount increased by 5,300 kronor despite the same headcount. The chairman told me not to 'question it'. I don't like it. But if you quote me I'll lose my job.",
               "expression": "nervous",
               "feedback": "Empathy after pressure — you got her to admit something is being hidden. Foundation for investigation.",
-              "note": "The amount increased by 5,300 kronor despite the..."
+              "note": "The hotel invoice just says 'package'"
             }
           ],
           "q1_note": "Those are completely different budget lines"
@@ -5190,7 +5190,7 @@
               "response": "*long silence* ...The chairman held a 'pre-party' in a separate lounge. Just the municipal board. It ended up on the same invoice as the staff party. I said it should be separated, but he said 'put it under staff, it's less visible'. Direct quote.",
               "expression": "nervous",
               "feedback": "Patience gave you the core — the chairman is hiding private entertainment.",
-              "note": "Just the municipal board"
+              "note": "It ended up on the same invoice as the staff party"
             },
             {
               "tier": 1,
@@ -5204,10 +5204,10 @@
               "response": "I've been municipal secretary for 14 years. This year was different. I can't say more, but... check the entertainment account for October too. Just a tip.",
               "expression": "neutral",
               "feedback": "Lead to a broader investigation, but no evidence for this story.",
-              "note": "I've been municipal secretary for 14 years"
+              "note": "Check the entertainment account for October too"
             }
           ],
-          "q1_note": "You want me to say something that isn't in the..."
+          "q1_note": "You want me to say something that isn't in the press..."
         }
       }
     },
@@ -5324,21 +5324,21 @@
               "response": "I went there, but the house was dark. Nobody answered. The neighbors said they haven't seen the Bergkvists' car for a while. But that might not be strange — maybe they're traveling.",
               "expression": "neutral",
               "feedback": "Basic — dog linked to empty house. But you didn't dig deeper.",
-              "note": "The neighbors said they haven't seen the..."
+              "note": "The neighbors said they haven't seen the Bergkvists'..."
             },
             {
               "tier": 2,
               "response": "The dog was in good shape — not starved, not injured. Someone had taken care of it recently. But it was nervous, whimpering toward the lake. Strange — as if it wanted to show something. I went down to the dock and... well, there was a jacket there. Damp, soaked. Men's jacket, size 50. No name tag, but in the pocket was a bus pass for Göran Bergkvist.",
               "expression": "nervous",
               "feedback": "Good — the jacket at the dock gives the story a disturbing dimension.",
-              "note": "Name tag, but in the pocket was a bus pass for..."
+              "note": "Men's jacket, size 50"
             },
             {
               "tier": 1,
               "response": "Bergkvist? Well, Göran Bergkvist worked at the post office. Quiet type. Not someone I've talked to directly. His wife was seen at the grocery store sometimes.",
               "expression": "neutral",
               "feedback": "Background but no leads.",
-              "note": "Göran Bergkvist worked at the post office"
+              "note": "His wife was seen at the grocery store sometimes"
             }
           ],
           "q1_note": "The Bergkvist Family, Tallvägen 7'"
@@ -5363,7 +5363,7 @@
               "response": "I drove there yesterday. Empty. Mail overflowing from the mailbox — at least a week's worth. Car gone. And the neighbor lady said she hasn't seen Göran since... *counts* maybe two weeks? He used to walk Rex every morning at six. Suddenly he stopped.",
               "expression": "nervous",
               "feedback": "Strong — house empty for weeks, missing person. This isn't a dog story.",
-              "note": "The neighbor lady said she hasn't seen Göran since"
+              "note": "He used to walk Rex every morning at six"
             },
             {
               "tier": 1,
@@ -5402,14 +5402,14 @@
               "response": "I found the dog at the dock. Nothing more. You can talk to the neighbors on Tallvägen, they might know more.",
               "expression": "guarded",
               "feedback": "He gave you a lead but held back the most important part.",
-              "note": "You can talk to the neighbors on Tallvägen, they..."
+              "note": "You can talk to the neighbors on Tallvägen, they might..."
             },
             {
               "tier": 0,
               "response": "I don't want to be involved in anything. It's probably just a runaway dog. Leave me alone.",
               "expression": "hostile",
               "feedback": "You pushed too hard — he shut the door.",
-              "note": "I don't want to be involved in anything"
+              "note": "It's probably just a runaway dog"
             },
             {
               "tier": 2,
@@ -5441,7 +5441,7 @@
               "response": "I don't know what I think. A lonely dog, an empty house. It might not mean anything. But it might.",
               "expression": "guarded",
               "feedback": "No news, just concern.",
-              "note": "A lonely dog, an empty house"
+              "note": "It might"
             },
             {
               "tier": 1,
@@ -5458,7 +5458,7 @@
               "note": "In the pocket was Göran Bergkvist's bus pass"
             }
           ],
-          "q1_note": "You're just looking at me"
+          "q1_note": "I know there's more to this"
         }
       }
     },
@@ -5575,14 +5575,14 @@
               "response": "Last summer they eliminated the night shift. Then two machines disappeared — shipped to Lisbon. We should have caught on.",
               "expression": "defiant",
               "feedback": "Good — the timeline and evidence of a planned relocation.",
-              "note": "Last summer they eliminated the night shift"
+              "note": "Then two machines disappeared"
             },
             {
               "tier": 1,
               "response": "We'll strike if we have to. But the legislation doesn't favor us.",
               "expression": "guarded",
               "feedback": "Reaction but no details about the decision.",
-              "note": "We'll strike if we have to"
+              "note": "The legislation doesn't favor us"
             },
             {
               "tier": 1,
@@ -5621,7 +5621,7 @@
               "response": "The factory made a profit last year. 2.3 million. This isn't about finances — it's about BIGGER profits.",
               "expression": "defiant",
               "feedback": "Profit despite closure — strong angle.",
-              "note": "The factory made a profit last year"
+              "note": "2.3 million"
             },
             {
               "tier": 1,
@@ -5667,10 +5667,10 @@
               "response": "It's happening now because Portugal joined the trade pact. Cheaper there.",
               "expression": "guarded",
               "feedback": "Background but nothing exclusive.",
-              "note": "It's happening now because Portugal joined the..."
+              "note": "It's happening now because Portugal joined the trade..."
             }
           ],
-          "q1_note": "We found out YESTERDAY"
+          "q1_note": "We found out YESTERDAY. Do you think we're covering up"
         },
         "silence": {
           "q1_response": "*breathes heavily* The worst part? They're making money. They just want to make MORE.",
@@ -5692,7 +5692,7 @@
               "response": "I have the annual report. 2.3 million in profit. I copied it before they had time to lock the cabinet.",
               "expression": "defiant",
               "feedback": "Documentary evidence plus an active cover-up attempt.",
-              "note": "2.3 million in profit"
+              "note": "I have the annual report"
             },
             {
               "tier": 1,
@@ -5706,7 +5706,7 @@
               "response": "The CEO lives in Gothenburg. He's never set foot on the factory floor.",
               "expression": "defiant",
               "feedback": "Good quote but lacks documentation.",
-              "note": "The CEO lives in Gothenburg"
+              "note": "He's never set foot on the factory floor"
             }
           ],
           "q1_note": "They're making money"
@@ -5840,7 +5840,7 @@
               "response": "I worked there for 30 years. They closed an operating room last spring to 'save money'. But the chief physician went to a conference in Nice. I've seen the budget — they had money. They just prioritized wrong.",
               "expression": "open",
               "feedback": "Insider perspective with budget evidence.",
-              "note": "They closed an operating room last spring to..."
+              "note": "They had money"
             }
           ],
           "q1_note": "42 years married"
@@ -5865,14 +5865,14 @@
               "response": "Normally three months. Göte waited eight. They said 'resource shortage'. Period.",
               "expression": "neutral",
               "feedback": "Numbers without explanation.",
-              "note": "Rmally three months"
+              "note": "They said 'resource shortage'"
             },
             {
               "tier": 1,
               "response": "Doctor Ahlgren. Nice but resigned. 'There's nothing more I can do.'",
               "expression": "guarded",
               "feedback": "Sympathy but no accountability.",
-              "note": "Doctor Ahlgren"
+              "note": "Nice but resigned"
             },
             {
               "tier": 2,
@@ -5904,7 +5904,7 @@
               "response": "The chief physician sits on the board that evaluates his own clinic. Since 1969. Nobody has questioned it.",
               "expression": "defiant",
               "feedback": "Structural conflict of interest in healthcare.",
-              "note": "The chief physician sits on the board that..."
+              "note": "The chief physician sits on the board that evaluates..."
             },
             {
               "tier": 1,
@@ -5921,7 +5921,7 @@
               "note": "I want people to know that Göte didn't have to die"
             }
           ],
-          "q1_note": "The chief physician sits on the county council..."
+          "q1_note": "The chief physician sits on the county council board"
         },
         "silence": {
           "q1_response": "*knits faster* Do you know what it feels like to watch someone you love waste away while the system 'waits'?",
@@ -5943,14 +5943,14 @@
               "response": "He grew weaker every day. Couldn't walk up the stairs. We waited for a letter that never came.",
               "expression": "open",
               "feedback": "Strong narrative but limited news data.",
-              "note": "He grew weaker every day"
+              "note": "We waited for a letter that never came"
             },
             {
               "tier": 3,
               "response": "I know they had capacity. The operating room was empty every third Tuesday. But the chief prioritized private patients. I saw the schedule.",
               "expression": "defiant",
               "feedback": "Insider evidence — prioritization of private patients. Enormous.",
-              "note": "The operating room was empty every third Tuesday"
+              "note": "I saw the schedule"
             },
             {
               "tier": 2,
@@ -5960,7 +5960,7 @@
               "note": "He sits on his own review board"
             }
           ],
-          "q1_note": "Do you know what it feels like to watch someone..."
+          "q1_note": "Do you know what it feels like to watch someone you..."
         }
       }
     },
@@ -6077,7 +6077,7 @@
               "response": "Last Thursday. Viktor refused to take off his cap. The principal struck him in front of the whole class. Bruise for three days.",
               "expression": "nervous",
               "feedback": "Eyewitness account with details.",
-              "note": "Last Thursday"
+              "note": "Bruise for three days"
             },
             {
               "tier": 1,
@@ -6091,7 +6091,7 @@
               "response": "No. Last spring he hit a girl with a ruler. Three parents complained. The investigation was dropped. By the school board. Where the principal's brother sits.",
               "expression": "open",
               "feedback": "Pattern + conflict of interest. Full exposé.",
-              "note": "Last spring he hit a girl with a ruler"
+              "note": "Where the principal's brother sits"
             }
           ],
           "q1_note": "Viktor Holm, 15 years old"
@@ -6116,7 +6116,7 @@
               "response": "*hands over a folded note* Item four: 'Korsnäs called Sara a racial slur October 12'. There are dates on everything.",
               "expression": "neutral",
               "feedback": "Documented list with dates. Strong foundation.",
-              "note": "Item four: 'Korsnäs called Sara a racial slur..."
+              "note": "Item four: 'Korsnäs called Sara a racial slur October..."
             },
             {
               "tier": 1,
@@ -6130,10 +6130,10 @@
               "response": "No response. Chairman Björk: 'Children should obey, not strike.'",
               "expression": "defiant",
               "feedback": "Quote but no substance.",
-              "note": "Chairman Björk: 'Children should obey, not..."
+              "note": "Chairman Björk: 'Children should obey, not strike.'"
             }
           ],
-          "q1_note": "They want the principal to resign"
+          "q1_note": "Number one: corporal punishment"
         },
         "pressure": {
           "q1_response": "Childish?! The principal HIT a student. The school board swept it under the rug.",
@@ -6162,14 +6162,14 @@
               "response": "I was in the room when the principal told the board: 'Handle it quietly or I'll tell everyone about your budget fraud.' Blackmail.",
               "expression": "nervous",
               "feedback": "Blackmail between principal and school board!",
-              "note": "I was in the room when the principal told the..."
+              "note": "I was in the room when the principal told the board..."
             },
             {
               "tier": 0,
               "response": "On record? No. If I lose my job... forget we talked. *stands up*",
               "expression": "hostile",
               "feedback": "Terminated. You pushed too hard.",
-              "note": "If I lose my job"
+              "note": "Forget we talked"
             }
           ],
           "q1_note": "The school board swept it under the rug"
@@ -6201,7 +6201,7 @@
               "response": "That it's been going on for years. There's a binder of complaints that were never registered. I copied three before the principal locked the cabinet.",
               "expression": "open",
               "feedback": "Systematic cover-up with documents. Complete.",
-              "note": "That it's been going on for years"
+              "note": "There's a binder of complaints that were never..."
             },
             {
               "tier": 1,
@@ -6211,7 +6211,7 @@
               "note": "Maybe you can be that person"
             }
           ],
-          "q1_note": "They're striking because the adult world failed..."
+          "q1_note": "I'm part of it"
         }
       }
     },
@@ -6328,7 +6328,7 @@
               "response": "The doctor said 'contact dermatitis, likely chemical'. But he didn't write down what. I wondered why — then the nurse said the doctor 'didn't want trouble with Karlsson'. The dry cleaner's owner.",
               "expression": "nervous",
               "feedback": "A doctor who covered up a diagnosis due to local power. Strong.",
-              "note": "Then the nurse said the doctor 'didn't want..."
+              "note": "Then the nurse said the doctor 'didn't want trouble..."
             },
             {
               "tier": 1,
@@ -6345,7 +6345,7 @@
               "note": "She said Karlsson's permit expired in 1972"
             }
           ],
-          "q1_note": "Last summer the children started getting rashes..."
+          "q1_note": "Three children, same symptoms. And it smelled"
         },
         "direct": {
           "q1_response": "Trichloroethylene. I know because my husband worked in the cleaning industry. You never forget that smell.",
@@ -6367,14 +6367,14 @@
               "response": "Carcinogenic. Should never be in open water whatsoever. Any chemist knows that.",
               "expression": "defiant",
               "feedback": "Facts but no local connection.",
-              "note": "Should never be in open water whatsoever"
+              "note": "Any chemist knows that"
             },
             {
               "tier": 2,
               "response": "I filled a glass jar with water last week. It was yellow-green. Still smells. Here. *shows the jar*",
               "expression": "defiant",
               "feedback": "Physical evidence — the water sample corroborates the story.",
-              "note": "I filled a glass jar with water last week"
+              "note": "It was yellow-green. Still smells"
             },
             {
               "tier": 2,
@@ -6406,24 +6406,24 @@
               "response": "I called three times. The second time I recorded the call. The case officer said verbatim: 'We don't have budget for that, talk to Karlsson directly.'",
               "expression": "defiant",
               "feedback": "Recorded call — municipality refers you to the polluter. Incredible.",
-              "note": "The case officer said verbatim: 'We don't have..."
+              "note": "The case officer said verbatim: 'We don't have budget..."
             },
             {
               "tier": 1,
               "response": "Five parents have signed a petition. But Karlsson owns half the shopping center — people are afraid.",
               "expression": "nervous",
               "feedback": "Public resistance but without evidence.",
-              "note": "Five parents have signed a petition"
+              "note": "Karlsson owns half the shopping center"
             },
             {
               "tier": 3,
               "response": "I spoke with an environmental consultant in Lund. He said that at those levels, you don't just kill fish — the groundwater could be poisoned. The entire well-water area downstream. 200 households.",
               "expression": "nervous",
               "feedback": "Public health catastrophe — 200 households with toxic drinking water. Disaster story.",
-              "note": "I spoke with an environmental consultant in Lund"
+              "note": "The groundwater could be poisoned"
             }
           ],
-          "q1_note": "I called and asked"
+          "q1_note": "They have NOT tested"
         },
         "silence": {
           "q1_response": "*looks around nervously* I'm telling you this so my children won't get sick. Not because I want to be in the paper.",
@@ -6445,14 +6445,14 @@
               "response": "Okay. In July I saw Karlsson's people dump barrels in the river. Eleven o'clock at night. I live by the bridge. They thought no one was watching.",
               "expression": "nervous",
               "feedback": "Eyewitness to illegal dumping. Strong.",
-              "note": "In July I saw Karlsson's people dump barrels in..."
+              "note": "In July I saw Karlsson's people dump barrels in the..."
             },
             {
               "tier": 1,
               "response": "His son threatened the neighbor's boy who asked about the smell. 'Shut up if you know what's good for you.' People are scared.",
               "expression": "nervous",
               "feedback": "Threats but secondhand information.",
-              "note": "His son threatened the neighbor's boy who asked..."
+              "note": "His son threatened the neighbor's boy who asked about..."
             },
             {
               "tier": 3,
@@ -6462,7 +6462,7 @@
               "note": "I took a photo with my husband's Polaroid"
             }
           ],
-          "q1_note": "T because I want to be in the paper"
+          "q1_note": "Not because I want to be in the paper"
         }
       }
     },
@@ -6579,14 +6579,14 @@
               "response": "I found receipts in the wastepaper basket. Travel expenses to Mallorca. Dated the same week as the Christmas collection. Three years in a row.",
               "expression": "neutral",
               "feedback": "Paper trail — travel expenses funded by collection.",
-              "note": "Dated the same week as the Christmas collection"
+              "note": "I found receipts in the wastepaper basket"
             },
             {
               "tier": 3,
               "response": "I wrote to them. The orphanage replied. They haven't received A SINGLE KRONA since 1968. The collection continued. Gunvor kept everything. Six years of Christmas collections.",
               "expression": "open",
               "feedback": "Direct evidence from the recipient. Complete story.",
-              "note": "They haven't received A SINGLE KRONA since 1968"
+              "note": "Gunvor kept everything"
             },
             {
               "tier": 1,
@@ -6632,10 +6632,10 @@
               "response": "Gunvor. Alone. She's vicar, treasurer, and chair of the collection committee. No oversight, no transparency.",
               "expression": "neutral",
               "feedback": "Complete lack of oversight — publishable.",
-              "note": "She's vicar, treasurer, and chair of the..."
+              "note": "She's vicar, treasurer, and chair of the collection..."
             }
           ],
-          "q1_note": "Approximately half a million kronor over 30 years"
+          "q1_note": "The money didn't end up in India"
         },
         "pressure": {
           "q1_response": "Report a vicar in Småstad? Do you know what people would say? 'Gösta's gone senile.'",
@@ -6664,7 +6664,7 @@
               "response": "The diocese knows. I spoke with an official last year. He said 'we're investigating internally'. Then nothing happened. As usual.",
               "expression": "defiant",
               "feedback": "The diocese covered it up — they knew and ignored it.",
-              "note": "I spoke with an official last year"
+              "note": "He said 'we're investigating internally'"
             },
             {
               "tier": 1,
@@ -6710,10 +6710,10 @@
               "response": "Publish. But be thorough. She'll deny everything and she has half the council in her pocket.",
               "expression": "neutral",
               "feedback": "Warning plus insight into her power.",
-              "note": "She'll deny everything and she has half the..."
+              "note": "She'll deny everything and she has half the council in..."
             }
           ],
-          "q1_note": "I was a cop for thirty years"
+          "q1_note": "I know what fraud looks like"
         }
       }
     },
@@ -6830,7 +6830,7 @@
               "response": "I called at 01:14. I know because the kitchen clock stopped at 01:12 when the power went out. The fire brigade arrived at 01:58. I have the call log.",
               "expression": "defiant",
               "feedback": "Exact timeline with documentation. Strong.",
-              "note": "I called at 01:14"
+              "note": "The fire brigade arrived at 01:58"
             },
             {
               "tier": 1,
@@ -6844,10 +6844,10 @@
               "response": "Insurance covers the house but not Elsa's treatment. We're collecting donations. It's humiliating.",
               "expression": "nervous",
               "feedback": "Human angle but thin as news.",
-              "note": "Insurance covers the house but not Elsa's..."
+              "note": "Insurance covers the house but not Elsa's treatment"
             }
           ],
-          "q1_note": "She still wakes up screaming at night"
+          "q1_note": "She's terrified of fire now"
         },
         "direct": {
           "q1_response": "The fire started around one. I called at 01:14. Got an answer after six rings. The fire brigade arrived at 01:58. 44 minutes.",
@@ -6869,14 +6869,14 @@
               "response": "The dispatch center closed at midnight. At night the alarm goes to Olsson's mobile phone. Olsson, who's the only one left at the station since the budget cuts.",
               "expression": "neutral",
               "feedback": "Shutdown dispatch center + one-man station. System collapse.",
-              "note": "At night the alarm goes to Olsson's mobile phone"
+              "note": "Olsson, who's the only one left at the station since..."
             },
             {
               "tier": 3,
               "response": "During those 44 minutes the upper floor burned down. My wife carried the children out through the window. Elsa lost her grip and landed in burning bushes. IF they had arrived within 15 minutes — standard response time — the upper floor would still be standing. And Elsa wouldn't have been burned.",
               "expression": "open",
               "feedback": "Direct causation: delay → child's injuries. Indisputable.",
-              "note": "During those 44 minutes the upper floor burned..."
+              "note": "IF they had arrived within 15 minutes"
             },
             {
               "tier": 1,
@@ -6886,7 +6886,7 @@
               "note": "They had to call the Köping station 30 km away"
             }
           ],
-          "q1_note": "I called at 01:14"
+          "q1_note": "The fire brigade arrived at 01:58"
         },
         "pressure": {
           "q1_response": "Late?! I called THE SECOND I smelled smoke. He's lying. And I can prove it.",
@@ -6915,17 +6915,17 @@
               "response": "Fire chief Moberg decided to cut costs by closing the night shifts in April. His report to the municipality said that 'response times are not affected'. That was a lie.",
               "expression": "defiant",
               "feedback": "Deliberately misleading report. Strong.",
-              "note": "Fire chief Moberg decided to cut costs by closing..."
+              "note": "Fire chief Moberg decided to cut costs by closing the..."
             },
             {
               "tier": 2,
               "response": "Olsson, the firefighter. He cried. Said 'I was alone, the phone wasn't working, I biked to the station'. BIKED. In November.",
               "expression": "neutral",
               "feedback": "Firefighter without a car — absurd and publishable.",
-              "note": "Said 'I was alone, the phone wasn't working, I..."
+              "note": "In November"
             }
           ],
-          "q1_note": "I called THE SECOND I smelled smoke"
+          "q1_note": "I can prove it"
         },
         "silence": {
           "q1_response": "*stares down at the table* My daughter asks every evening: 'Daddy, why didn't anyone come?'",
@@ -6947,7 +6947,7 @@
               "response": "I lie. I tell her 'they came as fast as they could'. But that's not true.",
               "expression": "open",
               "feedback": "Emotionally powerful but without news substance.",
-              "note": "I tell her 'they came as fast as they could'"
+              "note": "That's not true"
             },
             {
               "tier": 2,
@@ -6961,10 +6961,10 @@
               "response": "Fire chief Moberg. He shut down night shifts. He lied in the report. And then — *lowers his voice* — then he called me yesterday and said 'if you talk to the press I'll report you for arson.' He's THREATENING me. I recorded it.",
               "expression": "defiant",
               "feedback": "Recorded threat from fire chief. Criminal story of the highest order.",
-              "note": "Then he called me yesterday and said 'if you talk..."
+              "note": "— then he called me yesterday and said 'if you talk to..."
             }
           ],
-          "q1_note": "My daughter asks every evening: 'Daddy, why..."
+          "q1_note": "My daughter asks every evening: 'Daddy, why didn't..."
         }
       }
     },
@@ -7088,7 +7088,7 @@
               "response": "Last month Stig Lund ended up in the hospital. Methanol, the doctor said. But nobody reported it. Stig said he 'found the bottle'.",
               "expression": "guarded",
               "feedback": "Hospital case of methanol poisoning. Dangerous.",
-              "note": "Last month Stig Lund ended up in the hospital"
+              "note": "Nobody reported it"
             },
             {
               "tier": 1,
@@ -7098,7 +7098,7 @@
               "note": "14-year-olds"
             }
           ],
-          "q1_note": "It got worse after Systembolaget closed their..."
+          "q1_note": "It got worse after Systembolaget closed their branch"
         },
         "direct": {
           "q1_response": "Wednesdays and Saturdays. The Pettersson brothers. They park their van by the market hall. Pay, take a 'coffee package', go.",
@@ -7120,7 +7120,7 @@
               "response": "Wednesday? Sure. Stand by the hot dog stand at ten. You'll see ten customers within an hour. I can point out the van.",
               "expression": "open",
               "feedback": "Invitation to witness the crime. Reportage angle.",
-              "note": "Stand by the hot dog stand at ten"
+              "note": "You'll see ten customers within an hour"
             },
             {
               "tier": 2,
@@ -7134,10 +7134,10 @@
               "response": "Clean? They distill in an old milk tank. I wouldn't give it to my dog.",
               "expression": "neutral",
               "feedback": "Hygiene risk but nothing concrete.",
-              "note": "They distill in an old milk tank"
+              "note": "I wouldn't give it to my dog"
             }
           ],
-          "q1_note": "Wednesdays and Saturdays"
+          "q1_note": "The Pettersson brothers"
         },
         "pressure": {
           "q1_response": "Self-serving? My inn does fine. But when 14-year-olds drink methanol and the police do NOTHING — then it's not self-serving.",
@@ -7166,7 +7166,7 @@
               "response": "I reported it myself in August. Know what happened? The police called THE PETTERSSONS and warned them. They reported ME for 'defamation'.",
               "expression": "defiant",
               "feedback": "Police warned the bootleggers. Corruption with documentation.",
-              "note": "I reported it myself in August"
+              "note": "They reported ME for 'defamation'"
             },
             {
               "tier": 1,
@@ -7176,7 +7176,7 @@
               "note": "The municipality looks the other way"
             }
           ],
-          "q1_note": "When 14-year-olds drink methanol and the police..."
+          "q1_note": "When 14-year-olds drink methanol and the police do..."
         },
         "silence": {
           "q1_response": "*slowly fills his coffee* I've seen people die from bad liquor. In Finland, the '60s. It always starts with looking the other way.",
@@ -7212,7 +7212,7 @@
               "response": "That the police do their job. Or that a journalist writes about it. Maybe you.",
               "expression": "open",
               "feedback": "Encouragement without facts.",
-              "note": "That the police do their job"
+              "note": "Or that a journalist writes about it"
             }
           ],
           "q1_note": "In Finland, the '60s"
@@ -7339,7 +7339,7 @@
               "response": "Everyone in technical services — 15 men. But only three have keys to the copper room. And Björk. And the council chairman has a spare key that 'nobody uses'.",
               "expression": "neutral",
               "feedback": "Limited key access — a trail to follow.",
-              "note": "The council chairman has a spare key that 'nobody..."
+              "note": "The council chairman has a spare key that 'nobody uses'"
             },
             {
               "tier": 2,
@@ -7349,7 +7349,7 @@
               "note": "43,000 kronor"
             }
           ],
-          "q1_note": "47 bags of cement, 12 windows, and all the copper..."
+          "q1_note": "47 bags of cement, 12 windows, and all the copper pipe..."
         },
         "direct": {
           "q1_response": "43,000 kronor in discrepancy so far this year. Cement, copper pipe, windows, building timber. Things you use to renovate a house.",
@@ -7378,14 +7378,14 @@
               "response": "Council Chairman Gren renovated his summer cottage in July. His brother-in-law got a new roof in August. All with exactly the materials that are missing. I drove past the cottage — those ARE the municipality's windows. I recognize the model.",
               "expression": "neutral",
               "feedback": "Connection between municipal theft and politician's private use.",
-              "note": "Council Chairman Gren renovated his summer..."
+              "note": "Council Chairman Gren renovated his summer cottage in..."
             },
             {
               "tier": 1,
               "response": "Mostly in summer. June to September. Building season. But it's ongoing year round.",
               "expression": "neutral",
               "feedback": "Pattern but no perpetrator.",
-              "note": "June to September"
+              "note": "Building season"
             }
           ],
           "q1_note": "43,000 kronor in discrepancy so far this year"
@@ -7424,10 +7424,10 @@
               "response": "The police? The police station is heated with the municipality's pellets. The commissioner doesn't want trouble with technical services.",
               "expression": "defiant",
               "feedback": "Systemic passivity but no direct evidence.",
-              "note": "The police station is heated with the..."
+              "note": "The commissioner doesn't want trouble with technical..."
             }
           ],
-          "q1_note": "43,000 kronor worth of sloppy"
+          "q1_note": "The material WAS THERE and now it's NOT"
         },
         "silence": {
           "q1_response": "*flips through the binder silently* I've worked here 25 years. I build things for the municipality. But this... this is theft. Period.",
@@ -7456,7 +7456,7 @@
               "response": "They cut winter maintenance. No budget, they said. But there WAS material — it just ended up... somewhere else.",
               "expression": "guarded",
               "feedback": "Consequence but hard to prove.",
-              "note": "They cut winter maintenance"
+              "note": "Somewhere else"
             },
             {
               "tier": 1,
@@ -7597,10 +7597,10 @@
               "response": "We didn't ask. Melin said 'this will make you stronger'. We won the league. Nobody questioned it.",
               "expression": "guarded",
               "feedback": "Culture of blind trust but no facts.",
-              "note": "Melin said 'this will make you stronger'"
+              "note": "Nobody questioned it"
             }
           ],
-          "q1_note": "The doctor says it's not normal"
+          "q1_note": "The question he asked was: 'Have you taken anabolic..."
         },
         "direct": {
           "q1_response": "I don't know exactly. The ampoules had no label. But I took one with me the last time.",
@@ -7629,17 +7629,17 @@
               "response": "The club. But the money comes from the sponsor — Patron Gren. Yes, the same family as the council chairman. Gren wants to win the division.",
               "expression": "neutral",
               "feedback": "Sponsor connection to municipal politician.",
-              "note": "The money comes from the sponsor"
+              "note": "The same family as the council chairman"
             },
             {
               "tier": 1,
               "response": "Voluntarily? Melin said: 'If you don't take the injection, you sit on the bench.' Not exactly voluntary.",
               "expression": "guarded",
               "feedback": "Coercion but no names beyond Melin.",
-              "note": "Melin said: 'If you don't take the injection, you..."
+              "note": "Melin said: 'If you don't take the injection, you sit..."
             }
           ],
-          "q1_note": "I took one with me the last time"
+          "q1_note": "The ampoules had no label"
         },
         "pressure": {
           "q1_response": "Why? Because we WON. And everyone loved us. And Melin said it was harmless. I was 25 — I trusted a doctor.",
@@ -7661,21 +7661,21 @@
               "response": "On record? If I don't die from my kidneys first. *laughs bitterly* Yes. Use my name.",
               "expression": "open",
               "feedback": "Named source but no new facts.",
-              "note": "If I don't die from my kidneys first"
+              "note": "Use my name"
             },
             {
               "tier": 2,
               "response": "Tommy Blom has liver problems. Stefan Ax got heart palpitations and quit. There are three of us who are sick. Three out of twelve.",
               "expression": "nervous",
               "feedback": "Pattern of health damage. Three cases.",
-              "note": "Tommy Blom has liver problems"
+              "note": "There are three of us who are sick"
             },
             {
               "tier": 1,
               "response": "Melin billed the club 500 kronor per treatment. 12 players, 20 matches. Do the math.",
               "expression": "neutral",
               "feedback": "Financial motive but anecdotal.",
-              "note": "Melin billed the club 500 kronor per treatment"
+              "note": "12 players, 20 matches"
             }
           ],
           "q1_note": "Melin said it was harmless"
@@ -7707,17 +7707,17 @@
               "response": "*takes out glass ampoule* The last one. I had it analyzed in Köping. Nandrolone. AND — I have Melin's notebook. He left it on the bench. All names, all doses, all dates.",
               "expression": "defiant",
               "feedback": "Ampoule + analysis results + doctor's log. Complete chain of evidence.",
-              "note": "The last one"
+              "note": "All names, all doses, all dates"
             },
             {
               "tier": 2,
               "response": "Melin. But the board chairman knew. I heard them talking in the locker room: 'We do what it takes to win.' That was Carlsson, the chairman.",
               "expression": "guarded",
               "feedback": "The board was aware — responsibility goes higher.",
-              "note": "I heard them talking in the locker room: 'We do..."
+              "note": "I heard them talking in the locker room: 'We do what..."
             }
           ],
-          "q1_note": "All of Småstad came to the matches"
+          "q1_note": "Now I'm pissing blood"
         }
       }
     },
@@ -7841,7 +7841,7 @@
               "response": "Four farms. 23 animals total. Svensson lost his breeding ram — 12,000 kronor. No compensation paid.",
               "expression": "guarded",
               "feedback": "Four affected farms, figures, no compensation.",
-              "note": "12,000 kronor"
+              "note": "Svensson lost his breeding ram"
             },
             {
               "tier": 1,
@@ -7851,7 +7851,7 @@
               "note": "The wife doesn't want me to go"
             }
           ],
-          "q1_note": "I found the first lamb in May"
+          "q1_note": "My daughter cried for three days"
         },
         "direct": {
           "q1_response": "Tomorrow night. Two o'clock. Six men with rifles. We know where the wolf is — at the foot of Hagaberget.",
@@ -7912,21 +7912,21 @@
               "response": "The rule of law? Get out of here. *stands up*",
               "expression": "hostile",
               "feedback": "Terminated. You moralized instead of listening.",
-              "note": "Get out of here"
+              "note": "The rule of law. Get out of here"
             },
             {
               "tier": 2,
               "response": "The municipality APPROVED fencing funds. 40,000. But the money was never paid out. It was 'transferred' to another budget line. It's in the minutes. The farmers got nothing.",
               "expression": "defiant",
               "feedback": "Municipal funds embezzled — new angle.",
-              "note": "The money was never paid out"
+              "note": "It's in the minutes"
             },
             {
               "tier": 1,
               "response": "*softens* My side? That we're doing what the state won't. Protecting our property. It's no more complicated than that.",
               "expression": "guarded",
               "feedback": "Explains motive but nothing new.",
-              "note": "That we're doing what the state won't"
+              "note": "It's no more complicated than that"
             }
           ],
           "q1_note": "I lose 30,000 a year from wolf damage"
@@ -7951,24 +7951,24 @@
               "response": "Exactly. We're still in the same bind. The government in Stockholm doesn't understand what it's like living out here.",
               "expression": "open",
               "feedback": "Urban vs. rural theme but no facts.",
-              "note": "The government in Stockholm doesn't understand..."
+              "note": "The government in Stockholm doesn't understand what..."
             },
             {
               "tier": 2,
               "response": "Svensson made the calls. But that was AFTER Gren's call. The council chairman gave us the green light. Unofficial. Everyone knows.",
               "expression": "guarded",
               "feedback": "The chain: council chairman → farmers → illegal hunt.",
-              "note": "That was AFTER Gren's call"
+              "note": "The council chairman gave us the green light"
             },
             {
               "tier": 1,
               "response": "Everything. Inspection the same week. Compensation within a couple of months. Protective hunting if needed. But nothing happened.",
               "expression": "guarded",
               "feedback": "Explanation of systemic failure.",
-              "note": "Inspection the same week"
+              "note": "Protective hunting if needed"
             }
           ],
-          "q1_note": "Dad shot the last bear in the parish in 1942"
+          "q1_note": "Nobody convicted him"
         }
       }
     },
@@ -8092,17 +8092,17 @@
               "response": "The nursing assistant Maja told me: 'We don't have time to feed them. There are three of us for 28 residents. Sometimes she only gets the porridge before the next one.' Three staff for 28 elderly people.",
               "expression": "open",
               "feedback": "Staffing: 3 for 28. Understaffing as the cause.",
-              "note": "Sometimes she only gets the porridge before the..."
+              "note": "Sometimes she only gets the porridge before the next..."
             },
             {
               "tier": 2,
               "response": "NO. I spoke with the Holm family. Their father lost eight kilos. And Mrs. Lindqvist? Admitted to hospital with malnutrition. Three cases on the same ward.",
               "expression": "defiant",
               "feedback": "Three cases of malnutrition. Systematic.",
-              "note": "I spoke with the Holm family"
+              "note": "Admitted to hospital with malnutrition"
             }
           ],
-          "q1_note": "She was a teacher for 40 years"
+          "q1_note": "Now she weighs 42 kilos"
         },
         "direct": {
           "q1_response": "12 kilos since July. From 54 to 42. The doctor said 'unacceptable but not uncommon'. Not UNCOMMON?",
@@ -8124,24 +8124,24 @@
               "response": "*shows papers* I weighed her myself every visit. 54, 51, 48, 45, 42. Over twelve weeks. Staff documented nothing. I had to do it myself.",
               "expression": "defiant",
               "feedback": "Self-documented weight loss + staff's lack of record-keeping.",
-              "note": "54, 51, 48, 45, 42"
+              "note": "Staff documented nothing"
             },
             {
               "tier": 2,
               "response": "He said elderly people 'naturally desiccate'. But he admitted three Solhaga residents had been referred to hospital for malnutrition in the past six months. Three! And nobody raised the alarm.",
               "expression": "defiant",
               "feedback": "Doctor confirms pattern — three hospital referrals.",
-              "note": "He admitted three Solhaga residents had been..."
+              "note": "He admitted three Solhaga residents had been referred..."
             },
             {
               "tier": 1,
               "response": "The Health Inspectorate? I called. They said processing time is four months. My mother might not have four months.",
               "expression": "nervous",
               "feedback": "Inspectorate wait time but no new evidence.",
-              "note": "They said processing time is four months"
+              "note": "My mother might not have four months"
             }
           ],
-          "q1_note": "12 kilos since July"
+          "q1_note": "From 54 to 42"
         },
         "pressure": {
           "q1_response": "Good quality? Come and EAT it! Watery soup and dry bread. The food budget? 27 kronor per resident per day. That's DOG FOOD.",
@@ -8170,7 +8170,7 @@
               "response": "In March it was 42 kronor. Then the social services board HALVED the budget. Chairman Svensson called it 'streamlining'. Meanwhile city hall got a new dining room for 200,000. They eat lunch for 85 kronor per person. The elderly get 27.",
               "expression": "defiant",
               "feedback": "Budget halved + municipality's own luxury dining. Explosive.",
-              "note": "In March it was 42 kronor"
+              "note": "Chairman Svensson called it 'streamlining'"
             },
             {
               "tier": 1,
@@ -8202,14 +8202,14 @@
               "response": "Write. Write so people understand. That those who built this country are now starving in it.",
               "expression": "open",
               "feedback": "Emotionally powerful but no new evidence.",
-              "note": "That those who built this country are now..."
+              "note": "That those who built this country are now starving in..."
             },
             {
               "tier": 2,
               "response": "I bring sandwiches every day. But last week the director told me I CAN'T — 'hygiene risks'. They're NOT ALLOWED to eat outside food. And the food provided isn't enough. It's a trap.",
               "expression": "defiant",
               "feedback": "Forbidden from bringing food + insufficient serving. Kafkaesque.",
-              "note": "Last week the director told me I CAN'T"
+              "note": "The food provided isn't enough"
             },
             {
               "tier": 3,
@@ -8219,7 +8219,7 @@
               "note": "She threatened to move my 84-year-old mother to..."
             }
           ],
-          "q1_note": "T that it was a budget issue"
+          "q1_note": "Not that it was a budget issue"
         }
       }
     },
@@ -8336,14 +8336,14 @@
               "response": "Absolutely sure. The same sun-and-birch emblem as on city hall. I photographed it. *shows photo*",
               "expression": "defiant",
               "feedback": "Photo evidence with the municipality's logo.",
-              "note": "The same sun-and-birch emblem as on city hall"
+              "note": "I photographed it"
             },
             {
               "tier": 1,
               "response": "Chemical. Sweetish. My husband who worked at the water treatment plant says it smells like industrial sludge.",
               "expression": "guarded",
               "feedback": "Identified as industrial sludge but unconfirmed.",
-              "note": "My husband who worked at the water treatment..."
+              "note": "My husband who worked at the water treatment plant..."
             },
             {
               "tier": 1,
@@ -8353,7 +8353,7 @@
               "note": "At least 50 cubic meters"
             }
           ],
-          "q1_note": "It started with a strange smell by the mushroom..."
+          "q1_note": "Then I saw the barrels"
         },
         "direct": {
           "q1_response": "37 barrels. Coordinates: 200 meters northwest of Hagaberg parking lot. Contents: at least three are marked 'industrial waste'. The rest are unmarked.",
@@ -8375,7 +8375,7 @@
               "response": "Based on the vegetation — at least three years. The grass around the barrels is dead in a ring. That's not normal.",
               "expression": "neutral",
               "feedback": "Time estimate but indirect.",
-              "note": "At least three years"
+              "note": "The grass around the barrels is dead in a ring"
             },
             {
               "tier": 2,
@@ -8389,10 +8389,10 @@
               "response": "Yes. The neighbor's boy studies chemistry in Lund. He tested — elevated levels of lead and cadmium. Far above the limits.",
               "expression": "neutral",
               "feedback": "Soil samples with heavy metals. Environmental crime.",
-              "note": "The neighbor's boy studies chemistry in Lund"
+              "note": "Elevated levels of lead and cadmium"
             }
           ],
-          "q1_note": "Coordinates: 200 meters northwest of Hagaberg..."
+          "q1_note": "Coordinates: 200 meters northwest of Hagaberg parking..."
         },
         "pressure": {
           "q1_response": "The municipality. Without a doubt. The barrels have the municipality's stamp and it's the municipality's truck that drives there.",
@@ -8421,17 +8421,17 @@
               "response": "Photos. License plate numbers. Soil samples. And *holds up paper* — the municipality's own environmental report from 1973. Where it states: 'temporary deposition in forested area approved by the technical board'. THEY DECIDED IT. Black on white.",
               "expression": "open",
               "feedback": "The municipality's own decision to dump in the forest. Complete chain of evidence.",
-              "note": "The municipality's own environmental report from..."
+              "note": "The municipality's own environmental report from 1973"
             },
             {
               "tier": 1,
               "response": "The county board said they 'note the complaint'. That was in October. Nothing has happened.",
               "expression": "guarded",
               "feedback": "Complaint filed but no action.",
-              "note": "That was in October"
+              "note": "The county board said they 'note the complaint'"
             }
           ],
-          "q1_note": "The municipality"
+          "q1_note": "The barrels have the municipality's stamp and it's the..."
         },
         "silence": {
           "q1_response": "*flips through photos* You know, I was just looking for chanterelles. But this... it doesn't smell like chanterelles. And it doesn't smell right.",
@@ -8453,7 +8453,7 @@
               "response": "*spreads out 15 photos* Here. The barrels. The logo. The truck. And this... *points* It's seeping into the creek. The same creek that flows into Bysjön. Where the children swim.",
               "expression": "nervous",
               "feedback": "Photo documentation + connection to swimming lake.",
-              "note": "Here"
+              "note": "The same creek that flows into Bysjön"
             },
             {
               "tier": 1,
@@ -8470,7 +8470,7 @@
               "note": "We haven't spoken since I called the county board"
             }
           ],
-          "q1_note": "It doesn't smell like chanterelles"
+          "q1_note": "It doesn't smell right"
         }
       }
     },
@@ -8587,7 +8587,7 @@
               "response": "Three families in the barn. Two more in Olsson's old garage. Total 14 people, five of them children. In facilities not even approved for animals.",
               "expression": "defiant",
               "feedback": "14 people in 2 unapproved facilities. Hard facts.",
-              "note": "Total 14 people, five of them children"
+              "note": "Two more in Olsson's old garage"
             },
             {
               "tier": 1,
@@ -8601,7 +8601,7 @@
               "response": "Everything. But heat. If the children get sick... the three-year-old already has a cold.",
               "expression": "nervous",
               "feedback": "Urgent but journalistically thin.",
-              "note": "The three-year-old already has a cold"
+              "note": "If the children get sick"
             }
           ],
           "q1_note": "The Red Cross got a list"
@@ -8626,7 +8626,7 @@
               "response": "*shows papers* Rental agreement. Dated September 15. 'Landlord: B. Bengtsson'. Signed: 'S. Andersson, social services director'. Bengtsson married Andersson's sister in 1968. It's in the church records.",
               "expression": "defiant",
               "feedback": "Documented conflict of interest — rental agreement between brothers-in-law. Complete.",
-              "note": "Dated September 15"
+              "note": "Bengtsson married Andersson's sister in 1968"
             },
             {
               "tier": 2,
@@ -8640,10 +8640,10 @@
               "response": "Approved? Not even for storage. Fire safety is nonexistent. There's one door.",
               "expression": "neutral",
               "feedback": "Fire safety issue but needs confirmation.",
-              "note": "Fire safety is nonexistent"
+              "note": "There's one door"
             }
           ],
-          "q1_note": "3,000 kronor a month"
+          "q1_note": "His brother-in-law Bengtsson"
         },
         "pressure": {
           "q1_response": "Temporary? Since SEPTEMBER. That's three months. What world does Andersson live in?",
@@ -8665,24 +8665,24 @@
               "response": "Vacant apartments? THERE ARE. The municipality's own housing company has three empty two-bedroom units. But Andersson said it's 'not a priority to give them to foreigners'. His words. I was a WITNESS.",
               "expression": "defiant",
               "feedback": "Empty apartments + discriminatory statement from social services director.",
-              "note": "Andersson said it's 'not a priority to give them..."
+              "note": "Andersson said it's 'not a priority to give them to..."
             },
             {
               "tier": 1,
               "response": "Nothing. Literally nothing. If the Red Cross hadn't come they wouldn't even have blankets.",
               "expression": "defiant",
               "feedback": "Municipal inaction but familiar pattern.",
-              "note": "If the Red Cross hadn't come they wouldn't even..."
+              "note": "If the Red Cross hadn't come they wouldn't even have..."
             },
             {
               "tier": 1,
               "response": "Mixed. Some help out. But there are those who... well. Småstad is conservative.",
               "expression": "guarded",
               "feedback": "Social context without news substance.",
-              "note": "There are those who"
+              "note": "Småstad is conservative"
             }
           ],
-          "q1_note": "Since SEPTEMBER"
+          "q1_note": "What world does Andersson live in"
         },
         "silence": {
           "q1_response": "*long pause* The three-year-old is named Sofia. She draws the sun every day. She hasn't seen the sun since September. The barn has no windows.",
@@ -8704,7 +8704,7 @@
               "response": "Come. I'll take you there now. You need to SEE it. No insulation, a kerosene lamp, mattresses on the floor. A water jug. It's 1975 — not 1875.",
               "expression": "open",
               "feedback": "Invitation for site visit. Reportage material.",
-              "note": "Insulation, a kerosene lamp, mattresses on the..."
+              "note": "You need to SEE it. A water jug"
             },
             {
               "tier": 1,
@@ -8718,7 +8718,7 @@
               "response": "The father Carlos was a university lecturer. Pinochet. They fled for their lives. And Sweden promised protection. Not a barn.",
               "expression": "guarded",
               "feedback": "Background but not local news content.",
-              "note": "The father Carlos was a university lecturer"
+              "note": "Sweden promised protection"
             }
           ],
           "q1_note": "She hasn't seen the sun since September"
@@ -8838,7 +8838,7 @@
               "response": "Three times. March: binder disappeared. May: I mentioned a source — the source was called in for a 'chat' with the council chairman the next day. September: my motion proposal leaked before I submitted it.",
               "expression": "defiant",
               "feedback": "Three incidents with causal link to phone calls.",
-              "note": "The source was called in for a 'chat' with the..."
+              "note": "The source was called in for a 'chat' with the council..."
             },
             {
               "tier": 2,
@@ -8852,7 +8852,7 @@
               "response": "The police? The commissioner and the council chairman play golf every Sunday.",
               "expression": "defiant",
               "feedback": "Chain of conflicts of interest but no evidence.",
-              "note": "The commissioner and the council chairman play..."
+              "note": "The commissioner and the council chairman play golf..."
             }
           ],
           "q1_note": "In March I discussed on the phone with a party..."
@@ -8877,24 +8877,24 @@
               "response": "I ran a test. In October I called from the municipality phone and said a fake name — 'Björklund from Parliament is calling tomorrow'. Next morning the council chairman was standing at the entrance in a suit. Björklund doesn't exist.",
               "expression": "defiant",
               "feedback": "Deliberate test that exposes wiretapping. Brilliant.",
-              "note": "In October I called from the municipality phone..."
+              "note": "Next morning the council chairman was standing at the..."
             },
             {
               "tier": 1,
               "response": "Karl Lindström. Municipal worker. The council chairman told him: 'I know what you've been talking about.' Karl called me in a panic.",
               "expression": "nervous",
               "feedback": "Secondhand account but named witness.",
-              "note": "The council chairman told him: 'I know what..."
+              "note": "The council chairman told him: 'I know what you've..."
             },
             {
               "tier": 2,
               "response": "Word for word. Including a typo — 'administratoin committee'. Same typo in the shredder copy. Someone copied it from my draft — which I had ONLY read aloud on the phone.",
               "expression": "defiant",
               "feedback": "Typo as evidence — the copy matches what was said verbally.",
-              "note": "'administratoin committee'"
+              "note": "Same typo in the shredder copy"
             }
           ],
-          "q1_note": "Three: September, my motion proposal appeared in..."
+          "q1_note": "Three: September, my motion proposal appeared in the..."
         },
         "pressure": {
           "q1_response": "Evidence? *takes out a small device from her handbag* I had a phone repair technician take a look. He found THIS connected to my line.",
@@ -8916,21 +8916,21 @@
               "response": "A parallel connection. The technician — Ågren at Televerket — said it's professionally installed. And the cable leads down to the municipality's telephone exchange. Not to the police. Not to SÄPO. To the MUNICIPALITY. He can testify.",
               "expression": "defiant",
               "feedback": "Physical evidence + expert who can testify + trail to municipality. Complete.",
-              "note": "Said it's professionally installed"
+              "note": "The cable leads down to the municipality's telephone..."
             },
             {
               "tier": 2,
               "response": "Someone with access to city hall's basement. The technician said the installation was done 'at least a year ago'. It required tools and expertise.",
               "expression": "neutral",
               "feedback": "Professional installation with timeframe.",
-              "note": "The technician said the installation was done 'at..."
+              "note": "It required tools and expertise"
             },
             {
               "tier": 1,
               "response": "It shows someone is listening. But not WHO. The cable disappears into conduit — hard to trace without digging.",
               "expression": "guarded",
               "feedback": "Evidence of wiretapping without identified perpetrator.",
-              "note": "The cable disappears into conduit"
+              "note": "Hard to trace without digging"
             }
           ],
           "q1_note": "He found THIS connected to my line"
@@ -8955,24 +8955,24 @@
               "response": "We've stopped calling from city hall. We meet in the park. Like now. Is this normal in a Swedish municipality?",
               "expression": "guarded",
               "feedback": "Illustrative but no new evidence.",
-              "note": "We've stopped calling from city hall"
+              "note": "We meet in the park. Is this normal in a Swedish..."
             },
             {
               "tier": 2,
               "response": "Probably. Hedström in the Centre Party said his proposal about the land purchase 'happened to be' brought up by the council chairman the day before it was formally submitted. Exact same idea.",
               "expression": "neutral",
               "feedback": "Additional affected politician — pattern.",
-              "note": "Hedström in the Centre Party said his proposal..."
+              "note": "Hedström in the Centre Party said his proposal about..."
             },
             {
               "tier": 2,
               "response": "An independent review of the municipality's telephone system. But who's going to do it? The county police chief? He sits on the council chairman's preparatory committee.",
               "expression": "defiant",
               "feedback": "Systemic conflict of interest preventing oversight.",
-              "note": "He sits on the council chairman's preparatory..."
+              "note": "He sits on the council chairman's preparatory committee"
             }
           ],
-          "q1_note": "The worst part is that democracy stops working"
+          "q1_note": "The opposition can't function if everything we say..."
         }
       }
     },
@@ -9103,10 +9103,10 @@
               "response": "They said: 'The ambulance is not in service. Contact other transport or call the on-call doctor.' The on-call doctor — who's based in THE CITY. 40 km away.",
               "expression": "defiant",
               "feedback": "System critique but no new angle.",
-              "note": "Contact other transport or call the on-call..."
+              "note": "Who's based in THE CITY"
             }
           ],
-          "q1_note": "The doctor said another 20 minutes and"
+          "q1_note": "The taxi took 35 minutes"
         },
         "direct": {
           "q1_response": "The night of November 3rd. But it happens every other night. Tuesday, Thursday, Saturday. They've cut the night ambulance three nights a week.",
@@ -9128,7 +9128,7 @@
               "response": "Ambulance driver Olle told me. They forced the staff NOT to tell the public. 'Internal information' the boss said. Olle finally dared to speak.",
               "expression": "guarded",
               "feedback": "Internal cover-up + named witness.",
-              "note": "Ambulance driver Olle told me"
+              "note": "Olle finally dared to speak"
             },
             {
               "tier": 2,
@@ -9142,10 +9142,10 @@
               "response": "3,200 residents in the countryside. Without ambulance at night. Nearest alternative: Köping, 30 km.",
               "expression": "neutral",
               "feedback": "Numbers but publicly available.",
-              "note": "3,200 residents in the countryside"
+              "note": "Nearest alternative: Köping, 30 km"
             }
           ],
-          "q1_note": "The night of November 3rd"
+          "q1_note": "Tuesday, Thursday, Saturday"
         },
         "pressure": {
           "q1_response": "Adequate? Call 90 000 at three on a Tuesday night and ask if it's adequate. You'll get the same answer as Rune.",
@@ -9167,24 +9167,24 @@
               "response": "The taxi receipt. 03:17. From Rune's address to the hospital. If the ambulance had been in service there wouldn't be a taxi receipt. That's the proof.",
               "expression": "defiant",
               "feedback": "Taxi receipt as proof of missing ambulance.",
-              "note": "03:17"
+              "note": "If the ambulance had been in service there wouldn't be..."
             },
             {
               "tier": 2,
               "response": "350,000 per year. THAT's what three lives per week costs. 350,000. The county council's budget for business dinners? 400,000.",
               "expression": "defiant",
               "feedback": "Cost comparison. Lives vs. dinners. Publishable.",
-              "note": "350,000 per year"
+              "note": "THAT's what three lives per week costs"
             },
             {
               "tier": 1,
               "response": "Persson said it's about 'priorities' and that we should 'trust the professionals'. The professionals who were forced to stay silent.",
               "expression": "guarded",
               "feedback": "Politician-speak without new facts.",
-              "note": "The professionals who were forced to stay silent"
+              "note": "Persson said it's about 'priorities' and that we..."
             }
           ],
-          "q1_note": "Call 90 000 at three on a Tuesday night and ask..."
+          "q1_note": "Call 90 000 at three on a Tuesday night and ask if..."
         },
         "silence": {
           "q1_response": "*long pause* What happens next time? If it's not a heart attack but an accident involving children? Should a five-year-old take a taxi to the emergency room?",
@@ -9206,24 +9206,24 @@
               "response": "The whole area. We talked about it at the general store. Everyone knew. Nobody thought it was 'official'. They lied to us.",
               "expression": "open",
               "feedback": "Community concern but no new facts.",
-              "note": "We talked about it at the general store"
+              "note": "Nobody thought it was 'official'"
             },
             {
               "tier": 3,
               "response": "*hesitates* Greta Holm. November. She called 90 000. No ambulance. Her husband drove. But it was icy. They drove off the road. Greta didn't die from the illness — she died in the ditch. IF there had been an ambulance she would be alive. I can give you the son's number.",
               "expression": "open",
               "feedback": "Death directly caused by ambulance shortage. Family testimony. Complete.",
-              "note": "She called 90 000"
+              "note": "I can give you the son's number"
             },
             {
               "tier": 1,
               "response": "The truth. That we've paid taxes our whole lives and they took away the ambulance without even telling us.",
               "expression": "defiant",
               "feedback": "Strong sentiment but journalistically thin.",
-              "note": "That we've paid taxes our whole lives and they..."
+              "note": "That we've paid taxes our whole lives and they took..."
             }
           ],
-          "q1_note": "If it's not a heart attack but an accident..."
+          "q1_note": "Should a five-year-old take a taxi to the emergency..."
         }
       }
     },
@@ -9347,7 +9347,7 @@
               "response": "The zoning change was pushed through in ONE meeting. Normally it takes 6-12 months with public consultation. This took 30 days. No opposition mentioned it.",
               "expression": "neutral",
               "feedback": "Abnormally fast process. Procedural evidence.",
-              "note": "Rmally it takes 6-12 months with public..."
+              "note": "Normally it takes 6-12 months with public consultation"
             },
             {
               "tier": 1,
@@ -9379,7 +9379,7 @@
               "response": "I was a land surveyor. I KNOW what land costs. 15,000 for waterfront land? That's a gift price.",
               "expression": "defiant",
               "feedback": "Expert assessment but subjective.",
-              "note": "15,000 for waterfront land"
+              "note": "That's a gift price"
             },
             {
               "tier": 3,
@@ -9425,14 +9425,14 @@
               "response": "We spoke up. I wrote a memo. It ended up in a drawer. My boss said: 'You retire in three years. Don't do it.' And I obeyed. Until now.",
               "expression": "guarded",
               "feedback": "Internal warning ignored but secondhand source.",
-              "note": "My boss said: 'You retire in three years"
+              "note": "Don't do it.' And I obeyed"
             },
             {
               "tier": 2,
               "response": "*opens briefcase* Everything. Purchase deed August 14, zoning decision September 12, tax assessment before and after. And — Roger Gren's tax return for 1974. He declared THE PROFIT. 800,000 in capital gains. Black on white.",
               "expression": "open",
               "feedback": "Tax return shows profit. Hard evidence.",
-              "note": "Purchase deed August 14, zoning decision..."
+              "note": "Purchase deed August 14, zoning decision September 12..."
             }
           ],
           "q1_note": "That's CORRUPTION"
@@ -9457,7 +9457,7 @@
               "response": "I used to fish there with my dad. Now it'll be pastel villas for Stockholmers. With a view they stole.",
               "expression": "guarded",
               "feedback": "Nostalgia and loss but no evidence.",
-              "note": "W it'll be pastel villas for Stockholmers"
+              "note": "Now it'll be pastel villas for Stockholmers"
             },
             {
               "tier": 3,
@@ -9471,7 +9471,7 @@
               "response": "Open bidding. Public consultation with residents. The normal process. What the LAW requires.",
               "expression": "neutral",
               "feedback": "Description of norms without evidence.",
-              "note": "Public consultation with residents"
+              "note": "What the LAW requires"
             }
           ],
           "q1_note": "Now Roger's villas will stand there"
@@ -9591,24 +9591,24 @@
               "response": "The seventh graders had three math teachers last term. They're half a year behind. The national tests will be a disaster.",
               "expression": "guarded",
               "feedback": "Consequence but without documentation.",
-              "note": "The seventh graders had three math teachers last..."
+              "note": "The national tests will be a disaster"
             },
             {
               "tier": 1,
               "response": "An unqualified substitute costs 60 percent of a qualified teacher's salary. Four substitutes save the municipality around 200,000 per year.",
               "expression": "neutral",
               "feedback": "Economic driver but public figures.",
-              "note": "Four substitutes save the municipality around..."
+              "note": "Four substitutes save the municipality around 200,000..."
             },
             {
               "tier": 2,
               "response": "No. The principal FORBADE us from mentioning their substitute status at the parent meeting. 'Say they're new colleagues.' We lied. On the principal's orders.",
               "expression": "nervous",
               "feedback": "Principal ordered parents to be misled.",
-              "note": "The principal FORBADE us from mentioning their..."
+              "note": "On the principal's orders"
             }
           ],
-          "q1_note": "Four of nine teachers are unqualified substitutes"
+          "q1_note": "They cost less"
         },
         "direct": {
           "q1_response": "Four. The math teacher has an auto mechanic qualification. The English teacher lived in the USA but has no degree. The music teacher knows three chords.",
@@ -9644,10 +9644,10 @@
               "response": "I'd risk my job. But... check the employment register. It's a public document. Their employment certificates — or rather the ABSENCE of teaching degrees — should be on file.",
               "expression": "nervous",
               "feedback": "Document trail for verification.",
-              "note": "It's a public document"
+              "note": "Check the employment register"
             }
           ],
-          "q1_note": "The English teacher lived in the USA but has no..."
+          "q1_note": "The English teacher lived in the USA but has no degree"
         },
         "pressure": {
           "q1_response": "Competent? The math substitute Svensson asked ME how to calculate percentages. He CAN'T do math. And he's teaching eighth graders.",
@@ -9669,24 +9669,24 @@
               "response": "The school board? Chairman Björk said 'we have full confidence in the principal'. That was the entire answer.",
               "expression": "defiant",
               "feedback": "Political shield wall but standard response.",
-              "note": "Chairman Björk said 'we have full confidence in..."
+              "note": "Chairman Björk said 'we have full confidence in the..."
             },
             {
               "tier": 2,
               "response": "The principal said: 'If you're unhappy with your colleagues you can start looking for a new job.' He threatened ME. I said the children aren't learning and got threatened with termination.",
               "expression": "nervous",
               "feedback": "Threat against whistleblower. Strong portrait of power.",
-              "note": "I said the children aren't learning and got..."
+              "note": "I said the children aren't learning and got threatened..."
             },
             {
               "tier": 1,
               "response": "The students notice. An eighth grader said: 'Everyone knows Svensson can't do math. We learn from YouTube instead.'",
               "expression": "guarded",
               "feedback": "Student perspective but anecdotal.",
-              "note": "An eighth grader said: 'Everyone knows Svensson..."
+              "note": "An eighth grader said: 'Everyone knows Svensson can't..."
             }
           ],
-          "q1_note": "The math substitute Svensson asked ME how to..."
+          "q1_note": "The math substitute Svensson asked ME how to calculate..."
         },
         "silence": {
           "q1_response": "*sits quietly, brushes chalk dust from her sleeve* I became a teacher to make a difference. And now I stand in a system that lies to parents and doesn't care about children.",
@@ -9722,7 +9722,7 @@
               "response": "The employment register. But — *lowers her voice* — I heard that the principal wrote FALSE information on employment certificates. He wrote 'pedagogical competence' for Svensson. That's forgery of an official document.",
               "expression": "nervous",
               "feedback": "Forged employment certificate. Serious.",
-              "note": "He wrote 'pedagogical competence' for Svensson"
+              "note": "That's forgery of an official document"
             }
           ],
           "q1_note": "Now I stand in a system that lies to parents and..."
@@ -9842,14 +9842,14 @@
               "response": "The doctor said: 'These injuries are not consistent with falling.' Broken ribs. Bruises in a pattern — like kicks. She wrote it in the medical record.",
               "expression": "defiant",
               "feedback": "Medical documentation contradicting the police version.",
-              "note": "The doctor said: 'These injuries are not..."
+              "note": "The doctor said: 'These injuries are not consistent..."
             },
             {
               "tier": 1,
               "response": "He said two officers came into the cell. He was too drunk to remember details. But he said 'I was lying down and they kicked.'",
               "expression": "nervous",
               "feedback": "Victim's account but uncertain memory.",
-              "note": "He said two officers came into the cell"
+              "note": "He said 'I was lying down and they kicked.'"
             },
             {
               "tier": 1,
@@ -9859,7 +9859,7 @@
               "note": "He's 19, 60 kilos"
             }
           ],
-          "q1_note": "He was at the pub"
+          "q1_note": "A bent nose"
         },
         "direct": {
           "q1_response": "Three broken ribs. Bruises on back and legs. Bent nose. All documented at the hospital the day after. Tommy says officers Krantz and Berg beat him in the cell.",
@@ -9881,14 +9881,14 @@
               "response": "*shows records* The doctor writes: 'Multiple contusions consistent with blunt force trauma to a prone person. Not consistent with falling.' That's a DOCTOR saying it.",
               "expression": "defiant",
               "feedback": "Medical expert opinion on the pattern of blows.",
-              "note": "T consistent with falling.' That's a DOCTOR..."
+              "note": "Not consistent with falling.' That's a DOCTOR saying it"
             },
             {
               "tier": 1,
               "response": "Report? To the police? He's supposed to report the police TO the police? That's a joke.",
               "expression": "defiant",
               "feedback": "System critique but no new facts.",
-              "note": "He's supposed to report the police TO the police"
+              "note": "That's a joke"
             },
             {
               "tier": 2,
@@ -9898,7 +9898,7 @@
               "note": "In the adjacent cell sat Anders Ek"
             }
           ],
-          "q1_note": "Tommy says officers Krantz and Berg beat him in..."
+          "q1_note": "Tommy says officers Krantz and Berg beat him in the..."
         },
         "pressure": {
           "q1_response": "Necessary force? Against a drunk 19-year-old lying on the cot? THREE BROKEN RIBS is necessary?!",
@@ -9927,17 +9927,17 @@
               "response": "The Svensson boy last year. Beaten black and blue. He reported it. The investigation was dropped. The Ström family, 1973 — same thing. Three cases. Same station.",
               "expression": "defiant",
               "feedback": "Three cases of suspected police brutality. Systematic.",
-              "note": "The Svensson boy last year"
+              "note": "The Ström family, 1973"
             },
             {
               "tier": 1,
               "response": "We can't afford a lawyer. The police union has lawyers. WE have nothing.",
               "expression": "nervous",
               "feedback": "Uneven power dynamic but no new facts.",
-              "note": "We can't afford a lawyer"
+              "note": "The police union has lawyers"
             }
           ],
-          "q1_note": "Against a drunk 19-year-old lying on the cot"
+          "q1_note": "THREE BROKEN RIBS is necessary"
         },
         "silence": {
           "q1_response": "*sits down, wipes her eyes* Tommy wanted to be a police officer. That was his dream. And now... now he's afraid of them.",
@@ -9959,24 +9959,24 @@
               "response": "He doesn't want to talk to journalists. But... he recorded audio on his pocket cassette player. He had it in his pocket. The police didn't know. *takes out cassette* You can hear everything.",
               "expression": "open",
               "feedback": "AUDIO RECORDING of the assault. Incredible evidence.",
-              "note": "He doesn't want to talk to journalists"
+              "note": "You can hear everything"
             },
             {
               "tier": 1,
               "response": "Justice. But in Småstad — with Commissioner Hallin's golf buddies on the council — who's going to give us justice?",
               "expression": "guarded",
               "feedback": "Power structure but no facts.",
-              "note": "With Commissioner Hallin's golf buddies on the..."
+              "note": "With Commissioner Hallin's golf buddies on the council"
             },
             {
               "tier": 3,
               "response": "Tommy recorded it. Cassette tape. You can hear EVERYTHING. Blows, screaming, and a voice saying 'this'll teach you to shut up'. And — *takes a deep breath* — the other voice says: 'No reports. Write that he fell.' THEY PLANNED THE COVER-UP.",
               "expression": "defiant",
               "feedback": "Recorded violence + recorded cover-up plan. Journalistic nuclear bomb.",
-              "note": "Blows, screaming, and a voice saying 'this'll..."
+              "note": "— the other voice says: 'No reports"
             }
           ],
-          "q1_note": "Tommy wanted to be a police officer"
+          "q1_note": "Now he's afraid of them"
         }
       }
     },

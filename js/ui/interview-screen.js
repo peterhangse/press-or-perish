@@ -441,8 +441,11 @@ function addNote(text) {
  */
 function summarizeResponse(text) {
   if (!text) return '...';
+  // Strip stage directions (*action text*)
+  let clean = text.replace(/\*[^*]+\*\s*/g, '').trim();
+  if (!clean) clean = text;
   // Take first sentence
-  const firstSentence = text.split(/[.!?]/)[0].trim();
+  const firstSentence = clean.split(/[.!?]/)[0].trim();
   if (firstSentence.length <= 60) return firstSentence;
   return firstSentence.substring(0, 57) + '...';
 }

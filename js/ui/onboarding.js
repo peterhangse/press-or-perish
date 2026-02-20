@@ -3,6 +3,7 @@
  */
 
 import * as ScreenManager from './screen-manager.js';
+import * as SFX from '../engine/sfx-engine.js';
 
 // Onboarding sequence steps
 const SEQUENCE = [
@@ -244,6 +245,7 @@ function showStep(container) {
     const stamp = document.createElement('div');
     stamp.className = 'rejection-stamp';
     stamp.textContent = 'REJECTED';
+    SFX.play('reject');
 
     const body = document.createElement('div');
     body.className = 'rejection-body';
@@ -264,6 +266,8 @@ function showStep(container) {
   if (step.type === 'acceptance') {
     const letter = document.createElement('div');
     letter.className = 'acceptance-letter';
+
+    SFX.play('relief');
 
     const header = document.createElement('div');
     header.className = 'acceptance-header';
@@ -359,7 +363,10 @@ function showStep(container) {
     // Staggered word slam: 0.6s apart
     const wordEls = wrapper.querySelectorAll('.title-word');
     wordEls.forEach((el, i) => {
-      setTimeout(() => el.classList.add('visible'), 400 + i * 600);
+      setTimeout(() => {
+        el.classList.add('visible');
+        SFX.play('slam');
+      }, 400 + i * 600);
     });
 
     // After all words shown (400 + 3*600 = 2200), hold 1.5s, then fade out
@@ -406,6 +413,7 @@ function showStep(container) {
     }
 
     btn.addEventListener('click', () => {
+      SFX.play('click');
       // Save name if on diploma step
       if (step.type === 'diploma') {
         const nameInput = wrapper.querySelector('#diploma-name');

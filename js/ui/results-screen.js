@@ -3,6 +3,7 @@
  */
 
 import * as CompetitorAI from '../engine/competitor-ai.js';
+import * as SFX from '../engine/sfx-engine.js';
 
 /**
  * Show end-of-day results
@@ -48,6 +49,7 @@ export function render(opts) {
   sleepBtn.className = 'btn-paper results-sleep-btn';
   sleepBtn.textContent = 'Go to sleep';
   sleepBtn.addEventListener('click', () => {
+    SFX.play('click');
     sleepBtn.remove();
     showPhase2(wrapper, opts);
   });
@@ -79,6 +81,7 @@ function showPhase2(wrapper, opts) {
   );
   yours.classList.add('results-slide-in-left');
   comparison.appendChild(yours);
+  SFX.play('reveal');
 
   // Competitor's paper — slides in second (delayed)
   const theirs = buildPaperCard(
@@ -90,6 +93,7 @@ function showPhase2(wrapper, opts) {
   );
   theirs.classList.add('results-slide-in-right');
   comparison.appendChild(theirs);
+  setTimeout(() => SFX.play('reveal'), 600);
 
   // Insert comparison after the breakdown
   const breakdown = wrapper.querySelector('.results-breakdown');
@@ -107,6 +111,7 @@ function showPhase2(wrapper, opts) {
   const delta = opts.playerScore - opts.competitorScore;
   addBreakdownRow(compBreakdown, 'Today\'s change', `${delta > 0 ? '+' : ''}${delta}`, delta > 0 ? 'positive' : delta < 0 ? 'negative' : '', true);
   phase2Bottom.appendChild(compBreakdown);
+  setTimeout(() => SFX.play(delta >= 0 ? 'relief' : 'tension'), 1200);
 
   // Deficit update
   const deficitRow = document.createElement('div');
@@ -161,6 +166,7 @@ function showPhase2(wrapper, opts) {
     btn.textContent = opts.day < 5 ? 'Next day →' : 'Final results';
   }
   btn.addEventListener('click', () => {
+    SFX.play('click');
     if (opts.onContinue) opts.onContinue();
   });
   phase2Bottom.appendChild(btn);

@@ -2,6 +2,8 @@
  * PUBLISH SCREEN — Headline selection + sleep phase
  */
 
+import * as SFX from '../engine/sfx-engine.js';
+
 let onPublish = null;
 
 /**
@@ -59,6 +61,7 @@ export function render(story, headlines, points, day, callback) {
     option.appendChild(tone);
 
     option.addEventListener('click', () => {
+      SFX.play('select');
       selectedIndex = i;
       document.querySelectorAll('.headline-option').forEach((o, j) => {
         o.classList.toggle('selected', j === i);
@@ -79,6 +82,7 @@ export function render(story, headlines, points, day, callback) {
   publishBtn.textContent = 'PRESS';
   publishBtn.addEventListener('click', () => {
     if (selectedIndex !== null && onPublish) {
+      SFX.play('stamp');
       onPublish({ headlineIndex: selectedIndex });
     }
   });
@@ -114,6 +118,7 @@ export function showSleep(day, points, competitorPoints, deficitDelta, callback)
   const change = document.createElement('div');
   change.className = `sleep-deficit-change ${deficitDelta > 0 ? 'positive' : deficitDelta < 0 ? 'negative' : 'neutral'}`;
   change.textContent = `${deficitDelta > 0 ? '+' : ''}${deficitDelta}`;
+  SFX.play(deficitDelta >= 0 ? 'relief' : 'tension');
 
   const changeLabel = document.createElement('div');
   changeLabel.style.cssText = 'font-family: var(--font-body); font-size: 9px; color: var(--paper-dark);';
@@ -128,6 +133,7 @@ export function showSleep(day, points, competitorPoints, deficitDelta, callback)
     btn.textContent = day < 5 ? 'Sleep → Next day' : 'See weekly results';
   }
   btn.addEventListener('click', () => {
+    SFX.play('click');
     if (callback) callback();
   });
 

@@ -5,6 +5,7 @@
 import * as InterviewEngine from '../engine/interview-engine.js';
 import * as ScreenManager from './screen-manager.js';
 import { renderSprite } from './npc-sprites.js';
+import * as SFX from '../engine/sfx-engine.js';
 
 let currentStory = null;
 let currentNPC = null;
@@ -67,6 +68,7 @@ export function start(story, npc, callback, options = {}) {
     startBtn.textContent = 'Start Interview';
     startBtn.style.alignSelf = 'center';
     startBtn.addEventListener('click', () => {
+      SFX.play('click');
       showQ1Options();
     });
     questions.appendChild(startBtn);
@@ -181,6 +183,7 @@ function showQ1Options() {
  * Handle Q1 selection
  */
 function handleQ1(archetype, questionText) {
+  SFX.play('click');
   const dialogue = document.getElementById('interview-dialogue');
   const questions = document.getElementById('interview-questions');
 
@@ -247,6 +250,7 @@ function showQ2Options(q1Archetype) {
  * Handle Q2 selection — resolves interview
  */
 function handleQ2(q1Archetype, q2Index, questionText) {
+  SFX.play('click');
   const dialogue = document.getElementById('interview-dialogue');
   const questions = document.getElementById('interview-questions');
 
@@ -279,6 +283,7 @@ function handleQ2(q1Archetype, q2Index, questionText) {
     continueBtn.style.marginTop = '6px';
     continueBtn.addEventListener('click', () => {
       if (onComplete) {
+        SFX.play('stamp');
         // Rubber stamp flash
         const container = document.getElementById('screen-interview');
         const stamp = document.createElement('div');
@@ -350,6 +355,7 @@ function typewriteDialogue(container, speaker, text, type, onDone) {
     if (i < words.length) {
       textEl.textContent += (i > 0 ? ' ' : '') + words[i];
       i++;
+      SFX.play('tick');
       container.scrollTop = container.scrollHeight;
       setTimeout(nextWord, 70 + Math.random() * 50);
     } else {
@@ -414,6 +420,7 @@ function getInitials(name) {
  * Add a note bullet to the notesheet
  */
 function addNote(text) {
+  SFX.play('note');
   const notesheet = document.getElementById('interview-notesheet');
   if (!notesheet) return;
 

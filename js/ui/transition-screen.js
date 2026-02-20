@@ -2,6 +2,8 @@
  * TRANSITION SCREEN — Day header with fade-in animations
  */
 
+import * as SFX from '../engine/sfx-engine.js';
+
 const DAY_NAMES = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'];
 const DAY_DATES = [
   'November 11, 1974',
@@ -65,6 +67,7 @@ export function show(day, deficit, onDone) {
   container.appendChild(mood);
 
   // Auto-advance after 3 seconds
+  SFX.play('ambientTick');
   setTimeout(() => {
     if (onDone) onDone();
   }, 3000);

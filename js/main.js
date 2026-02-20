@@ -18,6 +18,7 @@ import * as ResultsScreen from './ui/results-screen.js';
 import * as TransitionScreen from './ui/transition-screen.js';
 import * as GameOverScreen from './ui/gameover-screen.js';
 import * as AudioManager from './engine/audio-manager.js';
+import * as SFX from './engine/sfx-engine.js';
 
 // — Game data cache —
 let gameData = null;
@@ -45,8 +46,8 @@ async function boot() {
   Components.buildWeekStrip();
 
   // Wire start screen
-  document.getElementById('btn-new-run').addEventListener('click', () => { startNewRun(); });
-  document.getElementById('btn-tutorial').addEventListener('click', () => { startTutorial(); });
+  document.getElementById('btn-new-run').addEventListener('click', () => { SFX.play('click'); startNewRun(); });
+  document.getElementById('btn-tutorial').addEventListener('click', () => { SFX.play('click'); startTutorial(); });
 
   // Add persistent mute button on the game-wrapper (visible across all screens)
   addMuteButton();
@@ -58,6 +59,9 @@ async function boot() {
   const revealEl = document.getElementById('start-reveal');
   titleEl.addEventListener('click', () => {
     if (titleEl.classList.contains('settled')) return;
+    // Warm up SFX AudioContext on first gesture
+    SFX.warmUp();
+    SFX.play('click');
     // Start title music
     AudioManager.play('title');
     // Settle title and reveal menu
@@ -506,6 +510,7 @@ function showNamePrompt(callback) {
   function submit() {
     const name = input.value.trim();
     if (!name) return;
+    SFX.play('stamp');
     overlay.remove();
     callback(name);
   }

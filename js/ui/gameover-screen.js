@@ -2,6 +2,8 @@
  * GAME OVER SCREEN — Perished (fired) or Survived endings
  */
 
+import * as SFX from '../engine/sfx-engine.js';
+
 /**
  * Show game over: PERISHED (fired)
  * @param {Object} opts
@@ -20,6 +22,7 @@ export function showPerished(opts) {
   title.className = 'gameover-title';
   title.textContent = 'PERISHED';
   container.appendChild(title);
+  SFX.play('slam');
 
   // Subtitle
   const sub = document.createElement('div');
@@ -47,7 +50,10 @@ export function showPerished(opts) {
   const btn = document.createElement('button');
   btn.className = 'btn-paper gameover-restart';
   btn.textContent = 'Try Again';
-  btn.addEventListener('click', () => opts.onRestart && opts.onRestart());
+  btn.addEventListener('click', () => {
+    SFX.play('click');
+    opts.onRestart && opts.onRestart();
+  });
   container.appendChild(btn);
 }
 
@@ -68,6 +74,7 @@ export function showSurvived(opts) {
   title.className = 'gameover-title';
   title.textContent = 'SURVIVED';
   container.appendChild(title);
+  SFX.play('slam');
 
   // Message (cold, not triumphant)
   const msg = document.createElement('div');
@@ -97,7 +104,10 @@ export function showSurvived(opts) {
   const btn = document.createElement('button');
   btn.className = 'btn-paper gameover-restart';
   btn.textContent = 'Play Again';
-  btn.addEventListener('click', () => opts.onRestart && opts.onRestart());
+  btn.addEventListener('click', () => {
+    SFX.play('click');
+    opts.onRestart && opts.onRestart();
+  });
   container.appendChild(btn);
 }
 

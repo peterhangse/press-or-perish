@@ -3,6 +3,8 @@
  * Hard cuts (no fade), flash overlay for impact
  */
 
+import * as SFX from '../engine/sfx-engine.js';
+
 const screens = {};
 let currentScreen = null;
 let hudBar = null;
@@ -69,6 +71,7 @@ export function getCurrent() {
  */
 export function flash() {
   if (!flashOverlay) return;
+  SFX.play('ambientTick');
   flashOverlay.classList.remove('flash');
   void flashOverlay.offsetWidth;
   flashOverlay.classList.add('flash');

@@ -3,6 +3,7 @@
  */
 
 import * as ScreenManager from './screen-manager.js';
+import * as SFX from '../engine/sfx-engine.js';
 
 let currentLeads = [];
 let selectedIndex = null;
@@ -109,6 +110,7 @@ export function render(leads, day, bossNote, callback) {
   investigateBtn.disabled = true;
   investigateBtn.addEventListener('click', () => {
     if (selectedIndex !== null && onInvestigate) {
+      SFX.play('stamp');
       // Rubber stamp flash — Papers Please style
       showStamp(container, 'ASSIGNED');
       // Slight delay for stamp feel before transitioning
@@ -166,6 +168,7 @@ function showFlyInNote(container, bossNote, pinnedNote) {
 
   // On click: animate note to pinned position, then remove modal
   backdrop.addEventListener('click', () => {
+    SFX.play('click');
     modal.classList.remove('visible');
     modal.classList.add('fly-to-corner');
 
@@ -186,6 +189,7 @@ function showFlyInNote(container, bossNote, pinnedNote) {
 function selectLead(index) {
   // If clicking the already selected card, deselect
   if (selectedIndex === index) {
+    SFX.play('deselect');
     selectedIndex = null;
     document.querySelectorAll('.lead-card').forEach(card => {
       card.classList.remove('selected');
@@ -199,6 +203,7 @@ function selectLead(index) {
   }
 
   selectedIndex = index;
+  SFX.play('select');
 
   // Update card selection visuals
   document.querySelectorAll('.lead-card').forEach((card, i) => {

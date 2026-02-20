@@ -29,7 +29,7 @@ function getTrack(name) {
     }[name] || 0.3;
 
     const el = new Audio(src);
-    el.loop = (name === 'title' || name === 'game');
+    el.loop = true;
     el.volume = 0;
     tracks[name] = { el, maxVolume: vol, fadeInterval: null };
   }

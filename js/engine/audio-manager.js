@@ -19,7 +19,7 @@ function getTrack(name) {
   if (!tracks[name]) {
     const src = {
       title:  'audio/soundtrack.mp3',
-      game:   'audio/Soundtrack_Ingame.mp3',
+      game:   'audio/Soundtrack_Ingame.mp3?v=2',
       perish: 'audio/Soundtrack_perishscreen.mp3',
     }[name];
     const vol = {

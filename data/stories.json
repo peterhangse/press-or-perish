@@ -764,7 +764,7 @@
     "category": "human_interest",
     "npc_id": "maj_britt_olsson",
     "npc_name": "Maj-Britt Olsson",
-    "npc_title": "Dog Owner and Kennel Club Treasurer",
+    "npc_title": "Kennel Club Treasurer",
     "interview": {
       "opening_line": "Finally! Someone who'll listen! What happened yesterday was pure FRAUD!",
       "q1_options": [
@@ -1517,7 +1517,7 @@
     "category": "corruption",
     "npc_id": "bengt_ake_frid",
     "npc_name": "Bengt-Åke Frid",
-    "npc_title": "Project manager, Road Administration (regional office)",
+    "npc_title": "Project Manager, Road Administration",
     "interview": {
       "opening_line": "We have no comment at this time. The project is following the revised plan.",
       "q1_options": [
@@ -1768,7 +1768,7 @@
     "category": "human_interest",
     "npc_id": "birgitta_lund",
     "npc_name": "Birgitta Lund",
-    "npc_title": "Parent and member of the school board",
+    "npc_title": "School Board Member",
     "interview": {
       "opening_line": "Oh, you saw that? Good! The principal refuses to listen. The children won't eat the food — and I know why!",
       "q1_options": [
@@ -2521,7 +2521,7 @@
     "category": "labor",
     "npc_id": "tommy_berg",
     "npc_name": "Tommy Berg",
-    "npc_title": "Caretaker and volunteer coach, Småstad Ice Rink",
+    "npc_title": "Caretaker, Småstad Ice Rink",
     "interview": {
       "opening_line": "We close in three weeks if nothing happens. Twenty years of youth hockey — gone. *snaps his fingers*",
       "q1_options": [

@@ -12,6 +12,7 @@
 }
 
 .results-container {
+  position: relative;
   width: 480px;
   display: flex;
   flex-direction: column;
@@ -155,12 +156,48 @@
   color: var(--ink-light);
 }
 
-/* Boss quote */
-.results-boss-quote {
+/* Boss sticky note — flies in from the right */
+.results-boss-sticky {
+  position: absolute;
+  bottom: 8px;
+  right: -60px;
+  background: #ffe680;
+  padding: 6px 8px;
+  font-family: var(--font-body);
+  font-size: 8px;
+  color: var(--ink);
+  max-width: 110px;
+  line-height: 1.3;
+  transform: translateX(160px) rotate(2deg);
+  box-shadow: 1px 1px 3px var(--shadow);
+  border-bottom: 1px solid #d4c060;
+  z-index: 10;
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1.1), opacity 0.3s ease;
+}
+
+.results-boss-sticky.visible {
+  transform: translateX(0) rotate(2deg);
+  opacity: 1;
+}
+
+.results-boss-sticky-name {
+  font-weight: bold;
+  font-size: 7px;
+  margin-top: 4px;
+  text-align: right;
+}
+
+.results-boss-sticky-text {
+  font-style: italic;
+}
+
+/* Competitor shock message (Day Zero) */
+.results-shock {
   font-family: var(--font-body);
   font-style: italic;
   font-size: 8px;
-  color: var(--ink-light);
+  color: var(--deficit-red);
   text-align: center;
   max-width: 300px;
   line-height: 1.3;

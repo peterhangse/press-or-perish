@@ -92,7 +92,7 @@ const SEQUENCE = [
   {
     type: 'boss',
     name: 'Gunnar Ek',
-    speech: 'Management already told me to let you go before you even start, {name}. But I convinced them to give you one week. FIVE DAYS. If you can\'t outperform the competition by then... there\'s no job. Not for you. Not for me. Not for anyone here.',
+    speech: 'I have convinced management to give you one week. FIVE DAYS. If you can\'t outperform Regionbladet by then... there\'s no job. Not for you. Not for me. Or anyone here.',
     mood: 'intense',
   },
   // Title card

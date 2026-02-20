@@ -140,19 +140,34 @@ function showPhase2(wrapper, opts) {
   deficitRow.appendChild(defAfter);
   phase2Bottom.appendChild(deficitRow);
 
-  // Boss quote
+  // Boss quote — yellow sticky note that flies in from the right
   if (opts.bossQuote) {
-    const quote = document.createElement('div');
-    quote.className = 'results-boss-quote';
-    quote.textContent = `"${opts.bossQuote}" — Gunnar`;
-    phase2Bottom.appendChild(quote);
+    const sticky = document.createElement('div');
+    sticky.className = 'results-boss-sticky';
+
+    const stickyName = document.createElement('div');
+    stickyName.className = 'results-boss-sticky-name';
+    stickyName.textContent = '— Gunnar';
+
+    const stickyText = document.createElement('div');
+    stickyText.className = 'results-boss-sticky-text';
+    stickyText.textContent = opts.bossQuote;
+
+    sticky.appendChild(stickyText);
+    sticky.appendChild(stickyName);
+    wrapper.appendChild(sticky);
+
+    // Fly in after phase 2 settles (1.8s after phase 2 appears)
+    setTimeout(() => {
+      sticky.classList.add('visible');
+      SFX.play('note');
+    }, 1200 + 600);
   }
 
   // Competitor shock message (Day Zero only)
   if (opts.competitorShock) {
     const shock = document.createElement('div');
-    shock.className = 'results-boss-quote';
-    shock.style.color = 'var(--deficit-red)';
+    shock.className = 'results-shock';
     shock.textContent = opts.competitorShock;
     phase2Bottom.appendChild(shock);
   }
@@ -235,9 +250,10 @@ function addBreakdownRow(container, label, value, colorClass, isTotal = false) {
 }
 
 /**
- * Add the news value row with dots matching the base value (2-8 dots)
+ * Add the news value row with dots — 8 slots, filled based on base value
  */
 function addNewsValueRow(container, baseValue) {
+  const MAX_VALUE = 8;
   const row = document.createElement('div');
   row.className = 'breakdown-row';
 
@@ -249,9 +265,16 @@ function addNewsValueRow(container, baseValue) {
 
   const dots = document.createElement('span');
   dots.style.cssText = 'display:flex; gap:2px; align-items:center;';
-  for (let i = 0; i < baseValue; i++) {
+  for (let i = 0; i < MAX_VALUE; i++) {
     const dot = document.createElement('span');
-    dot.style.cssText = 'width:5px; height:5px; border-radius:50%; display:inline-block; background:var(--paper-aged);';
+    dot.style.cssText = 'width:5px; height:5px; border-radius:50%; border:1px solid; display:inline-block;';
+    if (i < baseValue) {
+      dot.style.background = 'var(--paper-aged)';
+      dot.style.borderColor = 'var(--paper-aged)';
+    } else {
+      dot.style.background = 'transparent';
+      dot.style.borderColor = 'var(--ink-faded)';
+    }
     dots.appendChild(dot);
   }
 

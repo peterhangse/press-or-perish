@@ -59,20 +59,22 @@ export function start(story, npc, callback, options = {}) {
   dialogue.className = 'interview-dialogue';
   dialogue.id = 'interview-dialogue';
 
-  // NPC opening line — typewriter word-by-word
-  typewriteDialogue(dialogue, npc.name, story.interview.opening_line, 'npc', () => {
-    // After typewriter finishes, show "Start Interview" button
-    const questions = document.getElementById('interview-questions');
-    const startBtn = document.createElement('button');
-    startBtn.className = 'btn-paper';
-    startBtn.textContent = 'Start Interview';
-    startBtn.style.alignSelf = 'center';
-    startBtn.addEventListener('click', () => {
-      SFX.play('click');
-      showQ1Options();
+  // NPC opening line — typewriter word-by-word (1s delay for screen to settle)
+  setTimeout(() => {
+    typewriteDialogue(dialogue, npc.name, story.interview.opening_line, 'npc', () => {
+      // After typewriter finishes, show "Start Interview" button
+      const questions = document.getElementById('interview-questions');
+      const startBtn = document.createElement('button');
+      startBtn.className = 'btn-paper';
+      startBtn.textContent = 'Start Interview';
+      startBtn.style.alignSelf = 'center';
+      startBtn.addEventListener('click', () => {
+        SFX.play('click');
+        showQ1Options();
+      });
+      questions.appendChild(startBtn);
     });
-    questions.appendChild(startBtn);
-  });
+  }, 1000);
   right.appendChild(dialogue);
 
   // Questions area
@@ -196,18 +198,20 @@ function handleQ1(archetype, questionText) {
   // Get Q1 response from story data
   const branch = currentStory.interview.branches[archetype];
 
-  // Typewrite NPC response, then continue
-  typewriteDialogue(dialogue, currentNPC.name, branch.q1_response, 'npc', () => {
-    // Add note from Q1 answer
-    addNote(branch.q1_note || summarizeResponse(branch.q1_response));
+  // Typewrite NPC response, then continue (1s pause to let the question land)
+  setTimeout(() => {
+    typewriteDialogue(dialogue, currentNPC.name, branch.q1_response, 'npc', () => {
+      // Add note from Q1 answer
+      addNote(branch.q1_note || summarizeResponse(branch.q1_response));
 
-    // Update expression hint
-    const hint = document.getElementById('npc-expression-hint');
-    hint.textContent = branch.expression_hint || '';
+      // Update expression hint
+      const hint = document.getElementById('npc-expression-hint');
+      hint.textContent = branch.expression_hint || '';
 
-    // Show Q2 options
-    showQ2Options(archetype);
-  });
+      // Show Q2 options
+      showQ2Options(archetype);
+    });
+  }, 1000);
 }
 
 /**
@@ -267,44 +271,46 @@ function handleQ2(q1Archetype, q2Index, questionText) {
   // Resolve the interview via lookup table
   const result = InterviewEngine.resolveInterview(currentStory, q1Archetype, q2Index);
 
-  // Typewrite NPC response, then show result
-  typewriteDialogue(dialogue, currentNPC.name, result.response, 'npc', () => {
-    // Add note from Q2 answer
-    addNote(result.note || summarizeResponse(result.response));
+  // Typewrite NPC response, then show result (1s pause to let the question land)
+  setTimeout(() => {
+    typewriteDialogue(dialogue, currentNPC.name, result.response, 'npc', () => {
+      // Add note from Q2 answer
+      addNote(result.note || summarizeResponse(result.response));
 
-    // Update expression
-    const hint = document.getElementById('npc-expression-hint');
-    hint.textContent = getExpressionText(result.expression);
+      // Update expression
+      const hint = document.getElementById('npc-expression-hint');
+      hint.textContent = getExpressionText(result.expression);
 
-    // Simple continue button (no tier/points display)
-    const continueBtn = document.createElement('button');
-    continueBtn.className = 'btn-paper';
-    continueBtn.textContent = 'Write article →';
-    continueBtn.style.marginTop = '6px';
-    continueBtn.addEventListener('click', () => {
-      if (onComplete) {
-        SFX.play('stamp');
-        // Rubber stamp flash
-        const container = document.getElementById('screen-interview');
-        const stamp = document.createElement('div');
-        stamp.className = 'stamp-flash green';
-        stamp.textContent = 'FILED';
-        container.appendChild(stamp);
+      // Simple continue button (no tier/points display)
+      const continueBtn = document.createElement('button');
+      continueBtn.className = 'btn-paper';
+      continueBtn.textContent = 'Write article →';
+      continueBtn.style.marginTop = '6px';
+      continueBtn.addEventListener('click', () => {
+        if (onComplete) {
+          SFX.play('stamp');
+          // Rubber stamp flash
+          const container = document.getElementById('screen-interview');
+          const stamp = document.createElement('div');
+          stamp.className = 'stamp-flash green';
+          stamp.textContent = 'FILED';
+          container.appendChild(stamp);
         
-        setTimeout(() => {
-          const headlines = InterviewEngine.getHeadlines(currentStory, result.tier);
-          onComplete({
-            tier: result.tier,
-            points: result.points,
-            headlines,
-            q1Archetype,
-            q2Index,
-          });
-        }, 350);
-      }
+          setTimeout(() => {
+            const headlines = InterviewEngine.getHeadlines(currentStory, result.tier);
+            onComplete({
+              tier: result.tier,
+              points: result.points,
+              headlines,
+              q1Archetype,
+              q2Index,
+            });
+          }, 350);
+        }
+      });
+      questions.appendChild(continueBtn);
     });
-    questions.appendChild(continueBtn);
-  });
+  }, 1000);
 }
 
 /**
@@ -357,7 +363,7 @@ function typewriteDialogue(container, speaker, text, type, onDone) {
       i++;
       SFX.play('tick');
       container.scrollTop = container.scrollHeight;
-      setTimeout(nextWord, 70 + Math.random() * 50);
+      setTimeout(nextWord, 100 + Math.random() * 60);
     } else {
       // Remove cursor
       textEl.classList.remove('typewriter-cursor');

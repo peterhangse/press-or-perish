@@ -5,6 +5,31 @@
 
 import { getDeficitSeverity, getDeficitFillPercent, getPerishDistance } from '../engine/scoring-engine.js';
 
+/**
+ * Interpolate deficit → color.
+ * +2 or more = green, 0 = neutral/amber, -5 = orange, -10 = deep red
+ */
+function getDeficitColor(deficit) {
+  // Clamp to [-10, +5] range for interpolation
+  const d = Math.max(-10, Math.min(5, deficit));
+  if (d >= 0) {
+    // 0..+5  →  amber (#cc8822) to green (#558844)
+    const t = Math.min(d / 3, 1); // fully green at +3
+    return lerpColor([204,136,34], [85,136,68], t);
+  } else {
+    // -10..0  →  deep red (#cc2222) to amber (#cc8822)
+    const t = (d + 10) / 10; // 0 at -10, 1 at 0
+    return lerpColor([204,34,34], [204,136,34], t);
+  }
+}
+
+function lerpColor(a, b, t) {
+  const r = Math.round(a[0] + (b[0] - a[0]) * t);
+  const g = Math.round(a[1] + (b[1] - a[1]) * t);
+  const bl = Math.round(a[2] + (b[2] - a[2]) * t);
+  return `rgb(${r},${g},${bl})`;
+}
+
 const DAY_NAMES = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
 const CLOCK_PHASES = {
   desk:      { time: '08:00', phase: 'Morning' },
@@ -73,7 +98,12 @@ export function updateDeficitMeter(deficit) {
   if (severity === 'warning') fill.classList.add('warn');
   if (severity === 'danger') fill.classList.add('danger');
 
+  // Dynamic color for number and bar based on deficit
+  const color = getDeficitColor(deficit);
   value.textContent = deficit;
+  value.style.color = color;
+  fill.style.background = color;
+
   warning.textContent = perishMsg;
 }
 

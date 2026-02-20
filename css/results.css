@@ -70,6 +70,29 @@
   color: var(--ink-faded);
 }
 
+/* Småstads Tidning masthead — classic broadsheet serif */
+.results-masthead-yours {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 11px;
+  color: var(--ink);
+  letter-spacing: 0.5px;
+  border-bottom: 1.5px solid var(--ink);
+  border-top: 1px solid var(--ink);
+  padding: 1px 0;
+  text-transform: uppercase;
+}
+
+/* Regionbladet masthead — modern condensed tabloid */
+.results-masthead-theirs {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--ink);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
 .results-paper-headline {
   font-family: var(--font-headline);
   font-size: 9px;

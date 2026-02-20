@@ -208,7 +208,7 @@ function buildPaperCard(label, paperName, headline, score, isYours) {
   nameEl.textContent = label;
 
   const paperEl = document.createElement('div');
-  paperEl.style.cssText = 'font-family: var(--font-headline); font-size: 9px; color: var(--ink-faded);';
+  paperEl.className = isYours ? 'results-masthead-yours' : 'results-masthead-theirs';
   paperEl.textContent = paperName;
 
   const headlineEl = document.createElement('div');

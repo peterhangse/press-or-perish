@@ -1,21 +1,79 @@
 {
   "desk_notes": {
     "day_1": "Welcome, {name}. Prove I didn't make a mistake.",
-    "day_2": "Regionbladet sold 200 more copies yesterday. Step it up.",
-    "day_3": "Halfway. I need results, not excuses.",
-    "day_4": "One day left after today. Give me something I can be proud of.",
-    "day_5": "Last day. Everything rides on this.",
-    "warning": "We're behind. Every point counts now.",
-    "danger": "I'm already writing your termination letter, {name}. Change my mind.",
-    "default": "Deliver."
+    "day_2": [
+      "Regionbladet sold 200 more copies yesterday. Step it up.",
+      "The competition ran a strong front page. We need to answer.",
+      "Day two. This is where we set the tone. Don't disappoint me."
+    ],
+    "day_3": [
+      "Halfway. I need results, not excuses.",
+      "Three days in. The board is watching our numbers.",
+      "We're at the midpoint, {name}. Show me you belong here."
+    ],
+    "day_4": [
+      "One day left after today. Give me something I can be proud of.",
+      "Tomorrow is the last day. Today decides if there even IS a tomorrow.",
+      "The clock is ticking, {name}. Make today count."
+    ],
+    "day_5": [
+      "Last day. Everything rides on this.",
+      "Final day. No more second chances after this.",
+      "It's the last morning. Give me the front page of your life."
+    ],
+    "warning": [
+      "We're behind. Every point counts now.",
+      "The numbers don't lie, {name}. We need a strong story today.",
+      "I can hear Regionbladet's presses from here. Dig deeper."
+    ],
+    "danger": [
+      "I'm already writing your termination letter, {name}. Change my mind.",
+      "HR called. They want to know when your desk will be free.",
+      "The board is meeting this afternoon, {name}. Guess who's on the agenda."
+    ],
+    "default": [
+      "Deliver.",
+      "Get to work.",
+      "Stories don't write themselves, {name}."
+    ]
   },
   "result_quotes": {
-    "critical": "{name}, you know what happens if this continues.",
-    "bad": "Not enough, {name}. We're losing readers every day.",
-    "warning": "We're still behind. Regionbladet doesn't rest.",
-    "neutral": "Tomorrow again.",
-    "good": "Hmph. Not bad, {name}. Do it again tomorrow.",
-    "great": "...Good work. Don't tell anyone I said that."
+    "critical": [
+      "{name}, you know what happens if this continues.",
+      "I can't protect you from the board anymore, {name}.",
+      "This paper has survived two world wars. I won't let you kill it.",
+      "I've seen interns do better. Think about that."
+    ],
+    "bad": [
+      "Not enough, {name}. We're losing readers every day.",
+      "My grandmother could sell more papers. And she's been dead twelve years.",
+      "Regionbladet's editor just sent me a fruit basket. A FRUIT BASKET, {name}.",
+      "Close the gap or I'll close your career."
+    ],
+    "warning": [
+      "We're still behind. Regionbladet doesn't rest.",
+      "Better. But 'better' doesn't sell papers.",
+      "I see effort. I need results.",
+      "Not bad. Not good either. Keep pushing."
+    ],
+    "neutral": [
+      "Tomorrow again.",
+      "Adequate. That's the nicest word I'll use.",
+      "You survived another day. Don't celebrate.",
+      "Hmm. *shuffles papers*"
+    ],
+    "good": [
+      "Hmph. Not bad, {name}. Do it again tomorrow.",
+      "...Fine. That was acceptable work.",
+      "Don't let it go to your head. One good day means nothing.",
+      "The board will notice this. Good."
+    ],
+    "great": [
+      "...Good work. Don't tell anyone I said that.",
+      "*almost smiles* ...Carry on.",
+      "Regionbladet's editor won't be sleeping well tonight.",
+      "If you keep this up, I might actually learn your name."
+    ]
   },
   "gameover_fired": {
     "text": "Pack your things, {name}. I already called the temp agency.",

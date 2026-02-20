@@ -423,6 +423,20 @@ function showEnding() {
 }
 
 /**
+ * Pick a random item from an array (or return the string as-is).
+ * Avoids repeats within the same week by checking usedList.
+ */
+function pickUnused(pool, usedList) {
+  if (typeof pool === 'string') return pool;
+  if (!Array.isArray(pool) || pool.length === 0) return '';
+  const available = pool.filter(q => !usedList.includes(q));
+  const source = available.length > 0 ? available : pool; // fallback: allow repeats if all used
+  const pick = source[Math.floor(Math.random() * source.length)];
+  usedList.push(pick);
+  return pick;
+}
+
+/**
  * Get boss note for the desk based on day and deficit
  */
 function getBossNote(day, deficit) {
@@ -430,14 +444,20 @@ function getBossNote(day, deficit) {
   if (!notes) return null;
 
   // Check deficit-specific notes first
-  if (deficit <= -10 && notes.danger) return { text: injectName(notes.danger), name: 'Gunnar' };
-  if (deficit <= -5 && notes.warning) return { text: injectName(notes.warning), name: 'Gunnar' };
+  if (deficit <= -10 && notes.danger) {
+    return { text: injectName(pickUnused(notes.danger, state.usedBossNotes)), name: 'Gunnar' };
+  }
+  if (deficit <= -5 && notes.warning) {
+    return { text: injectName(pickUnused(notes.warning, state.usedBossNotes)), name: 'Gunnar' };
+  }
 
   // Day-specific notes
-  const dayNote = notes[`day_${day}`];
-  if (dayNote) return { text: injectName(dayNote), name: 'Gunnar' };
+  const dayPool = notes[`day_${day}`];
+  if (dayPool) {
+    return { text: injectName(pickUnused(dayPool, state.usedBossNotes)), name: 'Gunnar' };
+  }
 
-  return { text: injectName(notes.default || 'Deliver.'), name: 'Gunnar' };
+  return { text: injectName(pickUnused(notes.default || 'Deliver.', state.usedBossNotes)), name: 'Gunnar' };
 }
 
 /**
@@ -447,11 +467,15 @@ function getBossQuote(deficit, day) {
   const quotes = gameData.boss?.result_quotes;
   if (!quotes) return '';
 
-  if (deficit <= -12) return injectName(quotes.critical || `Not looking good, ${pn()}.`);
-  if (deficit <= -8)  return injectName(quotes.bad || `Not enough, ${pn()}. Do better.`);
-  if (deficit <= -3)  return injectName(quotes.warning || 'We\'re still behind.');
-  if (deficit >= 2)   return injectName(quotes.good || 'Hmph. Not bad.');
-  return injectName(quotes.neutral || 'Tomorrow again.');
+  let pool;
+  if (deficit <= -12)     pool = quotes.critical;
+  else if (deficit <= -8) pool = quotes.bad;
+  else if (deficit <= -3) pool = quotes.warning;
+  else if (deficit >= 2)  pool = quotes.good;
+  else                    pool = quotes.neutral;
+
+  if (!pool) return injectName('Tomorrow again.');
+  return injectName(pickUnused(pool, state.usedBossQuotes));
 }
 
 /**

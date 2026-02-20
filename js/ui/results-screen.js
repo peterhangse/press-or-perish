@@ -124,15 +124,16 @@ function showPhase2(wrapper, opts) {
   const defBefore = document.createElement('span');
   defBefore.className = 'results-deficit-value';
   defBefore.textContent = opts.deficitBefore;
+  defBefore.style.color = opts.deficitBefore < 0 ? 'var(--deficit-red)' : opts.deficitBefore > 0 ? 'var(--deficit-safe)' : '';
 
   const arrow = document.createElement('span');
   arrow.className = 'results-deficit-arrow';
   arrow.textContent = ' → ';
 
   const defAfter = document.createElement('span');
-  defAfter.className = `results-deficit-value ${opts.deficitAfter > 0 ? 'positive' : opts.deficitAfter < 0 ? 'negative' : ''}`;
-  defAfter.style.color = opts.deficitAfter < 0 ? (opts.deficitAfter <= -10 ? 'var(--deficit-red)' : opts.deficitAfter <= -5 ? 'var(--deficit-warn)' : 'var(--deficit-red)') : opts.deficitAfter > 0 ? 'var(--deficit-safe)' : '';
+  defAfter.className = 'results-deficit-value';
   defAfter.textContent = opts.deficitAfter;
+  defAfter.style.color = opts.deficitAfter < 0 ? 'var(--deficit-red)' : opts.deficitAfter > 0 ? 'var(--deficit-safe)' : '';
 
   deficitRow.appendChild(defLabel);
   deficitRow.appendChild(defBefore);

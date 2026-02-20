@@ -23,6 +23,8 @@ const DEFAULT_STATE = {
   // History
   dayHistory: [],  // [{day, storyId, tier, points, competitorScore, deficit, headline}]
   usedStoryIds: [], // prevent repeats
+  usedBossQuotes: [], // prevent repeat boss quotes within a week
+  usedBossNotes: [],  // prevent repeat boss desk notes within a week
 
   // Meta
   runNumber: 0,

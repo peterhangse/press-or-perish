@@ -281,6 +281,9 @@ function handleQ2(q1Archetype, q2Index, questionText) {
       const hint = document.getElementById('npc-expression-hint');
       hint.textContent = getExpressionText(result.expression);
 
+      // Auto-scroll to bottom after Q2 response
+      dialogue.scrollTop = dialogue.scrollHeight;
+
       // Simple continue button (no tier/points display)
       const continueBtn = document.createElement('button');
       continueBtn.className = 'btn-paper';

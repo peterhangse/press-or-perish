@@ -152,6 +152,101 @@
   margin-top: var(--sp-2);
 }
 
+/* — HIGHSCORE BOARD — */
+.highscore-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 16, 10, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  animation: fadeIn 0.3s ease;
+}
+
+.highscore-card {
+  background:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"),
+    var(--desk-surface);
+  border: 2px solid var(--ink-faded);
+  padding: 12px 14px;
+  width: 90%;
+  max-width: 560px;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.highscore-title {
+  font-family: var(--font-headline);
+  font-size: 14px;
+  color: var(--paper);
+  text-align: center;
+  letter-spacing: 2px;
+  border-bottom: 1px solid var(--ink-faded);
+  padding-bottom: 4px;
+}
+
+.highscore-empty {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--ink-light);
+  text-align: center;
+  padding: 20px 0;
+}
+
+.highscore-table {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.highscore-row {
+  display: grid;
+  grid-template-columns: 24px 1fr 36px 36px 60px 100px;
+  gap: 4px;
+  padding: 3px 4px;
+  font-family: var(--font-body);
+  font-size: 8px;
+  color: var(--paper-aged);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  align-items: center;
+}
+
+.highscore-header {
+  font-size: 7px;
+  color: var(--ink-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--ink-faded);
+}
+
+.highscore-row.survived { color: var(--paper); }
+.highscore-row.perished { color: var(--ink-light); }
+
+.highscore-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hs-survived { color: var(--deficit-safe); }
+.hs-perished { color: var(--deficit-red); }
+
+.highscore-date {
+  font-family: var(--font-numbers);
+  font-size: 7px;
+  color: var(--ink-faded);
+}
+
+.highscore-close {
+  align-self: center;
+  font-size: 10px;
+  padding: 4px 16px;
+  margin-top: 4px;
+}
+
 /* — NAME PROMPT (New Game shortcut) — */
 .name-prompt-overlay {
   position: absolute;

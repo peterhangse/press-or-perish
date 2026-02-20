@@ -88,6 +88,12 @@ async function boot() {
     document.getElementById('start-bestscore').textContent = `Best: ${best} pts`;
   }
 
+  // Wire highscore button
+  document.getElementById('btn-highscores').addEventListener('click', () => {
+    SFX.play('click');
+    showHighscoreBoard();
+  });
+
   // Show start screen
   ScreenManager.switchTo('start');
 }
@@ -385,6 +391,10 @@ function showGameOver() {
   ScreenManager.switchTo('gameover', true);
   ScreenManager.flash();
 
+  // Save to highscore board
+  const totalPoints = state.dayHistory.reduce((sum, d) => sum + d.points, 0);
+  saveHighscore(totalPoints, state.deficit, state.day, false);
+
   GameOverScreen.showPerished({
     finalDeficit: state.deficit,
     daysCompleted: state.day,
@@ -411,6 +421,9 @@ function showEnding() {
   if (totalPoints > best) {
     localStorage.setItem('pop_best_score', totalPoints);
   }
+
+  // Save to highscore board
+  saveHighscore(totalPoints, state.deficit, state.dayHistory.length, true);
 
   GameOverScreen.showSurvived({
     finalDeficit: state.deficit,
@@ -493,6 +506,116 @@ function injectName(text) {
   // Replace {name} placeholders if any
   let result = text.replace(/\{name\}/g, name);
   return result;
+}
+
+/**
+ * Save a completed week to the highscore board
+ */
+function saveHighscore(totalPoints, finalDeficit, daysCompleted, survived) {
+  const entries = JSON.parse(localStorage.getItem('pop_highscores') || '[]');
+  entries.push({
+    name: pn(),
+    points: totalPoints,
+    deficit: finalDeficit,
+    days: daysCompleted,
+    survived,
+    date: new Date().toISOString(),
+  });
+  // Keep max 50 entries
+  if (entries.length > 50) entries.splice(0, entries.length - 50);
+  localStorage.setItem('pop_highscores', JSON.stringify(entries));
+}
+
+/**
+ * Show the highscore board modal
+ */
+function showHighscoreBoard() {
+  const startScreen = document.getElementById('screen-start');
+  const existing = startScreen.querySelector('.highscore-overlay');
+  if (existing) existing.remove();
+
+  const entries = JSON.parse(localStorage.getItem('pop_highscores') || '[]');
+  // Sort by points descending
+  entries.sort((a, b) => b.points - a.points);
+
+  const overlay = document.createElement('div');
+  overlay.className = 'highscore-overlay';
+
+  const card = document.createElement('div');
+  card.className = 'highscore-card';
+
+  const title = document.createElement('div');
+  title.className = 'highscore-title';
+  title.textContent = 'PRESS ARCHIVE';
+  card.appendChild(title);
+
+  if (entries.length === 0) {
+    const empty = document.createElement('div');
+    empty.className = 'highscore-empty';
+    empty.textContent = 'No completed weeks yet.';
+    card.appendChild(empty);
+  } else {
+    const table = document.createElement('div');
+    table.className = 'highscore-table';
+
+    // Header row
+    const header = document.createElement('div');
+    header.className = 'highscore-row highscore-header';
+    header.innerHTML = '<span>#</span><span>Reporter</span><span>Pts</span><span>Days</span><span>Result</span><span>Date</span>';
+    table.appendChild(header);
+
+    entries.forEach((entry, i) => {
+      const row = document.createElement('div');
+      row.className = `highscore-row ${entry.survived ? 'survived' : 'perished'}`;
+
+      const rank = document.createElement('span');
+      rank.textContent = i + 1;
+
+      const name = document.createElement('span');
+      name.className = 'highscore-name';
+      name.textContent = entry.name;
+
+      const pts = document.createElement('span');
+      pts.textContent = entry.points;
+
+      const days = document.createElement('span');
+      days.textContent = `${entry.days}/5`;
+
+      const result = document.createElement('span');
+      result.className = entry.survived ? 'hs-survived' : 'hs-perished';
+      result.textContent = entry.survived ? 'Survived' : 'Perished';
+
+      const date = document.createElement('span');
+      date.className = 'highscore-date';
+      const d = new Date(entry.date);
+      date.textContent = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+
+      row.appendChild(rank);
+      row.appendChild(name);
+      row.appendChild(pts);
+      row.appendChild(days);
+      row.appendChild(result);
+      row.appendChild(date);
+      table.appendChild(row);
+    });
+
+    card.appendChild(table);
+  }
+
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'btn-paper highscore-close';
+  closeBtn.textContent = 'Close';
+  closeBtn.addEventListener('click', () => {
+    SFX.play('click');
+    overlay.remove();
+  });
+  card.appendChild(closeBtn);
+
+  overlay.appendChild(card);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) overlay.remove();
+  });
+  startScreen.appendChild(overlay);
 }
 
 /**

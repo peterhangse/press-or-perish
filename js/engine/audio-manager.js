@@ -1,112 +1,145 @@
 /**
- * AUDIO MANAGER — Title screen music with fade in/out and crossfade loop
+ * AUDIO MANAGER — Multi-track audio: title, game (looped), perish/survive
  */
 
-const FADE_DURATION = 5;    // seconds for fade in/out
-const DEFAULT_VOLUME = 0.3; // 30% — background level
+const FADE_DURATION = 3;       // seconds for fade in/out
+const TITLE_VOLUME = 0.3;     // title screen music
+const GAME_VOLUME = 0.25;     // in-game background loop
+const PERISH_VOLUME = 0.35;   // perish/survive screen
 
-let audio = null;
-let maxVolume = DEFAULT_VOLUME;
+// Track registry
+const tracks = {};
 let muted = false;
-let fadeInterval = null;
-let playing = false;
-let needsInteraction = false;
+let activeTrack = null;       // currently playing track name
 
 /**
- * Initialize the audio element
+ * Create or get a track by name
  */
-function init() {
-  if (audio) return;
-  audio = new Audio('audio/soundtrack.mp3');
-  audio.loop = true;
-  audio.volume = 0;
+function getTrack(name) {
+  if (!tracks[name]) {
+    const src = {
+      title:  'audio/soundtrack.mp3',
+      game:   'audio/Soundtrack_Ingame.mp3',
+      perish: 'audio/Soundtrack_perishscreen.mp3',
+    }[name];
+    const vol = {
+      title:  TITLE_VOLUME,
+      game:   GAME_VOLUME,
+      perish: PERISH_VOLUME,
+    }[name] || 0.3;
 
-  // Restore mute preference
-  muted = localStorage.getItem('pop_muted') === 'true';
+    const el = new Audio(src);
+    el.loop = (name === 'title' || name === 'game');
+    el.volume = 0;
+    tracks[name] = { el, maxVolume: vol, fadeInterval: null };
+  }
+  return tracks[name];
 }
 
+// Restore mute preference on load
+muted = localStorage.getItem('pop_muted') === 'true';
+
 /**
- * Start playing with fade-in.
- * If browser blocks autoplay, sets a flag so retryPlay() can try again.
+ * Play a named track with fade-in. Fades out any currently active track first.
+ * @param {string} name - 'title' | 'game' | 'perish'
  */
-function play() {
-  init();
-  audio.volume = 0;
-  const promise = audio.play();
+function play(name = 'title') {
+  if (activeTrack === name) return; // already playing
+
+  // Fade out previous track
+  if (activeTrack) {
+    const prev = activeTrack;
+    fadeOutTrack(prev, () => {
+      const t = tracks[prev];
+      if (t) { t.el.pause(); t.el.currentTime = 0; }
+    });
+  }
+
+  activeTrack = name;
+  const track = getTrack(name);
+  track.el.volume = 0;
+
+  const promise = track.el.play();
   if (promise) {
     promise.then(() => {
-      playing = true;
-      needsInteraction = false;
-      if (!muted) fadeIn();
+      if (!muted) fadeInTrack(name);
     }).catch(() => {
-      // Autoplay blocked — need user interaction first
-      needsInteraction = true;
-      playing = false;
+      // Autoplay blocked — will retry on user interaction
     });
   }
 }
 
 /**
- * Retry play after user interaction (called from click/keydown handler)
+ * Retry play after user interaction
  */
 function retryPlay() {
-  if (!needsInteraction) return;
-  play();
+  if (activeTrack) {
+    const track = tracks[activeTrack];
+    if (track && track.el.paused) {
+      track.el.play().then(() => {
+        if (!muted) fadeInTrack(activeTrack);
+      }).catch(() => {});
+    }
+  }
 }
 
 /**
- * Stop with fade-out, then pause
+ * Stop current track with fade-out
  */
 function stop() {
-  if (!audio) return;
-  fadeOut(() => {
-    audio.pause();
-    audio.currentTime = 0;
+  if (!activeTrack) return;
+  const name = activeTrack;
+  activeTrack = null;
+  fadeOutTrack(name, () => {
+    const t = tracks[name];
+    if (t) { t.el.pause(); t.el.currentTime = 0; }
   });
 }
 
 /**
- * Fade in over FADE_DURATION seconds
+ * Fade in a specific track
  */
-function fadeIn() {
-  clearFade();
-  const step = maxVolume / (FADE_DURATION * 20); // 20 ticks/sec
-  fadeInterval = setInterval(() => {
-    if (!audio) { clearFade(); return; }
-    if (audio.volume + step >= maxVolume) {
-      audio.volume = muted ? 0 : maxVolume;
-      clearFade();
+function fadeInTrack(name) {
+  const track = tracks[name];
+  if (!track) return;
+  clearTrackFade(track);
+  const step = track.maxVolume / (FADE_DURATION * 20);
+  track.fadeInterval = setInterval(() => {
+    if (muted) { track.el.volume = 0; clearTrackFade(track); return; }
+    if (track.el.volume + step >= track.maxVolume) {
+      track.el.volume = track.maxVolume;
+      clearTrackFade(track);
     } else {
-      audio.volume = muted ? 0 : Math.min(audio.volume + step, maxVolume);
+      track.el.volume = Math.min(track.el.volume + step, track.maxVolume);
     }
   }, 50);
 }
 
 /**
- * Fade out over FADE_DURATION seconds, then call onDone
+ * Fade out a specific track, then call onDone
  */
-function fadeOut(onDone) {
-  if (!audio) { if (onDone) onDone(); return; }
-  clearFade();
-  const startVol = audio.volume;
+function fadeOutTrack(name, onDone) {
+  const track = tracks[name];
+  if (!track) { if (onDone) onDone(); return; }
+  clearTrackFade(track);
+  const startVol = track.el.volume;
   if (startVol <= 0) { if (onDone) onDone(); return; }
   const step = startVol / (FADE_DURATION * 20);
-  fadeInterval = setInterval(() => {
-    if (!audio) { clearFade(); if (onDone) onDone(); return; }
-    if (audio.volume - step <= 0) {
-      audio.volume = 0;
-      clearFade();
+  track.fadeInterval = setInterval(() => {
+    if (track.el.volume - step <= 0) {
+      track.el.volume = 0;
+      clearTrackFade(track);
       if (onDone) onDone();
     } else {
-      audio.volume = Math.max(audio.volume - step, 0);
+      track.el.volume = Math.max(track.el.volume - step, 0);
     }
   }, 50);
 }
 
-function clearFade() {
-  if (fadeInterval) {
-    clearInterval(fadeInterval);
-    fadeInterval = null;
+function clearTrackFade(track) {
+  if (track.fadeInterval) {
+    clearInterval(track.fadeInterval);
+    track.fadeInterval = null;
   }
 }
 
@@ -116,13 +149,17 @@ function clearFade() {
 function toggleMute() {
   muted = !muted;
   localStorage.setItem('pop_muted', muted);
-  if (audio) {
+  // Apply to all tracks
+  Object.values(tracks).forEach(track => {
     if (muted) {
-      audio.volume = 0;
-    } else {
-      audio.volume = maxVolume;
+      track.el.volume = 0;
+    } else if (activeTrack) {
+      const active = tracks[activeTrack];
+      if (active === track) {
+        track.el.volume = track.maxVolume;
+      }
     }
-  }
+  });
   return muted;
 }
 
@@ -130,4 +167,11 @@ function isMuted() {
   return muted;
 }
 
-export { play, stop, retryPlay, toggleMute, isMuted };
+/**
+ * Get the name of the currently playing track
+ */
+function getActiveTrack() {
+  return activeTrack;
+}
+
+export { play, stop, retryPlay, toggleMute, isMuted, getActiveTrack };

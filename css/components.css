@@ -202,3 +202,38 @@
   color: var(--ink-light);
   white-space: nowrap;
 }
+
+/* — MUTE BUTTON — persistent toggle on game-wrapper — */
+.mute-btn {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+  font-family: var(--font-headline);
+  font-size: 7px;
+  letter-spacing: 0.5px;
+  color: var(--paper);
+  opacity: 0.55;
+  cursor: pointer;
+  z-index: 200;
+  padding: 3px 7px;
+  transition: opacity 0.2s, background 0.2s;
+  line-height: 1;
+}
+
+.mute-note {
+  font-size: 14px;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.mute-btn:hover {
+  opacity: 0.9;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.mute-btn.muted {
+  opacity: 0.3;
+}

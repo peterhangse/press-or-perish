@@ -45,10 +45,10 @@ async function boot() {
   Components.buildWeekStrip();
 
   // Wire start screen
-  document.getElementById('btn-new-run').addEventListener('click', () => { AudioManager.stop(); startNewRun(); });
-  document.getElementById('btn-tutorial').addEventListener('click', () => { AudioManager.stop(); startTutorial(); });
+  document.getElementById('btn-new-run').addEventListener('click', () => { startNewRun(); });
+  document.getElementById('btn-tutorial').addEventListener('click', () => { startTutorial(); });
 
-  // Add mute button (hidden until title is clicked)
+  // Add persistent mute button on the game-wrapper (visible across all screens)
   addMuteButton();
   const muteBtn = document.getElementById('mute-btn');
   if (muteBtn) muteBtn.style.display = 'none';
@@ -58,8 +58,8 @@ async function boot() {
   const revealEl = document.getElementById('start-reveal');
   titleEl.addEventListener('click', () => {
     if (titleEl.classList.contains('settled')) return;
-    // Start music
-    AudioManager.play();
+    // Start title music
+    AudioManager.play('title');
     // Settle title and reveal menu
     titleEl.classList.add('settled');
     setTimeout(() => {
@@ -109,6 +109,9 @@ function startNewRun() {
   state.runNumber = (parseInt(localStorage.getItem('pop_run_count') || '0')) + 1;
   localStorage.setItem('pop_run_count', state.runNumber);
 
+  // Switch to game soundtrack (looped)
+  AudioManager.play('game');
+
   // Ask for name before starting
   showNamePrompt((name) => {
     state.playerName = name;
@@ -124,6 +127,9 @@ function startTutorial() {
   state = GameState.createState();
   state.runNumber = (parseInt(localStorage.getItem('pop_run_count') || '0')) + 1;
   localStorage.setItem('pop_run_count', state.runNumber);
+
+  // Switch to game soundtrack (looped)
+  AudioManager.play('game');
 
   Onboarding.start();
 }
@@ -369,6 +375,9 @@ function showResults(story, interviewResult, deficitBefore) {
  * Show game over — perished
  */
 function showGameOver() {
+  // Switch to perish soundtrack
+  AudioManager.play('perish');
+
   ScreenManager.switchTo('gameover', true);
   ScreenManager.flash();
 
@@ -378,7 +387,7 @@ function showGameOver() {
     dayHistory: state.dayHistory,
     playerName: pn(),
     onRestart: () => {
-      ScreenManager.switchTo('start');
+      returnToStart();
     },
   });
 }
@@ -387,6 +396,9 @@ function showGameOver() {
  * Show ending — survived the week
  */
 function showEnding() {
+  // Switch to perish/survive soundtrack
+  AudioManager.play('perish');
+
   ScreenManager.switchTo('gameover');
 
   // Save best score
@@ -401,7 +413,7 @@ function showEnding() {
     dayHistory: state.dayHistory,
     playerName: pn(),
     onRestart: () => {
-      ScreenManager.switchTo('start');
+      returnToStart();
     },
   });
 }
@@ -513,10 +525,23 @@ function showNamePrompt(callback) {
 }
 
 /**
- * Add mute button to start screen
+ * Return to start screen with title music
+ */
+function returnToStart() {
+  AudioManager.play('title');
+  ScreenManager.switchTo('start');
+  // Re-settle the title so the menu is visible
+  const titleEl = document.getElementById('start-title');
+  const revealEl = document.getElementById('start-reveal');
+  if (titleEl) titleEl.classList.add('settled');
+  if (revealEl) revealEl.classList.add('visible');
+}
+
+/**
+ * Add persistent mute button on game-wrapper (visible across all screens)
  */
 function addMuteButton() {
-  const startScreen = document.getElementById('screen-start');
+  const wrapper = document.getElementById('game-wrapper');
   const btn = document.createElement('button');
   btn.id = 'mute-btn';
   btn.className = 'mute-btn';
@@ -528,7 +553,7 @@ function addMuteButton() {
     btn.classList.toggle('muted', muted);
   });
   if (AudioManager.isMuted()) btn.classList.add('muted');
-  startScreen.appendChild(btn);
+  wrapper.appendChild(btn);
 }
 
 // — BOOT —

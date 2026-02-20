@@ -90,45 +90,74 @@ function click() {
 }
 
 /**
- * SELECT — choosing a card/option (upward sweep)
- * 60 ms sine sweep from A4 → E5
+ * SELECT — picking up a paper / lead card
+ * 120 ms layered noise: mid-band "paper slide" + faint low thud
  */
 function select() {
   const ac = getCtx();
   const t = ac.currentTime;
-  const g = gain(ac, 0.10);
 
+  // Paper slide — bandpass noise, quick swell
+  const g1 = gain(ac, 0.12);
+  const noise = ac.createBufferSource();
+  noise.buffer = noiseBuf(ac);
+  const bp = ac.createBiquadFilter();
+  bp.type = 'bandpass';
+  bp.frequency.value = rnd(1800);
+  bp.Q.value = 0.8;
+  noise.connect(bp);
+  bp.connect(g1);
+  g1.gain.setValueAtTime(0.02, t);
+  g1.gain.linearRampToValueAtTime(0.12, t + 0.02);
+  g1.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+  noise.start(t);
+  noise.stop(t + 0.15);
+
+  // Subtle table knock
+  const g2 = gain(ac, 0.05);
   const osc = ac.createOscillator();
-  osc.type = 'triangle';
-  osc.frequency.setValueAtTime(rnd(440), t);            // A4
-  osc.frequency.exponentialRampToValueAtTime(rnd(659), t + 0.06);  // E5
-  osc.connect(g);
-
-  g.gain.setValueAtTime(0.10, t);
-  g.gain.exponentialRampToValueAtTime(0.001, t + 0.07);
-
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(rnd(120), t);
+  osc.frequency.exponentialRampToValueAtTime(60, t + 0.06);
+  osc.connect(g2);
+  g2.gain.setValueAtTime(0.05, t);
+  g2.gain.exponentialRampToValueAtTime(0.001, t + 0.07);
   osc.start(t);
   osc.stop(t + 0.08);
 }
 
 /**
- * DESELECT — un-choosing (downward sweep)
- * 40 ms triangle sweep from E5 → A4
+ * DESELECT — putting paper back down
+ * 80 ms soft noise thump, lower band
  */
 function deselect() {
   const ac = getCtx();
   const t = ac.currentTime;
-  const g = gain(ac, 0.08);
 
+  // Paper set-down — lower-band noise, quick fade
+  const g1 = gain(ac, 0.09);
+  const noise = ac.createBufferSource();
+  noise.buffer = noiseBuf(ac);
+  const bp = ac.createBiquadFilter();
+  bp.type = 'bandpass';
+  bp.frequency.value = rnd(900);
+  bp.Q.value = 0.6;
+  noise.connect(bp);
+  bp.connect(g1);
+  g1.gain.setValueAtTime(0.09, t);
+  g1.gain.exponentialRampToValueAtTime(0.001, t + 0.07);
+  noise.start(t);
+  noise.stop(t + 0.09);
+
+  // Muted tap
+  const g2 = gain(ac, 0.03);
   const osc = ac.createOscillator();
-  osc.type = 'triangle';
-  osc.frequency.setValueAtTime(rnd(659), t);
-  osc.frequency.exponentialRampToValueAtTime(rnd(440), t + 0.04);
-  osc.connect(g);
-
-  g.gain.setValueAtTime(0.08, t);
-  g.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
-
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(rnd(80), t);
+  osc.frequency.exponentialRampToValueAtTime(40, t + 0.04);
+  osc.connect(g2);
+  g2.gain.setValueAtTime(0.03, t);
+  g2.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
   osc.start(t);
   osc.stop(t + 0.06);
 }

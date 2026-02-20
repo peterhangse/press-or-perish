@@ -250,10 +250,11 @@ function addBreakdownRow(container, label, value, colorClass, isTotal = false) {
 }
 
 /**
- * Add the news value row with dots — 8 slots, filled based on base value
+ * Add the news value row with dots — 4 slots (each dot = 2 points), matching interview style
  */
 function addNewsValueRow(container, baseValue) {
-  const MAX_VALUE = 8;
+  const MAX_DOTS = 4;           // 4 dots × 2 pts = 8 max
+  const filled = Math.floor(baseValue / 2);
   const row = document.createElement('div');
   row.className = 'breakdown-row';
 
@@ -264,11 +265,11 @@ function addNewsValueRow(container, baseValue) {
   rightSide.style.cssText = 'display:flex; align-items:center; gap:6px;';
 
   const dots = document.createElement('span');
-  dots.style.cssText = 'display:flex; gap:2px; align-items:center;';
-  for (let i = 0; i < MAX_VALUE; i++) {
+  dots.style.cssText = 'display:flex; gap:3px; align-items:center;';
+  for (let i = 0; i < MAX_DOTS; i++) {
     const dot = document.createElement('span');
-    dot.style.cssText = 'width:5px; height:5px; border-radius:50%; border:1px solid; display:inline-block;';
-    if (i < baseValue) {
+    dot.style.cssText = 'width:6px; height:6px; border-radius:50%; border:1px solid; display:inline-block;';
+    if (i < filled) {
       dot.style.background = 'var(--paper-aged)';
       dot.style.borderColor = 'var(--paper-aged)';
     } else {

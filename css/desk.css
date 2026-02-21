@@ -64,11 +64,74 @@
   width: 100%;
   height: 100%;
   transition: background-color 1s ease;
+  position: relative;
 }
 
-.desk-window-sky.morning   { background: var(--window-morning); }
-.desk-window-sky.afternoon { background: var(--window-afternoon); }
-.desk-window-sky.evening   { background: var(--window-evening); }
+.desk-window-sky.morning   { background: linear-gradient(180deg, #6ab4d9 0%, #a8d8ea 60%, #d4e8c4 100%); }
+.desk-window-sky.afternoon { background: linear-gradient(180deg, #e8b860 0%, #f5d89a 50%, #f0c878 100%); }
+.desk-window-sky.evening   { background: linear-gradient(180deg, #1a1020 0%, #2c1810 60%, #0a0a14 100%); }
+
+/* Småstad town silhouette — layered buildings */
+.desk-window-sky::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 18px;
+  background:
+    /* Church spire */
+    linear-gradient(to right,
+      transparent 28%, #1a1208 28%, #1a1208 29%, transparent 29%
+    ),
+    /* Church cross */
+    linear-gradient(to right,
+      transparent 27.5%, #1a1208 27.5%, #1a1208 29.5%, transparent 29.5%
+    ) 0 3px / 100% 2px no-repeat,
+    /* Buildings skyline */
+    polygon(0% 100%, /* start bottom-left */
+    0% 70%, 8% 70%, 8% 55%, 15% 55%, 15% 65%, 22% 65%, 22% 45%,
+    25% 45%, 25% 30%, 27% 30%, 27% 18%, 30% 18%, 30% 35%, 33% 35%,
+    33% 50%, 38% 50%, 38% 60%, 45% 60%, 45% 50%, 52% 50%, 52% 62%,
+    58% 62%, 58% 55%, 62% 55%, 62% 48%, 68% 48%, 68% 58%, 72% 58%,
+    72% 65%, 78% 65%, 78% 52%, 82% 52%, 82% 60%, 88% 60%, 88% 70%,
+    94% 70%, 94% 65%, 100% 65%, 100% 100%);
+  /* Fallback: simple dark blocks */
+  clip-path: polygon(
+    0% 100%,
+    0% 72%, 6% 72%, 6% 58%, 12% 58%, 12% 68%, 18% 68%,
+    18% 52%, 22% 52%, 22% 42%, 25% 42%, 25% 22%, 28% 22%,
+    28% 12%, 29.5% 12%, 29.5% 22%, 32% 22%, 32% 42%,
+    36% 42%, 36% 55%, 42% 55%, 42% 62%, 48% 62%, 48% 52%,
+    54% 52%, 54% 65%, 60% 65%, 60% 55%, 65% 55%, 65% 48%,
+    70% 48%, 70% 60%, 76% 60%, 76% 68%, 82% 68%, 82% 55%,
+    86% 55%, 86% 62%, 92% 62%, 92% 72%, 100% 72%,
+    100% 100%
+  );
+  background: #1a1208;
+  opacity: 0.85;
+}
+
+/* Window lit squares (tiny yellow lights in buildings) */
+.desk-window-sky::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  right: 0;
+  height: 14px;
+  background:
+    radial-gradient(circle 1px, rgba(255,220,100,0.7) 0%, transparent 100%) 12px 6px,
+    radial-gradient(circle 1px, rgba(255,220,100,0.5) 0%, transparent 100%) 40px 4px,
+    radial-gradient(circle 1px, rgba(255,220,100,0.6) 0%, transparent 100%) 66px 8px,
+    radial-gradient(circle 1px, rgba(255,220,100,0.4) 0%, transparent 100%) 90px 5px,
+    radial-gradient(circle 1px, rgba(255,220,100,0.5) 0%, transparent 100%) 120px 7px,
+    radial-gradient(circle 1px, rgba(255,220,100,0.6) 0%, transparent 100%) 150px 4px,
+    radial-gradient(circle 1px, rgba(255,220,100,0.4) 0%, transparent 100%) 170px 9px;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 1;
+}
 
 /* — Boss note (pinned top) — */
 .boss-note {

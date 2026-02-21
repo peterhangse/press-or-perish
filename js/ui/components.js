@@ -30,6 +30,9 @@ function lerpColor(a, b, t) {
   return `rgb(${r},${g},${bl})`;
 }
 
+export { getDeficitColor };
+}
+
 const DAY_NAMES = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
 const CLOCK_PHASES = {
   desk:      { time: '08:15', phase: 'Morning' },

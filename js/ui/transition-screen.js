@@ -3,6 +3,7 @@
  */
 
 import * as SFX from '../engine/sfx-engine.js';
+import { getDeficitColor } from './components.js';
 
 const DAY_NAMES = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'];
 const DAY_DATES = [
@@ -51,9 +52,9 @@ export function show(day, deficit, onDone) {
     defLabel.textContent = 'Deficit: ';
 
     const defValue = document.createElement('span');
-    const severity = deficit > -5 ? 'safe' : deficit > -10 ? 'warning' : 'danger';
-    defValue.className = `transition-deficit-value ${severity}`;
+    defValue.className = 'transition-deficit-value';
     defValue.textContent = deficit;
+    defValue.style.color = getDeficitColor(deficit);
 
     deficitEl.appendChild(defLabel);
     deficitEl.appendChild(defValue);

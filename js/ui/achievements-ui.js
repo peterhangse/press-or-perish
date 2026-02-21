@@ -112,7 +112,7 @@ function updateButtonLabel(btn) {
   btn = btn || document.getElementById('achievements-btn');
   if (!btn) return;
 
-  btn.innerHTML = `<span class="achievements-medal">🎖</span>`;
+  btn.innerHTML = `<span class="achievements-medal">★</span>`;
 }
 
 /**

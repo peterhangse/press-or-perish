@@ -293,71 +293,68 @@
   margin-top: auto;
 }
 
-/* — Lead card flair — random visual uniqueness — */
+/* — Lead card flair — subtle, randomized per-card via CSS vars — */
 
-/* Coffee stain ring */
+/* Coffee ring stain — position set via --coffee-x, --coffee-y, --coffee-size */
 .lead-card.flair-coffee::before {
   content: '';
   position: absolute;
-  width: 22px;
-  height: 22px;
+  width: var(--coffee-size, 18px);
+  height: var(--coffee-size, 18px);
   border-radius: 50%;
-  border: 2px solid rgba(120, 80, 30, 0.12);
-  background: radial-gradient(circle, rgba(120, 80, 30, 0.06) 40%, transparent 70%);
-  bottom: 4px;
-  right: 6px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Torn / rugged edge — clip-path on one side */
-.lead-card.flair-torn {
-  border-right: none;
-  clip-path: polygon(
-    0% 0%, 100% 0%, 100% 8%, 99% 12%, 100% 18%, 98% 24%,
-    100% 32%, 99% 40%, 100% 48%, 98% 56%, 100% 64%, 99% 72%,
-    100% 80%, 98% 88%, 100% 94%, 100% 100%, 0% 100%
+  left: var(--coffee-x, 70%);
+  top: var(--coffee-y, 60%);
+  border: 1.5px solid rgba(140, 95, 40, 0.08);
+  background: radial-gradient(
+    circle,
+    rgba(140, 95, 40, 0.04) 30%,
+    rgba(140, 95, 40, 0.02) 55%,
+    transparent 70%
   );
-}
-
-/* Stamp mark for letters — faint red "RECEIVED" */
-.lead-card.flair-stamp::after {
-  content: 'RECEIVED';
-  position: absolute;
-  top: 50%;
-  right: 6px;
-  transform: translateY(-50%) rotate(-18deg);
-  font-family: var(--font-numbers);
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: rgba(180, 40, 40, 0.12);
-  border: 1.5px solid rgba(180, 40, 40, 0.10);
-  padding: 1px 4px;
-  border-radius: 2px;
   pointer-events: none;
   z-index: 0;
 }
-/* Override the dog-ear for stamped cards */
+
+/* Faint postal stamp for letters — position via --stamp-x, --stamp-y, --stamp-rot */
+.lead-card.flair-stamp::after {
+  content: 'MOTTAGET';
+  position: absolute;
+  top: var(--stamp-y, 45%);
+  left: var(--stamp-x, 50%);
+  transform: translate(-50%, -50%) rotate(var(--stamp-rot, -18deg));
+  font-family: var(--font-numbers);
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: rgba(160, 50, 50, 0.07);
+  border: 1px solid rgba(160, 50, 50, 0.06);
+  padding: 1px 3px;
+  border-radius: 1px;
+  pointer-events: none;
+  z-index: 0;
+  white-space: nowrap;
+}
+/* Override dog-ear for stamped cards */
 .lead-card.flair-stamp:nth-child(odd)::after {
-  content: 'RECEIVED';
+  content: 'MOTTAGET';
   width: auto;
   height: auto;
   background: none;
-  top: 50%;
-  right: 6px;
-  transform: translateY(-50%) rotate(-18deg);
+  top: var(--stamp-y, 45%);
+  left: var(--stamp-x, 50%);
+  right: auto;
+  transform: translate(-50%, -50%) rotate(var(--stamp-rot, -18deg));
 }
 
-/* Paper clip for documents */
+/* Paper clip — horizontal position via --clip-x */
 .lead-card.flair-clip::after {
   content: '';
   position: absolute;
   top: -3px;
-  left: 14px;
-  width: 8px;
-  height: 18px;
-  border: 1.5px solid rgba(160, 160, 170, 0.5);
-  border-radius: 4px 4px 0 0;
+  left: var(--clip-x, 14px);
+  width: 7px;
+  height: 16px;
+  border: 1.5px solid rgba(150, 150, 160, 0.35);
+  border-radius: 3px 3px 0 0;
   border-bottom: none;
   pointer-events: none;
   z-index: 3;
@@ -366,26 +363,14 @@
 .lead-card.flair-clip:nth-child(odd)::after {
   content: '';
   top: -3px;
-  left: 14px;
+  left: var(--clip-x, 14px);
   right: auto;
-  width: 8px;
-  height: 18px;
-  border: 1.5px solid rgba(160, 160, 170, 0.5);
-  border-radius: 4px 4px 0 0;
+  width: 7px;
+  height: 16px;
+  border: 1.5px solid rgba(150, 150, 160, 0.35);
+  border-radius: 3px 3px 0 0;
   border-bottom: none;
   background: none;
-}
-
-/* Crumpled texture for street tips */
-.lead-card.flair-crumpled {
-  background:
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.08' numOctaves='4' stitchTiles='stitch'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23c)' opacity='0.04'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E"),
-    var(--paper);
-  box-shadow:
-    1px 2px 4px rgba(0,0,0,0.25),
-    inset 0 0 8px rgba(0,0,0,0.04),
-    0 0 0 0.5px rgba(0,0,0,0.1);
 }
 
 /* Bottom action bar — heavy desk edge like Papers Please counter */

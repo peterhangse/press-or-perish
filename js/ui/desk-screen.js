@@ -221,35 +221,35 @@ function selectLead(index) {
 }
 
 /**
- * Apply random visual flair to a lead card based on source type
+ * Apply subtle visual flair to a lead card — randomized positions via CSS vars
  */
 function applyCardFlair(card, lead, index) {
   // Seeded pseudo-random based on story id for consistency
   const seed = (lead.id || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0) + index;
+  const h1 = (seed * 7 + 13) % 100;
+  const h2 = (seed * 11 + 7) % 100;
+  const h3 = (seed * 17 + 3) % 100;
 
-  // ~30% chance of coffee stain
-  if ((seed * 7) % 10 < 3) {
+  // ~12% chance of coffee ring stain — randomized position
+  if ((seed * 7) % 100 < 12) {
     card.classList.add('flair-coffee');
+    card.style.setProperty('--coffee-x', `${15 + h1 * 0.65}%`);
+    card.style.setProperty('--coffee-y', `${20 + h2 * 0.55}%`);
+    card.style.setProperty('--coffee-size', `${14 + (h3 % 10)}px`);
   }
 
-  // ~25% chance of torn/rugged edge
-  if ((seed * 13) % 100 < 25) {
-    card.classList.add('flair-torn');
-  }
-
-  // Letters get a stamp overlay ~50% of the time
-  if (lead.source_type === 'letter' && (seed * 11) % 10 < 5) {
+  // Letters: ~20% chance of faint postal stamp — randomized angle + position
+  if (lead.source_type === 'letter' && (seed * 11) % 100 < 20) {
     card.classList.add('flair-stamp');
+    card.style.setProperty('--stamp-rot', `${-28 + (h1 % 36)}deg`);
+    card.style.setProperty('--stamp-x', `${35 + (h2 % 35)}%`);
+    card.style.setProperty('--stamp-y', `${30 + (h3 % 35)}%`);
   }
 
-  // Documents get a paper-clip ~40% of the time
-  if (lead.source_type === 'document' && (seed * 17) % 10 < 4) {
+  // Documents: ~15% chance of paper clip — randomized horizontal position
+  if (lead.source_type === 'document' && (seed * 17) % 100 < 15) {
     card.classList.add('flair-clip');
-  }
-
-  // Street tips get a crumpled look ~35% of the time
-  if (lead.source_type === 'street' && (seed * 19) % 100 < 35) {
-    card.classList.add('flair-crumpled');
+    card.style.setProperty('--clip-x', `${10 + (h1 % 55)}%`);
   }
 }
 

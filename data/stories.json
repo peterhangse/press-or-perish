@@ -558,11 +558,11 @@
               "note": "Then the commissioner showed up with an offer"
             },
             {
-              "tier": 3,
-              "response": "They said 'industrial area' — but the internal planning documents say 'mixed use with municipal priority.' The land was valued at 1.2 million by an independent assessor in 2023. The municipality paid 600,000. And here's the kicker: the farmer who sold it? His daughter works at the planning office. SHE handled the zoning application. I checked the conflict-of-interest registry — she never declared it. The municipal auditor flagged it six months ago but the report was 'delayed' until after the council vote.",
-              "expression": "open",
-              "feedback": "Conflict of interest, suppressed audit, undervaluation with proof. Full corruption trail.",
-              "note": "The farmer's daughter works at the planning office — she handled the zoning application"
+              "tier": 2,
+              "response": "They said 'industrial area' but I heard it's mostly planned as parking and storage for the municipality's own vehicles. The land was worth twice as much if they had zoned it for housing.",
+              "expression": "neutral",
+              "feedback": "Zoning manipulation — land undervalued through zone category. Good!",
+              "note": "The land was worth twice as much if they had zoned it..."
             },
             {
               "tier": 1,
@@ -604,11 +604,11 @@
               "note": "I didn't get a copy"
             },
             {
-              "tier": 2,
-              "response": "I asked the same thing. The realtor in Ystad said the land is easily worth 350,000 with that location. The municipality never commissioned an external valuation.",
-              "expression": "neutral",
-              "feedback": "Price discrepancy + no external valuation = viable story.",
-              "note": "The realtor in Ystad said the land is easily worth..."
+              "tier": 3,
+              "response": "Lower? Let me tell you why. Olsson's land was zoned 'residential' — mine was kept as 'agricultural' right up until the sale. But the INTERNAL planning documents say 'mixed use with municipal priority.' An independent assessor valued my land at 1.2 million in 2023. The municipality paid 600,000. And here's the kicker: the farmer who — well, that's me — my daughter works at the planning office. No wait, I mean the COUNCIL'S daughter. Björk's girl. SHE handled the zoning application. She never declared the conflict. The municipal auditor flagged it six months ago but the report was delayed until after the council voted.",
+              "expression": "open",
+              "feedback": "Conflict of interest, suppressed audit, undervaluation with proof. The farmer connects the dots when asked directly.",
+              "note": "Björk's daughter handled the zoning — the auditor's report was delayed until after the vote"
             }
           ],
           "q1_note": "Neighbor Olsson got 300,000 for a similar plot last..."
@@ -802,11 +802,11 @@
           ],
           "outcomes": [
             {
-              "tier": 3,
-              "response": "Related? They LIVE together! Ulla-Karin Persson moved in with the judge last March — I saw the moving van myself. And this isn't the first time: she won in Kisa last year with the same judge. Three shows, three wins. Bengt at the kennel club has a list — he was going to report it to the Swedish Kennel Club but somebody talked him out of it. Guess who.",
+              "tier": 1,
+              "response": "Yes indeed! Sister-in-law! Everyone knows it. Ulla-Karin Persson is her name. Married to the judge's brother Stig. It's well known in the whole district.",
               "expression": "open",
-              "feedback": "Cohabiting judges, a pattern across shows, and a suppressed complaint. Explosive for a dog show story.",
-              "note": "They LIVE together — she won in Kisa last year with the same judge"
+              "feedback": "You got the family connection confirmed. Small but fun story.",
+              "note": "Married to the judge's brother Stig"
             },
             {
               "tier": 1,
@@ -848,11 +848,11 @@
               "note": "That should be proof enough"
             },
             {
-              "tier": 1,
-              "response": "It was Gösta on the board who invited him. They're hunting buddies. The whole thing was decided in advance if you ask me.",
-              "expression": "guarded",
-              "feedback": "You got the selection chain. Enough for a brief.",
-              "note": "The whole thing was decided in advance if you ask me"
+              "tier": 3,
+              "response": "Chosen? Ha! Nobody 'chose' him. Ulla-Karin SUGGESTED him — to her own sister on the board. They didn't even ask the kennel club. And this isn't the first time: Rolf judged in Kisa last year, same breed class, same winner. I have the protocols from THREE shows. Bengt was going to report it to the Swedish Kennel Club — but Ulla-Karin's sister got him voted off the board first. The whole selection process is a sham. I can show you the minutes.",
+              "expression": "open",
+              "feedback": "Rigged selection process, pattern across multiple shows, whistleblower silenced. Full story.",
+              "note": "Same judge, same winner across THREE shows — Bengt was voted off the board to silence him"
             },
             {
               "tier": 0,
@@ -1053,11 +1053,11 @@
           ],
           "outcomes": [
             {
-              "tier": 3,
-              "response": "The Svensson family across the road — their three-year-old wakes up every single night. Mrs. Alm has written to the municipality THREE times. But here's the thing nobody talks about: the bell system was reprogrammed by the vicar's nephew — he's not even an electrician. He installed it wrong and now nobody knows how to fix it. The company that made the system went bankrupt. The diocese KNOWS but won't pay for a real technician because it would mean admitting the nephew botched it.",
+              "tier": 1,
+              "response": "The Svensson family across the road — they have a three-year-old who wakes up every time. And Mrs. Alm by the hill has written to the municipality three times with no reply.",
               "expression": "open",
-              "feedback": "Unqualified installation, cover-up by the diocese, and affected families. Full story.",
-              "note": "The vicar's nephew reprogrammed it — he's not even an electrician"
+              "feedback": "Multiple affected — good basis for a human interest story.",
+              "note": "The Svensson family across the road"
             },
             {
               "tier": 1,
@@ -1145,11 +1145,11 @@
               "note": "I know because Ingrid went around with a list"
             },
             {
-              "tier": 1,
-              "response": "Yes! Since May. The old one worked for fifty years. The new one hasn't worked properly a single night.",
-              "expression": "defiant",
-              "feedback": "Timeframe and contrast — useful.",
-              "note": "The new one hasn't worked properly a single night"
+              "tier": 3,
+              "response": "Since the new mechanism? YES! That's exactly when it started! The vicar's nephew installed it — kid's not even an electrician! He did it for free, and now nobody knows how to fix it. The company that made the system went bankrupt. The diocese KNOWS but won't pay for a real technician because it means admitting the nephew botched it. Meanwhile, the Svenssons' three-year-old wakes up every night and Mrs. Alm has written to the municipality three times. You put that in the paper. Every word.",
+              "expression": "open",
+              "feedback": "Unqualified installation, diocese cover-up, affected families. The frustrated farmer gave you everything when you pressed the right button.",
+              "note": "The vicar's nephew installed it — not an electrician — the diocese won't pay to fix his mistake"
             }
           ],
           "q1_note": "Have you ever— No, sorry"
@@ -1304,11 +1304,11 @@
           ],
           "outcomes": [
             {
-              "tier": 3,
-              "response": "Everyone knows the Petterssons. The dad drinks. The mom works double shifts. But here's what nobody's saying — Tommy wasn't stealing for himself. He was taking food. Bread, milk, pasta. I checked the list of what he took. No candy, no soda. The family hasn't had a working fridge for two months. Social services were notified in September but NOTHING happened. I have the case number — the school reported it too. Two reports, zero action.",
+              "tier": 1,
+              "response": "Everyone knows them. The dad drinks. The mom works double shifts at the factory. Tommy is a good kid, really. He's been carrying bags for Mrs. Alm for years.",
               "expression": "open",
-              "feedback": "Systemic failure — child poverty, social services failing, school reports ignored. This is much bigger than shoplifting.",
-              "note": "Social services were notified in September but NOTHING happened"
+              "feedback": "Human background — good human interest angle.",
+              "note": "He's been carrying bags for Mrs"
             },
             {
               "tier": 0,
@@ -1435,11 +1435,11 @@
               "note": "Not through the newspaper"
             },
             {
-              "tier": 1,
-              "response": "He's doing fine now. Sweeps the floor at my place on Saturdays. I pay him in food and a little money. That's better than a police report, right?",
-              "expression": "grateful",
-              "feedback": "Beautiful follow-up — the shopkeeper as the community's safety net.",
-              "note": "I pay him in food and a little money"
+              "tier": 3,
+              "response": "*long silence, then quietly* He's... not doing well. *rubs eyes* The thing is — Tommy wasn't stealing for himself. I checked the list. Bread, milk, pasta. No candy. No soda. The family hasn't had a working fridge for two months. The dad drinks everything away. Social services were notified in September — the school sent a report too. Two reports. Zero action. *voice breaks* I've been giving him day-old bread for weeks. Pretending we're throwing it away. But he needs real help. Not bread from a guilty shopkeeper.",
+              "expression": "open",
+              "feedback": "Silence let the guilt pour out — child poverty, social services failing, school reports ignored. Much bigger than shoplifting.",
+              "note": "Tommy was stealing food — social services got two reports and did nothing"
             }
           ],
           "q1_note": "You're not going to give up, are you. Want some coffee"
@@ -1562,11 +1562,11 @@
               "note": "Municipal chairman Björk pushed hard for a southern..."
             },
             {
-              "tier": 3,
-              "response": "The preliminary study? *dry laugh* It was done by Markgrund AB. The owner is Sven Björk's brother-in-law. That report was worth as much as toilet paper. But I dug deeper — Markgrund has done FOUR municipal contracts in three years. All awarded without competitive bidding. Every single one went over budget. The total overspend across all four? 8.2 million. And Björk sits on the procurement committee that approves these contracts. I filed a complaint with the county administrative board. They said they'd investigate. That was fourteen months ago.",
+              "tier": 2,
+              "response": "The preliminary study? *dry laugh* It was done by Markgrund AB. Do you know who owns that? Sven Björk's brother-in-law. That report was worth as much as the paper it was written on.",
               "expression": "open",
-              "feedback": "Pattern of rigged procurement across four contracts, 8.2 million in overspend, stalled investigation. Systemic corruption.",
-              "note": "Markgrund has done FOUR contracts — all without bidding, all over budget, 8.2 million total overspend"
+              "feedback": "Strong connection — rigged preliminary study. This explains everything.",
+              "note": "That report was worth as much as the paper it was..."
             },
             {
               "tier": 1,
@@ -1640,11 +1640,11 @@
               "note": "Municipal chairman Björk said we shouldn't 'worry the..."
             },
             {
-              "tier": 2,
-              "response": "Markgrund AB... yes. They're owned by Tore Persson. Björk's brother-in-law. I know how it looks. I protested in a memo in November 1974 but it was ignored.",
+              "tier": 3,
+              "response": "*tight-lipped* Where did you... Fine. Markgrund AB. Owned by Sven Björk's brother-in-law. That preliminary study was garbage — I TOLD them. But it gets worse. Markgrund has done FOUR municipal contracts in three years. All without competitive bidding. Every single one went over budget. Total overspend: 8.2 million. And Björk sits on the procurement committee. I filed a complaint with the county administrative board fourteen months ago. They said they'd investigate. Nothing. You want to know why nobody talks? Because Björk controls who gets contracts in this town. And everyone knows it.",
               "expression": "open",
-              "feedback": "Conflict of interest, memo with protest — documented chain. Very strong.",
-              "note": "I protested in a memo in November 1974 but it was..."
+              "feedback": "Confronted the project manager — he confirmed the rigged procurement pattern. Four contracts, 8.2 million overspend, stalled investigation.",
+              "note": "Markgrund AB — four no-bid contracts, 8.2 million overspend, Björk controls procurement"
             },
             {
               "tier": 1,
@@ -1813,11 +1813,11 @@
               "note": "You can have someone examine it"
             },
             {
-              "tier": 3,
-              "response": "YES! Matab — the cheapest option on the market. The food comes chilled from Norrköping, 200 kilometers away. But here's what the parents don't know: the municipal health inspector found bacteria levels ABOVE the limit in three samples last month. Three! The report went to the head of education. She told the inspector to 'retest with new samples' — which of course came back clean because they were taken on a day Matab knew about in advance. I have the original lab results. The inspector is furious but scared of losing her job.",
+              "tier": 2,
+              "response": "YES! That's exactly it! The municipality switched to Matab this autumn. The cheapest option. The food comes chilled from Norrköping and is reheated in the school's microwave. The old system was torn out.",
               "expression": "open",
-              "feedback": "Failed health inspections, ordered retesting, supplier tipped off. Children's health at risk with a cover-up.",
-              "note": "Bacteria levels ABOVE the limit — the inspector was told to retest after tipping off the supplier"
+              "feedback": "System change — procurement, central kitchen gone, new supplier. Strong story.",
+              "note": "The food comes chilled from Norrköping and is reheated..."
             },
             {
               "tier": 1,
@@ -1845,11 +1845,11 @@
           ],
           "outcomes": [
             {
-              "tier": 2,
-              "response": "School board chairman Ingemar Holm. His brother happens to own one of Matab's delivery trucks. But maybe that's a coincidence, right?",
-              "expression": "defiant",
-              "feedback": "Conflict of interest! The school board chairman has a link to the supplier.",
-              "note": "School board chairman Ingemar Holm"
+              "tier": 3,
+              "response": "WHO decided? The head of education, Annika Ström. She pushed it through in June — no board vote, no consultation. Matab was the cheapest bid by far. The food comes chilled from Norrköping, 200 kilometers away. But here's what the parents don't know: the municipal health inspector found bacteria levels ABOVE the limit in three samples last month. Three! The report went straight to Ström. She told the inspector to 'retest with new samples' — and tipped off Matab about the date. Of course the retest came back clean. I have the original lab results. The inspector is furious but scared for her job.",
+              "expression": "open",
+              "feedback": "Named the decision-maker, failed health inspections, ordered retesting with supplier tipped off. Children's health at risk.",
+              "note": "Annika Ström pushed Matab through without a board vote — bacteria levels above the limit, retesting rigged"
             },
             {
               "tier": 1,
@@ -2064,11 +2064,11 @@
               "note": "As if he didn't want to be seen"
             },
             {
-              "tier": 3,
-              "response": "That was the STRANGE thing. Eriksson came out after ten minutes — not until the neighbors had already called the department. And he wasn't in his pajamas. Fully dressed. Shoes on. At 2 AM. But here's what I haven't told anyone: I went back the next day to look around. Behind the barn — untouched by fire — I found two empty gasoline cans. New ones, from Byggmax, still had the price tag. And Eriksson's barn? He increased the insurance by 400 percent in September. SEPTEMBER. The fire was in November. The insurance company sent an investigator but somehow the report concluded 'electrical fault.' The investigator? He goes to Eriksson's church. Same congregation.",
+              "tier": 2,
+              "response": "That was the STRANGE thing. Eriksson came out after ten minutes — not until the neighbors had already called the fire department. And he wasn't in his pajamas. He was fully dressed. At half past ten on a Wednesday.",
               "expression": "open",
-              "feedback": "Gasoline cans, 400% insurance increase two months before, biased investigator from same congregation. Arson with insurance fraud.",
-              "note": "Two gasoline cans behind the barn — insurance increased 400% in September, investigator goes to Eriksson's church"
+              "feedback": "Eriksson was dressed in the middle of the night. Was he expecting the fire?",
+              "note": "Eriksson came out after ten minutes"
             },
             {
               "tier": 1,
@@ -2149,11 +2149,11 @@
               "note": "Eriksson has been struggling financially"
             },
             {
-              "tier": 2,
-              "response": "He re-insured the barn this spring. My Olle said Eriksson bragged that 'the barn was worth more than the house'. On p-a-p-e-r, as he put it. And now it burned down.",
-              "expression": "nervous",
-              "feedback": "Insurance angle directly stated. Combined with the person who ran — strong.",
-              "note": "My Olle said Eriksson bragged that 'the barn was worth..."
+              "tier": 3,
+              "response": "*whispers* You've figured it out too? I went back the next day. Behind the barn — untouched by fire — I found two gasoline cans. New ones, from Byggmax, price tags still on. And Eriksson? He increased the insurance by FOUR HUNDRED percent in September. The fire was in November. The insurance company sent an investigator, but the report says 'electrical fault.' The investigator goes to Eriksson's church. Same congregation. Same prayer group. And Eriksson wasn't in his pajamas at 2 AM — he was fully dressed. Shoes on. He was WAITING for it.",
+              "expression": "open",
+              "feedback": "You named the suspicion — and the scared neighbor confirmed everything. Gasoline cans, 400% insurance increase, biased investigator from same church.",
+              "note": "Gasoline cans behind the barn, insurance increased 400% two months before, investigator is in Eriksson's congregation"
             }
           ],
           "q1_note": "I may be old but I'm not stupid"
@@ -2315,11 +2315,11 @@
               "note": "The Center Party had opinions about the location but..."
             },
             {
-              "tier": 3,
-              "response": "800,000 on paper. But I work at the county administration — I've seen the REAL numbers. The demolition of the Alm villa alone costs 300,000. And the villa is listed as 'cultural heritage interest' in the county's own registry. They skipped the heritage assessment entirely. The municipal commissioner's brother-in-law owns the construction company that got the contract — WITHOUT a public tender. I can show you the procurement documents. It's all there in black and white.",
+              "tier": 1,
+              "response": "The estimate is 800,000. State grants cover half. But it requires demolishing the Alm villa — it's been empty since Mrs. Alm passed away.",
               "expression": "open",
-              "feedback": "Skipped heritage assessment, nepotistic procurement, inflated costs. A corruption story hiding inside a parking lot.",
-              "note": "The municipal commissioner's brother-in-law owns the construction company"
+              "feedback": "Demolition of a culturally historic building — that could spark debate.",
+              "note": "It's been empty since Mrs"
             },
             {
               "tier": 0,
@@ -2400,11 +2400,11 @@
               "note": "It costs more to renovate than to demolish"
             },
             {
-              "tier": 1,
-              "response": "Björk owns land? I... don't know. But that would have been recorded as a conflict of interest. *shifts uncomfortably*",
-              "expression": "nervous",
-              "feedback": "He didn't know — or knew and got nervous. Interesting.",
-              "note": "That would have been recorded as a conflict of interest"
+              "tier": 3,
+              "response": "*long pause* Who told you that? *shifts in chair* Fine. Yes, the Alm villa demolition — it wasn't in the original plan. It was added AFTER the land survey. And the survey was done by Björk's brother-in-law's company. Without a public tender. The demolition alone costs 300,000 but the villa is listed as 'cultural heritage interest' in the county's registry. They skipped the heritage assessment entirely. And yes — Björk's wife owns the adjacent plot. When the parking lot goes in, that plot doubles in value. But you didn't hear that from me.",
+              "expression": "guarded",
+              "feedback": "Pressed the politician on the specific allegation — he cracked and revealed nepotistic procurement, skipped heritage assessment, and Björk's wife's land profit.",
+              "note": "Björk's wife owns adjacent land — his brother-in-law did the survey without tender"
             }
           ],
           "q1_note": "We live in a democracy. The majority voted yes"
@@ -2824,11 +2824,11 @@
               "note": "Someone placed it there on purpose"
             },
             {
-              "tier": 3,
-              "response": "Just me and Sonja at reception. But Björk himself saw it — and he was TERRIFIED. White as a sheet. He didn't call the police. He called a private number — I saw the area code, it was Stockholm. Then he locked himself in his office for an hour. When he came out, he told us to 'forget it happened.' But Sonja kept the note — she photographed it before Björk took it. The handwriting matches a letter that was sent to the building inspector last spring — another threat. Same block letters, same red ink. The building inspector quit two weeks later. Moved to Gothenburg. Nobody asked why. And now the same handwriting shows up with a dead cat. Someone is systematically threatening municipal officials who get in the way.",
+              "tier": 2,
+              "response": "Just me and Sonja at reception. But Björk himself saw it — and he was TERRIFIED. White as a sheet. Called someone right away. Not the police — someone else.",
               "expression": "open",
-              "feedback": "Pattern of threats, matching handwriting, previous official forced out, Björk's terrified reaction and Stockholm call. Organized intimidation.",
-              "note": "Sonja photographed the note — handwriting matches a threat letter to the building inspector who quit and fled to Gothenburg"
+              "feedback": "Björk called someone who wasn't the police. He knows who it is. Burning lead.",
+              "note": "Just me and Sonja at reception"
             }
           ],
           "q1_note": "In capital letters"
@@ -2934,11 +2934,11 @@
               "note": "Someone is threatening the municipal commissioner and..."
             },
             {
-              "tier": 2,
-              "response": "He said 'it's MY problem, not the municipality's'. My problem. As if he knows exactly who did it. And three weeks ago I heard him arguing with some Ricky about money.",
+              "tier": 3,
+              "response": "*looks around nervously* Because he knows who did it. He called a private number — Stockholm area code — not the police. Locked himself in for an hour. And Sonja at reception — she photographed the note before Björk took it. The handwriting... *swallows* ...it matches a letter that was sent to the building inspector last spring. Same block letters, same red ink. Another threat. The building inspector quit two weeks later. Moved to Gothenburg. Nobody asked why. And now the same handwriting shows up with a dead cat. Someone is systematically threatening municipal officials who get in the way. And Björk knows who.",
               "expression": "open",
-              "feedback": "Björk knows who it is. Debts, threats, secrets. Big story.",
-              "note": "Three weeks ago I heard him arguing with some Ricky..."
+              "feedback": "Patience and silence unlocked the scared messenger — matching handwriting, previous threat, building inspector fled. Organized intimidation.",
+              "note": "Sonja photographed the note — handwriting matches a threat to the building inspector who quit and fled"
             },
             {
               "tier": 1,
@@ -3075,11 +3075,11 @@
               "note": "Emmy Nilsson"
             },
             {
-              "tier": 3,
-              "response": "They save 200,000 on the library. The conference trip to Båstad cost 230,000. But let me tell you what I found in the budget appendix that nobody reads: the building the library is in? The municipality owns it. When the library closes, the lease transfers to a PRIVATE company — Småstad Fastighets AB — at below market rate. Want to guess who's on the board? The municipal commissioner's husband. They're not just cutting a library — they're transferring a public asset to the commissioner's family. The deal was signed in June, three months BEFORE the budget vote.",
+              "tier": 2,
+              "response": "They save 200,000. But do you know what the conference trip to Båstad cost? 230,000. They shut down a library to fund the municipal commissioner's conference.",
               "expression": "open",
-              "feedback": "Property transfer to commissioner's family company, signed before the budget vote. The library closure is a front for asset stripping.",
-              "note": "The building transfers to Småstad Fastighets AB — the commissioner's husband is on the board"
+              "feedback": "Direct link — conference vs. library. Very strong contrast.",
+              "note": "They shut down a library to fund the municipal..."
             }
           ],
           "q1_note": "4,000 registered borrowers"
@@ -3192,11 +3192,11 @@
               "note": "The Yousef brothers who read Pippi in Swedish"
             },
             {
-              "tier": 2,
-              "response": "Hope? *falls silent for a long time* If you write and people read... I have a copy of the budget proposal. And an expense list from Björk's conference trip — 230,000 on hotels and dinners. Our library costs 180,000. You understand.",
+              "tier": 3,
+              "response": "*quiet for a long time* Hope? No. Because it was never about saving money. *takes out a folder* I've worked here for 32 years. I read every budget document. The library costs 200,000. The conference trip to Båstad cost 230,000. But listen to this: when the library closes, this building — which the municipality owns — transfers to a private company. Småstad Fastighets AB. Below market rate. And the commissioner's husband sits on that company's board. The transfer agreement was signed in June. Three months BEFORE the budget vote. They're not closing a library. They're handing a building to the commissioner's family.",
               "expression": "open",
-              "feedback": "Documentation — the budget comparison. Strong contrast that could overturn the decision.",
-              "note": "I have a copy of the budget proposal"
+              "feedback": "Silence let the librarian reveal 32 years of careful observation — the closure is a front for transferring public property to the commissioner's family.",
+              "note": "The building transfers to Småstad Fastighets AB — commissioner's husband on the board, deal signed before the vote"
             }
           ],
           "q1_note": "I've worked here since 1962"
@@ -3319,11 +3319,11 @@
               "note": "Last year 120 people came"
             },
             {
-              "tier": 3,
-              "response": "We're collecting for Erik's family — he injured his back in the spring. But what makes me furious is WHY. The forklift he was driving had a broken safety belt. We reported it to management in January. JANUARY! They said they'd fix it. Four months later Erik's in a hospital bed. And now the company says it was 'his own fault' and the insurance won't pay. We found the work order for the belt repair — it was never sent. Someone deleted it from the system.",
+              "tier": 2,
+              "response": "Yes, actually — we're collecting for Erik's family. He injured his back in the spring and has been at home ever since. The social insurance office is dragging their feet. The union is covering the difference.",
               "expression": "open",
-              "feedback": "Deleted work order, ignored safety report, insurance fraud angle. The bazaar hides a workplace scandal.",
-              "note": "The work order for the belt repair was never sent — someone deleted it"
+              "feedback": "Good — you found the human angle behind the bazaar.",
+              "note": "He injured his back in the spring and has been at home..."
             },
             {
               "tier": 1,
@@ -3351,11 +3351,11 @@
           ],
           "outcomes": [
             {
-              "tier": 2,
-              "response": "The budget is about 4,000 kronor. But this year we've got sponsorship from Svenssons and Konsum, so we'll probably break even. And all the surplus this year is earmarked for Erik Blom — the one who injured his back.",
+              "tier": 3,
+              "response": "Budget? We raised 14,000 last year. All of it was supposed to go to Erik's family — he broke his back on a forklift with a broken safety belt. But here's what I found in the books: management took 3,000 as 'administrative overhead.' For a CHARITY bazaar! And that forklift? We reported the belt in January. JANUARY! The work order was filed, then someone deleted it from the system. Four months later Erik's in the hospital, and the company says it was 'his own fault.' The insurance won't pay because there's no work order. Because somebody erased it.",
               "expression": "open",
-              "feedback": "Concrete finances and human interest — good combination.",
-              "note": "This year we've got sponsorship from Svenssons and..."
+              "feedback": "Deleted work order, management skimming charity funds, falsified safety records. The bazaar hides a workplace scandal.",
+              "note": "The work order for the belt repair was deleted — management took 3,000 from the charity fund"
             },
             {
               "tier": 1,
@@ -3570,11 +3570,11 @@
               "note": "I had to set up barricades myself with chairs and..."
             },
             {
-              "tier": 3,
-              "response": "Happened before? It leaked at the same intersection last summer! And here's what I found out — the pipe network is from the 1930s and the municipality commissioned a full inspection in 2019. The report said 40 percent of the pipes need IMMEDIATE replacement. Cost: 12 million. You know what happened to that report? The technical director classified it as 'internal working material' and buried it. Because the election was eight months away. I have a copy. A colleague saved one before they shredded the rest.",
+              "tier": 2,
+              "response": "Happened before? It leaked at the same intersection last summer! And the drinking water pipe on Björkgatan was patched with temporary tape — it's still there! The pipe network is from the 1930s and nobody wants to pay to replace it.",
               "expression": "open",
-              "feedback": "Buried infrastructure report, classified to avoid election damage, documented evidence. Systematic cover-up.",
-              "note": "The technical director classified the report as 'internal working material'"
+              "feedback": "Good — you got a systemic problem, not just a one-off incident.",
+              "note": "The pipe network is from the 1930s and nobody wants to..."
             },
             {
               "tier": 1,
@@ -3602,11 +3602,11 @@
           ],
           "outcomes": [
             {
-              "tier": 2,
-              "response": "One machine, yes! The other one was sold last year to save money. The municipal commissioner said 'we can rent when needed' — but it's Sunday and no rental company is open. Genius.",
-              "expression": "defiant",
-              "feedback": "Good connection to the cutbacks — gives the article a political dimension.",
-              "note": "The municipal commissioner said 'we can rent when..."
+              "tier": 3,
+              "response": "One excavator — that's right! And it's from 1978! But that's not even the real problem. The pipe network is from the 1930s and the municipality commissioned an inspection in 2019. The report said 40 percent needs IMMEDIATE replacement. Cost: 12 million. You know what happened? The technical director classified it as 'internal working material' and buried it — because the election was eight months away. I have a copy. A colleague saved one before they shredded the rest. One excavator, one old pipe network, and one buried report. That's Småstad for you.",
+              "expression": "open",
+              "feedback": "Buried infrastructure report, classified to avoid election damage. Systematic cover-up behind a 'simple' water leak.",
+              "note": "The technical director classified the inspection report as 'internal working material' and shredded copies"
             },
             {
               "tier": 1,
@@ -4065,11 +4065,11 @@
           ],
           "outcomes": [
             {
-              "tier": 3,
-              "response": "*sighs* Fine. Thirty percent of the grid is from the '40s and '50s. But that's the official number. The REAL number — which I calculated myself last year — is closer to fifty percent. We submitted a risk assessment to the board in March. Category: 'critical.' The board chair said, and I quote, 'We can't alarm people before the rate negotiations.' So they reclassified it to 'elevated' and cut the replacement budget by half. I have the original assessment. They changed the cover page but forgot to update the appendix — it still says 'critical' on page 14.",
+              "tier": 2,
+              "response": "Well... *hesitant* Some of the grid is old, yes. We have about 30 percent cables from the '40s and '50s still in use. The budget allows replacing maybe five percent per year. Do the math.",
               "expression": "open",
-              "feedback": "Falsified risk assessment, budget cuts despite critical infrastructure. Documentary evidence with the appendix discrepancy.",
-              "note": "They reclassified 'critical' to 'elevated' — the appendix still says critical on page 14"
+              "feedback": "Good — you got numbers on the systemic problem.",
+              "note": "We have about 30 percent cables from the '40s and '50s..."
             },
             {
               "tier": 1,
@@ -4189,11 +4189,11 @@
               "note": "We keep the ship afloat"
             },
             {
-              "tier": 2,
-              "response": "*long silence* What we didn't write was that the backup power at the nursing home almost didn't start. The diesel was old. If it hadn't kicked in... well, Mrs. Söderström has oxygen. You understand.",
-              "expression": "nervous",
-              "feedback": "Patience got you what wasn't in the press release — potential danger.",
-              "note": "You understand"
+              "tier": 3,
+              "response": "*looks around, lowers voice* What was left out? Everything. Thirty percent old cables — that's the official number. The real number is closer to fifty. I wrote a risk assessment in March. Category: 'critical.' The board chair said — and I can quote him because I wrote it down — 'We can't alarm people before the rate negotiations.' So they reclassified it to 'elevated' and cut the replacement budget by half. I kept the original. They changed the cover page but forgot to update the appendix — it still says 'critical' on page 14. I've been waiting for someone to ask the right question.",
+              "expression": "open",
+              "feedback": "Silence gave the bureaucrat space to reveal what he couldn't say officially — falsified risk assessment, the appendix still proves it.",
+              "note": "Risk assessment reclassified from 'critical' to 'elevated' — the appendix on page 14 still says critical"
             },
             {
               "tier": 1,
@@ -4825,11 +4825,11 @@
               "note": "It happened too fast. green truck, I think"
             },
             {
-              "tier": 3,
-              "response": "Stopped? He braked after the intersection, looked in the rearview mirror and DROVE OFF! Hit and run! Gustavsson at the tobacco shop recognized the company — Fraktbolaget Svea. But here's what I found out after: that same company was involved in a near-miss at Parkskolan last spring. The driver — SAME driver — ran a stop sign. The school reported it. The transport authority did nothing. And the company's operating license was supposed to be reviewed in September — it was 'postponed.' My neighbor works at the transport authority. She says someone called from the municipality and asked them to delay the review. The truck shouldn't even have been on that route.",
+              "tier": 2,
+              "response": "Stopped? He braked after the intersection, looked in the rearview mirror and DROVE OFF! Hit and run! But guess what — Gustavsson at the tobacco shop said he recognized the logo. 'Sträng Transport' he thought. They deliver to the factory every day.",
               "expression": "open",
-              "feedback": "Repeat offender, same driver, suppressed license review, municipal interference. Pattern of negligence with children at risk.",
-              "note": "Same driver had a near-miss at Parkskolan — someone from the municipality asked the transport authority to delay the review"
+              "feedback": "Good — hit-and-run plus identification of the trucking company. Strong evidence.",
+              "note": "Gustavsson at the tobacco shop said he recognized the..."
             },
             {
               "tier": 1,
@@ -4857,11 +4857,11 @@
           ],
           "outcomes": [
             {
-              "tier": 2,
-              "response": "Green truck, flatbed with a tarp. The plate starts with M... couldn't catch the rest. But — Gustavsson at the tobacco shop said it was Sträng Transport. They deliver to the mill. I think he's right, they pass by every day.",
-              "expression": "neutral",
-              "feedback": "Identification of the trucking company — you can follow up on that.",
-              "note": "Gustavsson at the tobacco shop said it was Sträng..."
+              "tier": 3,
+              "response": "Yes! Fraktbolaget Svea — big red letters on the side. And I got the last three digits of the plate: 847. But here's what I found out after: that same company was involved in a near-miss at Parkskolan last spring. The driver — SAME driver, I recognized the beard — ran a stop sign. The school reported it. The transport authority did nothing. And the company's license was supposed to be reviewed in September — it was 'postponed.' My neighbor works at the transport authority. She says someone called from the municipality and asked them to delay. The truck shouldn't even have been on that route — it's a school zone.",
+              "expression": "open",
+              "feedback": "Plate number, company ID, repeat offender, same driver, suppressed license review. Rock-solid witness testimony.",
+              "note": "Fraktbolaget Svea, plate ending 847 — same driver had a near-miss at Parkskolan, license review was postponed"
             },
             {
               "tier": 1,
@@ -5076,11 +5076,11 @@
               "note": "It's Christmas"
             },
             {
-              "tier": 3,
-              "response": "Three courses, karaoke, the works. But the council chairman also booked a 'separate lounge' for the management team. The invoice says 'conference room rental' — 45,000 kronor. For one evening. And I saw the real bill because my friend works at the restaurant. The 'lounge' included champagne, cigars, and a private chef. That's on TOP of the party budget. And here's the thing — the same restaurant has a catering contract with the municipality worth 800,000 a year. The contract was renewed in November. The Christmas party was December 8th. The chairman signed both. No tender. No comparison.",
-              "expression": "open",
-              "feedback": "Secret lounge party, disguised invoices, and quid pro quo with restaurant's municipal contract. Taxpayer-funded corruption.",
-              "note": "The 'conference room' was champagne and cigars — 45,000 kr, same restaurant got an 800,000 contract renewed weeks earlier"
+              "tier": 2,
+              "response": "Yes, three courses. And then there was karaoke, I think. Although... now I remember — the council chairman also ordered a 'separate lounge' for the municipal board. That bill may have ended up on the same account. But it was a different party, really.",
+              "expression": "nervous",
+              "feedback": "Good — you got her to reveal the double billing almost by accident.",
+              "note": "The council chairman also ordered a 'separate lounge'..."
             },
             {
               "tier": 1,
@@ -5186,11 +5186,11 @@
           ],
           "outcomes": [
             {
-              "tier": 2,
-              "response": "*long silence* ...The chairman held a 'pre-party' in a separate lounge. Just the municipal board. It ended up on the same invoice as the staff party. I said it should be separated, but he said 'put it under staff, it's less visible'. Direct quote.",
-              "expression": "nervous",
-              "feedback": "Patience gave you the core — the chairman is hiding private entertainment.",
-              "note": "It ended up on the same invoice as the staff party"
+              "tier": 3,
+              "response": "*fidgets, then slowly* My friend works at the restaurant. She showed me the REAL bill. The 'separate lounge' the council chairman ordered? The invoice to the municipality says 'conference room rental' — 45,000 kronor. But the real bill shows champagne, cigars, a private chef. All on top of the party budget. And... *looks at door* ...the same restaurant has a catering contract with the municipality. 800,000 a year. Renewed in November. The party was December 8th. The chairman signed both. No tender. No comparison. It's... it's not right. I see this paperwork every day and nobody asks.",
+              "expression": "open",
+              "feedback": "Silence gave the nervous secretary courage — disguised invoices, champagne lounge, quid pro quo with the restaurant's contract. She'd been waiting for someone to listen.",
+              "note": "The 'conference room' was champagne and cigars — 45,000 kr, same restaurant got an 800,000 contract renewed weeks earlier"
             },
             {
               "tier": 1,
@@ -5571,11 +5571,11 @@
           ],
           "outcomes": [
             {
-              "tier": 3,
-              "response": "Warning signs? The night shift was eliminated last summer. Then two machines disappeared — shipped to Lisbon, we found the freight documents. But what really stinks is this: the CEO applied for a RELOCATION GRANT from the EU three months ago. A grant for creating jobs in Portugal — using the same machines they took from us. And the municipality guaranteed a 4 million kronor loan to the company just last year. For 'local investment and expansion.' The money was used to BUY the factory in Lisbon. Our tax money funded our own job losses. The union found the EU application last week.",
-              "expression": "open",
-              "feedback": "Municipal loan used to fund relocation, EU grant application to create jobs elsewhere with stolen machines. Tax money financing the betrayal.",
-              "note": "The municipality's 4 million loan was used to BUY the factory in Lisbon — EU relocation grant applied for"
+              "tier": 2,
+              "response": "Last summer they eliminated the night shift. Then two machines disappeared — shipped to Lisbon. We should have caught on.",
+              "expression": "defiant",
+              "feedback": "Good — the timeline and evidence of a planned relocation.",
+              "note": "Then two machines disappeared"
             },
             {
               "tier": 1,
@@ -5649,11 +5649,11 @@
           ],
           "outcomes": [
             {
-              "tier": 2,
-              "response": "*goes quiet* Chairman Kvist was at dinner. Said it was about contracts. But maybe... damn. Maybe he knew.",
-              "expression": "nervous",
-              "feedback": "Internal union betrayal — a story within the story.",
-              "note": "Chairman Kvist was at dinner"
+              "tier": 3,
+              "response": "*goes quiet, then angry* How do you know about that dinner? Fine. The CEO wanted Holm to keep quiet about the plan — offered him a 'consulting role' at the Portugal factory. Holm turned him down but he didn't TELL us about the offer until last week. Meanwhile, two machines disappeared — shipped to Lisbon, we found the freight documents. And the municipality guaranteed a 4 million kronor loan last year for 'local investment and expansion.' That money was used to BUY the Lisbon factory. Our tax money funded our own job losses. The CEO also applied for an EU RELOCATION GRANT — for creating jobs in Portugal. With OUR machines.",
+              "expression": "open",
+              "feedback": "Confrontation about the dinner cracked it open — bribe attempt, municipal loan misused, EU grant fraud. The union rep couldn't hold back once pressed.",
+              "note": "CEO tried to bribe union chairman — 4 million municipal loan used to buy the Portugal factory"
             },
             {
               "tier": 0,
@@ -7084,11 +7084,11 @@
               "note": "The Pettersson brothers"
             },
             {
-              "tier": 3,
-              "response": "Stig Lund ended up in the hospital last month. Methanol, the doctor said. But nobody reported it — Stig said he 'found the bottle.' But I talked to the nurse who treated him. She said there were TWO more methanol cases that same week. Two! Both claimed they 'found' bottles. The hospital reported it to the police but the cases were filed as 'individual alcohol poisoning' — not connected. And the market supervisor? Rolf Dahl. He takes a table fee from every seller. Cash. No receipts. He knows EXACTLY who's selling the moonshine. He's been confronted twice and both times said 'I can't control what people sell.' Three people poisoned and he's collecting fees from the poisoner.",
-              "expression": "open",
-              "feedback": "Three methanol cases in one week, cases deliberately not linked, market supervisor profiting from the seller. Public health emergency.",
-              "note": "TWO more methanol cases that same week — the market supervisor collects fees and knows who's selling"
+              "tier": 2,
+              "response": "Last month Stig Lund ended up in the hospital. Methanol, the doctor said. But nobody reported it. Stig said he 'found the bottle'.",
+              "expression": "guarded",
+              "feedback": "Hospital case of methanol poisoning. Dangerous.",
+              "note": "Nobody reported it"
             },
             {
               "tier": 1,
@@ -7162,11 +7162,11 @@
               "note": "My waitress's daughter came home drunk in November"
             },
             {
-              "tier": 2,
-              "response": "I reported it myself in August. Know what happened? The police called THE PETTERSSONS and warned them. They reported ME for 'defamation'.",
-              "expression": "defiant",
-              "feedback": "Police warned the bootleggers. Corruption with documentation.",
-              "note": "They reported ME for 'defamation'"
+              "tier": 3,
+              "response": "NOTHING! I've called three times! Constable Hedlund says 'we can't control what people sell at a market.' But I talked to the nurse who treated Stig Lund — methanol poisoning. And she said there were TWO more cases that same week! Two! Both claimed they 'found' bottles. The hospital reported it but the police filed them as separate 'individual alcohol poisoning' cases — deliberately unconnected. And Rolf Dahl — the market supervisor — he takes a table fee from every seller. Cash. No receipts. He knows EXACTLY who's selling. Three people poisoned and he collects from the poisoner while the police look the other way.",
+              "expression": "open",
+              "feedback": "Pressed about police inaction — the innkeeper exploded with three methanol cases, deliberate case separation, and the market supervisor's complicity.",
+              "note": "THREE methanol cases in one week — police deliberately filed them separately, market supervisor profits"
             },
             {
               "tier": 1,
@@ -7335,11 +7335,11 @@
               "note": "Supervisor Björk said 'it's always been like that'"
             },
             {
-              "tier": 3,
-              "response": "Fifteen men in technical services have general access. But the copper room — that's where the expensive stuff vanishes from — only three have keys. Plus Björk. And the council chairman has a 'spare key that nobody uses.' Except somebody IS using it. I installed a camera — on my own, don't tell my boss — two weeks ago. The footage shows someone entering the copper room at 11 PM on a Tuesday. They used the chairman's spare key. I can't make out the face because the lighting is bad, but they loaded materials into a van with municipal plates. The van was logged as 'in service' that night — but the GPS shows it drove to an address in Karlstad. A construction site. I checked: the chairman's son has a renovation company in Karlstad.",
-              "expression": "open",
-              "feedback": "Camera evidence, GPS trail, chairman's key and son's company. A complete investigation chain.",
-              "note": "Camera shows someone using the chairman's spare key at 11 PM — the van GPS went to the chairman's son's construction site in Karlstad"
+              "tier": 2,
+              "response": "Everyone in technical services — 15 men. But only three have keys to the copper room. And Björk. And the council chairman has a spare key that 'nobody uses'.",
+              "expression": "neutral",
+              "feedback": "Limited key access — a trail to follow.",
+              "note": "The council chairman has a spare key that 'nobody uses'"
             },
             {
               "tier": 2,
@@ -7374,11 +7374,11 @@
               "note": "Signed 'B.J.' Björn Johansson"
             },
             {
-              "tier": 2,
-              "response": "Council Chairman Gren renovated his summer cottage in July. His brother-in-law got a new roof in August. All with exactly the materials that are missing. I drove past the cottage — those ARE the municipality's windows. I recognize the model.",
-              "expression": "neutral",
-              "feedback": "Connection between municipal theft and politician's private use.",
-              "note": "Council Chairman Gren renovated his summer cottage in..."
+              "tier": 3,
+              "response": "Renovating? *leans in* The council chairman's son. Big renovation in Karlstad. And guess what I did — I installed a camera two weeks ago. My own camera. Don't tell my boss. The footage shows someone entering the copper room at 11 PM on a Tuesday. They used the chairman's spare key — the one 'nobody uses.' Loaded materials into a van with municipal plates. The van was logged as 'in service' that night, but the GPS shows it drove straight to Karlstad. To a construction site. The chairman's son's site. Copper pipes, fittings, insulation. Thousands of kronor. All on camera.",
+              "expression": "open",
+              "feedback": "Camera evidence, GPS trail, chairman's key, son's construction site. A complete investigation chain from one direct question.",
+              "note": "Camera shows chairman's key used at 11 PM — van GPS went to the chairman's son's construction site in Karlstad"
             },
             {
               "tier": 1,
@@ -9613,11 +9613,11 @@
               "note": "Four substitutes save the municipality around 200,000..."
             },
             {
-              "tier": 3,
-              "response": "Informed? The principal FORBADE us from telling parents. 'Say they're new colleagues,' she said. We lied at the parent meeting — on the principal's direct orders. But it gets worse. One of the substitutes — I won't say who — has a restraining order. Against a former student. At another school. The principal KNOWS. I saw the background check on her desk. She said, and I quote: 'We can't afford to lose another body.' A person with a restraining order, teaching children. And the parents have no idea.",
-              "expression": "open",
-              "feedback": "Substitute with restraining order, principal's knowledge, parents deliberately misled. Child safety story.",
-              "note": "One substitute has a restraining order — the principal knows and said 'we can't afford to lose another body'"
+              "tier": 2,
+              "response": "No. The principal FORBADE us from mentioning their substitute status at the parent meeting. 'Say they're new colleagues.' We lied. On the principal's orders.",
+              "expression": "nervous",
+              "feedback": "Principal ordered parents to be misled.",
+              "note": "On the principal's orders"
             }
           ],
           "q1_note": "They cost less"
@@ -9730,11 +9730,11 @@
               "note": "A principal who doesn't lie"
             },
             {
-              "tier": 2,
-              "response": "The employment register. But — *lowers her voice* — I heard that the principal wrote FALSE information on employment certificates. He wrote 'pedagogical competence' for Svensson. That's forgery of an official document.",
-              "expression": "nervous",
-              "feedback": "Forged employment certificate. Serious.",
-              "note": "That's forgery of an official document"
+              "tier": 3,
+              "response": "*very long pause* ...Yes. There's documentation. I've seen the files on the principal's desk. The background checks. *whispers* One of the substitutes — I can't say who — has a restraining order. Against a former student. At another school. The principal KNOWS. I SAW the background check. She said: 'We can't afford to lose another body.' Those were her exact words. A person with a restraining order against a child, teaching children. And the parents think they're just 'new colleagues.' We lied to them. On the principal's direct orders.",
+              "expression": "open",
+              "feedback": "Silence let the teacher confess what she couldn't say outright — a substitute with a restraining order, principal's knowledge, parents deliberately misled.",
+              "note": "One substitute has a restraining order against a student — the principal said 'we can't afford to lose another body'"
             }
           ],
           "q1_note": "Now I stand in a system that lies to parents and..."

@@ -120,6 +120,7 @@
 .ach-category-header {
   font-family: var(--font-headline);
   font-size: 7px;
+  font-weight: bold;
   color: var(--ink-faded);
   letter-spacing: 1.5px;
   text-transform: uppercase;

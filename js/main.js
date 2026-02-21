@@ -110,11 +110,9 @@ async function boot() {
 function scaleCanvas() {
   const wrapper = document.getElementById('game-wrapper');
   const hudH = 34;
-  const scale = Math.min(
-    window.innerWidth / 640,
-    window.innerHeight / (360 + hudH)
-  );
-  wrapper.style.setProperty('--scale', scale);
+  const sx = window.innerWidth / 640;
+  const sy = window.innerHeight / (360 + hudH);
+  wrapper.style.transform = `translate(-50%, -50%) scaleX(${sx}) scaleY(${sy})`;
 }
 
 /**

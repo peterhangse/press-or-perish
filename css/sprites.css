@@ -161,3 +161,31 @@
 .pixel-person.guarded::before  { background: #6a4030; }
 .pixel-person.open::before     { background: #406a40; }
 .pixel-person.hostile::before  { background: #6a2020; }
+
+/* ── Expression body animations ── */
+.sprite-body.anim-nervous {
+  animation: sprite-nervous 1.5s ease-in-out infinite;
+}
+@keyframes sprite-nervous {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-1px); }
+  40%      { transform: translateX(1px); }
+  60%      { transform: translateX(-1px); }
+  80%      { transform: translateX(1px); }
+}
+
+.sprite-body.anim-hostile {
+  animation: sprite-hostile 2s ease-in-out infinite;
+}
+@keyframes sprite-hostile {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-1px) scale(1.01); }
+}
+
+.sprite-body.anim-open {
+  animation: sprite-open 3s ease-in-out infinite;
+}
+@keyframes sprite-open {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-1px); }
+}

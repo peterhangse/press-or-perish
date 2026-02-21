@@ -147,6 +147,7 @@
   background: var(--paper);
   border-left: 3px solid var(--ink-faded);
   margin-right: 40px;
+  position: relative;
   /* Physical note card */
   box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
@@ -306,6 +307,44 @@
 .result-points.ok   { color: var(--deficit-warn); }
 .result-points.bad  { color: var(--deficit-red); }
 
+/* ── Tier-colored NPC response borders ── */
+.dialogue-line.npc.tier-0 { border-left-color: var(--ink-faded); }
+.dialogue-line.npc.tier-1 { border-left-color: #8a7a30; }
+.dialogue-line.npc.tier-2 { border-left-color: #2a7a2a; }
+.dialogue-line.npc.tier-3 { border-left-color: #1a6a3a; border-left-width: 4px; }
+
+/* ── Points badge — floats top-right of NPC response ── */
+.points-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  font-family: var(--font-numbers);
+  font-size: 8px;
+  padding: 1px 4px;
+  border-radius: 2px;
+  color: var(--paper);
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  z-index: 2;
+}
+.points-badge.tier-0 { background: var(--ink-faded); }
+.points-badge.tier-1 { background: #8a7a30; }
+.points-badge.tier-2 { background: #2a7a2a; }
+.points-badge.tier-3 { background: #1a6a3a; }
+
+/* ── Feedback line — short verdict after NPC response ── */
+.feedback-line {
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-style: italic;
+  padding: 2px var(--sp-2);
+  margin-right: 40px;
+  border-left: 2px solid transparent;
+}
+.feedback-line.tier-0 { color: var(--ink-faded); border-left-color: var(--ink-faded); }
+.feedback-line.tier-1 { color: #8a7a30; border-left-color: #8a7a30; }
+.feedback-line.tier-2 { color: #2a7a2a; border-left-color: #2a7a2a; }
+.feedback-line.tier-3 { color: #1a6a3a; border-left-color: #1a6a3a; }
+
 /* ── Notesheet — 70s reporter notepad ── */
 .interview-notesheet {
   margin-top: var(--sp-4);
@@ -367,10 +406,21 @@
 }
 
 .notesheet-dot {
-  color: #2244aa;
   font-size: 9px;
   line-height: 14px;
   flex-shrink: 0;
+  color: #2244aa;
+}
+.notesheet-dot.tier-0 { color: var(--ink-faded); }
+.notesheet-dot.tier-1 { color: #8a7a30; }
+.notesheet-dot.tier-2 { color: #2a7a2a; }
+.notesheet-dot.tier-3 { color: #1a6a3a; }
+
+/* Underline for tier 2-3 notes */
+.notesheet-item.note-underline .notesheet-text {
+  text-decoration: underline;
+  text-decoration-color: rgba(42, 122, 42, 0.4);
+  text-underline-offset: 2px;
 }
 
 .notesheet-text {
@@ -378,4 +428,27 @@
   font-size: 7px;
   color: #2a2210;
   line-height: 14px;
+}
+
+/* ── Portrait expression tint overlay ── */
+.portrait-tint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  z-index: 5;
+}
+.portrait-tint.tint-warm {
+  background: rgba(80, 140, 80, 0.15);
+  opacity: 1;
+}
+.portrait-tint.tint-cold {
+  background: rgba(60, 80, 120, 0.15);
+  opacity: 1;
+}
+.portrait-tint.tint-hostile {
+  background: rgba(140, 40, 40, 0.2);
+  opacity: 1;
 }

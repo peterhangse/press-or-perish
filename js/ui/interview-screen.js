@@ -274,17 +274,42 @@ function handleQ2(q1Archetype, q2Index, questionText) {
   // Typewrite NPC response, then show result (1s pause to let the question land)
   setTimeout(() => {
     typewriteDialogue(dialogue, currentNPC.name, result.response, 'npc', () => {
-      // Add note from Q2 answer
-      addNote(result.note || summarizeResponse(result.response));
+      // ── Feedback: tier-colored border on NPC response ──
+      const npcLines = dialogue.querySelectorAll('.dialogue-line.npc');
+      const lastNPC = npcLines[npcLines.length - 1];
+      if (lastNPC) lastNPC.classList.add(`tier-${result.tier}`);
+
+      // ── Feedback: points badge ──
+      if (result.points > 0 && lastNPC) {
+        const badge = document.createElement('span');
+        badge.className = `points-badge tier-${result.tier}`;
+        badge.textContent = `+${result.points}`;
+        lastNPC.appendChild(badge);
+      }
+
+      // Add note from Q2 answer (with tier)
+      addNote(result.note || summarizeResponse(result.response), result.tier);
 
       // Update expression
       const hint = document.getElementById('npc-expression-hint');
       hint.textContent = getExpressionText(result.expression);
 
+      // ── Feedback: portrait tint + body animation ──
+      applyExpressionTint(result.expression);
+      applyBodyAnimation(result.expression);
+
+      // ── Feedback: one-line verdict below NPC response ──
+      if (result.feedback) {
+        const fbLine = document.createElement('div');
+        fbLine.className = `feedback-line tier-${result.tier}`;
+        fbLine.textContent = result.feedback;
+        dialogue.appendChild(fbLine);
+      }
+
       // Auto-scroll to bottom after Q2 response
       dialogue.scrollTop = dialogue.scrollHeight;
 
-      // Simple continue button (no tier/points display)
+      // Continue button
       const continueBtn = document.createElement('button');
       continueBtn.className = 'btn-paper';
       continueBtn.textContent = 'Write article →';
@@ -427,18 +452,21 @@ function getInitials(name) {
 
 /**
  * Add a note bullet to the notesheet
+ * @param {string} text - Note text
+ * @param {number} [tier] - Interview tier (0-3) for colored feedback
  */
-function addNote(text) {
+function addNote(text, tier) {
   SFX.play('note');
   const notesheet = document.getElementById('interview-notesheet');
   if (!notesheet) return;
 
   const note = document.createElement('div');
   note.className = 'notesheet-item';
+  if (tier !== undefined && tier >= 2) note.classList.add('note-underline');
 
   const dot = document.createElement('span');
-  dot.className = 'notesheet-dot';
-  dot.textContent = '•';
+  dot.className = tier !== undefined ? `notesheet-dot tier-${tier}` : 'notesheet-dot';
+  dot.textContent = tier !== undefined && tier >= 2 ? '★' : '•';
 
   const content = document.createElement('span');
   content.className = 'notesheet-text';
@@ -450,6 +478,47 @@ function addNote(text) {
 
   // Trigger animation
   requestAnimationFrame(() => note.classList.add('visible'));
+}
+
+/**
+ * Apply a color tint overlay on the portrait based on expression
+ */
+function applyExpressionTint(expression) {
+  const portrait = document.querySelector('.npc-portrait');
+  if (!portrait) return;
+
+  // Remove any existing tint
+  portrait.querySelectorAll('.portrait-tint').forEach(el => el.remove());
+
+  let tintClass = '';
+  switch (expression) {
+    case 'open':     case 'grateful': tintClass = 'tint-warm'; break;
+    case 'guarded':  case 'nervous':  tintClass = 'tint-cold'; break;
+    case 'hostile':  case 'defiant':  tintClass = 'tint-hostile'; break;
+    default: return; // neutral — no tint
+  }
+
+  const overlay = document.createElement('div');
+  overlay.className = `portrait-tint ${tintClass}`;
+  portrait.appendChild(overlay);
+}
+
+/**
+ * Apply a body animation to the sprite based on expression
+ */
+function applyBodyAnimation(expression) {
+  const body = document.querySelector('.npc-portrait .sprite-body');
+  if (!body) return;
+
+  // Remove previous expression animations
+  body.classList.remove('anim-nervous', 'anim-hostile', 'anim-open');
+
+  switch (expression) {
+    case 'nervous':  body.classList.add('anim-nervous'); break;
+    case 'hostile':  case 'defiant': body.classList.add('anim-hostile'); break;
+    case 'open':     case 'grateful': body.classList.add('anim-open'); break;
+    // neutral/guarded: keep default idle sway
+  }
 }
 
 /**

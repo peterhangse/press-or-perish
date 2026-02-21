@@ -109,8 +109,11 @@
 
 .interview-story-title {
   font-family: var(--font-headline);
-  font-size: 13px;
+  font-size: 14px;
   color: var(--ink);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .interview-story-desc {
@@ -118,6 +121,7 @@
   font-size: 9px;
   color: var(--ink-faded);
   margin-top: 2px;
+  font-style: italic;
 }
 
 /* Dialogue log */
@@ -171,8 +175,6 @@
   flex-direction: column;
   gap: var(--sp-1);
   flex-shrink: 0;
-  max-height: 45%;
-  overflow-y: auto;
 }
 
 .interview-phase-label {
@@ -188,7 +190,7 @@
   display: flex;
   align-items: center;
   gap: var(--sp-2);
-  padding: var(--sp-2) var(--sp-3);
+  padding: var(--sp-1) var(--sp-3);
   background: linear-gradient(180deg, var(--paper) 0%, var(--paper-aged) 100%);
   border: 1px solid var(--ink-faded);
   cursor: pointer;

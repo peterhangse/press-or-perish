@@ -29,8 +29,21 @@ function getTrack(name) {
     }[name] || 0.3;
 
     const el = new Audio(src);
-    el.loop = true;
     el.volume = 0;
+
+    // Perish track: loop back at 0:18 instead of playing full file
+    if (name === 'perish') {
+      el.loop = false;
+      el.addEventListener('timeupdate', () => {
+        if (el.currentTime >= 18) {
+          el.currentTime = 0;
+          el.play().catch(() => {});
+        }
+      });
+    } else {
+      el.loop = true;
+    }
+
     tracks[name] = { el, maxVolume: vol, fadeInterval: null };
   }
   return tracks[name];

@@ -476,10 +476,10 @@
 
 .diploma-stamp-inner {
   font-family: var(--font-headline);
-  font-size: 7px;
+  font-size: 5.5px;
   color: #6a2c2c;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   line-height: 1.15;
   text-align: center;
 }

@@ -171,21 +171,6 @@
   justify-content: center;
 }
 
-/* Coffee ring stain on desk */
-.desk-leads::before {
-  content: '';
-  position: absolute;
-  bottom: 8px;
-  right: 16px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 2px solid rgba(80, 50, 20, 0.15);
-  background: radial-gradient(circle, rgba(80, 50, 20, 0.06) 40%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-
 /* Pencil scratch marks */
 .desk-leads::after {
   content: '';

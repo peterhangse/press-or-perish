@@ -110,7 +110,7 @@ async function boot() {
 function scaleCanvas() {
   const wrapper = document.getElementById('game-wrapper');
   const hudH = 34;
-  const scale = Math.min(
+  const scale = Math.max(
     window.innerWidth / 640,
     window.innerHeight / (360 + hudH)
   );

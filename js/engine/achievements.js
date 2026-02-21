@@ -110,10 +110,10 @@ const ACHIEVEMENTS = [
   {
     id: 'hidden_gem',
     name: 'Hidden Gem',
-    description: 'Find gold in a low-value story',
+    description: 'Get tier 3 on a base-value ≤ 3 story',
     category: 'interview',
     trigger: 'day_end',
-    check: (ctx) => ctx.tier >= 2 && ctx.baseValue <= 3,
+    check: (ctx) => ctx.tier >= 3 && ctx.baseValue <= 3,
   },
 
   // ═══════════════════════════════════

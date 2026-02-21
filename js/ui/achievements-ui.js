@@ -161,20 +161,26 @@ function renderPanel(panel) {
   const total = Achievements.getTotal();
   const all = Achievements.getAll();
 
-  // Close button
+  // Tab header with close button
+  const tab = document.createElement('div');
+  tab.className = 'achievements-tab';
+
   const closeBtn = document.createElement('button');
   closeBtn.className = 'ach-close-btn';
   closeBtn.textContent = '✕';
   closeBtn.addEventListener('click', () => { SFX.play('click'); closePanel(); });
-  panel.appendChild(closeBtn);
+  tab.appendChild(closeBtn);
 
-  // Tab header
-  const tab = document.createElement('div');
-  tab.className = 'achievements-tab';
-  tab.innerHTML = `
-    <span class="achievements-tab-title">ACHIEVEMENTS</span>
-    <span class="achievements-tab-count">${unlocked.size}/${total}</span>
-  `;
+  const title = document.createElement('span');
+  title.className = 'achievements-tab-title';
+  title.textContent = 'ACHIEVEMENTS';
+  tab.appendChild(title);
+
+  const count = document.createElement('span');
+  count.className = 'achievements-tab-count';
+  count.textContent = `${unlocked.size}/${total}`;
+  tab.appendChild(count);
+
   panel.appendChild(tab);
 
   // Build by category

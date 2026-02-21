@@ -95,6 +95,8 @@
   position: sticky;
   top: 0;
   z-index: 2;
+  display: flex;
+  align-items: center;
 }
 
 .achievements-tab-title {
@@ -109,9 +111,8 @@
   font-family: var(--font-numbers);
   font-size: 14px;
   color: var(--ink-faded);
-  float: right;
+  margin-left: auto;
   line-height: 1;
-  margin-top: -1px;
 }
 
 /* ── Category Headers ── */
@@ -301,23 +302,37 @@
 /* ── Panel close button ── */
 
 .ach-close-btn {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  background: none;
-  border: none;
-  color: var(--ink-faded);
+  background: linear-gradient(180deg, #d8caa0 0%, #c4b080 100%);
+  border: 1px solid #8a7a58;
+  border-radius: 2px;
+  color: #5a4a30;
   cursor: pointer;
-  font-family: var(--font-body);
-  font-size: 12px;
-  padding: 2px 4px;
+  font-family: var(--font-headline);
+  font-size: 9px;
+  font-weight: bold;
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   line-height: 1;
-  z-index: 3;
-  opacity: 0.6;
+  padding: 0;
+  margin-right: 6px;
+  vertical-align: middle;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.25);
+  flex-shrink: 0;
+  transition: background 0.15s, box-shadow 0.15s;
 }
 
 .ach-close-btn:hover {
-  opacity: 1;
+  background: linear-gradient(180deg, #e0d4a8 0%, #d0bc88 100%);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.35);
+  color: #3a2a10;
+}
+
+.ach-close-btn:active {
+  background: linear-gradient(180deg, #b8a878 0%, #a89868 100%);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
 }
 
 /* ── Scrollbar styling ── */

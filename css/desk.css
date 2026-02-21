@@ -161,13 +161,14 @@
 .desk-leads {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 100px);
   grid-template-rows: 1fr 1fr;
   gap: var(--sp-1);
   padding: var(--sp-1) var(--sp-3);
   overflow: hidden;
   position: relative;
   align-content: stretch;
+  justify-content: center;
 }
 
 /* Coffee ring stain on desk */

@@ -37,7 +37,7 @@
 
 /* — Top bar with window — */
 .desk-top-bar {
-  height: 60px;
+  height: 48px;
   position: relative;
   display: flex;
   align-items: flex-end;
@@ -53,7 +53,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 200px;
-  height: 50px;
+  height: 42px;
   border: 2px solid #4a3a28;
   border-top: none;
   overflow: hidden;
@@ -161,7 +161,7 @@
 .desk-leads {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(4, 100px);
+  grid-template-columns: repeat(4, 130px);
   grid-template-rows: 1fr 1fr;
   gap: var(--sp-1);
   padding: var(--sp-1) var(--sp-3);
@@ -447,7 +447,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--sp-2) var(--sp-8);
+  padding: var(--sp-1) var(--sp-8);
   background:
     /* Metal strip */
     linear-gradient(180deg,

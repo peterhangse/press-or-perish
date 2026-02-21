@@ -11,7 +11,7 @@
 const ACHIEVEMENTS = [
 
   // ═══════════════════════════════════
-  //  MILESTONES (6)
+  //  MILESTONES (9)
   // ═══════════════════════════════════
 
   {
@@ -63,8 +63,33 @@ const ACHIEVEMENTS = [
     check: (ctx) => ctx.baseValue === 8 && ctx.tier === 3,
   },
 
+  {
+    id: 'margin_of_error',
+    name: 'Margin of Error',
+    description: 'Win a day by exactly 1 point',
+    category: 'milestones',
+    trigger: 'day_end',
+    check: (ctx) => (ctx.points - ctx.competitorScore) === 1,
+  },
+  {
+    id: 'overqualified',
+    name: 'Overqualified',
+    description: 'Score higher than the competitor on Day 1',
+    category: 'milestones',
+    trigger: 'day_end',
+    check: (ctx) => ctx.day === 1 && ctx.points > ctx.competitorScore,
+  },
+  {
+    id: 'front_page_material',
+    name: 'Front Page Material',
+    description: 'Score 14 on a single day',
+    category: 'milestones',
+    trigger: 'day_end',
+    check: (ctx) => ctx.points >= 14,
+  },
+
   // ═══════════════════════════════════
-  //  INTERVIEW MASTERY (5)
+  //  INTERVIEW MASTERY (8)
   // ═══════════════════════════════════
 
   {
@@ -116,8 +141,36 @@ const ACHIEVEMENTS = [
     check: (ctx) => ctx.tier >= 3 && ctx.baseValue <= 3,
   },
 
+  {
+    id: 'bulldozer',
+    name: 'Bulldozer',
+    description: 'Reach Tier 3 using Pressure',
+    category: 'interview',
+    trigger: 'day_end',
+    check: (ctx) => ctx.tier === 3 && ctx.q1Archetype === 'pressure',
+  },
+  {
+    id: 'just_the_facts',
+    name: 'Just the Facts',
+    description: 'Reach Tier 3 using Direct',
+    category: 'interview',
+    trigger: 'day_end',
+    check: (ctx) => ctx.tier === 3 && ctx.q1Archetype === 'direct',
+  },
+  {
+    id: 'one_trick_pony',
+    name: 'One-Trick Pony',
+    description: 'Use the same archetype all week',
+    category: 'interview',
+    trigger: 'game_over',
+    check: (ctx) => {
+      const archs = ctx.dayHistory.map(d => d.q1Archetype).filter(Boolean);
+      return archs.length >= 5 && new Set(archs).size === 1;
+    },
+  },
+
   // ═══════════════════════════════════
-  //  SURVIVAL (5)
+  //  SURVIVAL (8)
   // ═══════════════════════════════════
 
   {
@@ -175,8 +228,33 @@ const ACHIEVEMENTS = [
     },
   },
 
+  {
+    id: 'not_dead_yet',
+    name: 'Not Dead Yet',
+    description: 'Survive Friday at deficit -9',
+    category: 'survival',
+    trigger: 'game_over',
+    check: (ctx) => ctx.survived && ctx.deficit === -9,
+  },
+  {
+    id: 'photo_finish',
+    name: 'Photo Finish',
+    description: 'Survive with exactly 0 deficit',
+    category: 'survival',
+    trigger: 'game_over',
+    check: (ctx) => ctx.survived && ctx.deficit === 0,
+  },
+  {
+    id: 'tuesday_is_the_new_friday',
+    name: 'Tuesday Is the New Friday',
+    description: 'Perish on Day 2',
+    category: 'survival',
+    trigger: 'game_over',
+    check: (ctx) => !ctx.survived && ctx.dayHistory.length <= 2,
+  },
+
   // ═══════════════════════════════════
-  //  STORIES — Specific legendary moments (9)
+  //  STORIES — Specific legendary moments (12)
   // ═══════════════════════════════════
 
   {
@@ -252,8 +330,33 @@ const ACHIEVEMENTS = [
     check: (ctx) => ctx.storyId === 'stöld_på_ica' && ctx.tier >= 1,
   },
 
+  {
+    id: 'stop_the_presses',
+    name: 'Stop the Presses!',
+    description: 'Tier 3 on the wiretap scandal',
+    category: 'stories',
+    trigger: 'day_end',
+    check: (ctx) => ctx.storyId === 'telefonavlyssning' && ctx.tier === 3,
+  },
+  {
+    id: 'follow_the_money',
+    name: 'Follow the Money',
+    description: 'Crack the land grab wide open',
+    category: 'stories',
+    trigger: 'day_end',
+    check: (ctx) => ctx.storyId === 'bostadsbubblan' && ctx.tier === 3,
+  },
+  {
+    id: 'pumpkin_pulitzer',
+    name: 'Pumpkin Pulitzer',
+    description: 'Tier 3 on a 200-kilo pumpkin story',
+    category: 'stories',
+    trigger: 'day_end',
+    check: (ctx) => ctx.storyId === 'jättepumpan' && ctx.tier === 3,
+  },
+
   // ═══════════════════════════════════
-  //  ROOKIE MISTAKES (5)
+  //  ROOKIE MISTAKES (8)
   // ═══════════════════════════════════
 
   {
@@ -297,6 +400,30 @@ const ACHIEVEMENTS = [
     check: (ctx) => {
       return ctx.dayHistory.length >= 5 && ctx.dayHistory.every(d => d.tier === 0);
     },
+  },
+  {
+    id: 'wrong_crowd',
+    name: 'Wrong Crowd',
+    description: 'Pressure a scared whistleblower on Day 1',
+    category: 'rookie',
+    trigger: 'day_end',
+    check: (ctx) => ctx.day === 1 && ctx.q1Archetype === 'pressure' && ctx.tier === 0,
+  },
+  {
+    id: 'speedrun',
+    name: 'Speedrun',
+    description: 'Get fired before Wednesday',
+    category: 'rookie',
+    trigger: 'game_over',
+    check: (ctx) => !ctx.survived && ctx.dayHistory.length <= 3,
+  },
+  {
+    id: 'silence_is_awkward',
+    name: 'Silence Is Awkward',
+    description: 'Use silence and get Tier 0',
+    category: 'rookie',
+    trigger: 'day_end',
+    check: (ctx) => ctx.q1Archetype === 'silence' && ctx.tier === 0,
   },
 ];
 

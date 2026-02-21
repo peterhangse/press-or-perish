@@ -150,6 +150,7 @@
 
 .breakdown-value.positive { color: var(--deficit-safe); }
 .breakdown-value.negative { color: var(--deficit-red); }
+.breakdown-value.fail { color: var(--deficit-red); font-weight: bold; }
 
 /* Deficit update */
 .results-deficit {

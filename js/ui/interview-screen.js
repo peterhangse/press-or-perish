@@ -198,11 +198,33 @@ function handleQ1(archetype, questionText) {
   // Get Q1 response from story data
   const branch = currentStory.interview.branches[archetype];
 
+  // Compute Q1 bonus at pick time
+  const q1Bonus = InterviewEngine.computeQ1Bonus(currentStory, archetype);
+
   // Typewrite NPC response, then continue (1s pause to let the question land)
   setTimeout(() => {
     typewriteDialogue(dialogue, currentNPC.name, branch.q1_response, 'npc', () => {
-      // Add note from Q1 answer
-      addNote(branch.q1_note || summarizeResponse(branch.q1_response));
+      // ── Q1 bonus badge on NPC response ──
+      const npcLines = dialogue.querySelectorAll('.dialogue-line.npc');
+      const lastNPC = npcLines[npcLines.length - 1];
+      if (lastNPC) {
+        if (q1Bonus > 0) {
+          lastNPC.classList.add('tier-2');
+          const badge = document.createElement('span');
+          badge.className = 'points-badge tier-2';
+          badge.textContent = `+${q1Bonus}`;
+          lastNPC.appendChild(badge);
+        } else {
+          lastNPC.classList.add('tier-0');
+          const badge = document.createElement('span');
+          badge.className = 'points-badge fail';
+          badge.textContent = '\u2717';
+          lastNPC.appendChild(badge);
+        }
+      }
+
+      // Add note from Q1 answer (with bonus)
+      addNote(branch.q1_note || summarizeResponse(branch.q1_response), undefined, q1Bonus);
 
       // Update expression hint
       const hint = document.getElementById('npc-expression-hint');
@@ -279,17 +301,23 @@ function handleQ2(q1Archetype, q2Index, questionText) {
       const lastNPC = npcLines[npcLines.length - 1];
       if (lastNPC) lastNPC.classList.add(`tier-${result.tier}`);
 
-      // ── Feedback: points badge (tier bonus only, not total) ──
-      const tierBonus = result.tier * 2;
-      if (tierBonus > 0 && lastNPC) {
-        const badge = document.createElement('span');
-        badge.className = `points-badge tier-${result.tier}`;
-        badge.textContent = `+${tierBonus}`;
-        lastNPC.appendChild(badge);
+      // ── Feedback: Q2 bonus badge ──
+      if (lastNPC) {
+        if (result.q2Bonus > 0) {
+          const badge = document.createElement('span');
+          badge.className = `points-badge tier-${result.tier}`;
+          badge.textContent = `+${result.q2Bonus}`;
+          lastNPC.appendChild(badge);
+        } else {
+          const badge = document.createElement('span');
+          badge.className = 'points-badge fail';
+          badge.textContent = '\u2717';
+          lastNPC.appendChild(badge);
+        }
       }
 
-      // Add note from Q2 answer (with tier)
-      addNote(result.note || summarizeResponse(result.response), result.tier);
+      // Add note from Q2 answer (with tier and bonus)
+      addNote(result.note || summarizeResponse(result.response), result.tier, result.q2Bonus);
 
       // Update expression
       const hint = document.getElementById('npc-expression-hint');
@@ -330,6 +358,8 @@ function handleQ2(q1Archetype, q2Index, questionText) {
             onComplete({
               tier: result.tier,
               points: result.points,
+              q1Bonus: result.q1Bonus,
+              q2Bonus: result.q2Bonus,
               headlines,
               q1Archetype,
               q2Index,
@@ -455,8 +485,9 @@ function getInitials(name) {
  * Add a note bullet to the notesheet
  * @param {string} text - Note text
  * @param {number} [tier] - Interview tier (0-3) for colored feedback
+ * @param {number} [bonus] - Bonus points this note contributed
  */
-function addNote(text, tier) {
+function addNote(text, tier, bonus) {
   SFX.play('note');
   const notesheet = document.getElementById('interview-notesheet');
   if (!notesheet) return;
@@ -475,6 +506,20 @@ function addNote(text, tier) {
 
   note.appendChild(dot);
   note.appendChild(content);
+
+  // Per-note bonus indicator
+  if (bonus !== undefined) {
+    const bonusEl = document.createElement('span');
+    if (bonus > 0) {
+      bonusEl.className = 'notesheet-bonus positive';
+      bonusEl.textContent = `+${bonus}`;
+    } else {
+      bonusEl.className = 'notesheet-bonus fail';
+      bonusEl.textContent = '✗';
+    }
+    note.appendChild(bonusEl);
+  }
+
   notesheet.appendChild(note);
 
   // Trigger animation

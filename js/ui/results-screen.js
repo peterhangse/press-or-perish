@@ -40,7 +40,8 @@ export function render(opts) {
   const breakdown = document.createElement('div');
   breakdown.className = 'results-breakdown';
   addNewsValueRow(breakdown, opts.baseValue);
-  addInterviewBonusRow(breakdown, opts.tier || 0, opts.tierBonus);
+  addInterviewBonusRow(breakdown, 'Approach (Q1)', opts.q1Bonus || 0);
+  addInterviewBonusRow(breakdown, 'Follow-up (Q2)', opts.q2Bonus || 0);
   addBreakdownRow(breakdown, 'Your total', `${opts.playerScore}`, 'positive', true);
   phase1.appendChild(breakdown);
 
@@ -293,43 +294,25 @@ function addNewsValueRow(container, baseValue) {
 }
 
 /**
- * Add the interview bonus row with detail dots
- * tier 0 = no details, tier 1 = 1 dot, tier 2 = 2 dots, tier 3 = 3 dots
+ * Add an interview bonus row (Q1 or Q2) showing +N or ✗
  */
-function addInterviewBonusRow(container, tier, bonus) {
+function addInterviewBonusRow(container, label, bonus) {
   const row = document.createElement('div');
   row.className = 'breakdown-row';
 
   const labelEl = document.createElement('span');
-  labelEl.textContent = 'Interview bonus';
-
-  const rightSide = document.createElement('span');
-  rightSide.style.cssText = 'display:flex; align-items:center; gap:6px;';
-
-  // Detail dots — 3 slots, filled based on tier
-  const dots = document.createElement('span');
-  dots.style.cssText = 'display:flex; gap:3px; align-items:center;';
-  for (let i = 0; i < 3; i++) {
-    const dot = document.createElement('span');
-    dot.style.cssText = `width:6px; height:6px; border-radius:50%; border:1px solid; display:inline-block;`;
-    if (i < tier) {
-      dot.style.background = 'var(--deficit-safe)';
-      dot.style.borderColor = 'var(--deficit-safe)';
-    } else {
-      dot.style.background = 'transparent';
-      dot.style.borderColor = 'var(--ink-faded)';
-    }
-    dots.appendChild(dot);
-  }
+  labelEl.textContent = label;
 
   const valEl = document.createElement('span');
-  valEl.className = 'breakdown-value positive';
-  valEl.textContent = `+${bonus}`;
-
-  rightSide.appendChild(dots);
-  rightSide.appendChild(valEl);
+  if (bonus > 0) {
+    valEl.className = 'breakdown-value positive';
+    valEl.textContent = `+${bonus}`;
+  } else {
+    valEl.className = 'breakdown-value fail';
+    valEl.textContent = '✗';
+  }
 
   row.appendChild(labelEl);
-  row.appendChild(rightSide);
+  row.appendChild(valEl);
   container.appendChild(row);
 }

@@ -30,22 +30,38 @@ export function getQ2Options(story, q1Archetype) {
 }
 
 /**
+ * Compute Q1 bonus based on branch quality.
+ * If the chosen archetype's branch has ANY outcome with tier >= 2,
+ * the approach was good and earns +2. Otherwise 0.
+ */
+export function computeQ1Bonus(story, q1Archetype) {
+  const branch = story.interview.branches[q1Archetype];
+  if (!branch || !branch.outcomes) return 0;
+  const maxTier = Math.max(...branch.outcomes.map(o => o.tier));
+  return maxTier >= 2 ? 2 : 0;
+}
+
+/**
  * Resolve the full interview outcome
  * @param {Object} story - Story data
  * @param {string} q1Archetype - The Q1 archetype chosen
  * @param {number} q2Index - Index of Q2 option chosen (0-2)
- * @returns {Object} { tier, points, response, expression, feedback }
+ * @returns {Object} { tier, points, q1Bonus, q2Bonus, response, expression, feedback }
  */
 export function resolveInterview(story, q1Archetype, q2Index) {
   const branch = story.interview.branches[q1Archetype];
   const outcome = branch.outcomes[q2Index];
 
   const tier = outcome.tier;
-  const points = story.base_value + (tier * 2);
+  const q1Bonus = computeQ1Bonus(story, q1Archetype);
+  const q2Bonus = Math.max(0, (tier * 2) - q1Bonus);
+  const points = story.base_value + q1Bonus + q2Bonus;
 
   return {
     tier,
     points,
+    q1Bonus,
+    q2Bonus,
     response: outcome.response,
     expression: outcome.expression,
     feedback: outcome.feedback || '',

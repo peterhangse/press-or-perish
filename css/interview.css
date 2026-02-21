@@ -330,6 +330,11 @@
 .points-badge.tier-1 { background: #8a7a30; }
 .points-badge.tier-2 { background: #2a7a2a; }
 .points-badge.tier-3 { background: #1a6a3a; }
+.points-badge.fail {
+  background: var(--deficit-red);
+  font-size: 9px;
+  font-weight: bold;
+}
 
 /* ── Feedback line — short verdict after NPC response ── */
 .feedback-line {
@@ -428,6 +433,24 @@
   font-size: 7px;
   color: #2a2210;
   line-height: 14px;
+  flex: 1;
+}
+
+/* Per-note bonus indicator */
+.notesheet-bonus {
+  font-family: var(--font-numbers);
+  font-size: 7px;
+  font-weight: bold;
+  flex-shrink: 0;
+  margin-left: 4px;
+  line-height: 14px;
+}
+.notesheet-bonus.positive {
+  color: #2a7a2a;
+}
+.notesheet-bonus.fail {
+  color: var(--deficit-red);
+  font-size: 8px;
 }
 
 /* ── Portrait expression tint overlay ── */

@@ -504,7 +504,7 @@
   {
     "id": "land_deal",
     "title": "The Land Deal",
-    "description": "The municipality plans to buy land from a local farmer for a new industrial area. The price seems suspiciously low.",
+    "description": "The municipality is buying farmland for a new industrial area at a suspiciously low price.",
     "lead_text": "The municipality is buying Persson's land cheap. The price is far below market value, and a municipal commissioner has personal ties to the buyer.",
     "preview": "Copy of municipal minutes, unofficially shared.",
     "source_type": "document",
@@ -5023,7 +5023,7 @@
     "id": "kommunens_julfest",
     "title": "The Municipality's Christmas Party",
     "description": "The municipality's annual Christmas party for employees seems to have been unusually expensive this year. The bill raises questions.",
-    "lead_text": "Minutes: Entertainment account charged 14,200 kr for 'staff activity December'...",
+    "lead_text": "Entertainment account charged 14,200 kr for 'staff activity December'...",
     "preview": "Anonymous envelope with a copy of the municipality's account statement. 'Staff activity December' underlined in red.",
     "source_type": "document",
     "difficulty": "medium",

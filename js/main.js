@@ -240,9 +240,11 @@ function showDayZeroResults(story, interviewResult) {
     bossQuote: `Welcome to the real world, ${pn()}. This is what we're up against.`,
     competitorShock: 'Regionbladet ran a massive scoop. This is the competition. Every day counts.',
     onContinue: () => {
-      // Reset state cleanly — Day Zero doesn't count
+      // Reset state cleanly — Day Zero doesn't count toward score
       state.deficit = 0;
-      state.usedStoryIds = [];
+      // Keep the day-zero story in usedStoryIds so it won't appear again
+      const dayZeroStoryId = state.selectedLead;
+      state.usedStoryIds = dayZeroStoryId ? [dayZeroStoryId] : [];
       state.dayHistory = [];
       startDay(1);
     },

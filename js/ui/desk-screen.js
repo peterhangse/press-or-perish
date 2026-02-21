@@ -62,6 +62,9 @@ export function render(leads, day, bossNote, callback) {
     card.className = 'lead-card';
     card.dataset.index = i;
 
+    // Random visual flair — each card gets a unique look
+    applyCardFlair(card, lead, i);
+
     // Source badge — colored tag
     const badge = document.createElement('div');
     badge.className = `lead-badge ${lead.source_type}`;
@@ -215,6 +218,39 @@ function selectLead(index) {
   const btn = document.querySelector('.desk-investigate-btn');
   if (label) label.textContent = `ASSIGNED: ${currentLeads[index].title}`;
   if (btn) btn.disabled = false;
+}
+
+/**
+ * Apply random visual flair to a lead card based on source type
+ */
+function applyCardFlair(card, lead, index) {
+  // Seeded pseudo-random based on story id for consistency
+  const seed = (lead.id || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0) + index;
+
+  // ~30% chance of coffee stain
+  if ((seed * 7) % 10 < 3) {
+    card.classList.add('flair-coffee');
+  }
+
+  // ~25% chance of torn/rugged edge
+  if ((seed * 13) % 100 < 25) {
+    card.classList.add('flair-torn');
+  }
+
+  // Letters get a stamp overlay ~50% of the time
+  if (lead.source_type === 'letter' && (seed * 11) % 10 < 5) {
+    card.classList.add('flair-stamp');
+  }
+
+  // Documents get a paper-clip ~40% of the time
+  if (lead.source_type === 'document' && (seed * 17) % 10 < 4) {
+    card.classList.add('flair-clip');
+  }
+
+  // Street tips get a crumpled look ~35% of the time
+  if (lead.source_type === 'street' && (seed * 19) % 100 < 35) {
+    card.classList.add('flair-crumpled');
+  }
 }
 
 /**

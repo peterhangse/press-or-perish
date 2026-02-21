@@ -32,7 +32,7 @@ function lerpColor(a, b, t) {
 
 const DAY_NAMES = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
 const CLOCK_PHASES = {
-  desk:      { time: '08:00', phase: 'Morning' },
+  desk:      { time: '08:15', phase: 'Morning' },
   interview: { time: '12:00', phase: 'Midday' },
   publish:   { time: '16:00', phase: 'Afternoon' },
   sleep:     { time: '22:00', phase: 'Evening' },

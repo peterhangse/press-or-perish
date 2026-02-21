@@ -328,8 +328,9 @@
 }
 .points-badge.tier-0 { background: var(--ink-faded); }
 .points-badge.tier-1 { background: #8a7a30; }
-.points-badge.tier-2 { background: #2a7a2a; }
-.points-badge.tier-3 { background: #1a6a3a; }
+.points-badge.tier-2 { background: var(--deficit-safe); }
+.points-badge.tier-3 { background: var(--deficit-safe); }
+.points-badge.positive { background: var(--deficit-safe); }
 .points-badge.fail {
   background: var(--deficit-red);
   font-size: 9px;

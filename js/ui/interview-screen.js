@@ -211,7 +211,7 @@ function handleQ1(archetype, questionText) {
         if (q1Bonus > 0) {
           lastNPC.classList.add('tier-2');
           const badge = document.createElement('span');
-          badge.className = 'points-badge tier-2';
+          badge.className = 'points-badge positive';
           badge.textContent = `+${q1Bonus}`;
           lastNPC.appendChild(badge);
         } else {
@@ -305,7 +305,7 @@ function handleQ2(q1Archetype, q2Index, questionText) {
       if (lastNPC) {
         if (result.q2Bonus > 0) {
           const badge = document.createElement('span');
-          badge.className = `points-badge tier-${result.tier}`;
+          badge.className = 'points-badge positive';
           badge.textContent = `+${result.q2Bonus}`;
           lastNPC.appendChild(badge);
         } else {

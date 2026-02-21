@@ -31,7 +31,6 @@ function lerpColor(a, b, t) {
 }
 
 export { getDeficitColor };
-}
 
 const DAY_NAMES = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
 const CLOCK_PHASES = {

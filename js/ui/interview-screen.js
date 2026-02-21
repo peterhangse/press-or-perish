@@ -279,11 +279,12 @@ function handleQ2(q1Archetype, q2Index, questionText) {
       const lastNPC = npcLines[npcLines.length - 1];
       if (lastNPC) lastNPC.classList.add(`tier-${result.tier}`);
 
-      // ── Feedback: points badge ──
-      if (result.points > 0 && lastNPC) {
+      // ── Feedback: points badge (tier bonus only, not total) ──
+      const tierBonus = result.tier * 2;
+      if (tierBonus > 0 && lastNPC) {
         const badge = document.createElement('span');
         badge.className = `points-badge tier-${result.tier}`;
-        badge.textContent = `+${result.points}`;
+        badge.textContent = `+${tierBonus}`;
         lastNPC.appendChild(badge);
       }
 

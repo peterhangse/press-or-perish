@@ -7783,8 +7783,8 @@
   {
     "id": "vargjakten",
     "title": "The Wolf Hunt",
-    "description": "Farmers are organizing an illegal hunt after wolves killed sheep.",
-    "lead_text": "They're gathering tonight to shoot the wolf — with the municipality's blessing",
+    "description": "Farmers are organizing an illegal hunt after wolves killed sheep. Your source? Your own boss, Gunnar, who also runs his family farm.",
+    "lead_text": "They're gathering tonight to shoot the wolf — and your boss Gunnar is one of them",
     "preview": "Anonymous phone call, the voice sounds nervous.",
     "source_type": "street",
     "difficulty": "hard",
@@ -7792,21 +7792,33 @@
     "category": "breaking_news",
     "npc_id": "gunnar_ek",
     "npc_name": "Gunnar Ek",
-    "npc_title": "Farmer",
+    "npc_title": "Your editor-in-chief (and farmer)",
+    "boss_result_quotes": {
+      "positive": [
+        "Good. You kept it fair. I appreciate that, {name}.",
+        "I read the piece. Fair reporting. I can live with that.",
+        "You told the farmers' story without making us look like criminals. Good work."
+      ],
+      "negative": [
+        "You published THAT? About the hunt? MY hunt? We'll talk about this.",
+        "I trusted you, {name}. And you made the hunters look like thugs. Don't expect warmth tomorrow.",
+        "Council Chairman Gren called. He's furious. I'm furious. You're in trouble."
+      ]
+    },
     "interview": {
-      "opening_line": "I've lost eight sheep. Eight. The Environmental Protection Agency does nothing. So we'll do it ourselves.",
+      "opening_line": "Close the door. *looks at you over his glasses* Yes, I'm a farmer too. Eight sheep, gone. The Environmental Protection Agency does nothing. So we'll handle it ourselves. And yes — I'm telling YOU. Because I trust you to be fair.",
       "q1_options": [
         {
           "archetype": "friendly",
-          "text": "It must be terrible to lose your animals. Tell me what happened."
+          "text": "I had no idea about the sheep, Gunnar. That must be awful."
         },
         {
           "archetype": "direct",
-          "text": "When is the hunt and who is participating?"
+          "text": "When is the hunt? Who's going? I need details, boss or not."
         },
         {
           "archetype": "pressure",
-          "text": "Poaching is a crime. Aren't you risking prison?"
+          "text": "You know this is illegal, right? You're my editor — and a poacher?"
         },
         {
           "archetype": "silence",
@@ -7815,160 +7827,160 @@
       ],
       "branches": {
         "friendly": {
-          "q1_response": "I found the first lamb in May. Half eaten. My daughter cried for three days. Then more came. Every week.",
-          "expression_hint": "Rough sun-tanned hands, clenching",
+          "q1_response": "Awful? I found the first lamb in May. Half eaten. My daughter — you've met her at the office Christmas party — she cried for three days. But you're not here as my employee. You're here as a reporter. So ask.",
+          "expression_hint": "Rough hands on the desk, conflicted",
           "q2_options": [
             {
-              "text": "Did you contact the authorities?"
+              "text": "Did you contact the authorities before deciding on the hunt?"
             },
             {
-              "text": "How many farmers are affected?"
+              "text": "How many other farmers are affected?"
             },
             {
-              "text": "What does your family say about taking matters into your own hands?"
+              "text": "What does your family think about you doing this — and telling a reporter?"
             }
           ],
           "outcomes": [
             {
               "tier": 1,
-              "response": "The Environmental Protection Agency said 'we're investigating'. Since May. Five months. Not even an inspection.",
+              "response": "The Environmental Protection Agency said 'we're investigating'. Since May. Five months. Not even an inspection. I'm not a patient man, {name}. You know that.",
               "expression": "defiant",
               "feedback": "Bureaucratic slowness but standard.",
-              "note": "The Environmental Protection Agency said 'we're..."
+              "note": "Environmental Protection Agency: investigating since May"
             },
             {
               "tier": 2,
-              "response": "Four farms. 23 animals total. Svensson lost his breeding ram — 12,000 kronor. No compensation paid.",
+              "response": "Four farms. 23 animals total. Svensson lost his breeding ram — 12,000 kronor. No compensation. And these are families I've known my whole life.",
               "expression": "guarded",
               "feedback": "Four affected farms, figures, no compensation.",
-              "note": "Svensson lost his breeding ram"
+              "note": "23 animals, four farms, no compensation"
             },
             {
               "tier": 1,
-              "response": "The wife doesn't want me to go. But what am I supposed to do? Watch while they eat up the flock?",
+              "response": "The wife doesn't want me to go. She says: 'What if {name} writes about it?' I told her — that's exactly why I'm talking to you. So it's done right.",
               "expression": "nervous",
-              "feedback": "Human dilemma but no facts.",
-              "note": "The wife doesn't want me to go"
+              "feedback": "Human dilemma but no new facts.",
+              "note": "His wife worries about the story"
             }
           ],
-          "q1_note": "My daughter cried for three days"
+          "q1_note": "His daughter cried for three days"
         },
         "direct": {
-          "q1_response": "Tomorrow night. Two o'clock. Six men with rifles. We know where the wolf is — at the foot of Hagaberget.",
+          "q1_response": "*leans back* You're not wasting time. Good. Tomorrow night. Two o'clock. Six men with rifles. Hagaberget. And before you ask — yes, I'm one of the six.",
           "expression_hint": "Lowers his voice, testing you",
           "q2_options": [
             {
-              "text": "Who organized it? And has the municipality given any signal?"
+              "text": "Who organized it? Does the municipality know?"
             },
             {
-              "text": "How do you know where the wolf is?"
+              "text": "You're giving me details that could get you arrested. Why?"
             },
             {
-              "text": "What happens if you get caught?"
+              "text": "What happens if you get caught — as an editor AND a hunter?"
             }
           ],
           "outcomes": [
             {
               "tier": 3,
-              "response": "Council Chairman Gren called last week. Said: 'If a wolf disappears and no one sees, then it doesn't exist.' Those are HIS words. Not mine.",
+              "response": "Council Chairman Gren called last week. Said: 'If a wolf disappears and no one sees, then it doesn't exist.' Those are HIS words. *taps the desk* Print THAT if you dare.",
               "expression": "defiant",
               "feedback": "Council chairman encouraged illegal hunting. Political scandal.",
-              "note": "Council Chairman Gren called last week"
-            },
-            {
-              "tier": 1,
-              "response": "Tracks. Droppings. And Persson's hunting dog found the den. We're farmers — we know the forest.",
-              "expression": "neutral",
-              "feedback": "Tracking details without news angle.",
-              "note": "Persson's hunting dog found the den"
+              "note": "Council Chairman Gren gave the green light"
             },
             {
               "tier": 2,
-              "response": "Caught? Who's going to report us? The police said they 'prioritize other matters'. And the hunting inspector Lundin is hunting WITH us. He's one of the six.",
+              "response": "Because I'd rather YOU write it than some Stockholm journalist who'll turn us into yokels with rifles. Write it fair, {name}. That's all I ask.",
+              "expression": "guarded",
+              "feedback": "Reveals his motive — controlling the narrative through trust.",
+              "note": "He wants to control the narrative"
+            },
+            {
+              "tier": 2,
+              "response": "Caught? The police said they 'prioritize other matters'. And the hunting inspector Lundin is hunting WITH us. He's one of the six. *smiles darkly* Who's going to report us?",
               "expression": "defiant",
               "feedback": "The hunting inspector participates — a government official in an illegal hunt.",
-              "note": "The hunting inspector Lundin is hunting WITH us"
+              "note": "Hunting inspector Lundin is one of the six"
             }
           ],
-          "q1_note": "At the foot of Hagaberget"
+          "q1_note": "Six men, Hagaberget, tomorrow night"
         },
         "pressure": {
-          "q1_response": "Prison? Go ahead. I lose 30,000 a year from wolf damage. Are you going to pay?",
-          "expression_hint": "Arms crossed, challenging",
+          "q1_response": "*stands up slowly* Careful, {name}. I hired you. And I'm not a poacher. I'm a farmer protecting his livestock. There's a difference. But since you went there — I'll give you an answer.",
+          "expression_hint": "Towering over the desk, dangerous",
           "q2_options": [
             {
-              "text": "You have every right to be angry — but how do you feel about the rule of law?"
+              "text": "I'm sorry — but how do you feel about the rule of law as a newspaper editor?"
             },
             {
               "text": "Has the municipality offered fencing or compensation?"
             },
             {
-              "text": "I'm not your enemy, Gunnar. I want to tell your side."
+              "text": "I'm not trying to attack you, Gunnar. But I have to ask the hard questions."
             }
           ],
           "outcomes": [
             {
               "tier": 0,
-              "response": "The rule of law? Get out of here. *stands up*",
+              "response": "The rule of law? *cold stare* You're lecturing ME about ethics? In MY newsroom? Interview's over. Get back to your desk.",
               "expression": "hostile",
-              "feedback": "Terminated. You moralized instead of listening.",
-              "note": "The rule of law. Get out of here"
+              "feedback": "Terminated. You moralized your own boss.",
+              "note": "Interview terminated — he shut it down"
             },
             {
               "tier": 2,
-              "response": "The municipality APPROVED fencing funds. 40,000. But the money was never paid out. It was 'transferred' to another budget line. It's in the minutes. The farmers got nothing.",
+              "response": "The municipality APPROVED fencing funds. 40,000 kronor. But the money was never paid out — 'transferred' to another budget line. It's in the minutes. I'll show you. THAT is the real story.",
               "expression": "defiant",
-              "feedback": "Municipal funds embezzled — new angle.",
-              "note": "It's in the minutes"
+              "feedback": "Municipal funds embezzled — new angle. He's steering you.",
+              "note": "Fencing funds approved but never paid out"
             },
             {
               "tier": 1,
-              "response": "*softens* My side? That we're doing what the state won't. Protecting our property. It's no more complicated than that.",
+              "response": "*sits back down, softens* Fair enough. You're doing your job. I respect that. Even when it's aimed at me. My side? We're doing what the state won't.",
               "expression": "guarded",
-              "feedback": "Explains motive but nothing new.",
-              "note": "It's no more complicated than that"
+              "feedback": "Explains motive but nothing new. Grudging respect.",
+              "note": "We're doing what the state won't"
             }
           ],
-          "q1_note": "I lose 30,000 a year from wolf damage"
+          "q1_note": "He's angry — but answering"
         },
         "silence": {
-          "q1_response": "*stares at the rifle in the corner* Dad shot the last bear in the parish in 1942. Nobody convicted him. Times change. Or do they?",
-          "expression_hint": "Old Husqvarna on the wall",
+          "q1_response": "*long pause, stares at the wall* You know, my father shot the last bear in the parish in 1942. Nobody convicted him. Times change. *looks at you* Or do they, {name}?",
+          "expression_hint": "Old Husqvarna photo on the wall",
           "q2_options": [
             {
-              "text": "Times have changed. But maybe not enough."
+              "text": "Times have changed. But maybe not enough for farmers like you."
             },
             {
               "text": "Who decided the hunt should happen?"
             },
             {
-              "text": "What should the Environmental Protection Agency have done differently?"
+              "text": "What should the Environmental Protection Agency have done?"
             }
           ],
           "outcomes": [
             {
               "tier": 1,
-              "response": "Exactly. We're still in the same bind. The government in Stockholm doesn't understand what it's like living out here.",
+              "response": "Exactly. We're still in the same bind. Stockholm doesn't understand. And you — you got here three months ago. But at least you're listening.",
               "expression": "open",
-              "feedback": "Urban vs. rural theme but no facts.",
-              "note": "The government in Stockholm doesn't understand what..."
+              "feedback": "Urban vs. rural theme but no facts. He's warming up.",
+              "note": "Stockholm doesn't understand"
             },
             {
               "tier": 2,
-              "response": "Svensson made the calls. But that was AFTER Gren's call. The council chairman gave us the green light. Unofficial. Everyone knows.",
+              "response": "Svensson made the calls. But that was AFTER Gren's call. The council chairman gave us the green light. Unofficial. Everyone knows. *leans forward* Even I know when my own boss is giving an order.",
               "expression": "guarded",
               "feedback": "The chain: council chairman → farmers → illegal hunt.",
-              "note": "The council chairman gave us the green light"
+              "note": "Council chairman gave the green light"
             },
             {
               "tier": 1,
-              "response": "Everything. Inspection the same week. Compensation within a couple of months. Protective hunting if needed. But nothing happened.",
+              "response": "Everything. Inspection the same week. Compensation fast. Protective hunting if needed. But nothing happened. Five months of nothing.",
               "expression": "guarded",
-              "feedback": "Explanation of systemic failure.",
-              "note": "Protective hunting if needed"
+              "feedback": "Systemic failure explained.",
+              "note": "Five months of nothing from authorities"
             }
           ],
-          "q1_note": "Nobody convicted him"
+          "q1_note": "His father shot the last bear"
         }
       }
     },

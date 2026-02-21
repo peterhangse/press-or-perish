@@ -369,7 +369,7 @@ function showResults(story, interviewResult, deficitBefore) {
     tierBonus: state.tierReached * 2,
     tier: state.tierReached,
     day: state.day,
-    bossQuote: getBossQuote(state.deficit, state.day),
+    bossQuote: getStoryBossQuote(story, state.tierReached) || getBossQuote(state.deficit, state.day),
     onContinue: () => {
       // Check game over
       if (GameState.isPerished(state)) {
@@ -473,6 +473,18 @@ function getBossNote(day, deficit) {
   }
 
   return { text: injectName(pickUnused(notes.default || 'Deliver.', state.usedBossNotes)), name: 'Gunnar' };
+}
+
+/**
+ * Get story-specific boss quote if the story has boss_result_quotes.
+ * Tier 0-1 = positive (soft coverage), Tier 2-3 = negative (exposed the hunters).
+ */
+function getStoryBossQuote(story, tier) {
+  const overrides = story.boss_result_quotes;
+  if (!overrides) return null;
+  const pool = tier >= 2 ? overrides.negative : overrides.positive;
+  if (!pool || pool.length === 0) return null;
+  return injectName(pool[Math.floor(Math.random() * pool.length)]);
 }
 
 /**

@@ -112,9 +112,7 @@ function updateButtonLabel(btn) {
   btn = btn || document.getElementById('achievements-btn');
   if (!btn) return;
 
-  const unlocked = Achievements.loadUnlocked();
-  const total = Achievements.getTotal();
-  btn.innerHTML = `<span class="achievements-medal">🎖</span> <span class="ach-count">${unlocked.size}/${total}</span>`;
+  btn.innerHTML = `<span class="achievements-medal">🎖</span>`;
 }
 
 /**

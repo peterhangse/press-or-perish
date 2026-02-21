@@ -1,0 +1,336 @@
+/* ============================================
+   ACHIEVEMENTS — 1970s file folder UI
+   Press or Perish
+   ============================================ */
+
+/* ── Medal Button (persistent, above mute) ── */
+
+.achievements-btn {
+  position: absolute;
+  bottom: 30px;
+  right: 6px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+  font-family: var(--font-headline);
+  font-size: 7px;
+  letter-spacing: 0.5px;
+  color: var(--paper);
+  opacity: 0.55;
+  cursor: pointer;
+  z-index: 200;
+  padding: 3px 7px;
+  transition: opacity 0.2s, background 0.2s;
+  line-height: 1;
+}
+
+.achievements-btn:hover {
+  opacity: 0.9;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.achievements-medal {
+  font-size: 13px;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.achievements-btn .ach-count {
+  font-family: var(--font-body);
+  font-size: 6px;
+  opacity: 0.7;
+  margin-left: 2px;
+}
+
+/* ── Slide-in Panel ── */
+
+.achievements-panel {
+  position: absolute;
+  top: 0;
+  right: -224px;
+  width: 220px;
+  height: 100%;
+  background:
+    repeating-linear-gradient(
+      180deg,
+      transparent 0px,
+      transparent 13px,
+      rgba(0,0,0,0.04) 13px,
+      rgba(0,0,0,0.04) 14px
+    ),
+    linear-gradient(135deg, #c8b990 0%, #baa878 30%, #d4c498 60%, #c0a870 100%);
+  border-left: 3px solid #8a7a58;
+  box-shadow: -4px 0 12px rgba(0,0,0,0.35);
+  z-index: 300;
+  transition: right 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-family: var(--font-body);
+  scrollbar-width: thin;
+  scrollbar-color: #8a7a58 transparent;
+}
+
+.achievements-panel.open {
+  right: 0;
+}
+
+/* Panel backdrop (click to close) */
+.achievements-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 299;
+  display: none;
+}
+
+.achievements-backdrop.open {
+  display: block;
+}
+
+/* ── Folder Tab ── */
+
+.achievements-tab {
+  background: linear-gradient(180deg, #d4c498 0%, #c0a870 100%);
+  border-bottom: 2px solid #8a7a58;
+  padding: 8px 10px 6px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.achievements-tab-title {
+  font-family: var(--font-headline);
+  font-size: 10px;
+  color: var(--ink);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.achievements-tab-count {
+  font-family: var(--font-numbers);
+  font-size: 14px;
+  color: var(--ink-faded);
+  float: right;
+  line-height: 1;
+  margin-top: -1px;
+}
+
+/* ── Category Headers ── */
+
+.ach-category-header {
+  font-family: var(--font-headline);
+  font-size: 7px;
+  color: var(--ink-faded);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 10px 3px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  margin-top: 2px;
+}
+
+/* ── Achievement Cards ── */
+
+.ach-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  padding: 5px 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  transition: background 0.15s;
+}
+
+.ach-card:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+.ach-card.locked {
+  opacity: 0.35;
+}
+
+.ach-card.locked .ach-icon-container {
+  filter: grayscale(1) brightness(0.7);
+}
+
+/* Icon container */
+.ach-icon-container {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  background: var(--paper-dark);
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  image-rendering: pixelated;
+}
+
+/* Pixel art icon using emojis for now — 
+   can be replaced with CSS pixel art later */
+.ach-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* Card text */
+.ach-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.ach-name {
+  font-family: var(--font-headline);
+  font-size: 8px;
+  color: var(--ink);
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ach-desc {
+  font-family: var(--font-body);
+  font-size: 6px;
+  color: var(--ink-faded);
+  line-height: 1.3;
+  margin-top: 1px;
+}
+
+.ach-date {
+  font-family: var(--font-body);
+  font-size: 5px;
+  color: var(--ink-light);
+  margin-top: 1px;
+}
+
+/* ── Unlock overlay (center-screen slam) ── */
+
+.achievement-unlock-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.achievement-unlock-card {
+  background:
+    linear-gradient(135deg, #d4c498 0%, #c8b888 50%, #d4c498 100%);
+  border: 2px solid #8a7a58;
+  border-radius: 3px;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+  opacity: 0;
+  transform: rotate(-6deg) scale(2.5);
+  animation: ach-stamp-in 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.achievement-unlock-card.fade-out {
+  animation: ach-fade-out 0.5s ease-out forwards;
+}
+
+@keyframes ach-stamp-in {
+  0%   { transform: rotate(-6deg) scale(2.5); opacity: 0; }
+  35%  { transform: rotate(-6deg) scale(0.92); opacity: 1; }
+  55%  { transform: rotate(-6deg) scale(1.06); opacity: 1; }
+  75%  { transform: rotate(-6deg) scale(0.98); opacity: 1; }
+  100% { transform: rotate(-6deg) scale(1); opacity: 1; }
+}
+
+@keyframes ach-fade-out {
+  0%   { transform: rotate(-6deg) scale(1); opacity: 1; }
+  100% { transform: rotate(-6deg) scale(0.95); opacity: 0; }
+}
+
+.unlock-icon {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  background: var(--paper);
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.unlock-label {
+  font-family: var(--font-headline);
+  font-size: 8px;
+  color: var(--ink-red);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.unlock-name {
+  font-family: var(--font-headline);
+  font-size: 11px;
+  color: var(--ink);
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+.unlock-desc {
+  font-family: var(--font-body);
+  font-size: 7px;
+  color: var(--ink-faded);
+  margin-top: 1px;
+  line-height: 1.3;
+}
+
+/* Rookie mistake variant — red accent */
+.achievement-unlock-card.rookie {
+  border-color: var(--deficit-red);
+}
+
+.achievement-unlock-card.rookie .unlock-label {
+  color: var(--deficit-red);
+}
+
+/* ── Panel close button ── */
+
+.ach-close-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: none;
+  border: none;
+  color: var(--ink-faded);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 12px;
+  padding: 2px 4px;
+  line-height: 1;
+  z-index: 3;
+  opacity: 0.6;
+}
+
+.ach-close-btn:hover {
+  opacity: 1;
+}
+
+/* ── Scrollbar styling ── */
+
+.achievements-panel::-webkit-scrollbar {
+  width: 4px;
+}
+
+.achievements-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.achievements-panel::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.15);
+  border-radius: 2px;
+}

@@ -19,6 +19,8 @@ import * as TransitionScreen from './ui/transition-screen.js';
 import * as GameOverScreen from './ui/gameover-screen.js';
 import * as AudioManager from './engine/audio-manager.js';
 import * as SFX from './engine/sfx-engine.js';
+import * as Achievements from './engine/achievements.js';
+import * as AchievementsUI from './ui/achievements-ui.js';
 
 // — Game data cache —
 let gameData = null;
@@ -54,6 +56,9 @@ async function boot() {
   const muteBtn = document.getElementById('mute-btn');
   if (muteBtn) muteBtn.style.display = 'none';
 
+  // Add achievements button (visible across all screens)
+  AchievementsUI.addAchievementButton();
+
   // Title logo-button: click to start music + reveal menu
   const titleEl = document.getElementById('start-title');
   const revealEl = document.getElementById('start-reveal');
@@ -69,6 +74,7 @@ async function boot() {
     setTimeout(() => {
       revealEl.classList.add('visible');
       if (muteBtn) muteBtn.style.display = '';
+      AchievementsUI.showButton();
     }, 400);
   });
 
@@ -196,6 +202,9 @@ function startDayZeroInterview(story) {
   InterviewScreen.start(story, npc, (result) => {
     state.tierReached = result.tier;
     state.pointsEarned = result.points;
+    state.q1Choice = result.q1Archetype;
+    state.q2Choice = result.q2Index;
+    state.baseValue = story.base_value || 0;
     showDayZeroPublish(story, result);
   }, { disabledArchetypes: ['pressure', 'silence'] });
 }
@@ -313,6 +322,9 @@ function startInterview(story) {
     // Interview complete — store results
     state.tierReached = result.tier;
     state.pointsEarned = result.points;
+    state.q1Choice = result.q1Archetype;
+    state.q2Choice = result.q2Index;
+    state.baseValue = story.base_value;
 
     // Move to publish
     showPublish(story, result);
@@ -336,6 +348,9 @@ function showPublish(story, interviewResult) {
 
   // Record in history
   GameState.recordDay(state);
+
+  // Check daily achievements
+  checkAndShowAchievements('day_end');
 
   ScreenManager.switchTo('publish', true);
   Components.updateClock('publish');
@@ -397,6 +412,9 @@ function showGameOver() {
   const totalPoints = state.dayHistory.reduce((sum, d) => sum + d.points, 0);
   saveHighscore(totalPoints, state.deficit, state.day, false);
 
+  // Check game-over achievements
+  checkAndShowAchievements('game_over');
+
   GameOverScreen.showPerished({
     finalDeficit: state.deficit,
     daysCompleted: state.day,
@@ -427,6 +445,9 @@ function showEnding() {
   // Save to highscore board
   saveHighscore(totalPoints, state.deficit, state.dayHistory.length, true);
 
+  // Check game-over achievements
+  checkAndShowAchievements('game_over');
+
   GameOverScreen.showSurvived({
     finalDeficit: state.deficit,
     dayHistory: state.dayHistory,
@@ -435,6 +456,36 @@ function showEnding() {
       returnToStart();
     },
   });
+}
+
+/**
+ * Check achievements and show unlock animations
+ * @param {string} trigger - 'day_end' or 'game_over'
+ */
+function checkAndShowAchievements(trigger) {
+  if (!state || state.day === 0) return; // skip day zero
+
+  const totalPoints = state.dayHistory.reduce((sum, d) => sum + d.points, 0);
+  const ctx = {
+    trigger,
+    day: state.day,
+    storyId: state.selectedLead,
+    q1Archetype: state.q1Choice,
+    q2Index: state.q2Choice,
+    tier: state.tierReached,
+    points: state.pointsEarned,
+    baseValue: state.baseValue || 0,
+    competitorScore: state.competitorScore,
+    deficit: state.deficit,
+    dayHistory: state.dayHistory,
+    survived: trigger === 'game_over' && GameState.hasSurvived(state),
+    totalPoints,
+  };
+
+  const newlyUnlocked = Achievements.checkAchievements(trigger, ctx);
+  if (newlyUnlocked.length > 0) {
+    AchievementsUI.showUnlocks(newlyUnlocked);
+  }
 }
 
 /**

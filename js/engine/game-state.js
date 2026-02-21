@@ -19,6 +19,7 @@ const DEFAULT_STATE = {
   pointsEarned: 0,      // points for today
   headlineChosen: null,  // headline index (0-2)
   competitorScore: 0,    // AI competitor points today
+  baseValue: 0,          // story base news value
 
   // History
   dayHistory: [],  // [{day, storyId, tier, points, competitorScore, deficit, headline}]
@@ -52,6 +53,7 @@ export function resetDay(state) {
   state.pointsEarned = 0;
   state.headlineChosen = null;
   state.competitorScore = 0;
+  state.baseValue = 0;
 }
 
 /**
@@ -66,6 +68,9 @@ export function recordDay(state) {
     competitorScore: state.competitorScore,
     deficit: state.deficit,
     headline: state.headlineChosen,
+    q1Archetype: state.q1Choice,
+    q2Index: state.q2Choice,
+    baseValue: state.baseValue || 0,
   });
 }
 

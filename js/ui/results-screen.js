@@ -40,8 +40,8 @@ export function render(opts) {
   const breakdown = document.createElement('div');
   breakdown.className = 'results-breakdown';
   addNewsValueRow(breakdown, opts.baseValue);
-  addInterviewBonusRow(breakdown, 'Approach (Q1)', opts.q1Bonus || 0);
-  addInterviewBonusRow(breakdown, 'Follow-up (Q2)', opts.q2Bonus || 0);
+  addInterviewBonusRow(breakdown, 'Approach', opts.q1Bonus || 0);
+  addInterviewBonusRow(breakdown, 'Follow-up', opts.q2Bonus || 0);
   addBreakdownRow(breakdown, 'Your total', `${opts.playerScore}`, 'positive', true);
   phase1.appendChild(breakdown);
 

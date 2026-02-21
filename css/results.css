@@ -13,24 +13,25 @@
 
 .results-container {
   position: relative;
-  width: 480px;
+  width: 360px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--sp-1);
+  gap: var(--sp-2);
 }
 
 .results-title {
   font-family: var(--font-headline);
-  font-size: 11px;
+  font-size: 14px;
   color: var(--paper);
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  margin-bottom: var(--sp-1);
 }
 
 /* Side-by-side newspaper comparison */
 .results-comparison {
   display: flex;
-  gap: var(--sp-4);
+  gap: var(--sp-3);
   width: 100%;
 }
 
@@ -121,7 +122,8 @@
   background:
     linear-gradient(180deg, var(--desk-surface) 0%, #2a1e10 100%);
   border: 1px solid var(--ink-faded);
-  padding: var(--sp-1);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: 2px;
   /* Worn ledger feel */
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
 }
@@ -129,10 +131,11 @@
 .breakdown-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 10px;
   color: var(--paper-aged);
-  padding: 1px 0;
+  padding: 2px 0;
 }
 
 .breakdown-row.total {
@@ -145,7 +148,7 @@
 
 .breakdown-value {
   font-family: var(--font-numbers);
-  font-size: 10px;
+  font-size: 13px;
 }
 
 .breakdown-value.positive { color: var(--deficit-safe); }
@@ -165,13 +168,13 @@
 
 .results-deficit-label {
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 10px;
   color: var(--paper-aged);
 }
 
 .results-deficit-value {
   font-family: var(--font-numbers);
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .results-deficit-arrow {
@@ -237,7 +240,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--sp-1);
+  gap: var(--sp-2);
   width: 100%;
 }
 

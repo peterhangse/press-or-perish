@@ -62,6 +62,12 @@ export function render(leads, day, bossNote, callback) {
     card.className = 'lead-card';
     card.dataset.index = i;
 
+    // Subtle paper aging — each card slightly different warmth/tone
+    const ageSeed = ((lead.id || '').charCodeAt(0) || 65) + i * 13;
+    const hueShift = (ageSeed % 7) - 3;           // -3 to +3 deg
+    const brightnessShift = 97 + (ageSeed % 5);     // 97-101%
+    card.style.filter = `hue-rotate(${hueShift}deg) brightness(${brightnessShift}%)`;
+
     // Random visual flair — each card gets a unique look
     applyCardFlair(card, lead, i);
 
@@ -230,24 +236,34 @@ function applyCardFlair(card, lead, index) {
   const h2 = (seed * 11 + 7) % 100;
   const h3 = (seed * 17 + 3) % 100;
 
-  // ~12% chance of coffee ring stain — randomized position
-  if ((seed * 7) % 100 < 12) {
+  // ~25% chance of coffee stain — large, positioned at a corner, half off-card
+  if ((seed * 7) % 100 < 25) {
     card.classList.add('flair-coffee');
-    card.style.setProperty('--coffee-x', `${15 + h1 * 0.65}%`);
-    card.style.setProperty('--coffee-y', `${20 + h2 * 0.55}%`);
-    card.style.setProperty('--coffee-size', `${14 + (h3 % 10)}px`);
+    const corner = (seed * 3) % 4; // 0=top-left, 1=top-right, 2=bottom-left, 3=bottom-right
+    const size = 60 + (h3 % 25); // 60-85px — covers ~1/3 of card
+    const offset = -(size * 0.35); // push off edge so only half visible
+    const jitterX = (h1 % 12) - 6; // ±6px randomness
+    const jitterY = (h2 % 12) - 6;
+    let cx, cy;
+    if (corner === 0)      { cx = offset + jitterX; cy = offset + jitterY; }
+    else if (corner === 1) { cx = `calc(100% - ${size + offset - jitterX}px)`; cy = offset + jitterY; }
+    else if (corner === 2) { cx = offset + jitterX; cy = `calc(100% - ${size + offset - jitterY}px)`; }
+    else                   { cx = `calc(100% - ${size + offset - jitterX}px)`; cy = `calc(100% - ${size + offset - jitterY}px)`; }
+    card.style.setProperty('--coffee-size', `${size}px`);
+    card.style.setProperty('--coffee-x', typeof cx === 'number' ? `${cx}px` : cx);
+    card.style.setProperty('--coffee-y', typeof cy === 'number' ? `${cy}px` : cy);
   }
 
-  // Letters: ~20% chance of faint postal stamp — randomized angle + position
-  if (lead.source_type === 'letter' && (seed * 11) % 100 < 20) {
+  // Letters: ~35% chance of faint postal stamp — randomized angle + position
+  if (lead.source_type === 'letter' && (seed * 11) % 100 < 35) {
     card.classList.add('flair-stamp');
     card.style.setProperty('--stamp-rot', `${-28 + (h1 % 36)}deg`);
     card.style.setProperty('--stamp-x', `${35 + (h2 % 35)}%`);
     card.style.setProperty('--stamp-y', `${30 + (h3 % 35)}%`);
   }
 
-  // Documents: ~15% chance of paper clip — randomized horizontal position
-  if (lead.source_type === 'document' && (seed * 17) % 100 < 15) {
+  // Documents: ~30% chance of paper clip — randomized horizontal position
+  if (lead.source_type === 'document' && (seed * 17) % 100 < 30) {
     card.classList.add('flair-clip');
     card.style.setProperty('--clip-x', `${10 + (h1 % 55)}%`);
   }

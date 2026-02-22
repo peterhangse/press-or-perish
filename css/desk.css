@@ -332,10 +332,6 @@
   line-height: 1.2;
   flex: 1;
   overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
 }
 
 .lead-npc {

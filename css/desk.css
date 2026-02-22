@@ -193,7 +193,7 @@
   background:
     /* Subtle paper fiber texture */
     url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"),
-    var(--paper);
+    var(--paper-tone, var(--paper));
   border: 1px solid var(--ink-faded);
   padding: 3px var(--sp-2);
   cursor: pointer;
@@ -349,22 +349,36 @@
 .lead-card.flair-coffee::before {
   content: '';
   position: absolute;
-  width: var(--coffee-size, 70px);
-  height: var(--coffee-size, 70px);
+  width: var(--coffee-size, 80px);
+  height: var(--coffee-size, 80px);
   border-radius: 50%;
-  /* Position pushes it partly off-card */
-  left: var(--coffee-x, -20px);
-  top: var(--coffee-y, -18px);
-  /* Realistic stain: outer ring + inner fill + uneven spread */
+  left: var(--coffee-x, -25px);
+  top: var(--coffee-y, -20px);
+  /* Realistic coffee stain: dark ring edge + warm brown fill + seepage */
   background:
-    /* Dark outer ring — thicker, uneven */
-    radial-gradient(circle, transparent 38%, rgba(101, 67, 22, 0.12) 40%, rgba(101, 67, 22, 0.18) 44%, rgba(101, 67, 22, 0.08) 48%, transparent 50%),
-    /* Mid ring, offset for irregularity */
-    radial-gradient(ellipse at 45% 55%, transparent 30%, rgba(120, 80, 30, 0.06) 36%, transparent 44%),
-    /* Inner fill — brownish, lightest at center */
-    radial-gradient(circle, rgba(130, 90, 35, 0.06) 0%, rgba(120, 78, 28, 0.10) 25%, rgba(101, 67, 22, 0.05) 38%, transparent 48%);
-  /* Soften edges */
-  filter: blur(0.5px);
+    /* Outer ring — the dark edge where coffee dried */
+    radial-gradient(circle,
+      transparent 36%,
+      rgba(85, 50, 10, 0.15) 38%,
+      rgba(100, 60, 15, 0.28) 42%,
+      rgba(85, 50, 10, 0.18) 46%,
+      rgba(70, 40, 8, 0.06) 50%,
+      transparent 52%
+    ),
+    /* Secondary ring — slightly offset for organic feel */
+    radial-gradient(ellipse at 46% 54%,
+      transparent 34%,
+      rgba(90, 55, 12, 0.10) 38%,
+      rgba(90, 55, 12, 0.14) 43%,
+      transparent 48%
+    ),
+    /* Inner fill — the absorbed coffee, warm tan-brown */
+    radial-gradient(circle,
+      rgba(140, 100, 45, 0.08) 0%,
+      rgba(120, 80, 30, 0.14) 20%,
+      rgba(100, 65, 20, 0.10) 35%,
+      transparent 46%
+    );
   pointer-events: none;
   z-index: 0;
 }
@@ -399,33 +413,7 @@
   transform: translate(-50%, -50%) rotate(var(--stamp-rot, -18deg));
 }
 
-/* Paper clip — horizontal position via --clip-x */
-.lead-card.flair-clip::after {
-  content: '';
-  position: absolute;
-  top: -3px;
-  left: var(--clip-x, 14px);
-  width: 7px;
-  height: 16px;
-  border: 1.5px solid rgba(150, 150, 160, 0.35);
-  border-radius: 3px 3px 0 0;
-  border-bottom: none;
-  pointer-events: none;
-  z-index: 3;
-}
-/* Override dog-ear for clipped cards */
-.lead-card.flair-clip:nth-child(odd)::after {
-  content: '';
-  top: -3px;
-  left: var(--clip-x, 14px);
-  right: auto;
-  width: 7px;
-  height: 16px;
-  border: 1.5px solid rgba(150, 150, 160, 0.35);
-  border-radius: 3px 3px 0 0;
-  border-bottom: none;
-  background: none;
-}
+/* Paper clip — REMOVED (looked unrealistic) */
 
 /* Bottom action bar — heavy desk edge like Papers Please counter */
 .desk-action-bar {

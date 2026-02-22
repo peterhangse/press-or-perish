@@ -62,11 +62,19 @@ export function render(leads, day, bossNote, callback) {
     card.className = 'lead-card';
     card.dataset.index = i;
 
-    // Subtle paper aging — each card slightly different warmth/tone
-    const ageSeed = ((lead.id || '').charCodeAt(0) || 65) + i * 13;
-    const hueShift = (ageSeed % 7) - 3;           // -3 to +3 deg
-    const brightnessShift = 97 + (ageSeed % 5);     // 97-101%
-    card.style.filter = `hue-rotate(${hueShift}deg) brightness(${brightnessShift}%)`;
+    // Paper aging — each card gets a noticeably different paper tone
+    const paperColors = [
+      '#e8dfc8', // standard cream
+      '#e2d8b8', // yellowed
+      '#ede4d0', // bright white-ish
+      '#ddd4b4', // well-aged yellow
+      '#e5dcc4', // warm cream
+      '#e0d5b0', // old newsprint
+      '#eae1cb', // fresh paper
+      '#d8cfad', // very aged
+    ];
+    const paperIdx = ((lead.id || '').charCodeAt(0) + i * 7) % paperColors.length;
+    card.style.setProperty('--paper-tone', paperColors[paperIdx]);
 
     // Random visual flair — each card gets a unique look
     applyCardFlair(card, lead, i);
@@ -240,10 +248,10 @@ function applyCardFlair(card, lead, index) {
   if ((seed * 7) % 100 < 25) {
     card.classList.add('flair-coffee');
     const corner = (seed * 3) % 4; // 0=top-left, 1=top-right, 2=bottom-left, 3=bottom-right
-    const size = 60 + (h3 % 25); // 60-85px — covers ~1/3 of card
-    const offset = -(size * 0.35); // push off edge so only half visible
-    const jitterX = (h1 % 12) - 6; // ±6px randomness
-    const jitterY = (h2 % 12) - 6;
+    const size = 70 + (h3 % 30); // 70-100px
+    const offset = -(size * 0.4); // push 40% off edge
+    const jitterX = (h1 % 10) - 5;
+    const jitterY = (h2 % 10) - 5;
     let cx, cy;
     if (corner === 0)      { cx = offset + jitterX; cy = offset + jitterY; }
     else if (corner === 1) { cx = `calc(100% - ${size + offset - jitterX}px)`; cy = offset + jitterY; }
@@ -262,11 +270,7 @@ function applyCardFlair(card, lead, index) {
     card.style.setProperty('--stamp-y', `${30 + (h3 % 35)}%`);
   }
 
-  // Documents: ~30% chance of paper clip — randomized horizontal position
-  if (lead.source_type === 'document' && (seed * 17) % 100 < 30) {
-    card.classList.add('flair-clip');
-    card.style.setProperty('--clip-x', `${10 + (h1 % 55)}%`);
-  }
+  // Documents: no extra flair (paper clip removed — looked fake)
 }
 
 /**

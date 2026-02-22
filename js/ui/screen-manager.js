@@ -46,8 +46,12 @@ export function switchTo(screenId, flash = false) {
   // Toggle HUD bar
   if (SCREENS_WITH_UI.includes(screenId)) {
     hudBar.classList.add('visible');
+    hudBar.style.background = '';
   } else {
     hudBar.classList.remove('visible');
+    // Match HUD bar background to screen so no color mismatch shows
+    const bgMap = { start: '#2a1f12', onboarding: '#2a1f12', transition: '#0a0a14', gameover: '#0a0a14' };
+    hudBar.style.background = bgMap[screenId] || '#0a0a14';
   }
 
   // Flash effect

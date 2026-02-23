@@ -56,7 +56,7 @@ export function render(opts) {
     note1Text.textContent = opts.dayZeroNote1;
     const note1Name = document.createElement('div');
     note1Name.className = 'results-boss-sticky-name';
-    note1Name.textContent = '— Gunnar';
+    note1Name.textContent = `— ${opts.bossName || 'Gunnar'}`;
     note1.appendChild(note1Text);
     note1.appendChild(note1Name);
     phase1.appendChild(note1);
@@ -92,7 +92,7 @@ function showPhase2(wrapper, opts) {
   // Player's paper — slides in first
   const yours = buildPaperCard(
     'YOUR PAPER',
-    'Småstads Tidning',
+    opts.paperName || 'Småstads Tidning',
     opts.playerHeadline,
     opts.playerScore,
     true
@@ -104,7 +104,7 @@ function showPhase2(wrapper, opts) {
   // Competitor's paper — slides in second (delayed)
   const theirs = buildPaperCard(
     'THE COMPETITION',
-    CompetitorAI.getCompetitorName(),
+    opts.competitorName || CompetitorAI.getCompetitorName(),
     opts.competitorHeadline,
     opts.competitorScore,
     false
@@ -125,7 +125,7 @@ function showPhase2(wrapper, opts) {
   // Competitor row in breakdown
   const compBreakdown = document.createElement('div');
   compBreakdown.className = 'results-breakdown';
-  addBreakdownRow(compBreakdown, CompetitorAI.getCompetitorName(), `${opts.competitorScore}`, '');
+  addBreakdownRow(compBreakdown, opts.competitorName || CompetitorAI.getCompetitorName(), `${opts.competitorScore}`, '');
   const delta = opts.playerScore - opts.competitorScore;
   addBreakdownRow(compBreakdown, 'Today\'s change', `${delta > 0 ? '+' : ''}${delta}`, delta > 0 ? 'positive' : delta < 0 ? 'negative' : '', true);
   phase2Bottom.appendChild(compBreakdown);
@@ -166,7 +166,7 @@ function showPhase2(wrapper, opts) {
 
     const stickyName = document.createElement('div');
     stickyName.className = 'results-boss-sticky-name';
-    stickyName.textContent = '— Gunnar';
+    stickyName.textContent = `— ${opts.bossName || 'Gunnar'}`;
 
     const stickyText = document.createElement('div');
     stickyText.className = 'results-boss-sticky-text';

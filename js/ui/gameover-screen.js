@@ -27,13 +27,13 @@ export function showPerished(opts) {
   // Subtitle
   const sub = document.createElement('div');
   sub.className = 'gameover-subtitle';
-  sub.textContent = `Småstads Tidning can no longer afford to keep you. Gunnar gave you a chance, ${opts.playerName || 'kid'}. You failed.`;
+  sub.textContent = `${opts.paperName || 'Småstads Tidning'} can no longer afford to keep you. ${opts.bossName || 'Gunnar'} gave you a chance, ${opts.playerName || 'kid'}. You failed.`;
   container.appendChild(sub);
 
   // Cold epilogue
   const epilogue = document.createElement('div');
   epilogue.className = 'gameover-epilogue';
-  epilogue.textContent = getPerishedEpilogue(opts.daysCompleted, opts.playerName || 'kid');
+  epilogue.textContent = getPerishedEpilogue(opts.daysCompleted, opts.playerName || 'kid', opts.townName || 'Småstad');
   container.appendChild(epilogue);
 
   // Stats
@@ -85,7 +85,7 @@ export function showSurvived(opts) {
   // Epilogue
   const epilogue = document.createElement('div');
   epilogue.className = 'gameover-epilogue';
-  epilogue.textContent = `Gunnar nods briefly. "You can stay, ${opts.playerName || 'kid'}. For now." Regionbladet moves on. Småstads Tidning lives another day. That's enough.`;
+  epilogue.textContent = `${opts.bossName || 'Gunnar'} nods briefly. "You can stay, ${opts.playerName || 'kid'}. For now." ${opts.competitorName || 'Regionbladet'} moves on. ${opts.paperName || 'Småstads Tidning'} lives another day. That's enough.`;
   container.appendChild(epilogue);
 
   // Stats
@@ -134,14 +134,15 @@ function addStat(container, value, label) {
 /**
  * Cold epilogue text for perished ending
  */
-function getPerishedEpilogue(days, name) {
+function getPerishedEpilogue(days, name, townName) {
+  townName = townName || 'Småstad';
   if (days <= 1) {
     return `You pack up the same day, ${name}. The town has already forgotten your name. The bus back to Stockholm leaves at five.`;
   }
   if (days <= 3) {
     return `You leave the key on the desk. The phone booth outside the office smells of rain and decay. No one calls for ${name}.`;
   }
-  return `Almost, ${name}. But almost doesn't cut it in this business. You take the train home in the dark. Småstad shrinks in the rearview.`;
+  return `Almost, ${name}. But almost doesn't cut it in this business. You take the train home in the dark. ${townName} shrinks in the rearview.`;
 }
 
 /**
@@ -149,13 +150,13 @@ function getPerishedEpilogue(days, name) {
  */
 function getSurvivedMessage(deficit) {
   if (deficit >= 0) {
-    return 'You beat Regionbladet. Not by much, but enough. Småstad has a paper that dares.';
+    return 'You beat the competition. Not by much, but enough.';
   }
   if (deficit >= -5) {
-    return 'Tough days, but you made it. Gunnar raises an eyebrow — the closest he gets to a compliment.';
+    return 'Tough days, but you made it.';
   }
   if (deficit >= -10) {
-    return 'You survived. Barely. Regionbladet still leads, but the paper lives. It\'ll have to do.';
+    return 'You survived. Barely. The competition still leads, but the paper lives. It\'ll have to do.';
   }
-  return 'By the thinnest of margins, you survived the week. Gunnar says nothing. That silence speaks for itself.';
+  return 'By the thinnest of margins, you survived the week.';
 }

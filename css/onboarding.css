@@ -143,6 +143,15 @@
   margin-top: var(--sp-2);
 }
 
+.start-save-info {
+  font-family: var(--font-body);
+  font-size: 8px;
+  color: var(--ink-faded);
+  margin-top: -2px;
+  margin-bottom: 4px;
+  letter-spacing: 0.3px;
+}
+
 .start-byline {
   font-family: var(--font-headline);
   font-size: 5px;

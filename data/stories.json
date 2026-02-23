@@ -248,7 +248,8 @@
           "tone": "Legal angle"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "missing_girl",
@@ -499,7 +500,8 @@
           "tone": "Quote-driven"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "land_deal",
@@ -750,7 +752,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "hundutställning",
@@ -1001,7 +1004,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "kyrkklockorna",
@@ -1252,7 +1256,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "stöld_på_ica",
@@ -1503,7 +1508,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "vägbygget",
@@ -1754,7 +1760,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "skolmaten",
@@ -2005,7 +2012,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "branden_i_ladan",
@@ -2256,7 +2264,8 @@
           "tone": "Documentary"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "nya_parkeringen",
@@ -2507,7 +2516,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "ishallen",
@@ -2758,7 +2768,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "döda_katten",
@@ -3009,7 +3020,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "biblioteksnedläggning",
@@ -3260,7 +3272,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "fackets_julbasar",
@@ -3511,7 +3524,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "vattenläckan",
@@ -3762,7 +3776,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "jättepumpan",
@@ -4013,7 +4028,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "strömavbrottet",
@@ -4264,7 +4280,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "kyrkkören",
@@ -4515,7 +4532,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "sjukskrivningarna",
@@ -4766,7 +4784,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "trafikolyckan",
@@ -5017,7 +5036,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "kommunens_julfest",
@@ -5268,7 +5288,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "hemlösa_hunden",
@@ -5519,7 +5540,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "fabriksnedläggning",
@@ -5770,7 +5792,8 @@
           "tone": "Double exposé"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "sjukhus_vantetider",
@@ -6021,7 +6044,8 @@
           "tone": "Whistleblower"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "skolstrejken",
@@ -6272,7 +6296,8 @@
           "tone": "Narrative"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "giftutsläpp",
@@ -6523,7 +6548,8 @@
           "tone": "Sensational"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "prästskandalen",
@@ -6774,7 +6800,8 @@
           "tone": "Narrative"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "brandkårsutryckning",
@@ -7025,7 +7052,8 @@
           "tone": "Narrative"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "smuggelsprit",
@@ -7276,7 +7304,8 @@
           "tone": "Triple angle"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "stöld_kommunförråd",
@@ -7527,7 +7556,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "dopingskandal",
@@ -7778,7 +7808,8 @@
           "tone": "Narrative"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "vargjakten",
@@ -8041,7 +8072,8 @@
           "tone": "Narrative"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "äldreboende_svält",
@@ -8292,7 +8324,8 @@
           "tone": "Narrative"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "illegal_soptipp",
@@ -8543,7 +8576,8 @@
           "tone": "Documented"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "flyktingmottagning",
@@ -8794,7 +8828,8 @@
           "tone": "Fact-based"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "telefonavlyssning",
@@ -9045,7 +9080,8 @@
           "tone": "Narrative"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "ambulansbristen",
@@ -9296,7 +9332,8 @@
           "tone": "Consequence"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "bostadsbubblan",
@@ -9547,7 +9584,8 @@
           "tone": "Narrative"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "lärarbrist",
@@ -9798,7 +9836,8 @@
           "tone": "Narrative"
         }
       ]
-    }
+    },
+    "town": "smastad"
   },
   {
     "id": "polisvåld",
@@ -10049,6 +10088,7 @@
           "tone": "Narrative"
         }
       ]
-    }
+    },
+    "town": "smastad"
   }
 ]

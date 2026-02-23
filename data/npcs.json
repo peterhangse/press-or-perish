@@ -15,7 +15,8 @@
     ],
     "unique_detail": "bandaged_hand",
     "clothing_color": "#4a6a8a",
-    "initial_demeanor": "Guarded, keeps bandaged hand close to body"
+    "initial_demeanor": "Guarded, keeps bandaged hand close to body",
+    "town": "smastad"
   },
   {
     "id": "birgitta_ekberg",
@@ -31,7 +32,8 @@
     ],
     "unique_detail": "photo_locket",
     "clothing_color": "#8a6a5a",
-    "initial_demeanor": "Visibly distressed, clutching her handbag"
+    "initial_demeanor": "Visibly distressed, clutching her handbag",
+    "town": "smastad"
   },
   {
     "id": "erik_persson",
@@ -48,7 +50,8 @@
     ],
     "unique_detail": "worn_cap",
     "clothing_color": "#5a7a5a",
-    "initial_demeanor": "Sits heavily, tired eyes, cap in hand"
+    "initial_demeanor": "Sits heavily, tired eyes, cap in hand",
+    "town": "smastad"
   },
   {
     "id": "gunnar_ek",
@@ -64,7 +67,8 @@
     ],
     "unique_detail": "reading_glasses_on_forehead",
     "clothing_color": "#3a3a3a",
-    "initial_demeanor": "Stares over the rim of his glasses"
+    "initial_demeanor": "Stares over the rim of his glasses",
+    "town": "smastad"
   },
   {
     "id": "inga_johansson",
@@ -80,7 +84,8 @@
     ],
     "unique_detail": "knitting_needles",
     "clothing_color": "#7a5a6a",
-    "initial_demeanor": "Knits while talking, avoids eye contact"
+    "initial_demeanor": "Knits while talking, avoids eye contact",
+    "town": "smastad"
   },
   {
     "id": "lars_bjork",
@@ -96,7 +101,8 @@
     ],
     "unique_detail": "party_pin",
     "clothing_color": "#4a4a6a",
-    "initial_demeanor": "Easygoing, pats you on the shoulder, big smile"
+    "initial_demeanor": "Easygoing, pats you on the shoulder, big smile",
+    "town": "smastad"
   },
   {
     "id": "sven_erik_berg",
@@ -112,7 +118,8 @@
     ],
     "unique_detail": "union_badge",
     "clothing_color": "#6a4a3a",
-    "initial_demeanor": "Leaning forward, determined, checking no one is listening"
+    "initial_demeanor": "Leaning forward, determined, checking no one is listening",
+    "town": "smastad"
   },
   {
     "id": "margareta_lund",
@@ -128,7 +135,8 @@
     ],
     "unique_detail": "chalk_stains",
     "clothing_color": "#8a7a5a",
-    "initial_demeanor": "Polite smile but tense"
+    "initial_demeanor": "Polite smile but tense",
+    "town": "smastad"
   },
   {
     "id": "gosta_nilsson",
@@ -144,7 +152,8 @@
     ],
     "unique_detail": "pipe",
     "clothing_color": "#5a5a5a",
-    "initial_demeanor": "Packing his pipe, taking his time"
+    "initial_demeanor": "Packing his pipe, taking his time",
+    "town": "smastad"
   },
   {
     "id": "helena_strand",
@@ -160,7 +169,8 @@
     ],
     "unique_detail": "hospital_bracelet",
     "clothing_color": "#ffffff",
-    "initial_demeanor": "Looking around nervously, whispering"
+    "initial_demeanor": "Looking around nervously, whispering",
+    "town": "smastad"
   },
   {
     "id": "anders_vik",
@@ -177,7 +187,8 @@
     ],
     "unique_detail": "soot_stains",
     "clothing_color": "#5a4a3a",
-    "initial_demeanor": "Determined but with deep sorrow in his eyes"
+    "initial_demeanor": "Determined but with deep sorrow in his eyes",
+    "town": "smastad"
   },
   {
     "id": "kerstin_alven",
@@ -193,7 +204,8 @@
     ],
     "unique_detail": "reading_glasses",
     "clothing_color": "#7a5a4a",
-    "initial_demeanor": "Calm, analytical"
+    "initial_demeanor": "Calm, analytical",
+    "town": "smastad"
   },
   {
     "id": "arvid_magnusson",
@@ -210,7 +222,8 @@
     ],
     "unique_detail": "flat_cap",
     "clothing_color": "#5a5a6a",
-    "initial_demeanor": "Anxious, looks around frequently"
+    "initial_demeanor": "Anxious, looks around frequently",
+    "town": "smastad"
   },
   {
     "id": "arne_wikstrom",
@@ -227,7 +240,8 @@
     ],
     "unique_detail": "apron",
     "clothing_color": "#6a6a5a",
-    "initial_demeanor": "Businesslike"
+    "initial_demeanor": "Businesslike",
+    "town": "smastad"
   },
   {
     "id": "rune_sjoberg",
@@ -244,7 +258,8 @@
     ],
     "unique_detail": "calloused_hands",
     "clothing_color": "#5a6a5a",
-    "initial_demeanor": "Straight to the point"
+    "initial_demeanor": "Straight to the point",
+    "town": "smastad"
   },
   {
     "id": "bengt_ake_frid",
@@ -260,7 +275,8 @@
     ],
     "unique_detail": "bow_tie",
     "clothing_color": "#4a4a5a",
-    "initial_demeanor": "Pedantic and tentative"
+    "initial_demeanor": "Pedantic and tentative",
+    "town": "smastad"
   },
   {
     "id": "tommy_berg",
@@ -277,7 +293,8 @@
     ],
     "unique_detail": "pencil_ear",
     "clothing_color": "#6a5a4a",
-    "initial_demeanor": "Tight-lipped"
+    "initial_demeanor": "Tight-lipped",
+    "town": "smastad"
   },
   {
     "id": "berit_holm",
@@ -294,7 +311,8 @@
     ],
     "unique_detail": "nurse_pin",
     "clothing_color": "#8a7a6a",
-    "initial_demeanor": "Warm but stressed"
+    "initial_demeanor": "Warm but stressed",
+    "town": "smastad"
   },
   {
     "id": "bo_lundgren",
@@ -311,7 +329,8 @@
     ],
     "unique_detail": "anchor_tattoo",
     "clothing_color": "#3a4a5a",
-    "initial_demeanor": "Suspicious"
+    "initial_demeanor": "Suspicious",
+    "town": "smastad"
   },
   {
     "id": "maj_britt_olsson",
@@ -327,7 +346,8 @@
     ],
     "unique_detail": "kerchief",
     "clothing_color": "#7a6a5a",
-    "initial_demeanor": "Quiet, wringing her hands"
+    "initial_demeanor": "Quiet, wringing her hands",
+    "town": "smastad"
   },
   {
     "id": "rune_karlsson",
@@ -344,7 +364,8 @@
     ],
     "unique_detail": "oil_stains",
     "clothing_color": "#4a5a4a",
-    "initial_demeanor": "Relaxed but sharp"
+    "initial_demeanor": "Relaxed but sharp",
+    "town": "smastad"
   },
   {
     "id": "astrid_nyberg",
@@ -361,7 +382,8 @@
     ],
     "unique_detail": "crochet_shawl",
     "clothing_color": "#8a6a7a",
-    "initial_demeanor": "Friendly, offers coffee"
+    "initial_demeanor": "Friendly, offers coffee",
+    "town": "smastad"
   },
   {
     "id": "per_erik_johansson",
@@ -378,7 +400,8 @@
     ],
     "unique_detail": "pipe",
     "clothing_color": "#5a5a4a",
-    "initial_demeanor": "Quiet, chewing on pipe stem"
+    "initial_demeanor": "Quiet, chewing on pipe stem",
+    "town": "smastad"
   },
   {
     "id": "tomas_falk",
@@ -394,7 +417,8 @@
     ],
     "unique_detail": "briefcase",
     "clothing_color": "#4a4a4a",
-    "initial_demeanor": "Checking his watch"
+    "initial_demeanor": "Checking his watch",
+    "town": "smastad"
   },
   {
     "id": "margareta_holm",
@@ -411,7 +435,8 @@
     ],
     "unique_detail": "key_ring",
     "clothing_color": "#6a5a5a",
-    "initial_demeanor": "Practical, straight to the point"
+    "initial_demeanor": "Practical, straight to the point",
+    "town": "smastad"
   },
   {
     "id": "maj_britt_hansson",
@@ -427,7 +452,8 @@
     ],
     "unique_detail": "register_stain",
     "clothing_color": "#7a5a6a",
-    "initial_demeanor": "Anxious, whispering"
+    "initial_demeanor": "Anxious, whispering",
+    "town": "smastad"
   },
   {
     "id": "birgitta_lund",
@@ -444,7 +470,8 @@
     ],
     "unique_detail": "bookmark",
     "clothing_color": "#6a7a5a",
-    "initial_demeanor": "Helpful, systematic"
+    "initial_demeanor": "Helpful, systematic",
+    "town": "smastad"
   },
   {
     "id": "olle_magnusson",
@@ -461,6 +488,7 @@
     ],
     "unique_detail": "mailbag",
     "clothing_color": "#5a6a7a",
-    "initial_demeanor": "Knows everything, treads carefully"
+    "initial_demeanor": "Knows everything, treads carefully",
+    "town": "smastad"
   }
 ]

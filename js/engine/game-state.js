@@ -9,6 +9,11 @@ const DEFAULT_STATE = {
   day: 0,         // 1-5 during game
   deficit: 0,     // cumulative deficit, -10 = perished
 
+  // Town progression
+  currentTown: 'smastad',  // town ID string
+  townIndex: 0,            // 0-based linear progression order
+  townHistory: [],         // [{townId, deficit, dayHistory, survived}] — completed towns
+
   // Today
   todayLeads: [],       // 8 story IDs offered today
   selectedLead: null,   // story ID player picked
@@ -86,4 +91,118 @@ export function isPerished(state) {
  */
 export function hasSurvived(state) {
   return state.day >= 5 && !isPerished(state);
+}
+
+/**
+ * Archive current town results and reset for a new town.
+ * Call when the player survives a week and advances.
+ */
+export function advanceToNextTown(state, nextTownId) {
+  // Archive current town
+  state.townHistory.push({
+    townId: state.currentTown,
+    deficit: state.deficit,
+    dayHistory: [...state.dayHistory],
+    survived: true,
+  });
+
+  // Reset for new town
+  state.currentTown = nextTownId;
+  state.townIndex += 1;
+  state.day = 0;
+  state.deficit = 0;
+  state.dayHistory = [];
+  state.usedStoryIds = [];
+  state.usedBossQuotes = [];
+  state.usedBossNotes = [];
+  resetDay(state);
+}
+
+// — Save / Load (localStorage) —
+
+const SAVE_KEY = 'pop_save';
+const SAVE_VERSION = 2;
+
+/**
+ * Persist current run state to localStorage.
+ * Call at the start of each day (1–5). Skips Day Zero.
+ */
+export function saveToLocalStorage(state) {
+  if (state.day < 1) return; // don't save tutorial
+  const payload = {
+    saveVersion: SAVE_VERSION,
+    savedAt: new Date().toISOString(),
+    day: state.day,
+    deficit: state.deficit,
+    playerName: state.playerName,
+    runNumber: state.runNumber,
+    dayHistory: state.dayHistory,
+    usedStoryIds: state.usedStoryIds,
+    usedBossQuotes: state.usedBossQuotes,
+    usedBossNotes: state.usedBossNotes,
+    currentTown: state.currentTown,
+    townIndex: state.townIndex,
+    townHistory: state.townHistory,
+  };
+  try {
+    localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
+  } catch (e) {
+    console.warn('Failed to save game:', e);
+  }
+}
+
+/**
+ * Load saved run from localStorage.
+ * Returns the parsed save object, or null if none / invalid.
+ */
+export function loadFromLocalStorage() {
+  try {
+    const raw = localStorage.getItem(SAVE_KEY);
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    // Accept current version or v1 (pre-town) saves
+    if (!data || (data.saveVersion !== SAVE_VERSION && data.saveVersion !== 1)) return null;
+    // Migrate v1 saves: add town fields with defaults
+    if (data.saveVersion === 1) {
+      data.currentTown = data.currentTown || 'smastad';
+      data.townIndex = data.townIndex || 0;
+      data.townHistory = data.townHistory || [];
+      data.saveVersion = SAVE_VERSION;
+    }
+    return data;
+  } catch (e) {
+    console.warn('Failed to load save:', e);
+    return null;
+  }
+}
+
+/**
+ * Remove saved game from localStorage.
+ */
+export function clearSave() {
+  localStorage.removeItem(SAVE_KEY);
+}
+
+/**
+ * Check if a saved game exists.
+ */
+export function hasSave() {
+  return !!localStorage.getItem(SAVE_KEY);
+}
+
+/**
+ * Restore a saved game into the live state object.
+ */
+export function restoreFromSave(state, saveData) {
+  state.day = saveData.day;
+  state.deficit = saveData.deficit;
+  state.playerName = saveData.playerName;
+  state.runNumber = saveData.runNumber;
+  state.dayHistory = saveData.dayHistory || [];
+  state.usedStoryIds = saveData.usedStoryIds || [];
+  state.usedBossQuotes = saveData.usedBossQuotes || [];
+  state.usedBossNotes = saveData.usedBossNotes || [];
+  state.currentTown = saveData.currentTown || 'smastad';
+  state.townIndex = saveData.townIndex || 0;
+  state.townHistory = saveData.townHistory || [];
 }

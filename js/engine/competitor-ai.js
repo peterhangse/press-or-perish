@@ -11,40 +11,51 @@
  */
 
 /**
+ * Default ranges (Småstad) — used as fallback
+ */
+const DEFAULT_RANGES = {
+  1: { min: 6, max: 9 },
+  2: { min: 7, max: 10 },
+  3: { min: 8, max: 11 },
+  4: { min: 8, max: 12 },
+  5: { min: 9, max: 12 },
+};
+
+/**
  * Generate competitor score for a given day
  * @param {number} day - Current day (1-5)
+ * @param {Object} [townConfig] - Town config with competitorScoreRanges
  * @returns {number} Competitor's points for today
  */
-export function generateCompetitorScore(day) {
-  // Base ranges by day
-  const ranges = {
-    1: { min: 6, max: 9 },   // easy start
-    2: { min: 7, max: 10 },
-    3: { min: 8, max: 11 },  // mid difficulty
-    4: { min: 8, max: 12 },
-    5: { min: 9, max: 12 },  // strong finish
-  };
-
-  const range = ranges[day] || ranges[3];
+export function generateCompetitorScore(day, townConfig) {
+  const ranges = townConfig?.competitorScoreRanges || DEFAULT_RANGES;
+  const range = ranges[day] || ranges[3] || DEFAULT_RANGES[3];
   return randomInt(range.min, range.max);
 }
 
 /**
  * Get competitor headline text (flavor)
  * @param {number} score - Competitor's score today
+ * @param {Object} [townConfig] - Town config with competitorHeadlines
  * @returns {string} A generic competing headline
  */
-export function getCompetitorHeadline(score) {
-  if (score >= 11) return pickRandom(STRONG_HEADLINES);
-  if (score >= 8)  return pickRandom(AVERAGE_HEADLINES);
-  return pickRandom(WEAK_HEADLINES);
+export function getCompetitorHeadline(score, townConfig) {
+  const headlines = townConfig?.competitorHeadlines;
+  const strong = headlines?.strong || STRONG_HEADLINES;
+  const average = headlines?.average || AVERAGE_HEADLINES;
+  const weak = headlines?.weak || WEAK_HEADLINES;
+  if (score >= 11) return pickRandom(strong);
+  if (score >= 8)  return pickRandom(average);
+  return pickRandom(weak);
 }
 
 /**
  * Get the competitor newspaper name
+ * @param {Object} [townConfig] - Town config with competitorName
+ * @returns {string} Competitor name
  */
-export function getCompetitorName() {
-  return 'Regionbladet';
+export function getCompetitorName(townConfig) {
+  return townConfig?.competitorName || 'Regionbladet';
 }
 
 // — Flavor text —

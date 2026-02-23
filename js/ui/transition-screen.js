@@ -19,10 +19,44 @@ const DAY_DATES = [
  * @param {number} day - Day number (0 for tutorial, 1-5 for game)
  * @param {number} deficit - Current deficit
  * @param {Function} onDone - Called after transition completes
+ * @param {Object} [extraOpts] - Extra options like customTitle, customSubtitle, dates, bossName
  */
-export function show(day, deficit, onDone) {
+export function show(day, deficit, onDone, extraOpts = {}) {
   const container = document.getElementById('screen-transition');
   container.innerHTML = '';
+
+  // Custom title/subtitle for town transitions
+  if (extraOpts.customTitle) {
+    const customTitleEl = document.createElement('div');
+    customTitleEl.className = 'transition-day';
+    customTitleEl.textContent = extraOpts.customTitle;
+    container.appendChild(customTitleEl);
+
+    if (extraOpts.customSubtitle) {
+      const customSubEl = document.createElement('div');
+      customSubEl.className = 'transition-mood';
+      customSubEl.style.marginTop = '12px';
+      customSubEl.textContent = extraOpts.customSubtitle;
+      container.appendChild(customSubEl);
+    }
+
+    const hint = document.createElement('div');
+    hint.className = 'transition-hint';
+    hint.textContent = 'Click to continue';
+    container.appendChild(hint);
+
+    SFX.play('ambientTick');
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      container.removeEventListener('click', finish);
+      if (onDone) onDone();
+    };
+    container.addEventListener('click', finish);
+    setTimeout(finish, 5000);
+    return;
+  }
 
   // Day number
   const dayNum = document.createElement('div');
@@ -93,7 +127,7 @@ function getMoodText(day, deficit) {
   if (day === 0) return 'Time to show them what you\'ve got.';
   if (day === 1) return 'A fresh start.';
   if (deficit <= -12) return 'This could be your last day.';
-  if (deficit <= -8) return 'Gunnar\'s stare burns the back of your neck.';
+  if (deficit <= -8) return 'The pressure is crushing.';
   if (deficit <= -5) return 'The pressure builds. The competition leads.';
   if (deficit >= 0) return 'You\'re ahead. Keep it up.';
   return 'Another day. Another chance.';

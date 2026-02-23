@@ -25,6 +25,32 @@ import * as AchievementsUI from './ui/achievements-ui.js';
 // — Game data cache —
 let gameData = null;
 let state = null;
+let activeTownConfig = null; // current town config from towns.json
+
+/**
+ * Get the active town config, setting it from state if needed
+ */
+function getTownConfig() {
+  if (!activeTownConfig && gameData?.towns && state) {
+    activeTownConfig = DataLoader.getTownConfig(gameData.towns, state.currentTown);
+  }
+  return activeTownConfig;
+}
+
+/**
+ * Get the boss dialogue for the current town
+ */
+function getBossDialogue() {
+  const townId = state?.currentTown || 'smastad';
+  return gameData.boss?.[townId] || gameData.boss?.['smastad'] || gameData.boss;
+}
+
+/**
+ * Get stories filtered for the current town
+ */
+function getTownStories() {
+  return DataLoader.getStoriesByTown(gameData.stories, state?.currentTown || 'smastad');
+}
 
 // — Init —
 async function boot() {
@@ -38,7 +64,7 @@ async function boot() {
   // Load all game data
   try {
     gameData = await DataLoader.loadAllData();
-    console.log(`Loaded ${gameData.stories.length} stories, ${gameData.npcs.length} NPCs`);
+    console.log(`Loaded ${gameData.stories.length} stories, ${gameData.npcs.length} NPCs, ${gameData.towns.length} towns`);
   } catch (e) {
     console.error('Failed to load game data:', e);
     return;
@@ -50,6 +76,10 @@ async function boot() {
   // Wire start screen
   document.getElementById('btn-new-run').addEventListener('click', () => { SFX.play('click'); startNewRun(); });
   document.getElementById('btn-tutorial').addEventListener('click', () => { SFX.play('click'); startTutorial(); });
+
+  // Wire continue button (resume saved game)
+  document.getElementById('btn-continue').addEventListener('click', () => { SFX.play('click'); resumeSavedGame(); });
+  refreshContinueButton();
 
   // Add persistent mute button on the game-wrapper (visible across all screens)
   addMuteButton();
@@ -119,9 +149,16 @@ function scaleCanvas() {
  * Start a new run (skip onboarding + day zero)
  */
 function startNewRun() {
+  // Clear any existing save — fresh run
+  GameState.clearSave();
+  refreshContinueButton();
+
   state = GameState.createState();
   state.runNumber = (parseInt(localStorage.getItem('pop_run_count') || '0')) + 1;
   localStorage.setItem('pop_run_count', state.runNumber);
+
+  // Set town config for first town
+  activeTownConfig = DataLoader.getTownConfig(gameData.towns, state.currentTown);
 
   // Switch to game soundtrack (looped)
   AudioManager.play('game');
@@ -141,6 +178,9 @@ function startTutorial() {
   state = GameState.createState();
   state.runNumber = (parseInt(localStorage.getItem('pop_run_count') || '0')) + 1;
   localStorage.setItem('pop_run_count', state.runNumber);
+
+  // Set town config for first town
+  activeTownConfig = DataLoader.getTownConfig(gameData.towns, state.currentTown);
 
   // Switch to game soundtrack (looped)
   AudioManager.play('game');
@@ -169,10 +209,12 @@ function startDayZero() {
 
 /** Day Zero desk — 3 easy leads, 1 per source type */
 function showDayZeroDesk() {
-  const leads = DayGenerator.generateDayZeroLeads(gameData.stories);
+  const townStories = getTownStories();
+  const leads = DayGenerator.generateDayZeroLeads(townStories);
   state.todayLeads = leads.map(l => l.id);
 
-  const bossNote = { text: `It's your first day at work, ${pn()}. We expect nothing today. See this as a test for tomorrow... Pick a story.`, name: 'Gunnar' };
+  const bossName = getTownConfig()?.bossName || 'Gunnar';
+  const bossNote = { text: `It's your first day at work, ${pn()}. We expect nothing today. See this as a test for tomorrow... Pick a story.`, name: bossName };
 
   ScreenManager.switchTo('desk', true);
   Components.updateClock('desk');
@@ -252,7 +294,11 @@ function showDayZeroResults(story, interviewResult) {
     isDayZero: true,
     dayZeroNote1: 'This is your score. The story itself has a base value — but how you handle the interview decides the rest. Choose your approach wisely.',
     bossQuote: `See that number? That\'s the deficit, ${pn()}. Stay above -10 or the paper closes. Every day is a fight.`,
-    competitorShock: 'Regionbladet ran a massive scoop. This is the competition you\'re up against — every single day.',
+    competitorShock: `${getTownConfig()?.competitorName || 'Regionbladet'} ran a massive scoop. This is the competition you\'re up against — every single day.`,
+    paperName: getTownConfig()?.newspaperName || 'Småstads Tidning',
+    bossName: getTownConfig()?.bossName || 'Gunnar',
+    competitorName: getTownConfig()?.competitorName || 'Regionbladet',
+    townName: getTownConfig()?.name || 'Småstad',
     onContinue: () => {
       // Reset state cleanly — Day Zero doesn't count toward score
       state.deficit = 0;
@@ -272,6 +318,11 @@ function startDay(dayNum) {
   state.day = dayNum;
   GameState.resetDay(state);
 
+  // Auto-save at the start of each real day (skip Day Zero)
+  if (dayNum >= 1) {
+    GameState.saveToLocalStorage(state);
+  }
+
   // Update persistent UI
   Components.updateWeekStrip(state.day, state.dayHistory);
   Components.updateDeficitMeter(state.deficit);
@@ -289,8 +340,9 @@ function startDay(dayNum) {
  * Show the morning desk with leads
  */
 function showDesk() {
-  // Generate today's leads
-  const leads = DayGenerator.generateDayLeads(state.day, gameData.stories, state.usedStoryIds);
+  // Generate today's leads (filtered by current town)
+  const townStories = getTownStories();
+  const leads = DayGenerator.generateDayLeads(state.day, townStories, state.usedStoryIds);
   state.todayLeads = leads.map(l => l.id);
 
   // Get boss note for today
@@ -341,7 +393,7 @@ function startInterview(story) {
  */
 function showPublish(story, interviewResult) {
   // Generate competitor score
-  state.competitorScore = CompetitorAI.generateCompetitorScore(state.day);
+  state.competitorScore = CompetitorAI.generateCompetitorScore(state.day, getTownConfig());
 
   ScreenManager.switchTo('publish', true);
   Components.updateClock('publish');
@@ -379,7 +431,8 @@ function showResults(story, interviewResult, deficitBefore) {
   Components.updateWeekStrip(state.day, state.dayHistory);
 
   const playerHeadlineText = interviewResult.headlines[state.headlineChosen]?.text || story.title;
-  const competitorHeadline = CompetitorAI.getCompetitorHeadline(state.competitorScore);
+  const tc = getTownConfig();
+  const competitorHeadline = CompetitorAI.getCompetitorHeadline(state.competitorScore, tc);
 
   ResultsScreen.render({
     playerHeadline: playerHeadlineText,
@@ -396,12 +449,22 @@ function showResults(story, interviewResult, deficitBefore) {
     tier: state.tierReached,
     day: state.day,
     bossQuote: getStoryBossQuote(story, state.tierReached) || getBossQuote(state.deficit, state.day),
+    paperName: tc?.newspaperName || 'Småstads Tidning',
+    bossName: tc?.bossName || 'Gunnar',
+    competitorName: tc?.competitorName || 'Regionbladet',
+    townName: tc?.name || 'Småstad',
     onContinue: () => {
       // Check game over
       if (GameState.isPerished(state)) {
         showGameOver();
       } else if (state.day >= 5) {
-        showEnding();
+        // Check if there's a next town to advance to
+        const nextTown = DataLoader.getNextTown(gameData.towns, state.currentTown);
+        if (nextTown) {
+          showTownAdvance(nextTown);
+        } else {
+          showEnding();
+        }
       } else {
         startDay(state.day + 1);
       }
@@ -413,6 +476,9 @@ function showResults(story, interviewResult, deficitBefore) {
  * Show game over — perished
  */
 function showGameOver() {
+  // Clear save — run is over
+  GameState.clearSave();
+
   // Switch to perish soundtrack
   AudioManager.play('perish');
 
@@ -431,6 +497,10 @@ function showGameOver() {
     daysCompleted: state.day,
     dayHistory: state.dayHistory,
     playerName: pn(),
+    paperName: getTownConfig()?.newspaperName || 'Småstads Tidning',
+    bossName: getTownConfig()?.bossName || 'Gunnar',
+    competitorName: getTownConfig()?.competitorName || 'Regionbladet',
+    townName: getTownConfig()?.name || 'Småstad',
     onRestart: () => {
       returnToStart();
     },
@@ -441,6 +511,9 @@ function showGameOver() {
  * Show ending — survived the week
  */
 function showEnding() {
+  // Clear save — run is over
+  GameState.clearSave();
+
   // Switch to perish/survive soundtrack
   AudioManager.play('perish');
 
@@ -463,6 +536,10 @@ function showEnding() {
     finalDeficit: state.deficit,
     dayHistory: state.dayHistory,
     playerName: pn(),
+    paperName: getTownConfig()?.newspaperName || 'Småstads Tidning',
+    bossName: getTownConfig()?.bossName || 'Gunnar',
+    competitorName: getTownConfig()?.competitorName || 'Regionbladet',
+    townName: getTownConfig()?.name || 'Småstad',
     onRestart: () => {
       returnToStart();
     },
@@ -517,24 +594,27 @@ function pickUnused(pool, usedList) {
  * Get boss note for the desk based on day and deficit
  */
 function getBossNote(day, deficit) {
-  const notes = gameData.boss?.desk_notes;
+  const bossDialogue = getBossDialogue();
+  const notes = bossDialogue?.desk_notes;
   if (!notes) return null;
+
+  const bossName = getTownConfig()?.bossName || 'Gunnar';
 
   // Check deficit-specific notes first
   if (deficit <= -10 && notes.danger) {
-    return { text: injectName(pickUnused(notes.danger, state.usedBossNotes)), name: 'Gunnar' };
+    return { text: injectName(pickUnused(notes.danger, state.usedBossNotes)), name: bossName };
   }
   if (deficit <= -5 && notes.warning) {
-    return { text: injectName(pickUnused(notes.warning, state.usedBossNotes)), name: 'Gunnar' };
+    return { text: injectName(pickUnused(notes.warning, state.usedBossNotes)), name: bossName };
   }
 
   // Day-specific notes
   const dayPool = notes[`day_${day}`];
   if (dayPool) {
-    return { text: injectName(pickUnused(dayPool, state.usedBossNotes)), name: 'Gunnar' };
+    return { text: injectName(pickUnused(dayPool, state.usedBossNotes)), name: bossName };
   }
 
-  return { text: injectName(pickUnused(notes.default || 'Deliver.', state.usedBossNotes)), name: 'Gunnar' };
+  return { text: injectName(pickUnused(notes.default || 'Deliver.', state.usedBossNotes)), name: bossName };
 }
 
 /**
@@ -553,7 +633,8 @@ function getStoryBossQuote(story, tier) {
  * Get boss quote for results based on deficit
  */
 function getBossQuote(deficit, day) {
-  const quotes = gameData.boss?.result_quotes;
+  const bossDialogue = getBossDialogue();
+  const quotes = bossDialogue?.result_quotes;
   if (!quotes) return '';
 
   let pool;
@@ -754,6 +835,90 @@ function showNamePrompt(callback) {
 }
 
 /**
+ * Resume a saved game from localStorage
+ */
+function resumeSavedGame() {
+  const saveData = GameState.loadFromLocalStorage();
+  if (!saveData) return;
+
+  state = GameState.createState();
+  GameState.restoreFromSave(state, saveData);
+
+  // Set town config from saved town
+  activeTownConfig = DataLoader.getTownConfig(gameData.towns, state.currentTown);
+
+  // Switch to game soundtrack (looped)
+  AudioManager.play('game');
+
+  // Jump straight to the saved day
+  startDay(saveData.day);
+}
+
+/**
+ * Show or hide the Continue button based on whether a save exists.
+ * When save exists, demote New Game to secondary styling.
+ */
+function refreshContinueButton() {
+  const btnContinue = document.getElementById('btn-continue');
+  const btnNewRun = document.getElementById('btn-new-run');
+  const saveInfo = document.getElementById('start-save-info');
+  const saveData = GameState.loadFromLocalStorage();
+
+  if (saveData) {
+    btnContinue.style.display = '';
+    btnNewRun.classList.add('start-btn-secondary');
+    // Show save info with town name
+    const dayNames = ['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+    const dayLabel = dayNames[saveData.day] || `Day ${saveData.day}`;
+    const townLabel = saveData.currentTown ? ` · ${saveData.currentTown.charAt(0).toUpperCase() + saveData.currentTown.slice(1)}` : '';
+    saveInfo.textContent = `${dayLabel} · Deficit: ${saveData.deficit}${townLabel}`;
+    saveInfo.style.display = '';
+  } else {
+    btnContinue.style.display = 'none';
+    btnNewRun.classList.remove('start-btn-secondary');
+    saveInfo.style.display = 'none';
+  }
+}
+
+/**
+ * Show town advance screen when player completes a town and there's a next one
+ */
+function showTownAdvance(nextTown) {
+  // Save the current run is over for this town
+  GameState.clearSave();
+
+  const tc = getTownConfig();
+  const totalPoints = state.dayHistory.reduce((sum, d) => sum + d.points, 0);
+
+  // Save to highscore board for this town
+  saveHighscore(totalPoints, state.deficit, state.dayHistory.length, true);
+
+  // Check game-over achievements
+  checkAndShowAchievements('game_over');
+
+  // Advance game state to next town
+  GameState.advanceToNextTown(state, nextTown.id);
+  activeTownConfig = DataLoader.getTownConfig(gameData.towns, state.currentTown);
+
+  // Save state at new town start
+  GameState.saveToLocalStorage(state);
+  refreshContinueButton();
+
+  // Show a transition intro for the new town
+  ScreenManager.switchTo('transition', true);
+  const introText = nextTown.introSequence
+    ? nextTown.introSequence.map(s => s.text).join(' ')
+    : `You\'ve been transferred to ${nextTown.name}. New paper. New boss. New stories.`;
+
+  TransitionScreen.show(1, 0, () => {
+    startDay(1);
+  }, {
+    customTitle: `Welcome to ${nextTown.name}`,
+    customSubtitle: introText,
+  });
+}
+
+/**
  * Return to start screen with title music
  */
 function returnToStart() {
@@ -764,6 +929,8 @@ function returnToStart() {
   const revealEl = document.getElementById('start-reveal');
   if (titleEl) titleEl.classList.add('settled');
   if (revealEl) revealEl.classList.add('visible');
+  // Update continue button state
+  refreshContinueButton();
 }
 
 /**

@@ -11,7 +11,7 @@
 
 /**
  * Generate 3 leads for Day Zero (tutorial) — 1 per source type, easy only
- * @param {Array} allStories - Full stories array from stories.json
+ * @param {Array} allStories - Full stories array (already filtered by town)
  * @returns {Array} 3 story objects (1 letter, 1 document, 1 street)
  */
 export function generateDayZeroLeads(allStories) {
@@ -31,7 +31,7 @@ export function generateDayZeroLeads(allStories) {
 /**
  * Generate 8 leads for a given day
  * @param {number} day - Current day (1-5)
- * @param {Array} allStories - Full stories array from stories.json
+ * @param {Array} allStories - Full stories array (already filtered by town)
  * @param {Array} usedIds - Already-used story IDs this run
  * @returns {Array} 8 story objects for today's desk
  */

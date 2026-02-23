@@ -1,0 +1,120 @@
+[
+  {
+    "id": "smastad",
+    "name": "Småstad",
+    "order": 0,
+    "newspaperName": "Småstads Tidning",
+    "competitorName": "Regionbladet",
+    "bossName": "Gunnar",
+    "bossFullName": "Gunnar Ek",
+    "bossTitle": "Editor-in-Chief",
+    "perishThreshold": -10,
+    "cssClass": "town-smastad",
+    "dates": [
+      "November 11, 1974",
+      "November 12, 1974",
+      "November 13, 1974",
+      "November 14, 1974",
+      "November 15, 1974"
+    ],
+    "dayZeroDate": "November 10, 1974",
+    "competitorScoreRanges": {
+      "1": { "min": 6, "max": 9 },
+      "2": { "min": 7, "max": 10 },
+      "3": { "min": 8, "max": 11 },
+      "4": { "min": 8, "max": 12 },
+      "5": { "min": 9, "max": 12 }
+    },
+    "competitorHeadlines": {
+      "strong": [
+        "Exposes corruption in municipal leadership",
+        "Exclusive interview with the county governor",
+        "Investigation: Millions missing from budget",
+        "Witnesses break silence on factory disaster",
+        "New revelations shake local politics"
+      ],
+      "average": [
+        "City council debates school closure",
+        "Report: Road network in disrepair",
+        "Business owners worry ahead of winter",
+        "New principal takes over after controversy",
+        "Landowner in dispute with municipality"
+      ],
+      "weak": [
+        "Award for local sports club",
+        "Autumn market draws visitors",
+        "Library extends opening hours",
+        "Traffic light repaired after complaints",
+        "New park bench unveiled at the square"
+      ]
+    },
+    "introSequence": null
+  },
+  {
+    "id": "industristad",
+    "name": "Industristad",
+    "order": 1,
+    "newspaperName": "Industristads Kurir",
+    "competitorName": "Fabriksbladet",
+    "bossName": "Birgit",
+    "bossFullName": "Birgit Ståhl",
+    "bossTitle": "Editor-in-Chief",
+    "perishThreshold": -10,
+    "cssClass": "town-industristad",
+    "dates": [
+      "November 18, 1974",
+      "November 19, 1974",
+      "November 20, 1974",
+      "November 21, 1974",
+      "November 22, 1974"
+    ],
+    "dayZeroDate": null,
+    "competitorScoreRanges": {
+      "1": { "min": 7, "max": 10 },
+      "2": { "min": 8, "max": 11 },
+      "3": { "min": 8, "max": 12 },
+      "4": { "min": 9, "max": 12 },
+      "5": { "min": 9, "max": 13 }
+    },
+    "competitorHeadlines": {
+      "strong": [
+        "Factory whistleblower reveals safety cover-up",
+        "Union leader arrested on embezzlement charges",
+        "Investigation: Workers exposed to toxic chemicals for years",
+        "Steel mill collapse — internal memos warned of risk",
+        "Exposed: Forged inspection reports at the harbor"
+      ],
+      "average": [
+        "Strike vote at the paper mill enters third week",
+        "New foreman faces resistance from veteran workers",
+        "Industrial waste found in local water supply",
+        "Port authority budget under scrutiny",
+        "Contract dispute halts construction project"
+      ],
+      "weak": [
+        "Factory canteen wins regional food award",
+        "Annual safety drill completed without incident",
+        "New parking lot opens near the steel mill",
+        "Company picnic draws record attendance",
+        "Retired dockworker celebrates 50 years of service"
+      ]
+    },
+    "introSequence": [
+      {
+        "type": "boss_meeting",
+        "expression": "serious",
+        "text": "So you're the one from Småstad. I heard you impressed Gunnar. That won't impress me."
+      },
+      {
+        "type": "boss_meeting",
+        "expression": "intense",
+        "text": "This isn't a small-town paper anymore. Fabriksbladet has three full-time reporters and a photographer. We have you."
+      },
+      {
+        "type": "boss_meeting",
+        "expression": "serious",
+        "text": "Same rules. Five days. Fall behind and you're out. I don't do second chances."
+      }
+    ]
+  }
+]

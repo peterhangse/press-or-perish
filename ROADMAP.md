@@ -83,14 +83,14 @@ All features deferred from the MVD (Minimum Viable Demo) are preserved here, org
 - [ ] **Sidegrade items** (tradeoffs, not power):
   - "Press Pass": 3 Q1 options per interview BUT only 1 interview per day
   - "Anonymous Tip Line": See 1 extra lead detail BUT all interviews start colder
-  - "Veteran's Notebook": See if you maxed info after interview BUT deficit threshold is -12 instead of -15
+  - "Veteran's Notebook": See if you maxed info after interview BUT deficit threshold is -8 instead of -10
 - [ ] **Item unlocks:** Specific achievements (max 5 stories total, win without aggressive, etc.)
 
 ---
 
 ## Design Principles (preserved from design sessions)
 - **Pressure is the game.** Every system serves the emotional loop. If it dilutes the dread, cut it.
-- **The name is honored.** -15 = perished. No mercy. No rubber banding.
+- **The name is honored.** -10 = perished. No mercy. No rubber banding.
 - **Two-axis skill.** Story selection (what to investigate) + interview extraction (how to interview).
 - **Content IS logic.** Lookup tables, not runtime calculation. Engine is just a reader.
 - **Blind publish.** You never see scores before committing. The gut call is the peak.

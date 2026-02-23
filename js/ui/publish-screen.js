@@ -212,7 +212,7 @@ function getSleepText(day, deficitDelta) {
     return 'A good day. You fall asleep quickly.';
   }
   if (deficitDelta <= -3) {
-    return 'You lie awake for hours. Gunnar\'s words echo.';
+    return 'You lie awake for hours. Tomorrow has to be better.';
   }
   return 'Another day. The alarm is set for 6:00 AM.';
 }

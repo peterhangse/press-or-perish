@@ -67,11 +67,23 @@ export function show(day, deficit, onDone) {
   mood.textContent = getMoodText(day, deficit);
   container.appendChild(mood);
 
-  // Auto-advance after 3 seconds
+  // Click to skip hint
+  const hint = document.createElement('div');
+  hint.className = 'transition-hint';
+  hint.textContent = 'Click to continue';
+  container.appendChild(hint);
+
+  // Auto-advance after 3 seconds, or click to skip
   SFX.play('ambientTick');
-  setTimeout(() => {
+  let done = false;
+  const finish = () => {
+    if (done) return;
+    done = true;
+    container.removeEventListener('click', finish);
     if (onDone) onDone();
-  }, 3000);
+  };
+  container.addEventListener('click', finish);
+  setTimeout(finish, 3000);
 }
 
 /**

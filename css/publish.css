@@ -84,7 +84,24 @@
   font-family: var(--font-body);
   font-size: 7px;
   color: var(--ink-light);
+}
+
+.headline-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 2px;
+}
+
+.headline-bonus {
+  font-family: var(--font-numbers);
+  font-size: 10px;
+  color: var(--deficit-safe);
+  letter-spacing: 0.5px;
+}
+
+.headline-bonus.bold {
+  color: var(--highlight);
 }
 
 /* Publish button */

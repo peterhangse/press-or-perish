@@ -209,19 +209,23 @@ function startDayZeroInterview(story) {
 
 /** Day Zero publish — same as normal but leads to competitor shock */
 function showDayZeroPublish(story, interviewResult) {
-  // Skip headline choice — auto-pick first headline
-  state.headlineChosen = 0;
-
   // Competitor gets a massive score for the shock effect
   state.competitorScore = 14;
-
-  const delta = ScoringEngine.calculateDeficitDelta(state.pointsEarned, state.competitorScore);
 
   ScreenManager.switchTo('publish', true);
   Components.updateClock('publish');
 
-  PublishScreen.showSleep(0, state.pointsEarned, state.competitorScore, delta, () => {
-    showDayZeroResults(story, interviewResult);
+  // Show headline selection UI
+  PublishScreen.render(story, interviewResult.headlines, state.pointsEarned, 0, interviewResult.q1Archetype, ({ headlineIndex, headlineBonus }) => {
+    state.headlineChosen = headlineIndex;
+    state.headlineBonus = headlineBonus;
+    state.pointsEarned += headlineBonus;
+
+    const delta = ScoringEngine.calculateDeficitDelta(state.pointsEarned, state.competitorScore);
+
+    PublishScreen.showSleep(0, state.pointsEarned, state.competitorScore, delta, () => {
+      showDayZeroResults(story, interviewResult);
+    });
   });
 }
 
@@ -243,6 +247,7 @@ function showDayZeroResults(story, interviewResult) {
     tierBonus: (interviewResult.q1Bonus || 0) + (interviewResult.q2Bonus || 0),
     q1Bonus: interviewResult.q1Bonus || 0,
     q2Bonus: interviewResult.q2Bonus || 0,
+    headlineBonus: state.headlineBonus || 0,
     tier: state.tierReached,
     day: 0,
     isDayZero: true,
@@ -335,29 +340,33 @@ function startInterview(story) {
  * Show the publish/headline screen
  */
 function showPublish(story, interviewResult) {
-  // Skip headline choice — auto-pick first headline, go straight to sleep
-  state.headlineChosen = 0;
-
   // Generate competitor score
   state.competitorScore = CompetitorAI.generateCompetitorScore(state.day);
-
-  // Calculate deficit
-  const delta = ScoringEngine.calculateDeficitDelta(state.pointsEarned, state.competitorScore);
-  const deficitBefore = state.deficit;
-  state.deficit = ScoringEngine.applyDeficit(state.deficit, delta);
-
-  // Record in history
-  GameState.recordDay(state);
-
-  // Check daily achievements
-  checkAndShowAchievements('day_end');
 
   ScreenManager.switchTo('publish', true);
   Components.updateClock('publish');
 
-  // Show sleep phase directly
-  PublishScreen.showSleep(state.day, state.pointsEarned, state.competitorScore, delta, () => {
-    showResults(story, interviewResult, deficitBefore);
+  // Show headline selection UI
+  PublishScreen.render(story, interviewResult.headlines, state.pointsEarned, state.day, interviewResult.q1Archetype, ({ headlineIndex, headlineBonus }) => {
+    state.headlineChosen = headlineIndex;
+    state.headlineBonus = headlineBonus;
+    state.pointsEarned += headlineBonus;
+
+    // Calculate deficit with headline bonus included
+    const delta = ScoringEngine.calculateDeficitDelta(state.pointsEarned, state.competitorScore);
+    const deficitBefore = state.deficit;
+    state.deficit = ScoringEngine.applyDeficit(state.deficit, delta);
+
+    // Record in history
+    GameState.recordDay(state);
+
+    // Check daily achievements
+    checkAndShowAchievements('day_end');
+
+    // Show sleep phase
+    PublishScreen.showSleep(state.day, state.pointsEarned, state.competitorScore, delta, () => {
+      showResults(story, interviewResult, deficitBefore);
+    });
   });
 }
 
@@ -384,6 +393,7 @@ function showResults(story, interviewResult, deficitBefore) {
     tierBonus: (interviewResult.q1Bonus || 0) + (interviewResult.q2Bonus || 0),
     q1Bonus: interviewResult.q1Bonus || 0,
     q2Bonus: interviewResult.q2Bonus || 0,
+    headlineBonus: state.headlineBonus || 0,
     tier: state.tierReached,
     day: state.day,
     bossQuote: getStoryBossQuote(story, state.tierReached) || getBossQuote(state.deficit, state.day),
@@ -551,6 +561,7 @@ function getBossQuote(deficit, day) {
   if (deficit <= -12)     pool = quotes.critical;
   else if (deficit <= -8) pool = quotes.bad;
   else if (deficit <= -3) pool = quotes.warning;
+  else if (deficit >= 5)  pool = quotes.great;
   else if (deficit >= 2)  pool = quotes.good;
   else                    pool = quotes.neutral;
 

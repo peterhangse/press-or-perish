@@ -81,6 +81,13 @@ const SEQUENCE = [
     speech: 'Welcome, {name}! It\'s good to have someone young on the team. I\'m Gunnar. Sit down, make yourself comfortable.',
     mood: 'warm',
   },
+  // Hint about approach
+  {
+    type: 'boss',
+    name: 'Gunnar Ek',
+    speech: 'One tip — every source has a story they want to tell. Find the right approach and they\'ll open up. Push the wrong way and you get nothing. Watch how people react to your questions.',
+    mood: 'warm',
+  },
   // The twist
   {
     type: 'boss',

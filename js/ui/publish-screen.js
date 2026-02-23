@@ -12,9 +12,10 @@ let onPublish = null;
  * @param {Array} headlines - Headline options [{text, tone}]
  * @param {number} points - Points earned today
  * @param {number} day - Current day
- * @param {Function} callback - Called with { headlineIndex } when published
+ * @param {string} q1Archetype - The Q1 archetype used ('friendly','direct','pressure','silence')
+ * @param {Function} callback - Called with { headlineIndex, headlineBonus } when published
  */
-export function render(story, headlines, points, day, callback) {
+export function render(story, headlines, points, day, q1Archetype, callback) {
   onPublish = callback;
 
   const container = document.getElementById('screen-publish');
@@ -38,6 +39,9 @@ export function render(story, headlines, points, day, callback) {
   paper.appendChild(masthead);
   paper.appendChild(date);
 
+  // Calculate headline bonuses
+  const bonuses = headlines.map((h, i) => getHeadlineBonus(h.tone, q1Archetype, i));
+
   // Headline choices
   const choices = document.createElement('div');
   choices.className = 'headline-choices';
@@ -53,12 +57,22 @@ export function render(story, headlines, points, day, callback) {
     text.className = 'headline-text';
     text.textContent = h.text;
 
-    const tone = document.createElement('div');
+    const meta = document.createElement('div');
+    meta.className = 'headline-meta';
+
+    const tone = document.createElement('span');
     tone.className = 'headline-tone';
     tone.textContent = h.tone || '';
 
+    const bonus = document.createElement('span');
+    bonus.className = `headline-bonus ${bonuses[i] >= 2 ? 'bold' : ''}`;
+    bonus.textContent = `+${bonuses[i]}`;
+
+    meta.appendChild(tone);
+    meta.appendChild(bonus);
+
     option.appendChild(text);
-    option.appendChild(tone);
+    option.appendChild(meta);
 
     option.addEventListener('click', () => {
       SFX.play('select');
@@ -83,12 +97,32 @@ export function render(story, headlines, points, day, callback) {
   publishBtn.addEventListener('click', () => {
     if (selectedIndex !== null && onPublish) {
       SFX.play('stamp');
-      onPublish({ headlineIndex: selectedIndex });
+      onPublish({ headlineIndex: selectedIndex, headlineBonus: bonuses[selectedIndex] });
     }
   });
   wrapper.appendChild(publishBtn);
 
   container.appendChild(wrapper);
+}
+
+/**
+ * Calculate headline bonus based on tone, archetype match, and position
+ * Position 0 = safe (+1), Position 1 = moderate (+2), Position 2 = bold (+3 if tone matches archetype, else +1)
+ */
+function getHeadlineBonus(tone, archetype, index) {
+  if (index === 0) return 1;  // Safe — always +1
+  if (index === 1) return 2;  // Moderate — always +2
+
+  // Bold headline (+3) — check if tone matches Q1 archetype
+  const toneMatchMap = {
+    friendly:  ['Personal', 'Narrative', 'Mild', 'Cautious', 'Quote-driven'],
+    direct:    ['Factual', 'Fact-based', 'Documented', 'Evidence-based', 'Documentary', 'Analytical'],
+    pressure:  ['Sensational', 'Confrontational', 'Exposing', 'Revealing', 'Cover-up'],
+    silence:   ['Questioning', 'Investigative', 'Pattern', 'Neutral'],
+  };
+
+  const matches = toneMatchMap[archetype] || [];
+  return matches.includes(tone) ? 3 : 1;
 }
 
 /**

@@ -92,3 +92,19 @@
     transform: translateY(0);
   }
 }
+
+/* Click to skip hint */
+.transition-hint {
+  font-family: var(--font-body);
+  font-size: 8px;
+  color: var(--ink-faded);
+  letter-spacing: 1px;
+  margin-top: var(--sp-6);
+  opacity: 0;
+  animation: fade-up 0.8s ease 1.5s forwards;
+  cursor: pointer;
+}
+
+#screen-transition {
+  cursor: pointer;
+}

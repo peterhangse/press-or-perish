@@ -215,17 +215,16 @@ function showDayZeroPublish(story, interviewResult) {
   ScreenManager.switchTo('publish', true);
   Components.updateClock('publish');
 
-  // Show headline selection UI
-  PublishScreen.render(story, interviewResult.headlines, state.pointsEarned, 0, interviewResult.q1Archetype, ({ headlineIndex, headlineBonus }) => {
-    state.headlineChosen = headlineIndex;
-    state.headlineBonus = headlineBonus;
-    state.pointsEarned += headlineBonus;
+  // Headline scoring disabled — auto-pick first headline
+  // To re-enable: restore PublishScreen.render() call below
+  // PublishScreen.render(story, interviewResult.headlines, state.pointsEarned, 0, interviewResult.q1Archetype, ({ headlineIndex, headlineBonus }) => { ... });
+  state.headlineChosen = 0;
+  state.headlineBonus = 0;
 
-    const delta = ScoringEngine.calculateDeficitDelta(state.pointsEarned, state.competitorScore);
+  const delta = ScoringEngine.calculateDeficitDelta(state.pointsEarned, state.competitorScore);
 
-    PublishScreen.showSleep(0, state.pointsEarned, state.competitorScore, delta, () => {
-      showDayZeroResults(story, interviewResult);
-    });
+  PublishScreen.showSleep(0, state.pointsEarned, state.competitorScore, delta, () => {
+    showDayZeroResults(story, interviewResult);
   });
 }
 
@@ -346,27 +345,26 @@ function showPublish(story, interviewResult) {
   ScreenManager.switchTo('publish', true);
   Components.updateClock('publish');
 
-  // Show headline selection UI
-  PublishScreen.render(story, interviewResult.headlines, state.pointsEarned, state.day, interviewResult.q1Archetype, ({ headlineIndex, headlineBonus }) => {
-    state.headlineChosen = headlineIndex;
-    state.headlineBonus = headlineBonus;
-    state.pointsEarned += headlineBonus;
+  // Headline scoring disabled — auto-pick first headline
+  // To re-enable: restore PublishScreen.render() call below
+  // PublishScreen.render(story, interviewResult.headlines, state.pointsEarned, state.day, interviewResult.q1Archetype, ({ headlineIndex, headlineBonus }) => { ... });
+  state.headlineChosen = 0;
+  state.headlineBonus = 0;
 
-    // Calculate deficit with headline bonus included
-    const delta = ScoringEngine.calculateDeficitDelta(state.pointsEarned, state.competitorScore);
-    const deficitBefore = state.deficit;
-    state.deficit = ScoringEngine.applyDeficit(state.deficit, delta);
+  // Calculate deficit
+  const delta = ScoringEngine.calculateDeficitDelta(state.pointsEarned, state.competitorScore);
+  const deficitBefore = state.deficit;
+  state.deficit = ScoringEngine.applyDeficit(state.deficit, delta);
 
-    // Record in history
-    GameState.recordDay(state);
+  // Record in history
+  GameState.recordDay(state);
 
-    // Check daily achievements
-    checkAndShowAchievements('day_end');
+  // Check daily achievements
+  checkAndShowAchievements('day_end');
 
-    // Show sleep phase
-    PublishScreen.showSleep(state.day, state.pointsEarned, state.competitorScore, delta, () => {
-      showResults(story, interviewResult, deficitBefore);
-    });
+  // Show sleep phase
+  PublishScreen.showSleep(state.day, state.pointsEarned, state.competitorScore, delta, () => {
+    showResults(story, interviewResult, deficitBefore);
   });
 }
 

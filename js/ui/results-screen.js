@@ -42,7 +42,8 @@ export function render(opts) {
   addNewsValueRow(breakdown, opts.baseValue);
   addInterviewBonusRow(breakdown, 'Approach', opts.q1Bonus || 0);
   addInterviewBonusRow(breakdown, 'Follow-up', opts.q2Bonus || 0);
-  addInterviewBonusRow(breakdown, 'Headline', opts.headlineBonus || 0);
+  // Headline scoring disabled — uncomment to re-enable
+  // addInterviewBonusRow(breakdown, 'Headline', opts.headlineBonus || 0);
   addBreakdownRow(breakdown, 'Your total', `${opts.playerScore}`, 'positive', true);
   phase1.appendChild(breakdown);
 

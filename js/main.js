@@ -250,8 +250,9 @@ function showDayZeroResults(story, interviewResult) {
     tier: state.tierReached,
     day: 0,
     isDayZero: true,
-    bossQuote: `Welcome to the real world, ${pn()}. This is what we're up against.`,
-    competitorShock: 'Regionbladet ran a massive scoop. This is the competition. Every day counts.',
+    dayZeroNote1: 'This is your score. The story itself has a base value — but how you handle the interview decides the rest. Choose your approach wisely.',
+    bossQuote: `See that number? That\'s the deficit, ${pn()}. Stay above -10 or the paper closes. Every day is a fight.`,
+    competitorShock: 'Regionbladet ran a massive scoop. This is the competition you\'re up against — every single day.',
     onContinue: () => {
       // Reset state cleanly — Day Zero doesn't count toward score
       state.deficit = 0;

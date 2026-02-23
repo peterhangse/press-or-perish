@@ -47,6 +47,21 @@ export function render(opts) {
   addBreakdownRow(breakdown, 'Your total', `${opts.playerScore}`, 'positive', true);
   phase1.appendChild(breakdown);
 
+  // Day Zero teaching note on Phase 1
+  if (opts.isDayZero && opts.dayZeroNote1) {
+    const note1 = document.createElement('div');
+    note1.className = 'results-boss-sticky results-boss-note-inline visible';
+    const note1Text = document.createElement('div');
+    note1Text.className = 'results-boss-sticky-text';
+    note1Text.textContent = opts.dayZeroNote1;
+    const note1Name = document.createElement('div');
+    note1Name.className = 'results-boss-sticky-name';
+    note1Name.textContent = '— Gunnar';
+    note1.appendChild(note1Text);
+    note1.appendChild(note1Name);
+    phase1.appendChild(note1);
+  }
+
   // Go to sleep button
   const sleepBtn = document.createElement('button');
   sleepBtn.className = 'btn-paper results-sleep-btn';

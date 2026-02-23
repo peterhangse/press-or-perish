@@ -208,6 +208,17 @@
   opacity: 1;
 }
 
+/* Inline variant for Day Zero teaching notes (no fly-in, sits in flow) */
+.results-boss-note-inline {
+  position: relative;
+  bottom: auto;
+  right: auto;
+  transform: rotate(-1deg);
+  margin-top: var(--sp-4);
+  max-width: 220px;
+  align-self: center;
+}
+
 .results-boss-sticky-name {
   font-weight: bold;
   font-size: 7px;

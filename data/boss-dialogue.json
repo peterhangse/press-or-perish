@@ -1,94 +1,190 @@
 {
-  "desk_notes": {
-    "day_1": "Welcome, {name}. Prove I didn't make a mistake.",
-    "day_2": [
-      "Regionbladet sold 200 more copies yesterday. Step it up.",
-      "The competition ran a strong front page. We need to answer.",
-      "Day two. This is where we set the tone. Don't disappoint me."
-    ],
-    "day_3": [
-      "Halfway. I need results, not excuses.",
-      "Three days in. The board is watching our numbers.",
-      "We're at the midpoint, {name}. Show me you belong here."
-    ],
-    "day_4": [
-      "One day left after today. Give me something I can be proud of.",
-      "Tomorrow is the last day. Today decides if there even IS a tomorrow.",
-      "The clock is ticking, {name}. Make today count."
-    ],
-    "day_5": [
-      "Last day. Everything rides on this.",
-      "Final day. No more second chances after this.",
-      "It's the last morning. Give me the front page of your life."
-    ],
-    "warning": [
-      "We're behind. Every point counts now.",
-      "The numbers don't lie, {name}. We need a strong story today.",
-      "I can hear Regionbladet's presses from here. Dig deeper."
-    ],
-    "danger": [
-      "I'm already writing your termination letter, {name}. Change my mind.",
-      "HR called. They want to know when your desk will be free.",
-      "The board is meeting this afternoon, {name}. Guess who's on the agenda."
-    ],
-    "default": [
-      "Deliver.",
-      "Get to work.",
-      "Stories don't write themselves, {name}."
-    ]
+  "smastad": {
+    "desk_notes": {
+      "day_1": "Welcome, {name}. Prove I didn't make a mistake.",
+      "day_2": [
+        "Regionbladet sold 200 more copies yesterday. Step it up.",
+        "The competition ran a strong front page. We need to answer.",
+        "Day two. This is where we set the tone. Don't disappoint me."
+      ],
+      "day_3": [
+        "Halfway. I need results, not excuses.",
+        "Three days in. The board is watching our numbers.",
+        "We're at the midpoint, {name}. Show me you belong here."
+      ],
+      "day_4": [
+        "One day left after today. Give me something I can be proud of.",
+        "Tomorrow is the last day. Today decides if there even IS a tomorrow.",
+        "The clock is ticking, {name}. Make today count."
+      ],
+      "day_5": [
+        "Last day. Everything rides on this.",
+        "Final day. No more second chances after this.",
+        "It's the last morning. Give me the front page of your life."
+      ],
+      "warning": [
+        "We're behind. Every point counts now.",
+        "The numbers don't lie, {name}. We need a strong story today.",
+        "I can hear Regionbladet's presses from here. Dig deeper."
+      ],
+      "danger": [
+        "I'm already writing your termination letter, {name}. Change my mind.",
+        "HR called. They want to know when your desk will be free.",
+        "The board is meeting this afternoon, {name}. Guess who's on the agenda."
+      ],
+      "default": [
+        "Deliver.",
+        "Get to work.",
+        "Stories don't write themselves, {name}."
+      ]
+    },
+    "result_quotes": {
+      "critical": [
+        "{name}, you know what happens if this continues.",
+        "I can't protect you from the board anymore, {name}.",
+        "This paper has survived two world wars. I won't let you kill it.",
+        "I've seen interns do better. Think about that."
+      ],
+      "bad": [
+        "Not enough, {name}. We're losing readers every day.",
+        "My grandmother could sell more papers. And she's been dead twelve years.",
+        "Regionbladet's editor just sent me a fruit basket. A FRUIT BASKET, {name}.",
+        "Close the gap or I'll close your career."
+      ],
+      "warning": [
+        "We're still behind. Regionbladet doesn't rest.",
+        "Better. But 'better' doesn't sell papers.",
+        "I see effort. I need results.",
+        "Not bad. Not good either. Keep pushing."
+      ],
+      "neutral": [
+        "Tomorrow again.",
+        "Adequate. That's the nicest word I'll use.",
+        "You survived another day. Don't celebrate.",
+        "Hmm. *shuffles papers*"
+      ],
+      "good": [
+        "Hmph. Not bad, {name}. Do it again tomorrow.",
+        "...Fine. That was acceptable work.",
+        "Don't let it go to your head. One good day means nothing.",
+        "The board will notice this. Good."
+      ],
+      "great": [
+        "...Good work. Don't tell anyone I said that.",
+        "*almost smiles* ...Carry on.",
+        "Regionbladet's editor won't be sleeping well tonight.",
+        "If you keep this up, I might actually learn your name."
+      ]
+    },
+    "gameover_fired": {
+      "text": "Pack your things, {name}. I already called the temp agency.",
+      "name": "Gunnar Ek"
+    },
+    "gameover_survived": {
+      "barely": "You survived the week, {name}. Barely. See you Monday — if I don't find someone better.",
+      "decent": "Not bad for a Stockholm kid, {name}. You can stay. For now.",
+      "dominant": "Hmm. Maybe I was wrong about you, {name}. *looks away* Maybe.",
+      "name": "Gunnar Ek"
+    },
+    "onboarding": {
+      "intro": "Welcome! It's good to have someone young on the team.",
+      "rules": "Every morning you'll find today's leads on the desk. Pick one — just one — and dig.",
+      "threat": "If we fall fifteen points behind Regionbladet... there's no job left.",
+      "start": "Got it? Good. Get to work."
+    }
   },
-  "result_quotes": {
-    "critical": [
-      "{name}, you know what happens if this continues.",
-      "I can't protect you from the board anymore, {name}.",
-      "This paper has survived two world wars. I won't let you kill it.",
-      "I've seen interns do better. Think about that."
-    ],
-    "bad": [
-      "Not enough, {name}. We're losing readers every day.",
-      "My grandmother could sell more papers. And she's been dead twelve years.",
-      "Regionbladet's editor just sent me a fruit basket. A FRUIT BASKET, {name}.",
-      "Close the gap or I'll close your career."
-    ],
-    "warning": [
-      "We're still behind. Regionbladet doesn't rest.",
-      "Better. But 'better' doesn't sell papers.",
-      "I see effort. I need results.",
-      "Not bad. Not good either. Keep pushing."
-    ],
-    "neutral": [
-      "Tomorrow again.",
-      "Adequate. That's the nicest word I'll use.",
-      "You survived another day. Don't celebrate.",
-      "Hmm. *shuffles papers*"
-    ],
-    "good": [
-      "Hmph. Not bad, {name}. Do it again tomorrow.",
-      "...Fine. That was acceptable work.",
-      "Don't let it go to your head. One good day means nothing.",
-      "The board will notice this. Good."
-    ],
-    "great": [
-      "...Good work. Don't tell anyone I said that.",
-      "*almost smiles* ...Carry on.",
-      "Regionbladet's editor won't be sleeping well tonight.",
-      "If you keep this up, I might actually learn your name."
-    ]
-  },
-  "gameover_fired": {
-    "text": "Pack your things, {name}. I already called the temp agency.",
-    "name": "Gunnar Ek"
-  },
-  "gameover_survived": {
-    "barely": "You survived the week, {name}. Barely. See you Monday — if I don't find someone better.",
-    "decent": "Not bad for a Stockholm kid, {name}. You can stay. For now.",
-    "dominant": "Hmm. Maybe I was wrong about you, {name}. *looks away* Maybe.",
-    "name": "Gunnar Ek"
-  },
-  "onboarding": {
-    "intro": "Welcome! It's good to have someone young on the team.",
-    "rules": "Every morning you'll find today's leads on the desk. Pick one — just one — and dig.",
-    "threat": "If we fall fifteen points behind Regionbladet... there's no job left.",
-    "start": "Got it? Good. Get to work."
+  "industristad": {
+    "desk_notes": {
+      "day_1": "You survived Småstad. Don't let that make you comfortable, {name}.",
+      "day_2": [
+        "Fabriksbladet ran three stories yesterday. We ran one. You do the math.",
+        "The mill's PR department called to 'welcome' you. That means they're already watching.",
+        "Day two. In this town, day two is when the mill decides whether you're a threat or a joke."
+      ],
+      "day_3": [
+        "Halfway. Fabriksbladet's lead is growing. I don't tolerate trends like that.",
+        "Three days in. The factory owners are reading our paper now. They didn't before you arrived.",
+        "Midpoint, {name}. Either you've found something worth printing or you haven't."
+      ],
+      "day_4": [
+        "One day left after today. I need something the factory board can't ignore.",
+        "Tomorrow's the last edition. What you do today decides what this paper becomes.",
+        "The mill's lawyer called. That means we're doing something right. Or something stupid."
+      ],
+      "day_5": [
+        "Last day. Make it count. My printer runs whether we sell or not.",
+        "Final edition. Fabriksbladet already printed theirs. Ours better be worth reading.",
+        "This is it, {name}. After today, either we matter or we don't."
+      ],
+      "warning": [
+        "Fabriksbladet is pulling ahead. Their readers trust them because they never challenge anything.",
+        "The numbers are slipping, {name}. People here read the paper that flatters the mill.",
+        "We're behind. In this town, behind means irrelevant."
+      ],
+      "danger": [
+        "The board called. They want to know why we're losing to a mill newsletter.",
+        "Fabriksbladet's editor sent flowers to my office. FLOWERS, {name}.",
+        "I've started looking at your replacement's résumé. It's better than yours."
+      ],
+      "default": [
+        "The mill opens at six. So do we.",
+        "There's a story in this town. Find it.",
+        "Fabriksbladet prints press releases. We print the truth. Get to work."
+      ]
+    },
+    "result_quotes": {
+      "critical": [
+        "This is worse than Fabriksbladet. And they just reprint the mill's memos.",
+        "I pulled you from Småstad for this? Gunnar warned me you might not be ready.",
+        "The mill's PR team does better journalism than this. Think about that.",
+        "{name}, I don't fire people. I just stop pretending they work here."
+      ],
+      "bad": [
+        "Not enough. Fabriksbladet didn't even try today and they're still winning.",
+        "The factory workers deserve better than this, {name}. So do I.",
+        "Bergström is sleeping well tonight. That means we failed.",
+        "I've seen more fight in a press release."
+      ],
+      "warning": [
+        "Fabriksbladet is still ahead. They don't have to be good — just safe.",
+        "Better. But 'better than yesterday' sets a low bar.",
+        "I see the effort. I need the results.",
+        "The mill noticed us today. That's a start. Just a start."
+      ],
+      "neutral": [
+        "Tomorrow. Again.",
+        "Adequate. For Småstad. We're not in Småstad anymore.",
+        "You survived another day. The mill noticed. Don't celebrate.",
+        "*lights cigarette* ...Fine."
+      ],
+      "good": [
+        "Not bad, {name}. The factory floor is reading us. Keep it up.",
+        "Bergström's secretary called to complain. That means we did something right.",
+        "Good work. My circulation numbers thank you. Don't stop now.",
+        "Fabriksbladet can't ignore us today. Good."
+      ],
+      "great": [
+        "...I almost smiled. Don't tell anyone.",
+        "The mill's lawyer called. We must be doing something right.",
+        "This is why I brought you here, {name}. To keep MY paper alive.",
+        "Bergström can't sleep tonight. Neither can I. But for different reasons."
+      ]
+    },
+    "gameover_fired": {
+      "text": "You couldn't handle a real town, {name}. Go back to Småstad where it's safe.",
+      "name": "Birgit Ståhl"
+    },
+    "gameover_survived": {
+      "barely": "You survived, {name}. Barely. This town chews up reporters. You got lucky.",
+      "decent": "You held your own. The board won't fire me this quarter. Stay sharp.",
+      "dominant": "You actually did it. Bergström's sweating. The workers are reading us. *pauses* ...Don't let it go to your head.",
+      "name": "Birgit Ståhl"
+    },
+    "onboarding": {
+      "intro": "So you're the one from Småstad. I heard you impressed Gunnar. That won't impress me.",
+      "rules": "Same as before — leads on the desk, pick one, dig. But this town is different. The mill watches everything.",
+      "threat": "Fall fifteen points behind Fabriksbladet and you're done. I don't do second chances.",
+      "start": "This isn't a small-town paper anymore. Get to work."
+    }
   }
 }

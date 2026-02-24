@@ -77,6 +77,11 @@ export function resolveInterview(story, q1Archetype, q2Index) {
  * @returns {Array} Headline choices [{text, tone}]
  */
 export function getHeadlines(story, tier) {
-  // Each story has headlines keyed by tier
+  // Support both formats:
+  // - Tiered object: { tier_0: [...], tier_1: [...], tier_2: [...], tier_3: [...] }
+  // - Flat array: [{text, tone}, {text, tone}, {text, tone}]
+  if (Array.isArray(story.headlines)) {
+    return story.headlines;
+  }
   return story.headlines[`tier_${tier}`] || story.headlines.tier_0;
 }

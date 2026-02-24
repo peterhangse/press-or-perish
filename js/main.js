@@ -254,20 +254,12 @@ function showDayZeroPublish(story, interviewResult) {
   // Competitor gets a massive score for the shock effect
   state.competitorScore = 14;
 
-  ScreenManager.switchTo('publish', true);
-  Components.updateClock('publish');
-
   // Headline scoring disabled — auto-pick first headline
-  // To re-enable: restore PublishScreen.render() call below
-  // PublishScreen.render(story, interviewResult.headlines, state.pointsEarned, 0, interviewResult.q1Archetype, ({ headlineIndex, headlineBonus }) => { ... });
   state.headlineChosen = 0;
   state.headlineBonus = 0;
 
-  const delta = ScoringEngine.calculateDeficitDelta(state.pointsEarned, state.competitorScore);
-
-  PublishScreen.showSleep(0, state.pointsEarned, state.competitorScore, delta, () => {
-    showDayZeroResults(story, interviewResult);
-  });
+  // Skip sleep screen — go straight to results
+  showDayZeroResults(story, interviewResult);
 }
 
 /** Day Zero results — competitor shock, then start real Day 1 */
@@ -395,12 +387,7 @@ function showPublish(story, interviewResult) {
   // Generate competitor score
   state.competitorScore = CompetitorAI.generateCompetitorScore(state.day, getTownConfig());
 
-  ScreenManager.switchTo('publish', true);
-  Components.updateClock('publish');
-
   // Headline scoring disabled — auto-pick first headline
-  // To re-enable: restore PublishScreen.render() call below
-  // PublishScreen.render(story, interviewResult.headlines, state.pointsEarned, state.day, interviewResult.q1Archetype, ({ headlineIndex, headlineBonus }) => { ... });
   state.headlineChosen = 0;
   state.headlineBonus = 0;
 
@@ -415,10 +402,8 @@ function showPublish(story, interviewResult) {
   // Check daily achievements
   checkAndShowAchievements('day_end');
 
-  // Show sleep phase
-  PublishScreen.showSleep(state.day, state.pointsEarned, state.competitorScore, delta, () => {
-    showResults(story, interviewResult, deficitBefore);
-  });
+  // Skip sleep screen — go straight to results
+  showResults(story, interviewResult, deficitBefore);
 }
 
 /**
@@ -904,17 +889,9 @@ function showTownAdvance(nextTown) {
   GameState.saveToLocalStorage(state);
   refreshContinueButton();
 
-  // Show a transition intro for the new town
-  ScreenManager.switchTo('transition', true);
-  const introText = nextTown.introSequence
-    ? nextTown.introSequence.map(s => s.text).join(' ')
-    : `You\'ve been transferred to ${nextTown.name}. New paper. New boss. New stories.`;
-
-  TransitionScreen.show(1, 0, () => {
+  // Show full onboarding cutscene for the new town
+  Onboarding.startTownAdvance(activeTownConfig, pn(), () => {
     startDay(1);
-  }, {
-    customTitle: `Welcome to ${nextTown.name}`,
-    customSubtitle: introText,
   });
 }
 

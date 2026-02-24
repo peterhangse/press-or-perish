@@ -137,12 +137,12 @@ function addStat(container, value, label) {
 function getPerishedEpilogue(days, name, townName) {
   townName = townName || 'Småstad';
   if (days <= 1) {
-    return `You pack up the same day, ${name}. The town has already forgotten your name. The bus back to Stockholm leaves at five.`;
+    return `One day, ${name}. That's all you lasted. The desk is cleared before lunch. ${townName} doesn't even notice you left.`;
   }
   if (days <= 3) {
-    return `You leave the key on the desk. The phone booth outside the office smells of rain and decay. No one calls for ${name}.`;
+    return `You leave the key on the desk and walk out into the rain. Nobody stops you. By tomorrow, someone else will sit in your chair.`;
   }
-  return `Almost, ${name}. But almost doesn't cut it in this business. You take the train home in the dark. ${townName} shrinks in the rearview.`;
+  return `Almost, ${name}. You could feel it turning — but not fast enough. The last bus out of ${townName} leaves at dusk. You're on it.`;
 }
 
 /**

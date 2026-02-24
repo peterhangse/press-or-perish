@@ -111,6 +111,7 @@ const SEQUENCE = [
 
 let currentStep = 0;
 let enteredName = '';
+let advanceCallback = null;
 
 /**
  * Get the player name entered during onboarding
@@ -120,27 +121,97 @@ export function getPlayerName() {
 }
 
 /**
- * Start the onboarding sequence
+ * Start the initial onboarding sequence (Småstad)
  */
 export function start() {
   currentStep = 0;
+  advanceCallback = null;
   const container = document.getElementById('screen-onboarding');
   container.innerHTML = '';
   ScreenManager.switchTo('onboarding');
-  showStep(container);
+  showStep(container, SEQUENCE);
+}
+
+/**
+ * Start a town-advance cutscene (Industristad, etc.)
+ * @param {Object} townConfig - Town config from towns.json
+ * @param {string} playerName - Player's name from save/state
+ * @param {Function} onComplete - Called when cutscene ends
+ */
+export function startTownAdvance(townConfig, playerName, onComplete) {
+  enteredName = playerName || enteredName || 'kid';
+  advanceCallback = onComplete;
+  currentStep = 0;
+
+  const bossInitials = (townConfig.bossFullName || 'BS')
+    .split(' ').map(w => w[0]).join('');
+
+  const advanceSequence = [
+    // Train arrival — scene-setting
+    {
+      type: 'arrival',
+      header: townConfig.name || 'Industristad',
+      body: getArrivalText(townConfig),
+    },
+    // New newspaper card
+    {
+      type: 'acceptance',
+      header: townConfig.newspaperName || 'Industristads Kurir',
+      body: `Your new desk is ready. The building smells like ink and cigarettes.`,
+      sender: `— ${townConfig.bossFullName || 'Birgit Ståhl'}, ${townConfig.bossTitle || 'Editor-in-Chief'}`,
+    },
+    // Boss meeting steps from introSequence
+    ...(townConfig.introSequence || []).map((step, i) => ({
+      type: 'boss',
+      name: townConfig.bossFullName || 'Birgit Ståhl',
+      initials: bossInitials,
+      speech: step.text.replace(/\{name\}/g, enteredName),
+      mood: step.expression || (i === 0 ? 'serious' : 'intense'),
+    })),
+    // Title card — same PRESS OR PERISH slam
+    {
+      type: 'title-card',
+      title: 'PRESS OR PERISH',
+    },
+  ];
+
+  const container = document.getElementById('screen-onboarding');
+  container.innerHTML = '';
+  ScreenManager.switchTo('onboarding');
+  showStep(container, advanceSequence);
+}
+
+/**
+ * Get arrival flavor text for a new town
+ */
+function getArrivalText(tc) {
+  const name = tc.name || 'the new town';
+  if (tc.id === 'industristad') {
+    return `You step off the train at ${name}. The air smells of iron and diesel. A paper mill towers over the rooftops. This is not Småstad.`;
+  }
+  return `You arrive at ${name}. A bigger town, a tougher job, and a boss who has no patience for second chances.`;
 }
 
 /**
  * Render the current step
  */
-function showStep(container) {
-  if (currentStep >= SEQUENCE.length) {
-    // Onboarding complete — emit event with player name
-    container.dispatchEvent(new CustomEvent('onboarding-complete', { bubbles: true, detail: { playerName: enteredName } }));
+function showStep(container, sequence) {
+  sequence = sequence || SEQUENCE;
+
+  if (currentStep >= sequence.length) {
+    if (advanceCallback) {
+      // Town-advance cutscene complete
+      const cb = advanceCallback;
+      advanceCallback = null;
+      cb();
+    } else {
+      // Initial onboarding complete — emit event with player name
+      container.dispatchEvent(new CustomEvent('onboarding-complete', { bubbles: true, detail: { playerName: enteredName } }));
+    }
     return;
   }
 
-  const step = SEQUENCE[currentStep];
+  const step = sequence[currentStep];
 
   // For consecutive boss steps, keep the boss frame — only update speech bubble
   const prevBossFrame = container.querySelector('.onboarding-boss');
@@ -160,6 +231,25 @@ function showStep(container) {
   } else {
     wrapper = document.createElement('div');
     wrapper.className = 'onboarding-container';
+  }
+
+  // --- ARRIVAL (town advance) ---
+  if (step.type === 'arrival') {
+    const card = document.createElement('div');
+    card.className = 'arrival-card';
+
+    const header = document.createElement('div');
+    header.className = 'arrival-header';
+    header.textContent = step.header;
+
+    const body = document.createElement('div');
+    body.className = 'arrival-body';
+    body.textContent = step.body;
+
+    card.appendChild(header);
+    card.appendChild(body);
+    wrapper.appendChild(card);
+    SFX.play('reveal');
   }
 
   // --- DIPLOMA ---
@@ -310,7 +400,7 @@ function showStep(container) {
       portrait.className = 'boss-portrait';
       const placeholder = document.createElement('div');
       placeholder.className = 'pixel-placeholder';
-      placeholder.dataset.initials = 'GE';
+      placeholder.dataset.initials = step.initials || 'GE';
       portrait.appendChild(placeholder);
 
       const nameTag = document.createElement('div');
@@ -383,7 +473,7 @@ function showStep(container) {
       if (titleEl) titleEl.classList.add('fade-out');
       setTimeout(() => {
         currentStep++;
-        showStep(container);
+        showStep(container, sequence);
       }, 2000);
     }, totalRevealTime + 1500);
   } else {
@@ -409,8 +499,10 @@ function showStep(container) {
       btn.textContent = step.style === 'shabby' ? '...I guess I\'ll take it' : 'Apply! →';
     } else if (step.type === 'rejection') {
       btn.textContent = 'Next...';
+    } else if (step.type === 'arrival') {
+      btn.textContent = 'Continue →';
     } else if (step.type === 'acceptance') {
-      btn.textContent = 'Report for duty →';
+      btn.textContent = advanceCallback ? 'Take a seat →' : 'Report for duty →';
     } else if (step.type === 'boss' && step.mood === 'intense') {
       btn.textContent = 'I understand.';
     } else if (step.type === 'boss') {
@@ -427,7 +519,7 @@ function showStep(container) {
         enteredName = nameInput ? nameInput.value.trim() : '';
       }
       currentStep++;
-      showStep(container);
+      showStep(container, sequence);
     });
     wrapper.appendChild(btn);
   }

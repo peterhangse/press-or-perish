@@ -36,33 +36,24 @@ export function render(opts) {
   title1.textContent = opts.isDayZero ? 'STORY FILED' : `DAY ${opts.day} — STORY FILED`;
   phase1.appendChild(title1);
 
-  // Scoring breakdown (your story only)
+  // Scoring breakdown with dot meters
   const breakdown = document.createElement('div');
   breakdown.className = 'results-breakdown';
-  addNewsValueRow(breakdown, opts.baseValue);
-  addInterviewBonusRow(breakdown, 'Approach', opts.q1Bonus || 0);
-  addInterviewBonusRow(breakdown, 'Follow-up', opts.q2Bonus || 0);
-  // Headline scoring disabled — uncomment to re-enable
-  // addInterviewBonusRow(breakdown, 'Headline', opts.headlineBonus || 0);
+  addNewsValueDotRow(breakdown, opts.baseValue);
+  addBonusDotRow(breakdown, 'Approach', opts.q1Bonus || 0, 1);
+  addBonusDotRow(breakdown, 'Follow-up', opts.q2Bonus || 0, 3);
   addBreakdownRow(breakdown, 'Your total', `${opts.playerScore}`, 'positive', true);
   phase1.appendChild(breakdown);
 
-  // Day Zero teaching note on Phase 1
-  if (opts.isDayZero && opts.dayZeroNote1) {
-    const note1 = document.createElement('div');
-    note1.className = 'results-boss-sticky results-boss-note-inline visible';
-    const note1Text = document.createElement('div');
-    note1Text.className = 'results-boss-sticky-text';
-    note1Text.textContent = opts.dayZeroNote1;
-    const note1Name = document.createElement('div');
-    note1Name.className = 'results-boss-sticky-name';
-    note1Name.textContent = `— ${opts.bossName || 'Gunnar'}`;
-    note1.appendChild(note1Text);
-    note1.appendChild(note1Name);
-    phase1.appendChild(note1);
+  // Day Zero note (tutorial)
+  if (opts.dayZeroNote1) {
+    const note = document.createElement('div');
+    note.className = 'results-day-zero-note';
+    note.textContent = opts.dayZeroNote1;
+    phase1.appendChild(note);
   }
 
-  // Go to sleep button
+  // "Go to sleep" button — transitions to Phase 2
   const sleepBtn = document.createElement('button');
   sleepBtn.className = 'btn-paper results-sleep-btn';
   sleepBtn.textContent = 'Go to sleep';
@@ -85,11 +76,11 @@ function showPhase2(wrapper, opts) {
   const title = wrapper.querySelector('.results-title');
   if (title) title.textContent = opts.isDayZero ? 'TRIAL DAY — RESULTS' : `DAY ${opts.day} — RESULTS`;
 
-  // Side-by-side comparison container
+  // Side-by-side comparison
   const comparison = document.createElement('div');
   comparison.className = 'results-comparison';
 
-  // Player's paper — slides in first
+  // Player's paper
   const yours = buildPaperCard(
     'YOUR PAPER',
     opts.paperName || 'Småstads Tidning',
@@ -101,7 +92,7 @@ function showPhase2(wrapper, opts) {
   comparison.appendChild(yours);
   SFX.play('reveal');
 
-  // Competitor's paper — slides in second (delayed)
+  // Competitor's paper
   const theirs = buildPaperCard(
     'THE COMPETITION',
     opts.competitorName || CompetitorAI.getCompetitorName(),
@@ -114,10 +105,10 @@ function showPhase2(wrapper, opts) {
   setTimeout(() => SFX.play('reveal'), 600);
 
   // Insert comparison after the breakdown
-  const breakdown = wrapper.querySelector('.results-breakdown');
-  breakdown.parentNode.insertBefore(comparison, breakdown);
+  const breakdownEl = wrapper.querySelector('.results-breakdown');
+  breakdownEl.parentNode.insertBefore(comparison, breakdownEl);
 
-  // Phase 2 bottom section — appears after headlines
+  // Phase 2 bottom section
   const phase2Bottom = document.createElement('div');
   phase2Bottom.className = 'results-phase results-phase-2';
   phase2Bottom.style.opacity = '0';
@@ -176,7 +167,7 @@ function showPhase2(wrapper, opts) {
     sticky.appendChild(stickyName);
     wrapper.appendChild(sticky);
 
-    // Fly in after phase 2 settles (1.8s after phase 2 appears)
+    // Fly in after phase 2 settles
     setTimeout(() => {
       sticky.classList.add('visible');
       SFX.play('note');
@@ -207,7 +198,7 @@ function showPhase2(wrapper, opts) {
 
   wrapper.appendChild(phase2Bottom);
 
-  // Staggered reveal: your paper (0ms) → competitor (600ms) → bottom section (1200ms)
+  // Staggered reveal: comparison (0ms) → bottom section (1200ms)
   setTimeout(() => {
     phase2Bottom.style.transition = 'opacity 0.5s ease';
     phase2Bottom.style.opacity = '1';
@@ -269,11 +260,14 @@ function addBreakdownRow(container, label, value, colorClass, isTotal = false) {
 }
 
 /**
- * Add the news value row with dots — 4 slots (each dot = 2 points), matching interview style
+ * Add the news value row with dots — 4 slots (each dot = 2 points)
+ * Supports half-fill for odd base values
  */
-function addNewsValueRow(container, baseValue) {
+function addNewsValueDotRow(container, baseValue) {
   const MAX_DOTS = 4;           // 4 dots × 2 pts = 8 max
-  const filled = Math.floor(baseValue / 2);
+  const fullDots = Math.floor(baseValue / 2);
+  const hasHalf = baseValue % 2 === 1;
+
   const row = document.createElement('div');
   row.className = 'breakdown-row';
 
@@ -284,16 +278,14 @@ function addNewsValueRow(container, baseValue) {
   rightSide.style.cssText = 'display:flex; align-items:center; gap:6px;';
 
   const dots = document.createElement('span');
-  dots.style.cssText = 'display:flex; gap:3px; align-items:center;';
+  dots.className = 'dot-meter';
   for (let i = 0; i < MAX_DOTS; i++) {
     const dot = document.createElement('span');
-    dot.style.cssText = 'width:6px; height:6px; border-radius:50%; border:1px solid; display:inline-block;';
-    if (i < filled) {
-      dot.style.background = 'var(--paper-aged)';
-      dot.style.borderColor = 'var(--paper-aged)';
-    } else {
-      dot.style.background = 'transparent';
-      dot.style.borderColor = 'var(--ink-faded)';
+    dot.className = 'dot-meter-dot';
+    if (i < fullDots) {
+      dot.classList.add('filled');
+    } else if (i === fullDots && hasHalf) {
+      dot.classList.add('half');
     }
     dots.appendChild(dot);
   }
@@ -311,14 +303,32 @@ function addNewsValueRow(container, baseValue) {
 }
 
 /**
- * Add an interview bonus row (Q1 or Q2) showing +N or ✗
+ * Add a bonus row with dot meter
+ * @param {string} label - Row label
+ * @param {number} bonus - Actual bonus points
+ * @param {number} maxDots - Max number of dots (each = 2 pts)
  */
-function addInterviewBonusRow(container, label, bonus) {
+function addBonusDotRow(container, label, bonus, maxDots) {
+  const filledDots = Math.floor(bonus / 2);
   const row = document.createElement('div');
   row.className = 'breakdown-row';
 
   const labelEl = document.createElement('span');
   labelEl.textContent = label;
+
+  const rightSide = document.createElement('span');
+  rightSide.style.cssText = 'display:flex; align-items:center; gap:6px;';
+
+  const dots = document.createElement('span');
+  dots.className = 'dot-meter';
+  for (let i = 0; i < maxDots; i++) {
+    const dot = document.createElement('span');
+    dot.className = 'dot-meter-dot';
+    if (i < filledDots) {
+      dot.classList.add('filled');
+    }
+    dots.appendChild(dot);
+  }
 
   const valEl = document.createElement('span');
   if (bonus > 0) {
@@ -329,7 +339,10 @@ function addInterviewBonusRow(container, label, bonus) {
     valEl.textContent = '✗';
   }
 
+  rightSide.appendChild(dots);
+  rightSide.appendChild(valEl);
+
   row.appendChild(labelEl);
-  row.appendChild(valEl);
+  row.appendChild(rightSide);
   container.appendChild(row);
 }

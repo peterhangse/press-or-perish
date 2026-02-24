@@ -223,6 +223,19 @@ function handleQ1(archetype, questionText) {
         }
       }
 
+      // ── Feedback: Q1 approach verdict line ──
+      if (q1Bonus > 0) {
+        const fbLine = document.createElement('div');
+        fbLine.className = 'feedback-line tier-2';
+        fbLine.textContent = getQ1Feedback(archetype, true);
+        dialogue.appendChild(fbLine);
+      } else {
+        const fbLine = document.createElement('div');
+        fbLine.className = 'feedback-line tier-0';
+        fbLine.textContent = getQ1Feedback(archetype, false);
+        dialogue.appendChild(fbLine);
+      }
+
       // Add note from Q1 answer (with bonus)
       addNote(branch.q1_note || summarizeResponse(branch.q1_response), undefined, q1Bonus);
 
@@ -442,6 +455,29 @@ function getArchetypeLabel(archetype) {
     case 'pressure': return 'Pressure';
     case 'silence':  return 'Silence';
     default:         return archetype;
+  }
+}
+
+/**
+ * Get Q1 approach feedback text
+ */
+function getQ1Feedback(archetype, success) {
+  if (success) {
+    switch (archetype) {
+      case 'friendly': return 'Good instinct — the soft approach is opening doors here.';
+      case 'direct':   return 'The direct approach paid off — they respect the professionalism.';
+      case 'pressure': return 'The pressure worked — they\'re rattled and talking.';
+      case 'silence':  return 'The silence drew them out — they filled the void with truth.';
+      default:         return 'Good approach — they\'re willing to share more.';
+    }
+  } else {
+    switch (archetype) {
+      case 'friendly': return 'Too soft — they\'re comfortable but not saying anything useful.';
+      case 'direct':   return 'Too blunt — they\'ve closed up. Surface facts only.';
+      case 'pressure': return 'The pressure backfired — they\'re defensive now.';
+      case 'silence':  return 'The silence fell flat — they\'re not biting.';
+      default:         return 'Wrong read — this approach isn\'t getting through.';
+    }
   }
 }
 

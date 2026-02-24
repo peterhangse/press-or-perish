@@ -52,6 +52,7 @@
     1px 2px 4px rgba(0,0,0,0.2),
     0 0 0 0.5px rgba(0,0,0,0.08);
   transform: rotate(-0.3deg);
+  min-height: 90px;
 }
 
 .results-paper.yours {
@@ -100,8 +101,9 @@
   color: var(--ink);
   text-align: center;
   line-height: 1.2;
-  max-height: 36px;
-  overflow: hidden;
+  flex: 1;
+  display: flex;
+  align-items: center;
 }
 
 .results-paper-score {
@@ -271,6 +273,32 @@
 .results-slide-in-right {
   opacity: 0;
   animation: results-slide-right 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.6s forwards;
+}
+
+/* ── Dot meter for scoring breakdown ── */
+.dot-meter {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.dot-meter-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1px solid var(--ink-faded);
+  background: transparent;
+  display: inline-block;
+}
+
+.dot-meter-dot.filled {
+  background: var(--paper-aged);
+  border-color: var(--paper-aged);
+}
+
+.dot-meter-dot.half {
+  background: linear-gradient(90deg, var(--paper-aged) 50%, transparent 50%);
+  border-color: var(--paper-aged);
 }
 
 @keyframes results-slide-left {

@@ -839,3 +839,33 @@
   70%  { opacity: 0.3; filter: blur(2px); }
   100% { opacity: 0; transform: scale(0.9) translateY(10px); filter: blur(6px); }
 }
+
+/* Arrival card — town advance intro */
+.arrival-card {
+  background: var(--paper-aged);
+  padding: var(--sp-5) var(--sp-4);
+  border: 1px solid var(--ink-faded);
+  max-width: 400px;
+  animation: paper-slide-left 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  box-shadow: 1px 2px 6px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.arrival-header {
+  font-family: var(--font-headline);
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: var(--ink);
+  text-transform: uppercase;
+  margin-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--ink-faded);
+  padding-bottom: var(--sp-2);
+}
+
+.arrival-body {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--ink);
+  line-height: 1.6;
+  font-style: italic;
+}

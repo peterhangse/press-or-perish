@@ -549,3 +549,231 @@
   from { opacity: 0; transform: rotate(2deg) scale(0.9); }
   to   { opacity: 1; transform: rotate(2deg) scale(1); }
 }
+
+/* ============================================
+   INDUSTRISTAD — Town-specific desk overrides
+   ============================================ */
+
+/* Desk surface — cooler, greyer wood: steel desk in an industrial office */
+#screen-desk.town-industristad {
+  background:
+    repeating-linear-gradient(
+      2deg,
+      transparent 0px,
+      transparent 3px,
+      rgba(0,0,0,0.07) 3px,
+      rgba(0,0,0,0.07) 4px
+    ),
+    radial-gradient(ellipse at 85% 10%, rgba(200,210,220,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%),
+    linear-gradient(180deg, #2c2c2e 0%, #22222a 30%, #1a1a22 100%);
+}
+
+/* Wall behind window — darker, industrial concrete */
+.town-industristad .desk-top-bar {
+  background:
+    linear-gradient(180deg, #141418 0%, #1c1c22 70%, transparent 100%);
+}
+
+/* Window frame — steel-grey instead of wood */
+.town-industristad .desk-window {
+  border-color: #555a60;
+  box-shadow: 0 0 20px rgba(180,190,200,0.06);
+}
+
+/* Industristad sky — hazier, more polluted */
+.town-industristad .desk-window-sky.morning {
+  background: linear-gradient(180deg, #7a9ab0 0%, #b0c0cc 60%, #c8c8b4 100%);
+}
+.town-industristad .desk-window-sky.afternoon {
+  background: linear-gradient(180deg, #c09848 0%, #d8b87a 50%, #c0a858 100%);
+}
+.town-industristad .desk-window-sky.evening {
+  background: linear-gradient(180deg, #12101a 0%, #201818 60%, #080810 100%);
+}
+
+/* Industrial skyline — factory chimneys, smokestacks, paper mill */
+.town-industristad .desk-window-sky::before {
+  clip-path: polygon(
+    0% 100%,
+    /* Low warehouse block */
+    0% 78%, 5% 78%, 5% 72%, 10% 72%, 10% 78%,
+    /* Smoke stack 1 — tall narrow chimney */
+    14% 78%, 14% 28%, 16% 28%, 16% 78%,
+    /* Factory building with sawtooth roof */
+    18% 78%, 18% 58%, 21% 52%, 24% 58%, 27% 52%, 30% 58%, 30% 78%,
+    /* Smoke stack 2 — medium */
+    33% 78%, 33% 35%, 35% 35%, 35% 78%,
+    /* Main paper mill — large block with tower */
+    38% 78%, 38% 50%, 42% 50%, 42% 22%, 44% 22%, 44% 50%,
+    48% 50%, 48% 78%,
+    /* Gap */
+    50% 78%,
+    /* Crane structure */
+    52% 78%, 52% 42%, 53% 42%, 55% 30%, 57% 42%, 58% 42%, 58% 78%,
+    /* Low office block */
+    60% 78%, 60% 62%, 68% 62%, 68% 78%,
+    /* Smoke stack 3 — tallest */
+    70% 78%, 70% 18%, 72% 18%, 72% 78%,
+    /* Storage silos — rounded tops */
+    74% 78%, 74% 55%, 76% 48%, 78% 55%, 78% 48%, 80% 42%, 82% 48%, 82% 78%,
+    /* Small buildings */
+    84% 78%, 84% 68%, 90% 68%, 90% 72%,
+    /* Final warehouse */
+    92% 72%, 92% 65%, 100% 65%,
+    100% 100%
+  );
+  background: #1a1a20;
+  opacity: 0.9;
+}
+
+/* Industrial window lights — orange/amber industrial glow */
+.town-industristad .desk-window-sky::after {
+  background:
+    /* Furnace glows — larger, orange */
+    radial-gradient(circle 2px, rgba(255,140,40,0.6) 0%, transparent 100%) 42px 10px,
+    radial-gradient(circle 2px, rgba(255,120,30,0.5) 0%, transparent 100%) 44px 12px,
+    /* Window lights */
+    radial-gradient(circle 1px, rgba(255,200,80,0.5) 0%, transparent 100%) 20px 6px,
+    radial-gradient(circle 1px, rgba(255,200,80,0.4) 0%, transparent 100%) 62px 5px,
+    radial-gradient(circle 1px, rgba(255,180,60,0.5) 0%, transparent 100%) 95px 7px,
+    radial-gradient(circle 1px, rgba(255,200,80,0.4) 0%, transparent 100%) 130px 4px,
+    radial-gradient(circle 1px, rgba(255,160,50,0.6) 0%, transparent 100%) 155px 8px,
+    radial-gradient(circle 1px, rgba(255,200,80,0.3) 0%, transparent 100%) 170px 6px;
+  background-repeat: no-repeat;
+}
+
+/* Smoke wisps from chimneys — CSS animated */
+.town-industristad .desk-window-sky .chimney-smoke {
+  position: absolute;
+  width: 6px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(180,180,190,0.25);
+  filter: blur(2px);
+  animation: smoke-rise 3s ease-out infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.town-industristad .desk-window-sky .chimney-smoke:nth-child(1) {
+  left: 14%; bottom: 22px; animation-duration: 2.8s; animation-delay: 0s;
+}
+.town-industristad .desk-window-sky .chimney-smoke:nth-child(2) {
+  left: 15%; bottom: 22px; animation-duration: 3.4s; animation-delay: 1.2s;
+  width: 5px; height: 10px;
+}
+.town-industristad .desk-window-sky .chimney-smoke:nth-child(3) {
+  left: 34%; bottom: 16px; animation-duration: 3s; animation-delay: 0.5s;
+}
+.town-industristad .desk-window-sky .chimney-smoke:nth-child(4) {
+  left: 43%; bottom: 28px; animation-duration: 3.6s; animation-delay: 0.8s;
+  width: 4px; height: 8px;
+}
+.town-industristad .desk-window-sky .chimney-smoke:nth-child(5) {
+  left: 71%; bottom: 30px; animation-duration: 2.6s; animation-delay: 0.3s;
+  width: 7px; height: 14px;
+}
+.town-industristad .desk-window-sky .chimney-smoke:nth-child(6) {
+  left: 72%; bottom: 30px; animation-duration: 3.2s; animation-delay: 1.5s;
+  width: 5px; height: 10px;
+}
+
+@keyframes smoke-rise {
+  0%   { transform: translateY(0) scaleX(1); opacity: 0.35; }
+  40%  { transform: translateY(-8px) scaleX(1.3); opacity: 0.25; }
+  70%  { transform: translateY(-16px) scaleX(1.8); opacity: 0.12; }
+  100% { transform: translateY(-24px) scaleX(2.2); opacity: 0; }
+}
+
+/* Industrial desk edge — steel/metal */
+#screen-desk.town-industristad::after {
+  background: linear-gradient(180deg, transparent, rgba(30,30,40,0.5));
+}
+
+/* Action bar — cold metal instead of warm wood */
+.town-industristad .desk-action-bar {
+  background:
+    linear-gradient(180deg,
+      rgba(50,50,60,0.4) 0%,
+      rgba(0,0,0,0.2) 2px,
+      #1a1a22 2px,
+      #141418 100%
+    );
+  border-top: 2px solid rgba(80,80,100,0.3);
+}
+
+/* Investigate button — steel blue-grey tone */
+.town-industristad .desk-investigate-btn {
+  background: linear-gradient(180deg, #3a3a48 0%, #242430 100%);
+  border-color: #6a6a78;
+  box-shadow:
+    0 4px 0 #0a0a10,
+    0 5px 8px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(200,200,220,0.08);
+}
+
+.town-industristad .desk-investigate-btn:hover:not(:disabled) {
+  background: linear-gradient(180deg, #4a4a58 0%, #2e2e3a 100%);
+}
+
+/* Lead cards — slightly cooler, newsprint-grey paper */
+.town-industristad .lead-card {
+  --paper-tone: #dddce0;
+  border-color: #a0a0a8;
+}
+
+.town-industristad .lead-card:hover {
+  border-color: #606068;
+}
+
+.town-industristad .lead-card.selected {
+  border-color: #8090a0;
+  box-shadow:
+    0 2px 10px rgba(100,140,180,0.3),
+    0 0 0 2px #8090a0;
+}
+
+/* Industrial flair: grease/ink smudge instead of coffee stain */
+.town-industristad .lead-card.flair-grease::before {
+  content: '';
+  position: absolute;
+  width: var(--grease-size, 50px);
+  height: var(--grease-size, 50px);
+  border-radius: 40% 60% 55% 45%;
+  left: var(--grease-x, -10px);
+  top: var(--grease-y, -8px);
+  background:
+    radial-gradient(ellipse at 45% 55%,
+      rgba(30,30,40,0.12) 0%,
+      rgba(40,40,50,0.08) 40%,
+      transparent 65%
+    );
+  pointer-events: none;
+  z-index: 0;
+  transform: rotate(var(--grease-rot, 15deg));
+}
+
+/* Stamp for industristad — HEMLIGT (Classified) */
+.town-industristad .lead-card.flair-stamp::after {
+  content: 'HEMLIGT';
+  color: rgba(180, 50, 50, 0.09);
+  border-color: rgba(180, 50, 50, 0.07);
+}
+.town-industristad .lead-card.flair-stamp:nth-child(odd)::after {
+  content: 'HEMLIGT';
+}
+
+/* Boss note — cooler tint for Birgit */
+.town-industristad .boss-note {
+  background: #e8e4d8;
+  border-bottom-color: #b0a890;
+}
+
+/* Pencil scratch marks — ink-blue for industristad */
+.town-industristad .desk-leads::after {
+  background: rgba(40, 40, 60, 0.12);
+  box-shadow:
+    6px 8px 0 rgba(40, 40, 60, 0.08),
+    -2px 14px 0 rgba(40, 40, 60, 0.06);
+}

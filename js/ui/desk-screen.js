@@ -15,14 +15,21 @@ let onInvestigate = null;
  * @param {number} day - Current day number
  * @param {Object} bossNote - { text, name } boss note for today
  * @param {Function} callback - Called with selected story when player investigates
+ * @param {Object} [townConfig] - Optional town config for visual theming
  */
-export function render(leads, day, bossNote, callback) {
+export function render(leads, day, bossNote, callback, townConfig) {
   currentLeads = leads;
   selectedIndex = null;
   onInvestigate = callback;
 
   const container = document.getElementById('screen-desk');
   container.innerHTML = '';
+
+  // Apply town-specific CSS class
+  container.classList.remove('town-smastad', 'town-industristad');
+  if (townConfig?.cssClass) {
+    container.classList.add(townConfig.cssClass);
+  }
 
   // Top bar with window
   const topBar = document.createElement('div');
@@ -32,6 +39,16 @@ export function render(leads, day, bossNote, callback) {
   window_.className = 'desk-window';
   const sky = document.createElement('div');
   sky.className = 'desk-window-sky morning';
+
+  // Add smoke elements for Industristad
+  if (townConfig?.id === 'industristad') {
+    for (let i = 0; i < 6; i++) {
+      const smoke = document.createElement('div');
+      smoke.className = 'chimney-smoke';
+      sky.appendChild(smoke);
+    }
+  }
+
   window_.appendChild(sky);
   topBar.appendChild(window_);
 
@@ -63,21 +80,32 @@ export function render(leads, day, bossNote, callback) {
     card.dataset.index = i;
 
     // Paper aging — each card gets a noticeably different paper tone
-    const paperColors = [
-      '#e8dfc8', // standard cream
-      '#e2d8b8', // yellowed
-      '#ede4d0', // bright white-ish
-      '#ddd4b4', // well-aged yellow
-      '#e5dcc4', // warm cream
-      '#e0d5b0', // old newsprint
-      '#eae1cb', // fresh paper
-      '#d8cfad', // very aged
-    ];
+    const paperColors = townConfig?.id === 'industristad'
+      ? [
+          '#dddce0', // cool grey
+          '#d8d8dc', // steel grey
+          '#e0dfe2', // light grey
+          '#d4d4da', // industrial grey
+          '#dcdbe0', // blue-grey
+          '#d6d6dc', // newsprint
+          '#e2e1e4', // crisp grey
+          '#d2d2d8', // aged grey
+        ]
+      : [
+          '#e8dfc8', // standard cream
+          '#e2d8b8', // yellowed
+          '#ede4d0', // bright white-ish
+          '#ddd4b4', // well-aged yellow
+          '#e5dcc4', // warm cream
+          '#e0d5b0', // old newsprint
+          '#eae1cb', // fresh paper
+          '#d8cfad', // very aged
+        ];
     const paperIdx = ((lead.id || '').charCodeAt(0) + i * 7) % paperColors.length;
     card.style.setProperty('--paper-tone', paperColors[paperIdx]);
 
     // Random visual flair — each card gets a unique look
-    applyCardFlair(card, lead, i);
+    applyCardFlair(card, lead, i, townConfig);
 
     // Source badge — colored tag
     const badge = document.createElement('div');
@@ -237,40 +265,61 @@ function selectLead(index) {
 /**
  * Apply subtle visual flair to a lead card — randomized positions via CSS vars
  */
-function applyCardFlair(card, lead, index) {
+function applyCardFlair(card, lead, index, townConfig) {
+  const isIndustrial = townConfig?.id === 'industristad';
+
   // Seeded pseudo-random based on story id for consistency
   const seed = (lead.id || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0) + index;
   const h1 = (seed * 7 + 13) % 100;
   const h2 = (seed * 11 + 7) % 100;
   const h3 = (seed * 17 + 3) % 100;
 
-  // ~25% chance of coffee stain — large, positioned at a corner, half off-card
-  if ((seed * 7) % 100 < 25) {
-    card.classList.add('flair-coffee');
-    const corner = (seed * 3) % 4; // 0=top-left, 1=top-right, 2=bottom-left, 3=bottom-right
-    const size = 70 + (h3 % 30); // 70-100px
-    const offset = -(size * 0.4); // push 40% off edge
-    const jitterX = (h1 % 10) - 5;
-    const jitterY = (h2 % 10) - 5;
-    let cx, cy;
-    if (corner === 0)      { cx = offset + jitterX; cy = offset + jitterY; }
-    else if (corner === 1) { cx = `calc(100% - ${size + offset - jitterX}px)`; cy = offset + jitterY; }
-    else if (corner === 2) { cx = offset + jitterX; cy = `calc(100% - ${size + offset - jitterY}px)`; }
-    else                   { cx = `calc(100% - ${size + offset - jitterX}px)`; cy = `calc(100% - ${size + offset - jitterY}px)`; }
-    card.style.setProperty('--coffee-size', `${size}px`);
-    card.style.setProperty('--coffee-x', typeof cx === 'number' ? `${cx}px` : cx);
-    card.style.setProperty('--coffee-y', typeof cy === 'number' ? `${cy}px` : cy);
+  if (isIndustrial) {
+    // Industristad: ~30% chance of grease/ink smudge
+    if ((seed * 7) % 100 < 30) {
+      card.classList.add('flair-grease');
+      const size = 40 + (h3 % 30);
+      const corner = (seed * 3) % 4;
+      const offset = -(size * 0.3);
+      const jX = (h1 % 10) - 5;
+      const jY = (h2 % 10) - 5;
+      let cx, cy;
+      if (corner === 0)      { cx = offset + jX; cy = offset + jY; }
+      else if (corner === 1) { cx = `calc(100% - ${size + offset - jX}px)`; cy = offset + jY; }
+      else if (corner === 2) { cx = offset + jX; cy = `calc(100% - ${size + offset - jY}px)`; }
+      else                   { cx = `calc(100% - ${size + offset - jX}px)`; cy = `calc(100% - ${size + offset - jY}px)`; }
+      card.style.setProperty('--grease-size', `${size}px`);
+      card.style.setProperty('--grease-x', typeof cx === 'number' ? `${cx}px` : cx);
+      card.style.setProperty('--grease-y', typeof cy === 'number' ? `${cy}px` : cy);
+      card.style.setProperty('--grease-rot', `${-20 + (h1 % 40)}deg`);
+    }
+  } else {
+    // Småstad: ~25% chance of coffee stain
+    if ((seed * 7) % 100 < 25) {
+      card.classList.add('flair-coffee');
+      const corner = (seed * 3) % 4;
+      const size = 70 + (h3 % 30);
+      const offset = -(size * 0.4);
+      const jitterX = (h1 % 10) - 5;
+      const jitterY = (h2 % 10) - 5;
+      let cx, cy;
+      if (corner === 0)      { cx = offset + jitterX; cy = offset + jitterY; }
+      else if (corner === 1) { cx = `calc(100% - ${size + offset - jitterX}px)`; cy = offset + jitterY; }
+      else if (corner === 2) { cx = offset + jitterX; cy = `calc(100% - ${size + offset - jitterY}px)`; }
+      else                   { cx = `calc(100% - ${size + offset - jitterX}px)`; cy = `calc(100% - ${size + offset - jitterY}px)`; }
+      card.style.setProperty('--coffee-size', `${size}px`);
+      card.style.setProperty('--coffee-x', typeof cx === 'number' ? `${cx}px` : cx);
+      card.style.setProperty('--coffee-y', typeof cy === 'number' ? `${cy}px` : cy);
+    }
   }
 
-  // Letters: ~35% chance of faint postal stamp — randomized angle + position
+  // Stamps — documents get "MOTTAGET" (Småstad) or "HEMLIGT" (both, via CSS)
   if (lead.source_type === 'letter' && (seed * 11) % 100 < 35) {
     card.classList.add('flair-stamp');
     card.style.setProperty('--stamp-rot', `${-28 + (h1 % 36)}deg`);
     card.style.setProperty('--stamp-x', `${35 + (h2 % 35)}%`);
     card.style.setProperty('--stamp-y', `${30 + (h3 % 35)}%`);
   }
-
-  // Documents: no extra flair (paper clip removed — looked fake)
 }
 
 /**

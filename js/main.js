@@ -220,7 +220,7 @@ function showDayZeroDesk() {
   Components.updateClock('desk');
   DeskScreen.render(leads, 0, bossNote, (selectedStory) => {
     startDayZeroInterview(selectedStory);
-  });
+  }, getTownConfig());
 }
 
 /** Day Zero interview — first interview has 2 of 4 Q1 options grayed out */
@@ -345,7 +345,7 @@ function showDesk() {
   Components.updateClock('desk');
   DeskScreen.render(leads, state.day, bossNote, (selectedStory) => {
     startInterview(selectedStory);
-  });
+  }, getTownConfig());
 }
 
 /**

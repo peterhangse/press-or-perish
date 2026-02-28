@@ -61,7 +61,7 @@ const SEQUENCE = [
   // The shitty opening
   {
     type: 'job-ad',
-    header: 'Småstads Tidning',
+    header: 'Småstad Paper',
     tagline: '',
     body: 'Reporter needed. Immediate start. No experience required. The pay is modest. Present yourself Monday morning.',
     salary: '21,500 kr/month',
@@ -70,7 +70,7 @@ const SEQUENCE = [
   // Acceptance
   {
     type: 'acceptance',
-    header: 'Småstads Tidning',
+    header: 'Småstad Paper',
     body: 'You got the job. Nobody else applied.',
     sender: '— Gunnar Ek, Editor-in-Chief',
   },
@@ -146,19 +146,52 @@ export function startTownAdvance(townConfig, playerName, onComplete) {
   const bossInitials = (townConfig.bossFullName || 'BS')
     .split(' ').map(w => w[0]).join('');
 
+  const isIndustrial = townConfig.id === 'industristad';
+  const isCoastal = townConfig.id === 'kuststad';
+
   const advanceSequence = [
-    // Train arrival — scene-setting
+    // Train arrival — scene-setting with town logo
     {
-      type: 'arrival',
+      type: 'town-intro',
+      townId: townConfig.id,
       header: townConfig.name || 'Industristad',
+      tagline: isIndustrial
+        ? 'Est. 1892 · Built on Iron and Paper'
+        : isCoastal
+        ? 'Est. 1847 · Where the Land Ends and the Truth Begins'
+        : townConfig.name,
       body: getArrivalText(townConfig),
     },
-    // New newspaper card
+    // Job offer from the new newspaper
+    ...(isIndustrial ? [{
+      type: 'job-ad',
+      header: townConfig.newspaperName || 'Industristad Paper',
+      tagline: isIndustrial
+        ? 'The Workers\' Voice Since 1903'
+        : '',
+      body: isIndustrial
+        ? 'REPORTER WANTED: One experienced journalist to cover industry, labor, and local politics. Must handle pressure from factory owners and union bosses alike. Not for the faint of heart.'
+        : 'Reporter needed. Immediate start.',
+      salary: '26,500 kr/month',
+      style: 'industrial',
+    }] : []),
+    ...(isCoastal ? [{
+      type: 'job-ad',
+      header: townConfig.newspaperName || 'Kuststad Paper',
+      tagline: 'The Coast\'s Independent Voice Since 1874',
+      body: 'REPORTER WANTED: One resilient journalist for harbor, maritime, and local affairs. Must not be afraid of early mornings, salt water, or powerful shipping interests. Seasickness disqualifying.',
+      salary: '28,000 kr/month',
+      style: 'coastal',
+    }] : []),
+    // Acceptance from new boss
     {
       type: 'acceptance',
-      header: townConfig.newspaperName || 'Industristads Kurir',
-      body: `Your new desk is ready. The building smells like ink and cigarettes.`,
-      sender: `— ${townConfig.bossFullName || 'Birgit Ståhl'}, ${townConfig.bossTitle || 'Editor-in-Chief'}`,
+      header: townConfig.newspaperName || 'Industristad Paper',
+      body: isIndustrial
+        ? `Your new desk is ready. The building smells like machine oil and old ink. Through the window you can see the paper mill\'s smokestacks.`
+        : isCoastal
+        ? `Your new desk faces the harbor. The building smells like salt, diesel, and old newsprint. Through the window you can see the fishing boats rocking at their moorings and the shipping cranes beyond.`
+        : `Your new desk is ready. The building smells like ink and cigarettes.`,
     },
     // Boss meeting steps from introSequence
     ...(townConfig.introSequence || []).map((step, i) => ({
@@ -188,6 +221,9 @@ function getArrivalText(tc) {
   const name = tc.name || 'the new town';
   if (tc.id === 'industristad') {
     return `You step off the train at ${name}. The air smells of iron and diesel. A paper mill towers over the rooftops. This is not Småstad.`;
+  }
+  if (tc.id === 'kuststad') {
+    return `You step off the bus at ${name}. Salt and diesel mix in the cold November air. Cargo cranes loom over the harbor like iron sentinels. The sea takes things here — and so does the silence.`;
   }
   return `You arrive at ${name}. A bigger town, a tougher job, and a boss who has no patience for second chances.`;
 }
@@ -247,6 +283,57 @@ function showStep(container, sequence) {
     body.textContent = step.body;
 
     card.appendChild(header);
+    card.appendChild(body);
+    wrapper.appendChild(card);
+    SFX.play('reveal');
+  }
+
+  // --- TOWN INTRO (with logo, tagline, and atmosphere) ---
+  if (step.type === 'town-intro') {
+    const card = document.createElement('div');
+    card.className = `arrival-card town-intro-card ${step.townId || ''}`;
+
+    // Town logo (CSS-built emblem)
+    const logo = document.createElement('div');
+    logo.className = `town-logo town-logo-${step.townId || 'default'}`;
+
+    // Industristad: gear + chimney emblem
+    if (step.townId === 'industristad') {
+      logo.innerHTML = `
+        <div class="town-logo-gear"></div>
+        <div class="town-logo-chimney"></div>
+        <div class="town-logo-chimney town-logo-chimney-2"></div>
+        <div class="town-logo-smoke"></div>
+      `;
+    }
+    // Kuststad: anchor + wave emblem
+    if (step.townId === 'kuststad') {
+      logo.innerHTML = `
+        <div class="town-logo-anchor"></div>
+        <div class="town-logo-wave"></div>
+        <div class="town-logo-seagull"></div>
+      `;
+    }
+
+    const header = document.createElement('div');
+    header.className = 'arrival-header town-intro-header';
+    header.textContent = step.header;
+
+    const tagline = document.createElement('div');
+    tagline.className = 'town-intro-tagline';
+    tagline.textContent = step.tagline;
+
+    const divider = document.createElement('div');
+    divider.className = 'town-intro-divider';
+
+    const body = document.createElement('div');
+    body.className = 'arrival-body town-intro-body';
+    body.textContent = step.body;
+
+    card.appendChild(logo);
+    card.appendChild(header);
+    card.appendChild(tagline);
+    card.appendChild(divider);
     card.appendChild(body);
     wrapper.appendChild(card);
     SFX.play('reveal');
@@ -496,10 +583,13 @@ function showStep(container, sequence) {
       // Focus the input
       setTimeout(() => nameInput.focus(), 700);
     } else if (step.type === 'job-ad') {
-      btn.textContent = step.style === 'shabby' ? '...I guess I\'ll take it' : 'Apply! →';
+      btn.textContent = step.style === 'shabby' ? '...I guess I\'ll take it'
+        : step.style === 'industrial' ? 'Accept the position →'
+        : step.style === 'coastal' ? 'Sign on →'
+        : 'Apply! →';
     } else if (step.type === 'rejection') {
       btn.textContent = 'Next...';
-    } else if (step.type === 'arrival') {
+    } else if (step.type === 'arrival' || step.type === 'town-intro') {
       btn.textContent = 'Continue →';
     } else if (step.type === 'acceptance') {
       btn.textContent = advanceCallback ? 'Take a seat →' : 'Report for duty →';

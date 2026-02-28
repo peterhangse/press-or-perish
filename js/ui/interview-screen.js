@@ -19,6 +19,7 @@ let disabledQ1 = [];  // archetypes to gray out (Day Zero tutorial)
  * @param {Function} callback - Called with { tier, points, headlineOptions } when done
  * @param {Object} [options] - Optional settings
  * @param {Array}  [options.disabledArchetypes] - Q1 archetypes to gray out
+ * @param {Object} [options.townConfig] - Town config for visual theming
  */
 export function start(story, npc, callback, options = {}) {
   currentStory = story;
@@ -28,6 +29,12 @@ export function start(story, npc, callback, options = {}) {
 
   const container = document.getElementById('screen-interview');
   container.innerHTML = '';
+
+  // Apply town-specific CSS class
+  container.classList.remove('town-smastad', 'town-industristad', 'town-kuststad');
+  if (options.townConfig?.cssClass) {
+    container.classList.add(options.townConfig.cssClass);
+  }
 
   // Build layout
   const layout = document.createElement('div');
@@ -411,6 +418,9 @@ function addDialogueLine(container, speaker, text, type) {
  * Typewrite a dialogue line word-by-word, then call onDone
  */
 function typewriteDialogue(container, speaker, text, type, onDone) {
+  // Replace {name} placeholder with player name
+  text = text.replace(/\{name\}/g, localStorage.getItem('pop_player_name') || 'kid');
+
   const line = document.createElement('div');
   line.className = `dialogue-line ${type}`;
 

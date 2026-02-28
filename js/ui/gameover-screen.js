@@ -27,7 +27,7 @@ export function showPerished(opts) {
   // Subtitle
   const sub = document.createElement('div');
   sub.className = 'gameover-subtitle';
-  sub.textContent = `${opts.paperName || 'Småstads Tidning'} can no longer afford to keep you. ${opts.bossName || 'Gunnar'} gave you a chance, ${opts.playerName || 'kid'}. You failed.`;
+  sub.textContent = `${opts.paperName || 'Småstad Paper'} can no longer afford to keep you. ${opts.bossName || 'Gunnar'} gave you a chance, ${opts.playerName || 'kid'}. You failed.`;
   container.appendChild(sub);
 
   // Cold epilogue
@@ -36,15 +36,21 @@ export function showPerished(opts) {
   epilogue.textContent = getPerishedEpilogue(opts.daysCompleted, opts.playerName || 'kid', opts.townName || 'Småstad');
   container.appendChild(epilogue);
 
-  // Stats
+  // Stats (cumulative across all towns)
   const stats = document.createElement('div');
   stats.className = 'gameover-stats';
 
-  addStat(stats, opts.daysCompleted, 'DAYS');
+  const rs = opts.runStats || {};
+  addStat(stats, rs.totalDays || opts.daysCompleted, 'DAYS');
   addStat(stats, opts.finalDeficit, 'DEFICIT');
-  const totalPoints = opts.dayHistory.reduce((sum, d) => sum + d.points, 0);
-  addStat(stats, totalPoints, 'POINTS');
+  addStat(stats, rs.totalPoints || opts.dayHistory.reduce((s, d) => s + d.points, 0), 'POINTS');
   container.appendChild(stats);
+
+  // Per-town breakdown if multiple towns played
+  if (opts.townHistory && opts.townHistory.length > 0) {
+    const breakdown = buildTownBreakdown(opts.townHistory, opts.dayHistory, opts.currentTownId || opts.townName);
+    container.appendChild(breakdown);
+  }
 
   // Restart
   const btn = document.createElement('button');
@@ -85,20 +91,28 @@ export function showSurvived(opts) {
   // Epilogue
   const epilogue = document.createElement('div');
   epilogue.className = 'gameover-epilogue';
-  epilogue.textContent = `${opts.bossName || 'Gunnar'} nods briefly. "You can stay, ${opts.playerName || 'kid'}. For now." ${opts.competitorName || 'Regionbladet'} moves on. ${opts.paperName || 'Småstads Tidning'} lives another day. That's enough.`;
+  epilogue.textContent = `${opts.bossName || 'Gunnar'} nods briefly. "You can stay, ${opts.playerName || 'kid'}. For now." ${opts.competitorName || 'Regionbladet'} moves on. ${opts.paperName || 'Småstad Paper'} lives another day. That's enough.`;
   container.appendChild(epilogue);
 
-  // Stats
+  // Stats (cumulative across all towns)
   const stats = document.createElement('div');
   stats.className = 'gameover-stats';
 
-  addStat(stats, 5, 'DAYS');
+  const rs = opts.runStats || {};
+  const totalDays = rs.totalDays || 5;
+  const totalPoints = rs.totalPoints || opts.dayHistory.reduce((s, d) => s + d.points, 0);
+  addStat(stats, totalDays, 'DAYS');
   addStat(stats, opts.finalDeficit, 'DEFICIT');
-  const totalPoints = opts.dayHistory.reduce((sum, d) => sum + d.points, 0);
   addStat(stats, totalPoints, 'POINTS');
-  const avgPoints = Math.round(totalPoints / 5);
+  const avgPoints = totalDays > 0 ? Math.round(totalPoints / totalDays) : 0;
   addStat(stats, avgPoints, 'AVG');
   container.appendChild(stats);
+
+  // Per-town breakdown if multiple towns played
+  if (opts.townHistory && opts.townHistory.length > 0) {
+    const breakdown = buildTownBreakdown(opts.townHistory, opts.dayHistory, opts.currentTownId || opts.townName);
+    container.appendChild(breakdown);
+  }
 
   // Restart
   const btn = document.createElement('button');
@@ -159,4 +173,44 @@ function getSurvivedMessage(deficit) {
     return 'You survived. Barely. The competition still leads, but the paper lives. It\'ll have to do.';
   }
   return 'By the thinnest of margins, you survived the week.';
+}
+
+/**
+ * Build per-town breakdown showing points from each town
+ */
+function buildTownBreakdown(townHistory, currentDayHistory, currentTownId) {
+  const wrap = document.createElement('div');
+  wrap.className = 'gameover-town-breakdown';
+
+  // Map town IDs to display names
+  const townNames = {
+    smastad: 'Småstad',
+    industristad: 'Industristad',
+    kuststad: 'Kuststad',
+  };
+
+  // Previous towns
+  for (const t of townHistory) {
+    const pts = (t.dayHistory || []).reduce((s, d) => s + d.points, 0);
+    const days = (t.dayHistory || []).length;
+    if (days > 0) {
+      addTownRow(wrap, townNames[t.townId] || t.townId, pts, days);
+    }
+  }
+
+  // Current town
+  const curPts = currentDayHistory.reduce((s, d) => s + d.points, 0);
+  const curDays = currentDayHistory.length;
+  if (curDays > 0) {
+    addTownRow(wrap, townNames[currentTownId] || currentTownId, curPts, curDays);
+  }
+
+  return wrap;
+}
+
+function addTownRow(container, name, pts, days) {
+  const row = document.createElement('div');
+  row.className = 'gameover-town-row';
+  row.innerHTML = `<span class="town-name">${name}</span><span class="town-pts">${pts} pts / ${days} days</span>`;
+  container.appendChild(row);
 }

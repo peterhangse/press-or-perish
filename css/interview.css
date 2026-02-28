@@ -476,3 +476,111 @@
   background: rgba(140, 40, 40, 0.2);
   opacity: 1;
 }
+
+/* ============================================
+   INDUSTRISTAD — Interview overrides
+   ============================================ */
+
+#screen-interview.town-industristad {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 7px,
+      rgba(0,0,0,0.04) 7px,
+      rgba(0,0,0,0.04) 8px
+    ),
+    linear-gradient(180deg, #1e1e24 0%, #18181e 100%);
+}
+
+.town-industristad .interview-left {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 7px,
+      rgba(0,0,0,0.04) 7px,
+      rgba(0,0,0,0.04) 8px
+    ),
+    #2a2a30;
+  border-right-color: #3a3a44;
+}
+
+.town-industristad .npc-portrait {
+  border-color: #3a3a44;
+}
+
+.town-industristad .interview-story-header {
+  background:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"),
+    #d0ccc4;
+  border-color: #5a5a64;
+}
+
+.town-industristad .interview-dialogue {
+  border-color: #3a3a44;
+}
+
+.town-industristad .question-btn {
+  border-color: #4a4a54;
+  background: linear-gradient(180deg, #d8d4cc 0%, #ccc8c0 100%);
+}
+
+.town-industristad .question-btn:hover:not(.disabled) {
+  border-color: #6a6a78;
+  background: linear-gradient(180deg, #e0dcd4 0%, #d4d0c8 100%);
+}
+
+/* ============================================
+   KUSTSTAD — Interview overrides
+   ============================================ */
+
+#screen-interview.town-kuststad {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 7px,
+      rgba(0,0,0,0.03) 7px,
+      rgba(0,0,0,0.03) 8px
+    ),
+    linear-gradient(180deg, #1a2024 0%, #161c20 100%);
+}
+
+.town-kuststad .interview-left {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 7px,
+      rgba(0,0,0,0.03) 7px,
+      rgba(0,0,0,0.03) 8px
+    ),
+    #262e30;
+  border-right-color: #3a4a44;
+}
+
+.town-kuststad .npc-portrait {
+  border-color: #3a4a44;
+}
+
+.town-kuststad .interview-story-header {
+  background:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"),
+    #d8d4cc;
+  border-color: #5a6a64;
+}
+
+.town-kuststad .interview-dialogue {
+  border-color: #3a4a44;
+}
+
+.town-kuststad .question-btn {
+  border-color: #4a5a54;
+  background: linear-gradient(180deg, #d8d8d0 0%, #ccc8c0 100%);
+}
+
+.town-kuststad .question-btn:hover:not(.disabled) {
+  border-color: #6a7a74;
+  background: linear-gradient(180deg, #e0e0d8 0%, #d4d0c8 100%);
+}

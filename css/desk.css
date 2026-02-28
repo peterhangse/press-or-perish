@@ -151,6 +151,35 @@
   z-index: 5;
 }
 
+.boss-note-close {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 14px;
+  height: 14px;
+  background: #d4c060;
+  border: 1px solid #b8a040;
+  border-radius: 50%;
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: bold;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 0;
+  line-height: 14px;
+  text-align: center;
+  opacity: 0.7;
+  transition: opacity 0.15s, transform 0.15s;
+  z-index: 6;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.boss-note-close:hover {
+  opacity: 1;
+  transform: scale(1.15);
+  background: #c4a830;
+}
+
 .boss-note-name {
   font-weight: bold;
   font-size: 7px;
@@ -776,4 +805,367 @@
   box-shadow:
     6px 8px 0 rgba(40, 40, 60, 0.08),
     -2px 14px 0 rgba(40, 40, 60, 0.06);
+}
+
+/* ── Coal / soot smudge — dark smear from factory fingers ── */
+.town-industristad .lead-card.flair-coal::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 14px;
+  border-radius: 60% 40% 50% 50%;
+  left: var(--coal-x, 50%);
+  top: var(--coal-y, 40%);
+  background:
+    radial-gradient(ellipse at 40% 50%,
+      rgba(20, 20, 25, 0.18) 0%,
+      rgba(30, 30, 35, 0.10) 50%,
+      transparent 75%
+    );
+  pointer-events: none;
+  z-index: 0;
+  transform: rotate(var(--coal-rot, 10deg));
+  filter: blur(1px);
+}
+
+/* Override dog-ear for coal-marked cards */
+.town-industristad .lead-card.flair-coal:nth-child(odd)::after {
+  content: '';
+  width: 24px;
+  height: 14px;
+  border-radius: 60% 40% 50% 50%;
+  left: var(--coal-x, 50%);
+  top: var(--coal-y, 40%);
+  right: auto;
+  background:
+    radial-gradient(ellipse at 40% 50%,
+      rgba(20, 20, 25, 0.18) 0%,
+      rgba(30, 30, 35, 0.10) 50%,
+      transparent 75%
+    );
+  transform: rotate(var(--coal-rot, 10deg));
+  filter: blur(1px);
+}
+
+/* ── Ripped / torn paper edge — factory wear ── */
+.town-industristad .lead-card.flair-ripped {
+  overflow: visible;
+}
+
+/* Right-side tear */
+.town-industristad .lead-card.flair-ripped[data-rip-side="right"] {
+  clip-path: polygon(
+    0% 0%,
+    97% 0%,
+    98% 8%,
+    96% 15%,
+    99% 22%,
+    95% 30%,
+    98% 38%,
+    96% 45%,
+    100% 52%,
+    95% 60%,
+    97% 68%,
+    94% 76%,
+    98% 84%,
+    96% 92%,
+    97% 100%,
+    0% 100%
+  );
+}
+
+/* Bottom-edge tear */
+.town-industristad .lead-card.flair-ripped[data-rip-side="bottom"] {
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 94%,
+    92% 96%,
+    85% 93%,
+    78% 97%,
+    70% 94%,
+    62% 98%,
+    55% 95%,
+    48% 97%,
+    40% 93%,
+    32% 96%,
+    25% 94%,
+    18% 98%,
+    10% 95%,
+    4% 97%,
+    0% 94%
+  );
+}
+
+/* Torn edge shadow hint */
+.town-industristad .lead-card.flair-ripped::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.town-industristad .lead-card.flair-ripped[data-rip-side="right"]::before {
+  box-shadow: inset -2px 0 3px rgba(0,0,0,0.08);
+}
+
+.town-industristad .lead-card.flair-ripped[data-rip-side="bottom"]::before {
+  box-shadow: inset 0 -2px 3px rgba(0,0,0,0.08);
+}
+
+/* ============================================
+   KUSTSTAD — Coastal harbor town overrides
+   ============================================ */
+
+/* Window frame — weathered wood, salt-stained */
+.town-kuststad .desk-window {
+  border-color: #6a7a70;
+  box-shadow: 0 0 20px rgba(120,160,180,0.08);
+}
+
+/* Kuststad sky — cold North Sea, foggy */
+.town-kuststad .desk-window-sky.morning {
+  background: linear-gradient(180deg, #7a96a8 0%, #a0b8c8 50%, #c4c8c0 100%);
+}
+.town-kuststad .desk-window-sky.afternoon {
+  background: linear-gradient(180deg, #b8a070 0%, #c8b088 40%, #a0a898 100%);
+}
+.town-kuststad .desk-window-sky.evening {
+  background: linear-gradient(180deg, #101820 0%, #182028 50%, #0a1018 100%);
+}
+
+/* Harbor skyline — cranes, masts, lighthouse, fishing sheds */
+.town-kuststad .desk-window-sky::before {
+  clip-path: polygon(
+    0% 100%,
+    /* Rocky shore shelf */
+    0% 85%, 3% 84%, 5% 86%,
+    /* Fish shed 1 — low pitched roof */
+    7% 86%, 7% 72%, 9% 68%, 11% 72%, 11% 86%,
+    /* Pier posts */
+    13% 86%, 13% 82%, 14% 82%, 14% 86%,
+    /* Fishing boat mast 1 */
+    16% 86%, 16% 40%, 17% 40%, 17% 86%,
+    /* Boat hull */
+    18% 86%, 18% 78%, 22% 78%, 22% 86%,
+    /* Fishing boat mast 2 */
+    24% 86%, 24% 35%, 25% 35%, 25% 86%,
+    /* Harbor master's office — boxy with flag */
+    28% 86%, 28% 62%, 30% 62%, 30% 55%, 31% 55%, 31% 62%,
+    34% 62%, 34% 86%,
+    /* Gap — open water */
+    36% 86%,
+    /* Large crane — harbor crane */
+    38% 86%, 38% 30%, 39% 28%, 40% 30%,
+    43% 40%, 42% 40%, 42% 86%,
+    /* Crane arm horizontal */
+    /* Warehouse — long low building */
+    44% 86%, 44% 68%, 54% 68%, 54% 86%,
+    /* Cargo ship silhouette */
+    56% 86%, 56% 72%, 58% 68%, 62% 65%, 66% 65%,
+    68% 68%, 70% 72%, 70% 86%,
+    /* Lighthouse — tall narrow tower */
+    72% 86%, 73% 86%, 73% 20%, 74% 18%, 75% 20%,
+    75% 86%,
+    /* Rock formation */
+    77% 86%, 78% 80%, 80% 82%, 82% 78%,
+    /* Small fishing huts */
+    84% 78%, 84% 70%, 86% 66%, 88% 70%, 88% 78%,
+    90% 78%, 90% 72%, 92% 68%, 94% 72%, 94% 78%,
+    /* Shore slope */
+    96% 80%, 100% 82%,
+    100% 100%
+  );
+  background: #1a2028;
+  opacity: 0.85;
+}
+
+/* Harbor lights — navigation lamps, ship portholes, lighthouse beam */
+.town-kuststad .desk-window-sky::after {
+  background:
+    /* Lighthouse lamp — brighter, warm */
+    radial-gradient(circle 3px, rgba(255,220,100,0.7) 0%, transparent 100%) 120px 5px,
+    /* Ship portholes — dim yellow */
+    radial-gradient(circle 1px, rgba(255,200,80,0.4) 0%, transparent 100%) 96px 7px,
+    radial-gradient(circle 1px, rgba(255,200,80,0.3) 0%, transparent 100%) 100px 7px,
+    radial-gradient(circle 1px, rgba(255,200,80,0.35) 0%, transparent 100%) 104px 7px,
+    /* Harbor office windows */
+    radial-gradient(circle 1px, rgba(255,180,60,0.5) 0%, transparent 100%) 48px 5px,
+    radial-gradient(circle 1px, rgba(255,180,60,0.4) 0%, transparent 100%) 50px 5px,
+    /* Crane warning light — red */
+    radial-gradient(circle 1.5px, rgba(255,60,40,0.5) 0%, transparent 100%) 65px 3px,
+    /* Pier lamps — faint */
+    radial-gradient(circle 1px, rgba(255,200,80,0.25) 0%, transparent 100%) 22px 9px,
+    radial-gradient(circle 1px, rgba(255,200,80,0.2) 0%, transparent 100%) 145px 6px;
+  background-repeat: no-repeat;
+}
+
+/* Harbor waves — subtle animated water movement */
+.town-kuststad .desk-window-sky .harbor-wave {
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(120,160,200,0.08) 20%,
+    rgba(120,160,200,0.12) 40%,
+    rgba(120,160,200,0.06) 60%,
+    transparent 80%
+  );
+  animation: harbor-wave 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.town-kuststad .desk-window-sky .harbor-wave:nth-child(1) {
+  bottom: 1px; animation-duration: 3.8s; animation-delay: 0s;
+}
+.town-kuststad .desk-window-sky .harbor-wave:nth-child(2) {
+  bottom: 3px; animation-duration: 4.2s; animation-delay: 0.8s;
+  opacity: 0.7;
+}
+.town-kuststad .desk-window-sky .harbor-wave:nth-child(3) {
+  bottom: 5px; animation-duration: 3.5s; animation-delay: 1.5s;
+  opacity: 0.5;
+}
+.town-kuststad .desk-window-sky .harbor-wave:nth-child(4) {
+  bottom: 7px; animation-duration: 4.6s; animation-delay: 0.4s;
+  opacity: 0.3;
+}
+
+@keyframes harbor-wave {
+  0%   { transform: translateX(-5px); opacity: 0.6; }
+  50%  { transform: translateX(5px); opacity: 1; }
+  100% { transform: translateX(-5px); opacity: 0.6; }
+}
+
+/* Coastal desk edge — weathered wood, lighter than default */
+#screen-desk.town-kuststad::after {
+  background: linear-gradient(180deg, transparent, rgba(20,30,40,0.4));
+}
+
+/* Action bar — salt-weathered wood */
+.town-kuststad .desk-action-bar {
+  background:
+    linear-gradient(180deg,
+      rgba(60,70,65,0.4) 0%,
+      rgba(0,0,0,0.15) 2px,
+      #1c2420 2px,
+      #141c18 100%
+    );
+  border-top: 2px solid rgba(80,100,90,0.3);
+}
+
+/* Investigate button — dark teal/maritime */
+.town-kuststad .desk-investigate-btn {
+  background: linear-gradient(180deg, #2a3a38 0%, #1a2a28 100%);
+  border-color: #5a7a70;
+  box-shadow:
+    0 4px 0 #0a1210,
+    0 5px 8px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(180,220,200,0.08);
+}
+
+.town-kuststad .desk-investigate-btn:hover:not(:disabled) {
+  background: linear-gradient(180deg, #3a4a48 0%, #2a3a38 100%);
+}
+
+/* Lead cards — weathered, sea-mist paper */
+.town-kuststad .lead-card {
+  --paper-tone: #e0ddd8;
+  border-color: #a0a898;
+}
+
+.town-kuststad .lead-card:hover {
+  border-color: #607068;
+}
+
+.town-kuststad .lead-card.selected {
+  border-color: #6a8a80;
+  box-shadow:
+    0 2px 10px rgba(80,140,130,0.3),
+    0 0 0 2px #6a8a80;
+}
+
+/* Boss note — salt-weathered, slightly blue */
+.town-kuststad .boss-note {
+  background: #e4e0d8;
+  border-bottom-color: #a0a898;
+}
+
+/* ── Salt damage flair — white mineral crust ── */
+.town-kuststad .lead-card.flair-salt::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 18px;
+  border-radius: 50% 60% 40% 50%;
+  left: var(--salt-x, 50%);
+  top: var(--salt-y, 40%);
+  background:
+    radial-gradient(ellipse at 40% 50%,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(240, 240, 235, 0.08) 50%,
+      transparent 75%
+    );
+  pointer-events: none;
+  z-index: 0;
+  transform: rotate(var(--salt-rot, 5deg));
+  filter: blur(0.5px);
+}
+
+/* ── Water ring — wet glass mark ── */
+.town-kuststad .lead-card.flair-waterring::before {
+  content: '';
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  left: var(--water-x, 60%);
+  top: var(--water-y, 50%);
+  border: 2px solid rgba(140, 170, 190, 0.10);
+  background: transparent;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Rope mark — diagonal crease line ── */
+.town-kuststad .lead-card.flair-rope::after {
+  content: '';
+  position: absolute;
+  width: 120%;
+  height: 2px;
+  left: -10%;
+  top: 45%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(100, 80, 60, 0.06) 20%,
+    rgba(100, 80, 60, 0.10) 50%,
+    rgba(100, 80, 60, 0.06) 80%,
+    transparent 100%
+  );
+  transform: rotate(var(--rope-angle, -5deg));
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Stamp for kuststad — KONFIDENTIELLT (Confidential) */
+.town-kuststad .lead-card.flair-stamp::after {
+  content: 'LOGGBOK';
+  color: rgba(40, 80, 120, 0.09);
+  border-color: rgba(40, 80, 120, 0.07);
+}
+.town-kuststad .lead-card.flair-stamp:nth-child(odd)::after {
+  content: 'LOGGBOK';
+}
+
+/* Pencil scratch marks — blue-green for kuststad */
+.town-kuststad .desk-leads::after {
+  background: rgba(40, 60, 50, 0.12);
+  box-shadow:
+    6px 8px 0 rgba(40, 60, 50, 0.08),
+    -2px 14px 0 rgba(40, 60, 50, 0.06);
 }

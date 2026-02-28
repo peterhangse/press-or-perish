@@ -37,7 +37,7 @@
 **Repository:** https://github.com/peterhangse/press-or-perish (branch: `main`)
 
 ### Premise
-You are a fresh journalism graduate from Stockholm University (Class of 1974, Magna Cum Laude). No prestigious paper — Dagens Nyheter, Expressen, Göteborgs-Posten — would hire you. The only job offer: reporter at **Småstads Tidning**, a tiny local newspaper run by the gruff editor-in-chief **Gunnar Ek**. Your competitor is **Regionbladet**, a larger regional paper that is systematically outperforming your publication each day.
+You are a fresh journalism graduate from Stockholm University (Class of 1974, Magna Cum Laude). No prestigious paper — Dagens Nyheter, Expressen, Göteborgs-Posten — would hire you. The only job offer: reporter at **Småstad Paper**, a tiny local newspaper run by the gruff editor-in-chief **Gunnar Ek**. Your competitor is **Regionbladet**, a larger regional paper that is systematically outperforming your publication each day.
 
 You have **one week (5 days)** to prove your worth — or perish.
 
@@ -71,7 +71,7 @@ If the player selects Tutorial, they experience a 13-step narrative sequence:
 | 5 | Rejection | "No." — Bo Strömberg |
 | 6 | Job Ad | Göteborgs-Posten — 340 applicants for one position |
 | 7 | Rejection | "We have chosen to proceed with candidates who have professional experience." |
-| 8 | Job Ad | Småstads Tidning — shabby, 21,500 kr/month, "No experience required." |
+| 8 | Job Ad | Småstad Paper — shabby, 21,500 kr/month, "No experience required." |
 | 9 | Acceptance | "You got the job. Nobody else applied." — Gunnar Ek |
 | 10 | Boss Meeting (warm) | "Welcome! It's good to have someone young on the team." |
 | 11 | Boss Meeting (serious) | "We're dying. Regionbladet is eating our lunch every single day." |
@@ -187,7 +187,7 @@ Two-phase reveal for maximum tension:
 - "Go to sleep" button
 
 **Phase 2: The Competition** (after clicking "Go to sleep")
-- Side-by-side newspaper cards slide in: your Småstads Tidning (left) vs Regionbladet (right)
+- Side-by-side newspaper cards slide in: your Småstad Paper (left) vs Regionbladet (right)
 - Each shows: masthead, headline, point score
 - Competitor breakdown row appears
 - Deficit update: animated "before → after" with colored numbers

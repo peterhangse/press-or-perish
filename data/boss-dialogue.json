@@ -95,89 +95,89 @@
   },
   "industristad": {
     "desk_notes": {
-      "day_1": "You survived Småstad. Don't let that make you comfortable, {name}.",
+      "day_1": "Sit down. Don't touch anything. And don't smile — this isn't a holiday, {name}.",
       "day_2": [
-        "Fabriksbladet ran three stories yesterday. We ran one. You do the math.",
-        "The mill's PR department called to 'welcome' you. That means they're already watching.",
-        "Day two. In this town, day two is when the mill decides whether you're a threat or a joke."
+        "Fabriksbladet ran three stories yesterday. We ran one. You want me to do the math for you?",
+        "The mill's PR department called to 'welcome' you. That means they already know your name. And not in a good way.",
+        "Day two. In this town, day two is when they decide if you're a threat or a punchline. Which is it going to be?"
       ],
       "day_3": [
-        "Halfway. Fabriksbladet's lead is growing. I don't tolerate trends like that.",
-        "Three days in. The factory owners are reading our paper now. They didn't before you arrived.",
-        "Midpoint, {name}. Either you've found something worth printing or you haven't."
+        "Halfway through and Fabriksbladet is pulling ahead. I didn't hire you to lose slowly, {name}.",
+        "The factory owners are reading our paper now. If the next front page is weak, they'll stop. Permanently.",
+        "Midpoint. You've had three days. Show me you've found something or start packing."
       ],
       "day_4": [
-        "One day left after today. I need something the factory board can't ignore.",
-        "Tomorrow's the last edition. What you do today decides what this paper becomes.",
-        "The mill's lawyer called. That means we're doing something right. Or something stupid."
+        "One day left after this. I need a story that makes the factory board choke on their coffee.",
+        "Tomorrow's the last edition. If today is mediocre, don't bother coming in tomorrow.",
+        "The mill's lawyer called again. Good — that means we're hurting them. Don't stop now."
       ],
       "day_5": [
-        "Last day. Make it count. My printer runs whether we sell or not.",
-        "Final edition. Fabriksbladet already printed theirs. Ours better be worth reading.",
-        "This is it, {name}. After today, either we matter or we don't."
+        "Last day. My printer runs at five. Either we have a front page worth reading or we have nothing.",
+        "Final edition. Fabriksbladet already printed theirs. Theirs is boring. Ours better not be.",
+        "This is it. After today, either this paper survives or I close the doors myself. Your move, {name}."
       ],
       "warning": [
-        "Fabriksbladet is pulling ahead. Their readers trust them because they never challenge anything.",
-        "The numbers are slipping, {name}. People here read the paper that flatters the mill.",
-        "We're behind. In this town, behind means irrelevant."
+        "Fabriksbladet is pulling ahead. You know why? Because they don't have you. That's their advantage right now.",
+        "The numbers are slipping. People in this town read the paper that doesn't make them uncomfortable. That's not us. So we need to be BETTER.",
+        "We're behind. In Industristad, behind means dead. Not eventually. Now."
       ],
       "danger": [
-        "The board called. They want to know why we're losing to a mill newsletter.",
-        "Fabriksbladet's editor sent flowers to my office. FLOWERS, {name}.",
-        "I've started looking at your replacement's résumé. It's better than yours."
+        "The board called. They want to know why we're losing to a glorified factory newsletter. I had no answer, {name}. DO YOU?",
+        "Fabriksbladet's editor sent flowers to my office. FLOWERS. I threw them in the bin and thought about throwing you after them.",
+        "I've already read your replacement's résumé. Two languages, five years experience, and they don't need hand-holding. Think about that."
       ],
       "default": [
-        "The mill opens at six. So do we.",
-        "There's a story in this town. Find it.",
-        "Fabriksbladet prints press releases. We print the truth. Get to work."
+        "The mill opens at six. I opened at five. Where were you?",
+        "There's a story in this town that could break everything wide open. Find it before Fabriksbladet does.",
+        "Fabriksbladet prints what the mill tells them to. We print what the mill doesn't want anyone to read. Get to work."
       ]
     },
     "result_quotes": {
       "critical": [
-        "This is worse than Fabriksbladet. And they just reprint the mill's memos.",
-        "I pulled you from Småstad for this? Gunnar warned me you might not be ready.",
-        "The mill's PR team does better journalism than this. Think about that.",
-        "{name}, I don't fire people. I just stop pretending they work here."
+        "This is worse than Fabriksbladet. And they literally just reprint the mill's internal memos. You lost to THAT.",
+        "I pulled you from Småstad for this? Gunnar must have been desperate to recommend you.",
+        "The mill's PR intern writes better copy than this. She's nineteen, {name}.",
+        "I don't fire people. I just stop remembering their names. What was yours again?"
       ],
       "bad": [
-        "Not enough. Fabriksbladet didn't even try today and they're still winning.",
-        "The factory workers deserve better than this, {name}. So do I.",
-        "Bergström is sleeping well tonight. That means we failed.",
-        "I've seen more fight in a press release."
+        "Not enough. Fabriksbladet didn't even try today and they're STILL winning. Do you understand how embarrassing that is?",
+        "The factory workers deserve better than this. I deserve better than this. Even the paper deserves better than this.",
+        "Bergström is sleeping like a baby tonight. Because of YOU, {name}.",
+        "I've seen more fight in an obituary."
       ],
       "warning": [
-        "Fabriksbladet is still ahead. They don't have to be good — just safe.",
-        "Better. But 'better than yesterday' sets a low bar.",
-        "I see the effort. I need the results.",
-        "The mill noticed us today. That's a start. Just a start."
+        "Fabriksbladet is still ahead. They don't have to be good — just safe. We don't get that luxury.",
+        "Better. But 'better than yesterday' means nothing when yesterday was a disaster.",
+        "I see the effort. I don't care about effort. I care about results.",
+        "The mill noticed us today. They laughed. That's not the reaction I wanted."
       ],
       "neutral": [
-        "Tomorrow. Again.",
-        "Adequate. For Småstad. We're not in Småstad anymore.",
-        "You survived another day. The mill noticed. Don't celebrate.",
-        "*lights cigarette* ...Fine."
+        "Tomorrow. Again. Don't expect gratitude.",
+        "Adequate. By Småstad standards. We don't use those standards here.",
+        "You survived another day. The mill noticed. They're not impressed. Neither am I.",
+        "*lights cigarette, stares at you for an uncomfortable amount of time* ...Fine."
       ],
       "good": [
-        "Not bad, {name}. The factory floor is reading us. Keep it up.",
-        "Bergström's secretary called to complain. That means we did something right.",
-        "Good work. My circulation numbers thank you. Don't stop now.",
-        "Fabriksbladet can't ignore us today. Good."
+        "Not bad, {name}. The factory floor is reading us. Don't ruin it tomorrow.",
+        "Bergström's secretary called to complain. I told her to buy a subscription. That's the only thanks you'll get.",
+        "Good work. Don't let it make you lazy. One good day doesn't make a journalist.",
+        "Fabriksbladet can't ignore us today. Enjoy it. It won't last if you slack off."
       ],
       "great": [
-        "...I almost smiled. Don't tell anyone.",
-        "The mill's lawyer called. We must be doing something right.",
-        "This is why I brought you here, {name}. To keep MY paper alive.",
-        "Bergström can't sleep tonight. Neither can I. But for different reasons."
+        "...I almost smiled. Almost. Don't get used to it.",
+        "The mill's lawyer called twice. We MUST be doing something right. Or something actionable. Either way — good.",
+        "This is why I brought you here. Not for your charm. For THIS. Do it again.",
+        "Bergström can't sleep tonight. Good. I haven't slept well in years. Welcome to journalism."
       ]
     },
     "gameover_fired": {
-      "text": "You couldn't handle a real town, {name}. Go back to Småstad where it's safe.",
+      "text": "Pack your things. I told Gunnar you weren't ready. He owes me a bottle of brännvin for this waste of my time.",
       "name": "Birgit Ståhl"
     },
     "gameover_survived": {
-      "barely": "You survived, {name}. Barely. This town chews up reporters. You got lucky.",
-      "decent": "You held your own. The board won't fire me this quarter. Stay sharp.",
-      "dominant": "You actually did it. Bergström's sweating. The workers are reading us. *pauses* ...Don't let it go to your head.",
+      "barely": "You survived. Barely. Don't mistake luck for talent, {name}. This town would have eaten you alive in week two.",
+      "decent": "You held your own against a town that breaks people. The board won't fire me this quarter. That's YOUR contribution.",
+      "dominant": "You actually did it. Bergström's sweating. The workers are reading us. The mill is scared. *long pause* ...I will deny ever saying this, but — well done.",
       "name": "Birgit Ståhl"
     },
     "onboarding": {
@@ -185,6 +185,100 @@
       "rules": "Same as before — leads on the desk, pick one, dig. But this town is different. The mill watches everything.",
       "threat": "Fall fifteen points behind Fabriksbladet and you're done. I don't do second chances.",
       "start": "This isn't a small-town paper anymore. Get to work."
+    }
+  },
+  "kuststad": {
+    "desk_notes": {
+      "day_1": "The harbor opens at five. I opened at four. Don't be late again, {name}.",
+      "day_2": [
+        "Sjöfartstidningen ran a full spread yesterday. We had a column. Fix it.",
+        "A fisherman stopped me at the pier this morning. Asked if we're going to last the week. I said yes. Don't make me a liar.",
+        "Day two. The shipping company already knows your name. That's not a compliment."
+      ],
+      "day_3": [
+        "Halfway. The harbor doesn't wait for anyone and neither do I.",
+        "Three days in. Sjöfartstidningen is buying drinks for the coast guard. We can't compete with money. Compete with truth.",
+        "The fishermen are watching, {name}. Either we're their paper or we're nobody's."
+      ],
+      "day_4": [
+        "One day left after this. I need something that makes the shipping company sweat.",
+        "Tomorrow is the last edition. If today's front page doesn't matter, don't bother printing it.",
+        "The tide is turning, {name}. Question is — which way."
+      ],
+      "day_5": [
+        "Last day. The sea doesn't give second chances. Neither do I.",
+        "Final edition. Make it count or the pier will be quieter tomorrow.",
+        "This is it. After today, Kuststad Paper either survives or sinks. Your call, {name}."
+      ],
+      "warning": [
+        "We're behind. Sjöfartstidningen doesn't even have to try — the money does the work. We have to be better.",
+        "The numbers are sinking. Like everything else in this town.",
+        "We're losing ground, {name}. In a harbor town, that means drowning."
+      ],
+      "danger": [
+        "The shipping company sent a wreath to the office. A WREATH, {name}. They think we're dead already.",
+        "I've sailed through storms that sank bigger boats than this paper. But I can't sail alone. WHERE ARE YOU?",
+        "My replacement list has three names on it. Two of them can start Monday. Think about that."
+      ],
+      "default": [
+        "The harbor never sleeps. Neither should you.",
+        "There's a story buried in every wave that hits this pier. Find one.",
+        "Sjöfartstidningen prints what the shipping company tells them. We print what the sea washes up. Get digging."
+      ]
+    },
+    "result_quotes": {
+      "critical": [
+        "This is worse than nothing. Even the shipping company's newsletter has more spine.",
+        "I pulled you from Industristad for THIS? Birgit must have been relieved to see you go.",
+        "The fish market clerk writes better copy. She does it on receipt paper, {name}.",
+        "I don't fire people. The sea does it for me. Keep this up and you'll understand what that means."
+      ],
+      "bad": [
+        "Not enough. Sjöfartstidningen is printing champagne ads while we're sinking.",
+        "The fishermen deserve better. This town deserves better. I certainly deserve better.",
+        "The shipping company's PR department called to offer us a subscription to their own paper. As a joke.",
+        "I've seen more courage in a barnacle."
+      ],
+      "warning": [
+        "Sjöfartstidningen is still ahead. They have money. We have you. That's supposed to be enough.",
+        "Better. But 'better than yesterday' doesn't keep a newspaper alive.",
+        "I see effort. The harbor doesn't care about effort. It cares about results.",
+        "The shipping company noticed us today. They're not worried yet. They should be."
+      ],
+      "neutral": [
+        "Tomorrow. Again. The tide waits for nobody.",
+        "Adequate. By mainland standards. We're not on the mainland.",
+        "You survived another day. The pier is quiet tonight. That's not necessarily good.",
+        "*stares at the harbor* ...Fine."
+      ],
+      "good": [
+        "Not bad, {name}. The fishermen are reading us again. Don't waste it.",
+        "The shipping company's lawyer called. I told him to buy a subscription. ...He hung up.",
+        "Good work. Don't let the salt air go to your head. One good story doesn't make a journalist.",
+        "Sjöfartstidningen can't ignore us today. Enjoy this. It won't last if you stop digging."
+      ],
+      "great": [
+        "...The harbor is talking about us tonight. That's rare. Don't get used to it.",
+        "The shipping company filed a complaint. That means we're doing something right. Or something expensive. Either way — good.",
+        "This is why I brought you to this coast. Not for the view. For THIS. Again tomorrow.",
+        "The old fishermen bought extra copies today. That hasn't happened since '68. *long pause* ...Well done."
+      ]
+    },
+    "gameover_fired": {
+      "text": "Pack your things. I told Birgit you had potential. She'll never let me forget this.",
+      "name": "Ragnar Sjöberg"
+    },
+    "gameover_survived": {
+      "barely": "You survived. Barely. The sea spared you this time, {name}. Don't test it again.",
+      "decent": "You held your ground against a town that swallows people whole. The fishermen trust us again. That's YOUR doing.",
+      "dominant": "The shipping company is running scared. The coast guard is answering questions. The harbor is honest for the first time in years. *looks out the window* ...I'll deny saying this, but — you belong here.",
+      "name": "Ragnar Sjöberg"
+    },
+    "onboarding": {
+      "intro": "You're from Industristad. Birgit says you can take a hit. We'll see.",
+      "rules": "Same setup — leads on the desk, pick one, dig. But this coast is different. The sea hides everything.",
+      "threat": "Fall behind Sjöfartstidningen and you're done. I don't repeat warnings.",
+      "start": "The harbor is waiting. Get to work."
     }
   }
 }

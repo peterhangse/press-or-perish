@@ -89,6 +89,9 @@ async function boot() {
   // Add achievements button (visible across all screens)
   AchievementsUI.addAchievementButton();
 
+  // Add dev skip buttons
+  addDevButtons();
+
   // Title logo-button: click to start music + reveal menu
   const titleEl = document.getElementById('start-title');
   const revealEl = document.getElementById('start-reveal');
@@ -105,6 +108,9 @@ async function boot() {
       revealEl.classList.add('visible');
       if (muteBtn) muteBtn.style.display = '';
       AchievementsUI.showButton();
+      // Show dev buttons
+      const devBtn = document.getElementById('dev-skip-btn');
+      if (devBtn) devBtn.style.display = '';
     }, 400);
   });
 
@@ -142,7 +148,8 @@ function scaleCanvas() {
   const hudH = 34;
   const sx = window.innerWidth / 640;
   const sy = window.innerHeight / (360 + hudH);
-  wrapper.style.transform = `translate(-50%, -50%) scaleX(${sx}) scaleY(${sy})`;
+  const s = Math.min(sx, sy);
+  wrapper.style.transform = `translate(-50%, -50%) scale(${s})`;
 }
 
 /**
@@ -204,7 +211,7 @@ function startDayZero() {
   ScreenManager.switchTo('transition', true);
   TransitionScreen.show(0, 0, () => {
     showDayZeroDesk();
-  });
+  }, { townConfig: getTownConfig() });
 }
 
 /** Day Zero desk — 3 easy leads, 1 per source type */
@@ -213,8 +220,16 @@ function showDayZeroDesk() {
   const leads = DayGenerator.generateDayZeroLeads(townStories);
   state.todayLeads = leads.map(l => l.id);
 
-  const bossName = getTownConfig()?.bossName || 'Gunnar';
-  const bossNote = { text: `It's your first day at work, ${pn()}. We expect nothing today. See this as a test for tomorrow... Pick a story.`, name: bossName };
+  const tc = getTownConfig();
+  const bossName = tc?.bossName || 'Gunnar';
+  const isIndustrial = tc?.id === 'industristad';
+  const isCoastal = tc?.id === 'kuststad';
+
+  const bossNote = isIndustrial
+    ? { text: `First day at the Industristad Paper, ${pn()}. The mill owners are already watching. Pick a story — but be careful who you trust in this town.`, name: bossName }
+    : isCoastal
+    ? { text: `First day at the Kuststad Paper, ${pn()}. The shipping company owns half this town and Sjöfartstidningen prints whatever they're told. Pick a story — but watch the tides.`, name: bossName }
+    : { text: `It's your first day at work, ${pn()}. We expect nothing today. See this as a test for tomorrow... Pick a story.`, name: bossName };
 
   ScreenManager.switchTo('desk', true);
   Components.updateClock('desk');
@@ -246,7 +261,7 @@ function startDayZeroInterview(story) {
     state.q2Choice = result.q2Index;
     state.baseValue = story.base_value || 0;
     showDayZeroPublish(story, result);
-  }, { disabledArchetypes: ['pressure', 'silence'] });
+  }, { disabledArchetypes: ['pressure', 'silence'], townConfig: getTownConfig() });
 }
 
 /** Day Zero publish — same as normal but leads to competitor shock */
@@ -267,13 +282,40 @@ function showDayZeroResults(story, interviewResult) {
   ScreenManager.switchTo('results', true);
   Components.updateClock('results');
 
+  const tc = getTownConfig();
+  const isIndustrial = tc?.id === 'industristad';
+  const isCoastal = tc?.id === 'kuststad';
   const playerHeadlineText = interviewResult.headlines[state.headlineChosen]?.text || story.title;
+
+  const competitorHeadline = isIndustrial
+    ? 'FACTORY WHISTLEBLOWER REVEALS DECADE OF SAFETY VIOLATIONS'
+    : isCoastal
+    ? 'COAST GUARD WHISTLEBLOWER REVEALS YEARS OF HARBOR SMUGGLING'
+    : 'COUNTY CORRUPTION RING EXPOSED — THREE OFFICIALS ARRESTED';
+
+  const dayZeroNote = isIndustrial
+    ? 'Same rules as Småstad — but the stakes are higher. Your story has a base value, and your interview technique determines the rest.'
+    : isCoastal
+    ? 'Same rules as before — but the harbor has deeper secrets. Your story has a base value, and your interview technique determines the rest.'
+    : 'This is your score. The story itself has a base value — but how you handle the interview decides the rest. Choose your approach wisely.';
+
+  const bossQuoteText = isIndustrial
+    ? `The deficit works the same way, ${pn()}. Stay above -10 or the Industristad Paper folds. Fabriksbladet won\'t go easy on you.`
+    : isCoastal
+    ? `The deficit works the same way, ${pn()}. Stay above -10 or the Kuststad Paper folds. Sjöfartstidningen has the shipping company\'s money behind them.`
+    : `See that number? That\'s the deficit, ${pn()}. Stay above -10 or the paper closes. Every day is a fight.`;
+
+  const competitorShockText = isIndustrial
+    ? `${tc.competitorName} ran an industry exposé on their front page. They have sources inside the mill. You need to build your own.`
+    : isCoastal
+    ? `${tc.competitorName} ran a harbor exposé on their front page. They have sources inside the coast guard. You'll need to find your own.`
+    : `${tc?.competitorName || 'Regionbladet'} ran a massive scoop. This is the competition you\'re up against — every single day.`;
 
   ResultsScreen.render({
     playerHeadline: playerHeadlineText,
     playerScore: state.pointsEarned,
     competitorScore: state.competitorScore,
-    competitorHeadline: 'COUNTY CORRUPTION RING EXPOSED — THREE OFFICIALS ARRESTED',
+    competitorHeadline,
     deficitBefore: 0,
     deficitAfter: 0,  // Day Zero doesn't affect real deficit
     baseValue: story.base_value,
@@ -284,13 +326,13 @@ function showDayZeroResults(story, interviewResult) {
     tier: state.tierReached,
     day: 0,
     isDayZero: true,
-    dayZeroNote1: 'This is your score. The story itself has a base value — but how you handle the interview decides the rest. Choose your approach wisely.',
-    bossQuote: `See that number? That\'s the deficit, ${pn()}. Stay above -10 or the paper closes. Every day is a fight.`,
-    competitorShock: `${getTownConfig()?.competitorName || 'Regionbladet'} ran a massive scoop. This is the competition you\'re up against — every single day.`,
-    paperName: getTownConfig()?.newspaperName || 'Småstads Tidning',
-    bossName: getTownConfig()?.bossName || 'Gunnar',
-    competitorName: getTownConfig()?.competitorName || 'Regionbladet',
-    townName: getTownConfig()?.name || 'Småstad',
+    dayZeroNote1: dayZeroNote,
+    bossQuote: bossQuoteText,
+    competitorShock: competitorShockText,
+    paperName: tc?.newspaperName || 'Småstad Paper',
+    bossName: tc?.bossName || 'Gunnar',
+    competitorName: tc?.competitorName || 'Regionbladet',
+    townName: tc?.name || 'Småstad',
     onContinue: () => {
       // Reset state cleanly — Day Zero doesn't count toward score
       state.deficit = 0;
@@ -325,7 +367,7 @@ function startDay(dayNum) {
   TransitionScreen.show(state.day, state.deficit, () => {
     // After transition, show desk
     showDesk();
-  });
+  }, { townConfig: getTownConfig() });
 }
 
 /**
@@ -377,7 +419,7 @@ function startInterview(story) {
 
     // Move to publish
     showPublish(story, result);
-  });
+  }, { townConfig: getTownConfig() });
 }
 
 /**
@@ -412,7 +454,7 @@ function showPublish(story, interviewResult) {
 function showResults(story, interviewResult, deficitBefore) {
   ScreenManager.switchTo('results', true);
   Components.updateClock('results');
-  Components.updateDeficitMeter(state.deficit);
+  Components.updateDeficitMeter(deficitBefore);
   Components.updateWeekStrip(state.day, state.dayHistory);
 
   const playerHeadlineText = interviewResult.headlines[state.headlineChosen]?.text || story.title;
@@ -434,10 +476,13 @@ function showResults(story, interviewResult, deficitBefore) {
     tier: state.tierReached,
     day: state.day,
     bossQuote: getStoryBossQuote(story, state.tierReached) || getBossQuote(state.deficit, state.day),
-    paperName: tc?.newspaperName || 'Småstads Tidning',
+    paperName: tc?.newspaperName || 'Småstad Paper',
     bossName: tc?.bossName || 'Gunnar',
     competitorName: tc?.competitorName || 'Regionbladet',
     townName: tc?.name || 'Småstad',
+    onPhase2: () => {
+      Components.updateDeficitMeter(state.deficit);
+    },
     onContinue: () => {
       // Check game over
       if (GameState.isPerished(state)) {
@@ -470,19 +515,23 @@ function showGameOver() {
   ScreenManager.switchTo('gameover', true);
   ScreenManager.flash();
 
-  // Save to highscore board
-  const totalPoints = state.dayHistory.reduce((sum, d) => sum + d.points, 0);
-  saveHighscore(totalPoints, state.deficit, state.day, false);
+  // Save to highscore board (cumulative across all towns)
+  const runStats = getRunStats();
+  saveHighscore(runStats.totalPoints, runStats.totalDays, runStats.avgPoints, false);
 
   // Check game-over achievements
   checkAndShowAchievements('game_over');
 
+  const perishRunStats = getRunStats();
   GameOverScreen.showPerished({
     finalDeficit: state.deficit,
     daysCompleted: state.day,
     dayHistory: state.dayHistory,
+    townHistory: state.townHistory,
+    currentTownId: state.currentTown,
+    runStats: perishRunStats,
     playerName: pn(),
-    paperName: getTownConfig()?.newspaperName || 'Småstads Tidning',
+    paperName: getTownConfig()?.newspaperName || 'Småstad Paper',
     bossName: getTownConfig()?.bossName || 'Gunnar',
     competitorName: getTownConfig()?.competitorName || 'Regionbladet',
     townName: getTownConfig()?.name || 'Småstad',
@@ -504,15 +553,15 @@ function showEnding() {
 
   ScreenManager.switchTo('gameover');
 
-  // Save best score
-  const totalPoints = state.dayHistory.reduce((sum, d) => sum + d.points, 0);
+  // Save best score (cumulative across all towns)
+  const runStats = getRunStats();
   const best = parseInt(localStorage.getItem('pop_best_score') || '0');
-  if (totalPoints > best) {
-    localStorage.setItem('pop_best_score', totalPoints);
+  if (runStats.totalPoints > best) {
+    localStorage.setItem('pop_best_score', runStats.totalPoints);
   }
 
   // Save to highscore board
-  saveHighscore(totalPoints, state.deficit, state.dayHistory.length, true);
+  saveHighscore(runStats.totalPoints, runStats.totalDays, runStats.avgPoints, true);
 
   // Check game-over achievements
   checkAndShowAchievements('game_over');
@@ -520,8 +569,11 @@ function showEnding() {
   GameOverScreen.showSurvived({
     finalDeficit: state.deficit,
     dayHistory: state.dayHistory,
+    townHistory: state.townHistory,
+    currentTownId: state.currentTown,
+    runStats: runStats,
     playerName: pn(),
-    paperName: getTownConfig()?.newspaperName || 'Småstads Tidning',
+    paperName: getTownConfig()?.newspaperName || 'Småstad Paper',
     bossName: getTownConfig()?.bossName || 'Gunnar',
     competitorName: getTownConfig()?.competitorName || 'Regionbladet',
     townName: getTownConfig()?.name || 'Småstad',
@@ -652,15 +704,30 @@ function injectName(text) {
 }
 
 /**
- * Save a completed week to the highscore board
+ * Compute cumulative run stats across all towns (townHistory + current)
  */
-function saveHighscore(totalPoints, finalDeficit, daysCompleted, survived) {
+function getRunStats() {
+  // Gather all day histories from completed towns + current
+  const allDays = [
+    ...(state.townHistory || []).flatMap(t => t.dayHistory || []),
+    ...state.dayHistory,
+  ];
+  const totalPoints = allDays.reduce((sum, d) => sum + d.points, 0);
+  const totalDays = allDays.length;
+  const avgPoints = totalDays > 0 ? Math.round((totalPoints / totalDays) * 10) / 10 : 0;
+  return { totalPoints, totalDays, avgPoints };
+}
+
+/**
+ * Save a completed run to the highscore board
+ */
+function saveHighscore(totalPoints, totalDays, avgPoints, survived) {
   const entries = JSON.parse(localStorage.getItem('pop_highscores') || '[]');
   entries.push({
     name: pn(),
     points: totalPoints,
-    deficit: finalDeficit,
-    days: daysCompleted,
+    days: totalDays,
+    avg: avgPoints,
     survived,
     date: new Date().toISOString(),
   });
@@ -695,7 +762,7 @@ function showHighscoreBoard() {
   if (entries.length === 0) {
     const empty = document.createElement('div');
     empty.className = 'highscore-empty';
-    empty.textContent = 'No completed weeks yet.';
+    empty.textContent = 'No completed runs yet.';
     card.appendChild(empty);
   } else {
     const table = document.createElement('div');
@@ -704,7 +771,7 @@ function showHighscoreBoard() {
     // Header row
     const header = document.createElement('div');
     header.className = 'highscore-row highscore-header';
-    header.innerHTML = '<span>#</span><span>Reporter</span><span>Pts</span><span>Days</span><span>Result</span><span>Date</span>';
+    header.innerHTML = '<span>#</span><span>Reporter</span><span>Points</span><span>Days</span><span>Avg</span><span>Date</span>';
     table.appendChild(header);
 
     entries.forEach((entry, i) => {
@@ -722,11 +789,10 @@ function showHighscoreBoard() {
       pts.textContent = entry.points;
 
       const days = document.createElement('span');
-      days.textContent = `${entry.days}/5`;
+      days.textContent = entry.days;
 
-      const result = document.createElement('span');
-      result.className = entry.survived ? 'hs-survived' : 'hs-perished';
-      result.textContent = entry.survived ? 'Survived' : 'Perished';
+      const avg = document.createElement('span');
+      avg.textContent = entry.avg != null ? entry.avg : (entry.days > 0 ? Math.round((entry.points / entry.days) * 10) / 10 : 0);
 
       const date = document.createElement('span');
       date.className = 'highscore-date';
@@ -737,7 +803,7 @@ function showHighscoreBoard() {
       row.appendChild(name);
       row.appendChild(pts);
       row.appendChild(days);
-      row.appendChild(result);
+      row.appendChild(avg);
       row.appendChild(date);
       table.appendChild(row);
     });
@@ -872,12 +938,6 @@ function showTownAdvance(nextTown) {
   // Save the current run is over for this town
   GameState.clearSave();
 
-  const tc = getTownConfig();
-  const totalPoints = state.dayHistory.reduce((sum, d) => sum + d.points, 0);
-
-  // Save to highscore board for this town
-  saveHighscore(totalPoints, state.deficit, state.dayHistory.length, true);
-
   // Check game-over achievements
   checkAndShowAchievements('game_over');
 
@@ -891,7 +951,12 @@ function showTownAdvance(nextTown) {
 
   // Show full onboarding cutscene for the new town
   Onboarding.startTownAdvance(activeTownConfig, pn(), () => {
-    startDay(1);
+    // If this town has a Day Zero, run it before Day 1
+    if (activeTownConfig.dayZeroDate) {
+      startDayZero();
+    } else {
+      startDay(1);
+    }
   });
 }
 
@@ -908,6 +973,78 @@ function returnToStart() {
   if (revealEl) revealEl.classList.add('visible');
   // Update continue button state
   refreshContinueButton();
+}
+
+/**
+ * Add dev-mode skip button (below mute) for jumping to a specific town
+ */
+function addDevButtons() {
+  const wrapper = document.getElementById('game-wrapper');
+  const btn = document.createElement('button');
+  btn.id = 'dev-skip-btn';
+  btn.className = 'dev-btn';
+  btn.textContent = '⚙ Skip to town';
+  btn.style.display = 'none'; // hidden until title click
+  btn.addEventListener('click', () => {
+    SFX.play('click');
+    // Cycle through available dev towns
+    const devTowns = ['industristad', 'kuststad'];
+    const current = btn.dataset.devTown || 'industristad';
+    startDevTown(current);
+  });
+  // Right-click to cycle target town
+  btn.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    const devTowns = ['industristad', 'kuststad'];
+    const current = btn.dataset.devTown || 'industristad';
+    const idx = devTowns.indexOf(current);
+    const next = devTowns[(idx + 1) % devTowns.length];
+    btn.dataset.devTown = next;
+    btn.textContent = `⚙ ${next.charAt(0).toUpperCase() + next.slice(1)}`;
+    SFX.play('click');
+  });
+  btn.dataset.devTown = 'industristad';
+  btn.textContent = '⚙ Industristad';
+  wrapper.appendChild(btn);
+}
+
+/**
+ * Dev: start a run directly in a specific town, skipping earlier towns
+ */
+function startDevTown(townId) {
+  GameState.clearSave();
+  refreshContinueButton();
+
+  state = GameState.createState();
+  state.runNumber = (parseInt(localStorage.getItem('pop_run_count') || '0')) + 1;
+  localStorage.setItem('pop_run_count', state.runNumber);
+
+  // Jump state to the requested town
+  const townIdx = gameData.towns.findIndex(t => t.id === townId);
+  if (townIdx > 0) {
+    // Fake surviving previous towns
+    for (let i = 0; i < townIdx; i++) {
+      const prevTown = gameData.towns[i];
+      state.townHistory.push({ townId: prevTown.id, deficit: 0, dayHistory: [], survived: true });
+    }
+    state.currentTown = townId;
+    state.townIndex = townIdx;
+  }
+  activeTownConfig = DataLoader.getTownConfig(gameData.towns, state.currentTown);
+
+  AudioManager.play('game');
+  showNamePrompt((name) => {
+    state.playerName = name;
+    localStorage.setItem('pop_player_name', name);
+    // Run the town's onboarding cutscene, then Day Zero or Day 1
+    Onboarding.startTownAdvance(activeTownConfig, name, () => {
+      if (activeTownConfig.dayZeroDate) {
+        startDayZero();
+      } else {
+        startDay(1);
+      }
+    });
+  });
 }
 
 /**

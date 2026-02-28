@@ -19,11 +19,17 @@ const DAY_DATES = [
  * @param {number} day - Day number (0 for tutorial, 1-5 for game)
  * @param {number} deficit - Current deficit
  * @param {Function} onDone - Called after transition completes
- * @param {Object} [extraOpts] - Extra options like customTitle, customSubtitle, dates, bossName
+ * @param {Object} [extraOpts] - Extra options like customTitle, customSubtitle, dates, bossName, townConfig
  */
 export function show(day, deficit, onDone, extraOpts = {}) {
   const container = document.getElementById('screen-transition');
   container.innerHTML = '';
+
+  // Apply town-specific CSS class
+  container.classList.remove('town-smastad', 'town-industristad', 'town-kuststad');
+  if (extraOpts.townConfig?.cssClass) {
+    container.classList.add(extraOpts.townConfig.cssClass);
+  }
 
   // Custom title/subtitle for town transitions
   if (extraOpts.customTitle) {
@@ -70,10 +76,14 @@ export function show(day, deficit, onDone, extraOpts = {}) {
   dayName.textContent = day === 0 ? 'MONDAY' : (DAY_NAMES[day - 1] || '');
   container.appendChild(dayName);
 
-  // Date
+  // Date — use town dates if available
+  const tc = extraOpts.townConfig;
+  const townDates = tc?.dates || DAY_DATES;
+  const dayZeroDate = tc?.dayZeroDate || 'November 10, 1974';
+
   const date = document.createElement('div');
   date.className = 'transition-date';
-  date.textContent = day === 0 ? 'November 10, 1974' : (DAY_DATES[day - 1] || '');
+  date.textContent = day === 0 ? dayZeroDate : (townDates[day - 1] || '');
   container.appendChild(date);
 
   // Deficit display (hidden on day 1)

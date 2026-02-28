@@ -30,7 +30,7 @@ export function render(story, headlines, points, day, q1Archetype, callback) {
 
   const masthead = document.createElement('div');
   masthead.className = 'newspaper-masthead';
-  masthead.textContent = 'Småstads Tidning';
+  masthead.textContent = 'Småstad Paper';
 
   const date = document.createElement('div');
   date.className = 'newspaper-date';

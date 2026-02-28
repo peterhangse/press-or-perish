@@ -72,7 +72,7 @@
   color: var(--ink-faded);
 }
 
-/* Småstads Tidning masthead — classic broadsheet serif */
+/* Småstad Paper masthead — classic broadsheet serif */
 .results-masthead-yours {
   font-family: 'Playfair Display', serif;
   font-weight: 900;
@@ -156,6 +156,15 @@
 .breakdown-value.positive { color: var(--deficit-safe); }
 .breakdown-value.negative { color: var(--deficit-red); }
 .breakdown-value.fail { color: var(--deficit-red); font-weight: bold; }
+
+/* Story maxed — perfect 14-point interview */
+.breakdown-value.story-maxed {
+  color: var(--paper-aged);
+  font-family: var(--font-headline);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 6px rgba(212, 201, 168, 0.4);
+}
 
 /* Deficit update */
 .results-deficit {
@@ -396,4 +405,33 @@
   text-align: center;
   max-width: 340px;
   line-height: 1.5;
+}
+
+/* Per-town breakdown on game-over */
+.gameover-town-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  width: 100%;
+  max-width: 300px;
+}
+
+.gameover-town-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-body);
+  font-size: 9px;
+  color: var(--ink-light);
+}
+
+.gameover-town-row .town-name {
+  color: var(--paper-aged);
+}
+
+.gameover-town-row .town-pts {
+  font-family: var(--font-numbers);
+  color: var(--paper-dark);
 }

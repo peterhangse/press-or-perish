@@ -3,7 +3,7 @@
     "id": "smastad",
     "name": "Småstad",
     "order": 0,
-    "newspaperName": "Småstads Tidning",
+    "newspaperName": "Småstad Paper",
     "competitorName": "Regionbladet",
     "bossName": "Gunnar",
     "bossFullName": "Gunnar Ek",
@@ -54,7 +54,7 @@
     "id": "industristad",
     "name": "Industristad",
     "order": 1,
-    "newspaperName": "Industristads Kurir",
+    "newspaperName": "Industristad Paper",
     "competitorName": "Fabriksbladet",
     "bossName": "Birgit",
     "bossFullName": "Birgit Ståhl",
@@ -68,7 +68,7 @@
       "November 21, 1974",
       "November 22, 1974"
     ],
-    "dayZeroDate": null,
+    "dayZeroDate": "November 17, 1974",
     "competitorScoreRanges": {
       "1": { "min": 7, "max": 10 },
       "2": { "min": 8, "max": 11 },
@@ -107,6 +107,16 @@
       },
       {
         "type": "boss_meeting",
+        "expression": "warm",
+        "text": "Let me tell you about this town. Industristad was built on iron and sweat. The paper mill runs the economy, the union runs the mill, and everyone watches everyone."
+      },
+      {
+        "type": "boss_meeting",
+        "expression": "serious",
+        "text": "The people here don't trust outsiders. Especially reporters. They've been burned before — Fabriksbladet writes whatever the mill tells them to."
+      },
+      {
+        "type": "boss_meeting",
         "expression": "intense",
         "text": "This isn't a small-town paper anymore. Fabriksbladet has three full-time reporters and a photographer. We have you."
       },
@@ -114,6 +124,83 @@
         "type": "boss_meeting",
         "expression": "serious",
         "text": "Same rules. Five days. Fall behind and you're out. I don't do second chances."
+      }
+    ]
+  },
+  {
+    "id": "kuststad",
+    "name": "Kuststad",
+    "order": 2,
+    "newspaperName": "Kuststad Paper",
+    "competitorName": "Sjöfartstidningen",
+    "bossName": "Ragnar",
+    "bossFullName": "Ragnar Sjöberg",
+    "bossTitle": "Editor-in-Chief",
+    "perishThreshold": -10,
+    "cssClass": "town-kuststad",
+    "dates": [
+      "November 25, 1974",
+      "November 26, 1974",
+      "November 27, 1974",
+      "November 28, 1974",
+      "November 29, 1974"
+    ],
+    "dayZeroDate": "November 24, 1974",
+    "competitorScoreRanges": {
+      "1": { "min": 7, "max": 10 },
+      "2": { "min": 8, "max": 11 },
+      "3": { "min": 9, "max": 12 },
+      "4": { "min": 9, "max": 13 },
+      "5": { "min": 10, "max": 13 }
+    },
+    "competitorHeadlines": {
+      "strong": [
+        "Shipping company CEO arrested on smuggling charges",
+        "Coast guard coverup: patrol boats ordered to stand down",
+        "Investigation: toxic waste dumped in fishing waters for years",
+        "Missing trawler found — crew tells of forced silence",
+        "Harbor master's secret ledger reveals bribery network"
+      ],
+      "average": [
+        "Ferry service cuts leave island residents stranded",
+        "Fishing quotas under review after catch discrepancies",
+        "Port authority delays audit of docking fees",
+        "Insurance claims spike after storm season",
+        "Harbor expansion contract awarded without public tender"
+      ],
+      "weak": [
+        "New lighthouse keeper settles in",
+        "Annual herring festival draws crowds despite rain",
+        "Harbor cat colony gets official feeding station",
+        "Retired captain celebrates 80th birthday at the pier",
+        "Fish market extends Saturday hours"
+      ]
+    },
+    "introSequence": [
+      {
+        "type": "boss_meeting",
+        "expression": "serious",
+        "text": "You're from Industristad. Birgit says you can take a hit. We'll see."
+      },
+      {
+        "type": "boss_meeting",
+        "expression": "warm",
+        "text": "Kuststad used to be a fishing town. Now the harbor runs on cargo ships and silence. Everyone here has something to hide — the captain, the coast guard, the shipping company. Especially the shipping company."
+      },
+      {
+        "type": "boss_meeting",
+        "expression": "serious",
+        "text": "Sjöfartstidningen is bankrolled by the shipping conglomerate. They print press releases and call it journalism. The fishermen read us. The harbor workers read us. That's who we fight for."
+      },
+      {
+        "type": "boss_meeting",
+        "expression": "intense",
+        "text": "The sea takes things here. Boats. People. Evidence. If you want to find the truth, you'll have to look where the water is deepest."
+      },
+      {
+        "type": "boss_meeting",
+        "expression": "serious",
+        "text": "Five days. Same rules. I don't repeat myself."
       }
     ]
   }

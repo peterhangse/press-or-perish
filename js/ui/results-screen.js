@@ -41,8 +41,12 @@ export function render(opts) {
   breakdown.className = 'results-breakdown';
   addNewsValueDotRow(breakdown, opts.baseValue);
   addBonusDotRow(breakdown, 'Approach', opts.q1Bonus || 0, 1);
-  addBonusDotRow(breakdown, 'Follow-up', opts.q2Bonus || 0, 3);
-  addBreakdownRow(breakdown, 'Your total', `${opts.playerScore}`, 'positive', true);
+  addBonusDotRow(breakdown, 'Follow-up', opts.q2Bonus || 0, 2);
+  if (opts.playerScore >= 14) {
+    addBreakdownRow(breakdown, 'Your total', '★ STORY MAXED', 'story-maxed', true);
+  } else {
+    addBreakdownRow(breakdown, 'Your total', `${opts.playerScore}`, 'positive', true);
+  }
   phase1.appendChild(breakdown);
 
   // Day Zero note (tutorial)
@@ -83,7 +87,7 @@ function showPhase2(wrapper, opts) {
   // Player's paper
   const yours = buildPaperCard(
     'YOUR PAPER',
-    opts.paperName || 'Småstads Tidning',
+    opts.paperName || 'Småstad Paper',
     opts.playerHeadline,
     opts.playerScore,
     true
@@ -202,6 +206,8 @@ function showPhase2(wrapper, opts) {
   setTimeout(() => {
     phase2Bottom.style.transition = 'opacity 0.5s ease';
     phase2Bottom.style.opacity = '1';
+    // Update HUD deficit meter now that results are visible
+    if (opts.onPhase2) opts.onPhase2();
   }, 1200);
 }
 

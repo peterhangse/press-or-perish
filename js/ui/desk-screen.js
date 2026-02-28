@@ -26,7 +26,7 @@ export function render(leads, day, bossNote, callback, townConfig) {
   container.innerHTML = '';
 
   // Apply town-specific CSS class
-  container.classList.remove('town-smastad', 'town-industristad');
+  container.classList.remove('town-smastad', 'town-industristad', 'town-kuststad');
   if (townConfig?.cssClass) {
     container.classList.add(townConfig.cssClass);
   }
@@ -48,6 +48,14 @@ export function render(leads, day, bossNote, callback, townConfig) {
       sky.appendChild(smoke);
     }
   }
+  // Add wave/mist elements for Kuststad
+  if (townConfig?.id === 'kuststad') {
+    for (let i = 0; i < 4; i++) {
+      const wave = document.createElement('div');
+      wave.className = 'harbor-wave';
+      sky.appendChild(wave);
+    }
+  }
 
   window_.appendChild(sky);
   topBar.appendChild(window_);
@@ -58,6 +66,19 @@ export function render(leads, day, bossNote, callback, townConfig) {
     pinnedNote = document.createElement('div');
     pinnedNote.className = 'boss-note';
     if (day === 0) pinnedNote.style.visibility = 'hidden'; // hidden initially on Day Zero
+
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'boss-note-close';
+    closeBtn.textContent = '\u2715';
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      pinnedNote.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+      pinnedNote.style.opacity = '0';
+      pinnedNote.style.transform = 'rotate(2deg) scale(0.9)';
+      setTimeout(() => { pinnedNote.style.display = 'none'; }, 200);
+    });
+    pinnedNote.appendChild(closeBtn);
+
     const noteName = document.createElement('div');
     noteName.className = 'boss-note-name';
     noteName.textContent = bossNote.name || 'Gunnar';
@@ -90,6 +111,17 @@ export function render(leads, day, bossNote, callback, townConfig) {
           '#d6d6dc', // newsprint
           '#e2e1e4', // crisp grey
           '#d2d2d8', // aged grey
+        ]
+      : townConfig?.id === 'kuststad'
+      ? [
+          '#e0ddd8', // weathered cream
+          '#dbd8d2', // salt-bleached
+          '#e4e1dc', // sea-mist white
+          '#d6d4d0', // driftwood grey
+          '#e2dfd8', // sandy cream
+          '#d8d6d0', // fog-washed
+          '#e6e3de', // bright shore
+          '#d4d2cc', // storm-aged
         ]
       : [
           '#e8dfc8', // standard cream
@@ -267,6 +299,7 @@ function selectLead(index) {
  */
 function applyCardFlair(card, lead, index, townConfig) {
   const isIndustrial = townConfig?.id === 'industristad';
+  const isCoastal = townConfig?.id === 'kuststad';
 
   // Seeded pseudo-random based on story id for consistency
   const seed = (lead.id || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0) + index;
@@ -275,6 +308,24 @@ function applyCardFlair(card, lead, index, townConfig) {
   const h3 = (seed * 17 + 3) % 100;
 
   if (isIndustrial) {
+    // Industristad: ~25% chance of coal/soot smudge
+    if ((seed * 13) % 100 < 25) {
+      card.classList.add('flair-coal');
+      const cx = 20 + (h1 % 60);
+      const cy = 20 + (h2 % 60);
+      card.style.setProperty('--coal-x', `${cx}%`);
+      card.style.setProperty('--coal-y', `${cy}%`);
+      card.style.setProperty('--coal-rot', `${-30 + (h3 % 60)}deg`);
+    }
+
+    // ~25% chance of a ripped/torn edge (2 out of 8 cards on average)
+    if ((seed * 19) % 100 < 25) {
+      card.classList.add('flair-ripped');
+      // Alternate rip side
+      const ripSide = (seed * 3) % 2 === 0 ? 'right' : 'bottom';
+      card.dataset.ripSide = ripSide;
+    }
+
     // Industristad: ~30% chance of grease/ink smudge
     if ((seed * 7) % 100 < 30) {
       card.classList.add('flair-grease');
@@ -292,6 +343,31 @@ function applyCardFlair(card, lead, index, townConfig) {
       card.style.setProperty('--grease-x', typeof cx === 'number' ? `${cx}px` : cx);
       card.style.setProperty('--grease-y', typeof cy === 'number' ? `${cy}px` : cy);
       card.style.setProperty('--grease-rot', `${-20 + (h1 % 40)}deg`);
+    }
+  } else if (isCoastal) {
+    // Kuststad: ~25% chance of salt/water damage (wrinkled edges)
+    if ((seed * 13) % 100 < 25) {
+      card.classList.add('flair-salt');
+      const sx = 15 + (h1 % 70);
+      const sy = 15 + (h2 % 70);
+      card.style.setProperty('--salt-x', `${sx}%`);
+      card.style.setProperty('--salt-y', `${sy}%`);
+      card.style.setProperty('--salt-rot', `${-25 + (h3 % 50)}deg`);
+    }
+
+    // ~20% chance of water ring (like a wet glass)
+    if ((seed * 19) % 100 < 20) {
+      card.classList.add('flair-waterring');
+      const wx = 30 + (h2 % 40);
+      const wy = 30 + (h3 % 40);
+      card.style.setProperty('--water-x', `${wx}%`);
+      card.style.setProperty('--water-y', `${wy}%`);
+    }
+
+    // ~15% chance of rope mark (diagonal crease)
+    if ((seed * 23) % 100 < 15) {
+      card.classList.add('flair-rope');
+      card.style.setProperty('--rope-angle', `${-15 + (h1 % 30)}deg`);
     }
   } else {
     // Småstad: ~25% chance of coffee stain

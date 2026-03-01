@@ -820,10 +820,10 @@
             },
             {
               "tier": 0,
-              "response": "The organizers? They're all the same crowd! The Småstad Kennel Club — three people who decide everything.",
+              "response": "Say afterward? Nothing! Gösta just shrugged and said 'the judge's decision is final.' They didn't even want to discuss it.",
               "expression": "neutral",
-              "feedback": "Vague — she blames everyone but gives no details.",
-              "note": "The Småstad Kennel Club"
+              "feedback": "The organizers stonewalled — but no details you can use.",
+              "note": "Gösta said 'the judge's decision is final'"
             }
           ],
           "q1_note": "The judge's sister-in-law"
@@ -845,10 +845,10 @@
           "outcomes": [
             {
               "tier": 0,
-              "response": "Proof? Look at my Bella! She's PERFECT! That should be proof enough.",
+              "response": "Proof? I mean... everyone could SEE it. The poodle was limping on one leg and still won! But no, I didn't film it or anything like that.",
               "expression": "defiant",
-              "feedback": "No substance — just a sore loser.",
-              "note": "That should be proof enough"
+              "feedback": "No documentation — just her word against the judge's.",
+              "note": "No documentation of the judging"
             },
             {
               "tier": 3,
@@ -930,10 +930,10 @@
             },
             {
               "tier": 0,
-              "response": "The full picture? It's SIMPLE! Rigged results, questionable judge, wishy-washy board. Don't laugh!",
+              "response": "The full picture? I just TOLD you! The judge picked his own sister-in-law. What more do you need? Are you even going to write about this?",
               "expression": "hostile",
-              "feedback": "No new details — mostly frustration.",
-              "note": "Rigged results, questionable judge, wishy-washy board"
+              "feedback": "No new details — she repeats herself, growing impatient.",
+              "note": "She repeats the same claim without new facts"
             },
             {
               "tier": 1,

@@ -43,15 +43,28 @@ export function switchTo(screenId, flash = false) {
   target.classList.add('active');
   currentScreen = screenId;
 
+  // Sync ALL backgrounds (body, wrapper, HUD) so no color mismatch anywhere
+  const bgMap = {
+    start: '#2a1f12', onboarding: '#2a1f12',
+    desk: '#2a1f12', interview: '#2a1f12', publish: '#2a1f12', results: '#2a1f12',
+    transition: '#0a0a14', gameover: '#0a0a14'
+  };
+  const bg = bgMap[screenId] || '#2a1f12';
+  document.documentElement.style.background = bg;
+  document.body.style.background = bg;
+  const wrapper = document.getElementById('game-wrapper');
+  if (wrapper) {
+    wrapper.style.background = bg;
+    wrapper.style.boxShadow = `0 0 0 200vmax ${bg}`;
+  }
+
   // Toggle HUD bar
   if (SCREENS_WITH_UI.includes(screenId)) {
     hudBar.classList.add('visible');
     hudBar.style.background = '';
   } else {
     hudBar.classList.remove('visible');
-    // Match HUD bar background to screen so no color mismatch shows
-    const bgMap = { start: '#2a1f12', onboarding: '#2a1f12', transition: '#0a0a14', gameover: '#0a0a14' };
-    hudBar.style.background = bgMap[screenId] || '#0a0a14';
+    hudBar.style.background = bg;
   }
 
   // Flash effect

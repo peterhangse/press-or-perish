@@ -144,17 +144,25 @@ async function boot() {
 }
 
 /**
- * Scale the 640×360 canvas to fit the browser
- * Uses visualViewport when available (handles mobile keyboard, address bar)
+ * Scale game to fill the entire viewport.
+ * Height determines scale; width expands dynamically so there are no empty bars.
+ * Width is clamped to [640, 960] game-pixels to prevent ultra-wide distortion.
  */
 function scaleCanvas() {
   const wrapper = document.getElementById('game-wrapper');
   const hudH = 34;
   const vw = window.visualViewport ? window.visualViewport.width : window.innerWidth;
   const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-  const sx = vw / 640;
-  const sy = vh / (360 + hudH);
-  const s = Math.min(sx, sy);
+
+  // Scale to fill height exactly
+  const s = vh / (360 + hudH);
+
+  // Compute how wide the canvas needs to be (in game-pixels) to fill viewport width
+  const rawW = Math.round(vw / s);
+  const newW = Math.max(640, Math.min(960, rawW));
+
+  // Update the CSS custom property — everything keyed to --canvas-w adapts
+  document.documentElement.style.setProperty('--canvas-w', newW + 'px');
   wrapper.style.transform = `translate(-50%, -50%) scale(${s})`;
 }
 

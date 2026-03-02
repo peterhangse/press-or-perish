@@ -190,7 +190,7 @@
 .desk-leads {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(4, 130px);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr 1fr;
   gap: var(--sp-1);
   padding: var(--sp-1) var(--sp-3);

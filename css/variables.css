@@ -319,23 +319,36 @@ button {
 }
 
 /* ============================================
-   VIEWPORT BACKGROUNDS — Full-screen body match
-   Driven by data-screen / data-town on <body>
-   Same textures as game screens → seamless edges
+   VIEWPORT EXTENSION — Seamless edge blending
+   #game-wrapper::before extends the active screen's
+   background beyond the 640×360 game canvas.
+   Since it lives inside the same CSS transform,
+   the texture scale matches the game exactly.
    ============================================ */
 
-/* Default / Start / Onboarding — warm dark brown */
-body[data-screen="start"],
-body[data-screen="onboarding"] {
+#game-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -500px;
+  left: -500px;
+  right: -500px;
+  bottom: -500px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Default / Start / Onboarding / Publish / Results — warm dark brown */
+body[data-screen="start"] #game-wrapper::before,
+body[data-screen="onboarding"] #game-wrapper::before,
+body[data-screen="publish"] #game-wrapper::before,
+body[data-screen="results"] #game-wrapper::before {
   background: #2a1f12;
 }
 
-/* Desk — Småstad & Kuststad (warm brown wood + grain + vignette) */
-body[data-screen="desk"],
-body[data-screen="desk"][data-town="smastad"],
-body[data-screen="desk"][data-town="kuststad"],
-body[data-screen="publish"],
-body[data-screen="results"] {
+/* Desk — Småstad & Kuststad (wood grain on vignette-edge dark) */
+body[data-screen="desk"] #game-wrapper::before,
+body[data-screen="desk"][data-town="smastad"] #game-wrapper::before,
+body[data-screen="desk"][data-town="kuststad"] #game-wrapper::before {
   background:
     repeating-linear-gradient(
       2deg,
@@ -344,18 +357,11 @@ body[data-screen="results"] {
       rgba(0,0,0,0.06) 3px,
       rgba(0,0,0,0.06) 4px
     ),
-    radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.3) 100%),
-    linear-gradient(180deg, #3a2a18 0%, #2a1f12 30%, #241a0e 100%);
+    #241a0e;
 }
 
-/* Interview — Småstad (flat desk brown) */
-body[data-screen="interview"],
-body[data-screen="interview"][data-town="smastad"] {
-  background: #2a1f12;
-}
-
-/* Desk — Industristad (cool grey steel + grain + vignette) */
-body[data-screen="desk"][data-town="industristad"] {
+/* Desk — Industristad (wood grain on grey steel dark) */
+body[data-screen="desk"][data-town="industristad"] #game-wrapper::before {
   background:
     repeating-linear-gradient(
       2deg,
@@ -364,12 +370,17 @@ body[data-screen="desk"][data-town="industristad"] {
       rgba(0,0,0,0.07) 3px,
       rgba(0,0,0,0.07) 4px
     ),
-    radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%),
-    linear-gradient(180deg, #2c2c2e 0%, #22222a 30%, #1a1a22 100%);
+    #1a1a22;
 }
 
-/* Interview — Industristad */
-body[data-screen="interview"][data-town="industristad"] {
+/* Interview — Småstad (flat desk brown) */
+body[data-screen="interview"] #game-wrapper::before,
+body[data-screen="interview"][data-town="smastad"] #game-wrapper::before {
+  background: #2a1f12;
+}
+
+/* Interview — Industristad (stripes on grey) */
+body[data-screen="interview"][data-town="industristad"] #game-wrapper::before {
   background:
     repeating-linear-gradient(
       0deg,
@@ -378,11 +389,11 @@ body[data-screen="interview"][data-town="industristad"] {
       rgba(0,0,0,0.04) 7px,
       rgba(0,0,0,0.04) 8px
     ),
-    linear-gradient(180deg, #1e1e24 0%, #18181e 100%);
+    #18181e;
 }
 
-/* Interview — Kuststad */
-body[data-screen="interview"][data-town="kuststad"] {
+/* Interview — Kuststad (stripes on grey-blue) */
+body[data-screen="interview"][data-town="kuststad"] #game-wrapper::before {
   background:
     repeating-linear-gradient(
       0deg,
@@ -391,26 +402,24 @@ body[data-screen="interview"][data-town="kuststad"] {
       rgba(0,0,0,0.03) 7px,
       rgba(0,0,0,0.03) 8px
     ),
-    linear-gradient(180deg, #1a2024 0%, #161c20 100%);
+    #161c20;
 }
 
-/* Transition — default (near-black) */
-body[data-screen="transition"] {
+/* Transition — near-black */
+body[data-screen="transition"] #game-wrapper::before {
   background: #0a0a14;
 }
 
-/* Transition — Industristad */
-body[data-screen="transition"][data-town="industristad"] {
+body[data-screen="transition"][data-town="industristad"] #game-wrapper::before {
   background: #0a0a10;
 }
 
-/* Transition — Kuststad */
-body[data-screen="transition"][data-town="kuststad"] {
+body[data-screen="transition"][data-town="kuststad"] #game-wrapper::before {
   background: #0a1018;
 }
 
 /* Game Over */
-body[data-screen="gameover"] {
+body[data-screen="gameover"] #game-wrapper::before {
   background: #0a0a14;
 }
 

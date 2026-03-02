@@ -43,24 +43,23 @@ export function switchTo(screenId, flash = false) {
   target.classList.add('active');
   currentScreen = screenId;
 
-  // Sync ALL backgrounds (body, wrapper, HUD) — town-aware
-  const townBg = {
-    smastad:      { desk: '#2a1f12', interview: '#2a1f12', transition: '#0a0a14' },
-    industristad: { desk: '#1a1a22', interview: '#18181e', transition: '#0a0a10' },
-    kuststad:     { desk: '#1a2024', interview: '#161c20', transition: '#0a1018' }
-  };
-  // Detect current town from screen class list
+  // Sync viewport background via data attributes on <body>
+  // CSS rules in variables.css handle the actual gradients
   const townClass = target.className.match(/town-(\w+)/);
   const town = townClass ? townClass[1] : 'smastad';
-  const baseBg = { start: '#2a1f12', onboarding: '#2a1f12', publish: '#2a1f12', results: '#2a1f12', gameover: '#0a0a14' };
-  const bg = (townBg[town] && townBg[town][screenId]) || baseBg[screenId] || '#2a1f12';
-  document.documentElement.style.background = bg;
-  document.body.style.background = bg;
-  const wrapper = document.getElementById('game-wrapper');
-  if (wrapper) {
-    wrapper.style.background = bg;
-    wrapper.style.boxShadow = `0 0 0 200vmax ${bg}`;
-  }
+
+  // Set data attributes — CSS takes care of the rest
+  document.body.dataset.screen = screenId;
+  document.body.dataset.town = town;
+
+  // Also set html background-color as base layer (prevents flash)
+  const flatColors = {
+    start: '#2a1f12', onboarding: '#2a1f12', desk: '#2a1f12',
+    interview: '#2a1f12', publish: '#2a1f12', results: '#2a1f12',
+    transition: '#0a0a14', gameover: '#0a0a14'
+  };
+  const flatBg = flatColors[screenId] || '#2a1f12';
+  document.documentElement.style.backgroundColor = flatBg;
 
   // Toggle HUD bar
   if (SCREENS_WITH_UI.includes(screenId)) {
@@ -68,7 +67,7 @@ export function switchTo(screenId, flash = false) {
     hudBar.style.background = '';
   } else {
     hudBar.classList.remove('visible');
-    hudBar.style.background = bg;
+    hudBar.style.background = flatBg;
   }
 
   // Flash effect

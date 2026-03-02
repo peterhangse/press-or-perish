@@ -60,6 +60,7 @@ export function switchTo(screenId, flash = false) {
   };
   const flatBg = flatColors[screenId] || '#2a1f12';
   document.documentElement.style.backgroundColor = flatBg;
+  document.body.style.background = flatBg;
 
   // Toggle HUD bar
   if (SCREENS_WITH_UI.includes(screenId)) {

@@ -43,13 +43,17 @@ export function switchTo(screenId, flash = false) {
   target.classList.add('active');
   currentScreen = screenId;
 
-  // Sync ALL backgrounds (body, wrapper, HUD) so no color mismatch anywhere
-  const bgMap = {
-    start: '#2a1f12', onboarding: '#2a1f12',
-    desk: '#2a1f12', interview: '#2a1f12', publish: '#2a1f12', results: '#2a1f12',
-    transition: '#0a0a14', gameover: '#0a0a14'
+  // Sync ALL backgrounds (body, wrapper, HUD) — town-aware
+  const townBg = {
+    smastad:      { desk: '#2a1f12', interview: '#2a1f12', transition: '#0a0a14' },
+    industristad: { desk: '#1a1a22', interview: '#18181e', transition: '#0a0a10' },
+    kuststad:     { desk: '#1a2024', interview: '#161c20', transition: '#0a1018' }
   };
-  const bg = bgMap[screenId] || '#2a1f12';
+  // Detect current town from screen class list
+  const townClass = target.className.match(/town-(\w+)/);
+  const town = townClass ? townClass[1] : 'smastad';
+  const baseBg = { start: '#2a1f12', onboarding: '#2a1f12', publish: '#2a1f12', results: '#2a1f12', gameover: '#0a0a14' };
+  const bg = (townBg[town] && townBg[town][screenId]) || baseBg[screenId] || '#2a1f12';
   document.documentElement.style.background = bg;
   document.body.style.background = bg;
   const wrapper = document.getElementById('game-wrapper');

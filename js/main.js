@@ -54,9 +54,12 @@ function getTownStories() {
 
 // — Init —
 async function boot() {
-  // Scale canvas to fit browser
+  // Scale canvas to fit browser — listen on visualViewport too for mobile
   scaleCanvas();
   window.addEventListener('resize', scaleCanvas);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', scaleCanvas);
+  }
 
   // Initialize screen manager
   ScreenManager.init();
@@ -142,12 +145,15 @@ async function boot() {
 
 /**
  * Scale the 640×360 canvas to fit the browser
+ * Uses visualViewport when available (handles mobile keyboard, address bar)
  */
 function scaleCanvas() {
   const wrapper = document.getElementById('game-wrapper');
   const hudH = 34;
-  const sx = window.innerWidth / 640;
-  const sy = window.innerHeight / (360 + hudH);
+  const vw = window.visualViewport ? window.visualViewport.width : window.innerWidth;
+  const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  const sx = vw / 640;
+  const sy = vh / (360 + hudH);
   const s = Math.min(sx, sy);
   wrapper.style.transform = `translate(-50%, -50%) scale(${s})`;
 }

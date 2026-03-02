@@ -2,21 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Press or Perish!</title>
+  <!-- Critical: paint correct background BEFORE any CSS/JS loads -->
+  <style>html,body{background:#2a1f12;margin:0;padding:0;overflow:hidden;width:100%;height:100%}</style>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Playfair+Display:wght@700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/variables.css?v=6">
-  <link rel="stylesheet" href="css/components.css?v=6">
-  <link rel="stylesheet" href="css/onboarding.css?v=6">
-  <link rel="stylesheet" href="css/desk.css?v=6">
-  <link rel="stylesheet" href="css/interview.css?v=6">
-  <link rel="stylesheet" href="css/publish.css?v=6">
-  <link rel="stylesheet" href="css/results.css?v=6">
-  <link rel="stylesheet" href="css/transition.css?v=6">
-  <link rel="stylesheet" href="css/sprites.css?v=6">
-  <link rel="stylesheet" href="css/achievements.css?v=6">
+  <link rel="stylesheet" href="css/variables.css?v=7">
+  <link rel="stylesheet" href="css/components.css?v=7">
+  <link rel="stylesheet" href="css/onboarding.css?v=7">
+  <link rel="stylesheet" href="css/desk.css?v=7">
+  <link rel="stylesheet" href="css/interview.css?v=7">
+  <link rel="stylesheet" href="css/publish.css?v=7">
+  <link rel="stylesheet" href="css/results.css?v=7">
+  <link rel="stylesheet" href="css/transition.css?v=7">
+  <link rel="stylesheet" href="css/sprites.css?v=7">
+  <link rel="stylesheet" href="css/achievements.css?v=7">
 </head>
-<body>
+<body bgcolor="#2a1f12">
+  <!-- Rotate hint for portrait mobile -->
+  <div id="rotate-hint">
+    <div class="rotate-icon">&#x1F4F1;</div>
+    <div>Rotate your phone for the best experience</div>
+  </div>
+
   <!-- Game wrapper — scales HUD + canvas together -->
   <div id="game-wrapper">
 
@@ -83,6 +91,6 @@
     </div>
   </div>
 
-  <script type="module" src="js/main.js?v=6"></script>
+  <script type="module" src="js/main.js?v=7"></script>
 </body>
 </html>

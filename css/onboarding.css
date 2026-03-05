@@ -318,10 +318,13 @@
 /* — ONBOARDING — */
 #screen-onboarding {
   background: var(--desk);
-  justify-content: center;
+  justify-content: safe center;
   align-items: center;
   perspective: 600px;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--sp-1) 0;
+  -webkit-overflow-scrolling: touch;
 }
 
 .onboarding-container {

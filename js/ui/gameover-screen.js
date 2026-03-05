@@ -114,15 +114,26 @@ export function showSurvived(opts) {
     container.appendChild(breakdown);
   }
 
-  // Restart
-  const btn = document.createElement('button');
-  btn.className = 'btn-paper gameover-restart';
-  btn.textContent = 'Play Again';
-  btn.addEventListener('click', () => {
-    SFX.play('click');
-    opts.onRestart && opts.onRestart();
-  });
-  container.appendChild(btn);
+  // Advance to next town (when available) or restart
+  if (opts.onAdvance) {
+    const btn = document.createElement('button');
+    btn.className = 'btn-paper gameover-restart';
+    btn.textContent = 'What happens next...';
+    btn.addEventListener('click', () => {
+      SFX.play('click');
+      opts.onAdvance();
+    });
+    container.appendChild(btn);
+  } else {
+    const btn = document.createElement('button');
+    btn.className = 'btn-paper gameover-restart';
+    btn.textContent = 'Play Again';
+    btn.addEventListener('click', () => {
+      SFX.play('click');
+      opts.onRestart && opts.onRestart();
+    });
+    container.appendChild(btn);
+  }
 }
 
 /**

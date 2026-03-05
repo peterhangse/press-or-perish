@@ -1245,3 +1245,111 @@
   color: #4a6a5a;
   font-size: 12px;
 }
+
+/* ============================================
+   TOWN UNLOCK CARD — "NEW ASSIGNMENT" reveal
+   ============================================ */
+
+.town-unlock-card {
+  padding: var(--sp-5) var(--sp-6);
+  max-width: 380px;
+  text-align: center;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 6px,
+      rgba(0,0,0,0.02) 6px,
+      rgba(0,0,0,0.02) 7px
+    ),
+    linear-gradient(180deg, var(--paper) 0%, #e8e4dc 100%);
+  border: 2px solid var(--ink-faded);
+  border-radius: 2px;
+  position: relative;
+  animation: paper-drop 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.town-unlock-label {
+  font-family: var(--font-headline);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--ink-faded);
+  margin-bottom: var(--sp-3);
+}
+
+.town-unlock-header {
+  font-family: var(--font-headline);
+  font-size: 20px;
+  color: var(--ink);
+  letter-spacing: 2px;
+  margin-bottom: var(--sp-1);
+}
+
+.town-unlock-tagline {
+  font-family: var(--font-body);
+  font-size: 8px;
+  color: var(--ink-faded);
+  letter-spacing: 1px;
+  margin-bottom: var(--sp-3);
+}
+
+.town-unlock-card .town-logo {
+  margin: 0 auto var(--sp-3);
+}
+
+.town-unlock-stamp {
+  font-family: var(--font-headline);
+  font-size: 18px;
+  color: #2a6e2a;
+  border: 3px solid #2a6e2a;
+  padding: var(--sp-1) var(--sp-3);
+  display: inline-block;
+  transform: rotate(-8deg) scale(0);
+  opacity: 0;
+  margin-top: var(--sp-3);
+  letter-spacing: 3px;
+  transition: transform 0.4s cubic-bezier(0.17, 0.89, 0.32, 1.28), opacity 0.3s ease;
+}
+
+.town-unlock-stamp.stamp-visible {
+  transform: rotate(-8deg) scale(1);
+  opacity: 1;
+}
+
+/* Industristad unlock variant */
+.town-unlock-card.industristad {
+  border-color: #5a5a64;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 6px,
+      rgba(40,40,50,0.03) 6px,
+      rgba(40,40,50,0.03) 7px
+    ),
+    linear-gradient(180deg, #d8d4cc 0%, #ccc8c0 100%);
+}
+
+.town-unlock-card.industristad .town-unlock-stamp {
+  color: #4a5a3a;
+  border-color: #4a5a3a;
+}
+
+/* Kuststad unlock variant */
+.town-unlock-card.kuststad {
+  border-color: #5a6a64;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 8px,
+      rgba(50,80,90,0.03) 8px,
+      rgba(50,80,90,0.03) 9px
+    ),
+    linear-gradient(180deg, #d8dcd8 0%, #ccd0cc 100%);
+}
+
+.town-unlock-card.kuststad .town-unlock-stamp {
+  color: #2a5a5a;
+  border-color: #2a5a5a;
+}

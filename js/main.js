@@ -154,12 +154,18 @@ function scaleCanvas() {
   const vw = window.visualViewport ? window.visualViewport.width : window.innerWidth;
   const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
 
-  // Scale to fill height exactly
-  const s = vh / (360 + hudH);
+  const totalH = 360 + hudH;
+
+  // Scale to fill height
+  const scaleH = vh / totalH;
 
   // Compute how wide the canvas needs to be (in game-pixels) to fill viewport width
-  const rawW = Math.round(vw / s);
+  const rawW = Math.round(vw / scaleH);
   const newW = Math.max(640, Math.min(960, rawW));
+
+  // Also compute width-based scale; use the smaller to guarantee fit in both dimensions
+  const scaleW = vw / newW;
+  const s = Math.min(scaleH, scaleW);
 
   // Update the CSS custom property — everything keyed to --canvas-w adapts
   document.documentElement.style.setProperty('--canvas-w', newW + 'px');
@@ -505,7 +511,7 @@ function showResults(story, interviewResult, deficitBefore) {
         // Check if there's a next town to advance to
         const nextTown = DataLoader.getNextTown(gameData.towns, state.currentTown);
         if (nextTown) {
-          showTownAdvance(nextTown);
+          showSurvivedThenAdvance(nextTown);
         } else {
           showEnding();
         }
@@ -943,6 +949,54 @@ function refreshContinueButton() {
     btnNewRun.classList.remove('start-btn-secondary');
     saveInfo.style.display = 'none';
   }
+}
+
+/**
+ * Show SURVIVED screen, then boss farewell, then advance to next town.
+ * Gives the player the emotional payoff before moving on.
+ */
+function showSurvivedThenAdvance(nextTown) {
+  // Switch to survive soundtrack
+  AudioManager.play('perish');
+
+  ScreenManager.switchTo('gameover');
+
+  // Save best score (cumulative across all towns so far)
+  const runStats = getRunStats();
+  const best = parseInt(localStorage.getItem('pop_best_score') || '0');
+  if (runStats.totalPoints > best) {
+    localStorage.setItem('pop_best_score', runStats.totalPoints);
+  }
+  saveHighscore(runStats.totalPoints, runStats.totalDays, runStats.avgPoints, true);
+
+  // Check achievements
+  checkAndShowAchievements('game_over');
+
+  const tc = getTownConfig();
+
+  GameOverScreen.showSurvived({
+    finalDeficit: state.deficit,
+    dayHistory: state.dayHistory,
+    townHistory: state.townHistory,
+    currentTownId: state.currentTown,
+    runStats: runStats,
+    playerName: pn(),
+    paperName: tc?.newspaperName || 'Småstad Paper',
+    bossName: tc?.bossName || 'Gunnar',
+    competitorName: tc?.competitorName || 'Regionbladet',
+    townName: tc?.name || 'Småstad',
+    onAdvance: () => {
+      // Boss farewell → then town advance
+      const farewell = tc?.farewellSequence;
+      if (farewell && farewell.length > 0) {
+        Onboarding.startFarewell(tc, nextTown, pn(), () => {
+          showTownAdvance(nextTown);
+        });
+      } else {
+        showTownAdvance(nextTown);
+      }
+    },
+  });
 }
 
 /**

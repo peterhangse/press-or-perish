@@ -96,6 +96,8 @@ html, body {
   transform: translate(-50%, -50%) scale(var(--scale, 1));
   transform-origin: center center;
   width: var(--canvas-w);
+  height: calc(var(--hud-h) + var(--canvas-h));
+  overflow: hidden;
   background: transparent;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;

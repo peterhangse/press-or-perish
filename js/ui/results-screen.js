@@ -202,6 +202,10 @@ function showPhase2(wrapper, opts) {
 
   wrapper.appendChild(phase2Bottom);
 
+  // Scroll to top so nothing is clipped
+  const container = document.getElementById('screen-results');
+  container.scrollTop = 0;
+
   // Staggered reveal: comparison (0ms) → bottom section (1200ms)
   setTimeout(() => {
     phase2Bottom.style.transition = 'opacity 0.5s ease';

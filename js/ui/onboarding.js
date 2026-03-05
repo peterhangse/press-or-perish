@@ -215,6 +215,49 @@ export function startTownAdvance(townConfig, playerName, onComplete) {
 }
 
 /**
+ * Start a farewell cutscene — boss says goodbye before player leaves for next town.
+ * @param {Object} townConfig - Current town config (has farewellSequence)
+ * @param {Object} nextTownConfig - Next town config (for unlock card)
+ * @param {string} playerName - Player's name
+ * @param {Function} onComplete - Called when farewell ends
+ */
+export function startFarewell(townConfig, nextTownConfig, playerName, onComplete) {
+  enteredName = playerName || enteredName || 'kid';
+  advanceCallback = onComplete;
+  currentStep = 0;
+
+  const bossInitials = (townConfig.bossFullName || 'GE')
+    .split(' ').map(w => w[0]).join('');
+
+  const farewellSteps = (townConfig.farewellSequence || []).map((step) => ({
+    type: 'boss',
+    name: townConfig.bossFullName || 'Gunnar Ek',
+    initials: bossInitials,
+    speech: step.text.replace(/\{name\}/g, enteredName),
+    mood: step.expression || 'warm',
+  }));
+
+  // Town-unlock card for the next town
+  const unlockStep = {
+    type: 'town-unlock',
+    townId: nextTownConfig.id,
+    header: nextTownConfig.name,
+    tagline: nextTownConfig.id === 'industristad'
+      ? 'Est. 1892 · Built on Iron and Paper'
+      : nextTownConfig.id === 'kuststad'
+      ? 'Est. 1847 · Where the Land Ends and the Truth Begins'
+      : nextTownConfig.name,
+  };
+
+  const sequence = [...farewellSteps, unlockStep];
+
+  const container = document.getElementById('screen-onboarding');
+  container.innerHTML = '';
+  ScreenManager.switchTo('onboarding');
+  showStep(container, sequence);
+}
+
+/**
  * Get arrival flavor text for a new town
  */
 function getArrivalText(tc) {
@@ -335,6 +378,56 @@ function showStep(container, sequence) {
     card.appendChild(tagline);
     card.appendChild(divider);
     card.appendChild(body);
+    wrapper.appendChild(card);
+    SFX.play('reveal');
+  }
+
+  // --- TOWN UNLOCK (new assignment reveal) ---
+  if (step.type === 'town-unlock') {
+    const card = document.createElement('div');
+    card.className = `town-unlock-card ${step.townId || ''}`;
+
+    const label = document.createElement('div');
+    label.className = 'town-unlock-label';
+    label.textContent = 'NEW ASSIGNMENT';
+
+    // Reuse town logo
+    const logo = document.createElement('div');
+    logo.className = `town-logo town-logo-${step.townId || 'default'}`;
+    if (step.townId === 'industristad') {
+      logo.innerHTML = `
+        <div class="town-logo-gear"></div>
+        <div class="town-logo-chimney"></div>
+        <div class="town-logo-chimney town-logo-chimney-2"></div>
+        <div class="town-logo-smoke"></div>
+      `;
+    }
+    if (step.townId === 'kuststad') {
+      logo.innerHTML = `
+        <div class="town-logo-anchor"></div>
+        <div class="town-logo-wave"></div>
+        <div class="town-logo-seagull"></div>
+      `;
+    }
+
+    const header = document.createElement('div');
+    header.className = 'town-unlock-header';
+    header.textContent = step.header;
+
+    const tagline = document.createElement('div');
+    tagline.className = 'town-unlock-tagline';
+    tagline.textContent = step.tagline;
+
+    const stamp = document.createElement('div');
+    stamp.className = 'town-unlock-stamp';
+    stamp.textContent = 'UNLOCKED';
+    setTimeout(() => stamp.classList.add('stamp-visible'), 400);
+
+    card.appendChild(label);
+    card.appendChild(logo);
+    card.appendChild(header);
+    card.appendChild(tagline);
+    card.appendChild(stamp);
     wrapper.appendChild(card);
     SFX.play('reveal');
   }
@@ -591,6 +684,8 @@ function showStep(container, sequence) {
       btn.textContent = 'Next...';
     } else if (step.type === 'arrival' || step.type === 'town-intro') {
       btn.textContent = 'Continue →';
+    } else if (step.type === 'town-unlock') {
+      btn.textContent = 'Pack your bags →';
     } else if (step.type === 'acceptance') {
       btn.textContent = advanceCallback ? 'Take a seat →' : 'Report for duty →';
     } else if (step.type === 'boss' && step.mood === 'intense') {

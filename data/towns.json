@@ -48,7 +48,21 @@
         "New park bench unveiled at the square"
       ]
     },
-    "introSequence": null
+    "introSequence": null,
+    "farewellSequence": [
+      {
+        "expression": "warm",
+        "text": "I was wrong about you, {name}."
+      },
+      {
+        "expression": "serious",
+        "text": "I got a call from Birgit Ståhl at Industristad Paper. She's looking for someone who can handle pressure. I told her about you."
+      },
+      {
+        "expression": "intense",
+        "text": "Go. Småstad is too small for you now. Don't make me regret saying that."
+      }
+    ]
   },
   {
     "id": "industristad",
@@ -124,6 +138,20 @@
         "type": "boss_meeting",
         "expression": "serious",
         "text": "Same rules. Five days. Fall behind and you're out. I don't do second chances."
+      }
+    ],
+    "farewellSequence": [
+      {
+        "expression": "warm",
+        "text": "You did well here, {name}. Better than I expected."
+      },
+      {
+        "expression": "serious",
+        "text": "Ragnar Sjöberg at Kuststad Paper lost his reporter. I gave him your name. The coast is a different beast — smugglers, shipping barons, cold water."
+      },
+      {
+        "expression": "intense",
+        "text": "Industristad won't forget you. Now go make them remember you in Kuststad too."
       }
     ]
   },

@@ -316,7 +316,7 @@ function showDayZeroResults(story, interviewResult) {
   const dayZeroNote = isIndustrial
     ? 'Same rules as Småstad — but the stakes are higher. Your story has a base value, and your interview technique determines the rest.'
     : isCoastal
-    ? 'Same rules as before — but the harbor has deeper secrets. Your story has a base value, and your interview technique determines the rest.'
+    ? 'Your story has a base value — and your interview technique determines the rest. Choose wisely.'
     : 'This is your score. The story itself has a base value — but how you handle the interview decides the rest. Choose your approach wisely.';
 
   const bossQuoteText = isIndustrial

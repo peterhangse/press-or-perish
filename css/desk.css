@@ -918,6 +918,27 @@
    KUSTSTAD — Coastal harbor town overrides
    ============================================ */
 
+/* Desk surface — weathered coastal wood: salt-bleached, cool grey-green */
+#screen-desk.town-kuststad {
+  background:
+    repeating-linear-gradient(
+      2deg,
+      transparent 0px,
+      transparent 3px,
+      rgba(0,0,0,0.05) 3px,
+      rgba(0,0,0,0.05) 4px
+    ),
+    radial-gradient(ellipse at 85% 10%, rgba(180,200,210,0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.30) 100%),
+    linear-gradient(180deg, #2a302e 0%, #1e2826 30%, #172220 100%);
+}
+
+/* Wall behind window — dark coastal concrete, cool-toned */
+.town-kuststad .desk-top-bar {
+  background:
+    linear-gradient(180deg, #10181a 0%, #182220 70%, transparent 100%);
+}
+
 /* Window frame — weathered wood, salt-stained */
 .town-kuststad .desk-window {
   border-color: #6a7a70;

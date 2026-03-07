@@ -263,7 +263,7 @@ export function startFarewell(townConfig, nextTownConfig, playerName, onComplete
 function getArrivalText(tc) {
   const name = tc.name || 'the new town';
   if (tc.id === 'industristad') {
-    return `You step off the train at ${name}. The air smells of iron and diesel. A paper mill towers over the rooftops. This is not Småstad.`;
+    return `You step off the train at ${name}. The air smells of iron and diesel. A paper mill towers over the rooftops.`;
   }
   if (tc.id === 'kuststad') {
     return `You step off the bus at ${name}. Salt and diesel mix in the cold November air. Cargo cranes loom over the harbor like iron sentinels. The sea takes things here — and so does the silence.`;

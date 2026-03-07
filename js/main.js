@@ -1010,6 +1010,9 @@ function showSurvivedThenAdvance(nextTown) {
  * Show town advance screen when player completes a town and there's a next one
  */
 function showTownAdvance(nextTown) {
+  // Switch back to game music (was on perish/survive track)
+  AudioManager.play('game');
+
   // Save the current run is over for this town
   GameState.clearSave();
 

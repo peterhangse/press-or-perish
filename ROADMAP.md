@@ -1,37 +1,52 @@
 # PRESS OR PERISH — Roadmap
 
-All features deferred from the MVD (Minimum Viable Demo) are preserved here, organized by milestone.
+All shipped features are marked ✅. Deferred features are preserved here, organized by milestone.
 
 ---
 
 ## ✅ MVD (v0.1) — Foundation
-*Currently building*
-- [x] 5-day game loop with 40 stories
+*Shipped*
+- [x] 5-day game loop with 40 stories (per town)
 - [x] Lookup-table interviews (4 Q1 × 3 Q2 = 12 paths/story)
 - [x] Variable base news values (2-8) + fixed tier bonus (+2/tier)
-- [x] Hidden gems (~6 deceptive leads)
-- [x] Deficit meter (-15 = perished)
-- [x] Competitor AI (70-80% optimal, misses hidden gems)
+- [x] Hidden gems (~6 deceptive leads per town)
+- [x] Deficit meter (-10 = perished)
+- [x] Competitor AI (town-specific ranges and headlines)
 - [x] Onboarding sequence (rejections → Småstad → boss twist → title card)
-- [x] Day Zero tutorial
-- [x] Pixel art NPCs (5 core × 4 expressions, 35 simple × 2 expressions)
+- [x] Day Zero tutorial (per town)
+- [x] Pixel art NPCs (5 core × 4 expressions, 23 simple × 2 expressions = 28 total)
 - [x] 3 source types on desk (letters, documents, street)
 - [x] Deficit-reactive window backgrounds
 - [x] Time-of-day lighting shifts
 - [x] Sleep screen between publish and results
-- [x] Boss dialogue keyed to deficit
+- [x] Boss dialogue keyed to deficit (per-town pools)
 - [x] Firebase Hosting deployment
+
+## ✅ v0.2 — Town Expansion & Systems
+*Shipped*
+- [x] 3 towns: Småstad → Industristad → Kuststad (linear unlock on survival)
+- [x] 120 stories (40 per town)
+- [x] Per-town bosses (Gunnar Ek / Birgit Ståhl / Ragnar Sjöberg)
+- [x] Per-town competitors (Regionbladet / Fabriksbladet / Sjöfartstidningen)
+- [x] Per-town desk visual identity (skylines, colors, animated effects)
+- [x] Farewell sequences between towns
+- [x] Town-advance onboarding for new towns
+- [x] Sound design (3 MP3 tracks + 12 synthesized SFX)
+- [x] High score tracking (localStorage, Press Archive modal)
+- [x] Save/resume system (pop_save localStorage, Continue button)
+- [x] 50 achievements (5 categories: Milestones, Interview Mastery, Survival, Stories, Rookie Mistakes)
+- [x] Instant-perish mechanic (certain Q2 choices → FIRED stamp → game over)
+- [x] Per-town competitor score escalation (Småstad easiest → Kuststad hardest)
 
 ---
 
 ## v1.1 — Replayability
-*After MVD proven fun*
+*After core game proven fun*
 - [ ] **Randomization variables:** NPC names, detail swaps, amounts, dates rotate each run
 - [ ] **Seeded PRNG:** Same seed = same run. Display seed on end screen for sharing.
 - [ ] **Daily challenge mode:** Seed = today's date, one attempt only
-- [ ] **High score tracking:** Per-run best score, saved to localStorage
 - [ ] **5th Q1 archetype: Gentle Challenge** — politely questions official narrative, medium risk
-- [ ] **4th Q2 option per Q1 path** — expands from 12 to 20 paths/story (800 total outcomes)
+- [ ] **4th Q2 option per Q1 path** — expands from 12 to 20 paths/story
 
 ---
 
@@ -56,20 +71,11 @@ All features deferred from the MVD (Minimum Viable Demo) are preserved here, org
   - The Charmer: Reach Day 3 with The Rookie
   - The Bulldog: Survive a full run
   - The Networker: Win with 2 different characters
-- [ ] **4 towns** (different story type distributions):
-  - Småstad (starter): balanced mix
-  - Industristad: labor disputes, factory accidents, union corruption
-  - Kuststad: smuggling, missing persons, maritime accidents
-  - Huvudstad District: high-stakes politics (hardest)
+- [ ] **4th town: Huvudstad District** — high-stakes politics (hardest). Requires surviving all 3 existing towns.
 - [ ] **Town unlocks:** Win with all characters in current town → unlock next
 - [ ] **Per-combination leaderboards:** 4 characters × 4 towns = 16 leaderboards
 - [ ] **Character-specific onboarding:** Each character has unique Day Zero
-- [ ] **Sound design:**
-  - Typewriter clicks on notepad
-  - Paper shuffle on desk
-  - Dull thud on publish stamp
-  - Red alert tone at danger zone
-  - Silence between — Nordic noir emptiness
+- [ ] **Story journal / clipping archive:** Review past stories across runs
 - [ ] **Cross-story threads:** Day 1 mill accident connects to Day 3 land deal (same developer)
 
 ---

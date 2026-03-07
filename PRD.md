@@ -1,5 +1,6 @@
+<!-- PRD_VERSION: 2.0 | STORIES: 120 | NPCS: 84 | TOWNS: 3 | ACHIEVEMENTS: 50 | UPDATED: 2026-03-07 -->
 # PRESS OR PERISH — Complete Product Requirements Document
-## Version 1.0 · Last updated: 21 February 2026
+## Version 2.0 · Last updated: 7 March 2026
 
 ---
 
@@ -29,7 +30,7 @@
 
 **Game:** Press or Perish
 **Genre:** Roguelike journalism simulation
-**Setting:** 1970s rural Sweden, fictional town "Småstad"
+**Setting:** 1970s rural Sweden — three fictional towns: Småstad → Industristad → Kuststad
 **Platform:** Web browser (HTML/CSS/JS), hosted on Firebase Hosting
 **Resolution:** 640×360 fixed canvas, CSS-scaled to fit browser window
 **Aesthetic:** Papers Please-inspired pixel art, cold Nordic noir, desaturated 1970s newsprint palette
@@ -39,11 +40,22 @@
 ### Premise
 You are a fresh journalism graduate from Stockholm University (Class of 1974, Magna Cum Laude). No prestigious paper — Dagens Nyheter, Expressen, Göteborgs-Posten — would hire you. The only job offer: reporter at **Småstad Paper**, a tiny local newspaper run by the gruff editor-in-chief **Gunnar Ek**. Your competitor is **Regionbladet**, a larger regional paper that is systematically outperforming your publication each day.
 
-You have **one week (5 days)** to prove your worth — or perish.
+You have **one week (5 days)** to prove your worth — or perish. If you survive, your boss recommends you to the next town's paper. Three towns, three bosses, fifteen days.
+
+### Town Progression
+| Order | Town | Newspaper | Competitor | Boss | Dates |
+|---|---|---|---|---|---|
+| 1 | Småstad | Småstad Paper | Regionbladet | Gunnar Ek | Nov 10–15, 1974 |
+| 2 | Industristad | Industristad Paper | Fabriksbladet | Birgit Ståhl | Nov 17–22, 1974 |
+| 3 | Kuststad | Kuststad Paper | Sjöfartstidningen | Ragnar Sjöberg | Nov 24–29, 1974 |
+
+Each town is a self-contained 5-day run with its own stories (40 per town, 120 total), boss, competitor, visual identity, and difficulty curve. Surviving a town triggers a farewell sequence where the outgoing boss recommends you to the next town's editor.
 
 ### Win/Lose Conditions
-- **WIN:** Survive to Friday evening (Day 5) without the deficit reaching -10 or below.
+- **WIN (town):** Survive to Friday evening (Day 5) without the deficit reaching -10 or below.
+- **WIN (game):** Survive all three towns.
 - **LOSE (PERISHED):** Deficit reaches -10 at any point = fired immediately.
+- **LOSE (INSTANT PERISH):** Certain interview Q2 choices trigger an immediate firing — red FIRED stamp, slam SFX, game over.
 
 ---
 
@@ -54,6 +66,7 @@ The game opens to a desktop-style start screen with the title **"PRESS OR PERISH
 
 **Menu options:**
 - **New Game** — Skips the tutorial, prompts for name, starts at Day 1
+- **Continue** — Resumes a saved game (only visible if a save exists in localStorage)
 - **Tutorial** — Runs the full onboarding sequence + Day Zero
 - **Highscores** — Shows the Press Archive (all completed runs sorted by points)
 
@@ -110,6 +123,17 @@ Results Screen (Phase 1: your score → Phase 2: "go to sleep" → comparison, d
 Check: deficit ≤ -10 → PERISHED  |  day = 5 → SURVIVED  |  else → next day
 ```
 
+### 2.6 Town Progression
+When a player survives Day 5 of a non-final town:
+
+1. **Survived screen** — Shows stats and "SURVIVED" stamp (same as final game-over screen)
+2. **Boss farewell sequence** — The outgoing boss delivers a 3-step farewell cutscene (warm → serious → intense), recommending the player to the next town's editor
+3. **Town advance screen** — Shows the new town's onboarding: boss introduction, new rules/context, threat
+4. **Day Zero (new town)** — Sticky-note orientation day with 3 easy leads, restricted interview options. Day Zero does NOT affect the real deficit.
+5. **Day 1 begins** — Deficit resets to 0, story pool resets, new boss quotes load
+
+Completed town history (deficit, day records, survived status) is preserved in `townHistory[]` for the highscore archive.
+
 ---
 
 ## 3. CORE GAMEPLAY LOOP
@@ -124,9 +148,14 @@ Check: deficit ≤ -10 → PERISHED  |  day = 5 → SURVIVED  |  else → next d
 The desk is the core selection screen. It presents **8 lead story cards** in a grid layout:
 
 **Layout:**
-- **Top bar:** A window showing a Småstad town silhouette (morning sky gradient, buildings as CSS clip-path, tiny lit windows), plus a **boss sticky note** with today's directive
+- **Top bar:** A window showing the current town's silhouette (sky gradient, buildings as CSS clip-path, tiny lit windows), plus a **boss sticky note** with today's directive
 - **Center:** 8 lead cards in a scrollable grid
 - **Bottom:** Action bar with selected lead label and INVESTIGATE button
+
+**Town-specific desk theming:**
+- **Småstad:** Warm brown wood desk, residential silhouette (church spire, marketplace), yellow window lights, warm cream lead cards
+- **Industristad:** Cold steel-grey desk, factory skyline (smokestacks, paper mill, cranes), animated chimney smoke wisps, orange furnace glows, cooler newsprint-grey lead cards with "HEMLIGT" stamps
+- **Kuststad:** Weathered teal desk, harbor silhouette (lighthouse, fishing boats, cargo ships), animated harbor waves, navigation lamps/ship portholes, sea-mist-grey lead cards
 
 **Each lead card shows:**
 - **Source badge** — colored tag: Letter (green-ish), Document (amber), Street Tip (blue-ish)
@@ -168,6 +197,8 @@ The interview is the skill-expression core. Two questions, each with distinct st
 11. **Feedback appears:** tier-colored border on NPC response, +points badge, feedback line, note with tier-colored dot, portrait tint overlay, body animation change
 12. "Write article →" button appears
 13. Click → rubber stamp "FILED" (green) → interview complete → passes result to main game loop
+
+**Instant Perish:** Certain Q2 choices have a `perish: true` flag in the outcome. When triggered: the "Write article" button text becomes "...", clicking it plays the slam SFX, a red FIRED stamp flashes on screen, and after 600ms the game jumps straight to game over. The article is never written.
 
 ### 3.4 Sleep/Publish Screen
 After the interview, the game skips the traditional headline selection and goes directly to a **sleep screen**:
@@ -211,6 +242,17 @@ Two-phase reveal for maximum tension:
 - "Play Again" button → returns to start screen
 - Best score saved to localStorage
 
+### 3.8 Town Advancement
+When the player survives Day 5 of Småstad or Industristad:
+
+1. **Survived screen** with stats and SURVIVED stamp
+2. **Boss farewell cutscene** — 3-step sequence (warm → serious → intense) from the current boss, recommending the player to the next town
+3. **Town advance** — New town’s onboarding sequence (boss introduction, context, threat)
+4. **Day Zero** — 3 easy leads, restricted Q1 options, does not affect deficit
+5. **State reset** — Deficit resets to 0, used story IDs cleared, boss quote pools refreshed. Completed town history is archived in `townHistory[]`.
+
+Surviving the final town (Kuststad) triggers the full game-over survived screen with cumulative stats.
+
 ---
 
 ## 4. SCORING SYSTEM
@@ -222,17 +264,17 @@ Tier Bonus = tier × 2
 ```
 
 ### 4.2 Base News Values (per story)
-Stories have base values of 2-8, distributed across 40 stories:
+Stories have base values of 2-8, distributed across 120 stories (40 per town):
 
-| Base Value | Count | Description |
-|---|---|---|
-| 2 pts | 7 stories | Filler: minor events, soft features |
-| 3 pts | 3 stories | Small items |
-| 4 pts | 9 stories | Decent: local disputes, small scandals |
-| 5 pts | 7 stories | Good local issues |
-| 6 pts | 6 stories | Strong investigations |
-| 7 pts | 4 stories | Major revelations |
-| 8 pts | 4 stories | Top: deaths, major corruption, cover-ups |
+| Base Value | Småstad | Industristad | Kuststad | Total | Description |
+|---|---|---|---|---|---|
+| 2 pts | 7 | 7 | 7 | 21 | Filler: minor events, soft features |
+| 3 pts | 3 | 3 | 3 | 9 | Small items |
+| 4 pts | 9 | 9 | 9 | 27 | Decent: local disputes, small scandals |
+| 5 pts | 7 | 7 | 7 | 21 | Good local issues |
+| 6 pts | 6 | 6 | 6 | 18 | Strong investigations |
+| 7 pts | 4 | 4 | 4 | 12 | Major revelations |
+| 8 pts | 4 | 4 | 4 | 12 | Top: deaths, major corruption, cover-ups |
 
 ### 4.3 Tier System
 Each interview resolves to a tier (0-3) based on the Q1→Q2 combination chosen:
@@ -295,7 +337,7 @@ story.interview.branches[q1_archetype].outcomes[q2_index]
 **No runtime trust calculation. No hidden state. Content IS the logic.**
 
 - 4 Q1 archetypes × 3 Q2 options = **12 unique paths per story**
-- 40 stories × 12 paths = **480 total interview outcomes** in the game
+- 120 stories × 12 paths = **1,440 total interview outcomes** in the game
 
 ### 5.4 Interview Feedback System
 After Q2 resolves, the player receives multi-channel feedback:
@@ -328,39 +370,81 @@ Used in expression hint text and animation:
 | defiant | "Defiant, chin raised" | red | slow rise |
 | neutral | "Hard to read" | none | default idle |
 
+### 5.6 Instant Perish
+Some Q2 outcomes carry a `perish: true` flag. When the player triggers one:
+
+1. NPC delivers the Q2 response (typewritten as normal)
+2. The "Write article" button text becomes `...` (ominous)
+3. Player clicks → slam SFX plays
+4. Red **FIRED** stamp flashes on screen (same stamp animation as ASSIGNED/FILED, but red `stamp-flash red` class)
+5. After 600ms delay, game jumps to game-over screen (perished path)
+
+The article is never filed. This mechanic enforces the game's core tension: certain lines of questioning aren't just ineffective — they end your career.
+
 ---
 
 ## 6. COMPETITOR AI
 
-The competitor is **Regionbladet**, a larger regional newspaper.
+Each town has its own competitor newspaper, with town-specific score ranges and headlines.
+
+| Town | Competitor | Focus |
+|---|---|---|
+| Småstad | Regionbladet | Municipal/civic stories |
+| Industristad | Fabriksbladet | Labor & industrial stories |
+| Kuststad | Sjöfartstidningen | Maritime & shipping stories |
 
 ### 6.1 Score Generation
-Competitor score is random within day-specific ranges:
+Competitor score is random within day-specific ranges, per town:
 
-| Day | Min | Max | Character |
-|---|---|---|---|
-| 1 | 6 | 9 | Easy start |
-| 2 | 7 | 10 | Building |
-| 3 | 8 | 11 | Mid difficulty |
-| 4 | 8 | 12 | Getting stronger |
-| 5 | 9 | 12 | Strong finish |
+**Småstad (Regionbladet):**
+| Day | Min | Max |
+|---|---|---|
+| 1 | 6 | 9 |
+| 2 | 7 | 10 |
+| 3 | 8 | 11 |
+| 4 | 8 | 12 |
+| 5 | 9 | 12 |
 
-**Average competitor output: ~8-10 pts/day.**
+**Industristad (Fabriksbladet):**
+| Day | Min | Max |
+|---|---|---|
+| 1 | 7 | 10 |
+| 2 | 8 | 11 |
+| 3 | 8 | 12 |
+| 4 | 9 | 12 |
+| 5 | 9 | 13 |
+
+**Kuststad (Sjöfartstidningen):**
+| Day | Min | Max |
+|---|---|---|
+| 1 | 7 | 10 |
+| 2 | 8 | 11 |
+| 3 | 9 | 12 |
+| 4 | 9 | 13 |
+| 5 | 10 | 13 |
+
+Difficulty escalates across towns: Småstad averages ~8-10 pts/day, Industristad ~9-11, Kuststad ~10-12.
 
 ### 6.2 Competitor Headlines
-Generated as flavor text based on score:
-- **Score ≥ 11:** Strong headlines (e.g., "Exposes corruption in municipal leadership")
-- **Score 8-10:** Average headlines (e.g., "City council debates school closure")
-- **Score < 8:** Weak headlines (e.g., "Award for local sports club")
+Generated as flavor text based on score, from town-specific headline pools:
+- **Score ≥ 11:** Strong headlines (town-themed investigations/exposés)
+- **Score 8-10:** Average headlines (routine beat coverage)
+- **Score < 8:** Weak headlines (soft features)
 
 ---
 
 ## 7. BOSS SYSTEM
 
-**Gunnar Ek** is the editor-in-chief. He appears in two contexts:
+Each town has its own editor-in-chief. They appear in desk notes, result quotes, game-over text, onboarding, and farewell sequences.
+
+| Town | Boss | Personality |
+|---|---|---|
+| Småstad | Gunnar Ek | Gruff, self-preserving, cold |
+| Industristad | Birgit Ståhl | Stern, demanding, methodical |
+| Kuststad | Ragnar Sjöberg | Weathered, terse, pragmatic |
 
 ### 7.1 Desk Notes (Morning)
-A sticky note pinned on the desk, refreshed daily. Drawn from pools to avoid repeats within a run.
+A sticky note pinned on the desk, refreshed daily. Drawn from per-town pools to avoid repeats within a run.
 
 | Condition | Pool |
 |---|---|
@@ -393,6 +477,24 @@ Some stories (e.g., the wolf hunt "vargjakten") have a `boss_result_quotes` fiel
 
 All boss text supports `{name}` placeholder replacement with the player's entered name.
 
+### 7.5 Town-Specific Boss Dialogue Pools
+All boss dialogue (desk notes, result quotes, game-over text, onboarding) is stored per-town in `boss-dialogue.json`. Each town’s boss has unique pools:
+
+- **Småstad (Gunnar):** Desk notes reference local civic concerns, survival tone
+- **Industristad (Birgit):** Desk notes reference factory output, labor disputes, corporate pressure
+- **Kuststad (Ragnar):** Desk notes reference maritime commerce, harbor politics, weather
+
+### 7.6 Farewell Sequences
+When the player survives a non-final town, the boss delivers a 3-step farewell cutscene:
+
+| Step | Expression | Content |
+|---|---|---|
+| 1 | warm | Acknowledges the player's work |
+| 2 | serious | Explains the next town's challenges |
+| 3 | intense | Recommends player to the next boss |
+
+Farewell dialogue is stored in `towns.json` under each town’s `farewellSequence` array.
+
 ---
 
 ## 8. ALL SCREENS & UI
@@ -421,10 +523,12 @@ Visible on desk, interview, publish, and results screens. Sits above the 640×36
    - Distance-to-perish message: "X from perishing"
    - Warning/danger classes on the fill bar
 
+4. **Town Name** — Current town displayed in the HUD (e.g., "Småstad", "Industristad", "Kuststad")
+
 ### 8.2 Screen: Start
 - Brown desk background
 - Large title "PRESS OR PERISH" — clickable to start music
-- After click: title settles, menu slides in with New Game, Tutorial, Highscores buttons
+- After click: title settles, menu slides in with New Game, Continue (if save exists), Tutorial, Highscores buttons
 - Best score display if exists
 - Byline: "Created by Peter Hang."
 
@@ -443,7 +547,8 @@ Visible on desk, interview, publish, and results screens. Sits above the 640×36
 
 ### 8.5 Screen: Desk
 - Full desk layout (see §3.2)
-- Town silhouette window, boss note, 8 lead cards, action bar
+- Town-specific silhouette window, boss note, 8 lead cards, action bar
+- Town theming applied via `#screen-desk.town-{id}` CSS classes (see §10.7)
 
 ### 8.6 Screen: Interview
 - Two-panel layout (see §3.3 and §5)
@@ -476,6 +581,18 @@ Visible on desk, interview, publish, and results screens. Sits above the 640×36
 - **Typewriter Cursor:** Blinking block cursor (█) during word-by-word text reveal.
 - **btn-paper:** Shared button style — paper-colored, raised shadow, physical push-in on click.
 
+### 8.11 Screen: Farewell
+- Triggered after surviving a non-final town
+- 3-step boss dialogue cutscene (reuses onboarding portrait frame layout)
+- Each step has expression hint (warm → serious → intense)
+- Boss recommends player to next town's editor
+- Advances to town-advance screen on completion
+
+### 8.12 Screen: Town Advance
+- New town’s onboarding sequence: boss introduction, context, threat
+- Uses the same rendering system as §8.3 Onboarding
+- Auto-transitions to Day Zero of the new town
+
 ---
 
 ## 9. AUDIO SYSTEM
@@ -493,6 +610,7 @@ Managed by `audio-manager.js`. Only one track plays at a time with crossfade.
 - 3-second fade in/out between tracks
 - Mute state persisted in localStorage (`pop_muted`)
 - Autoplay retry on user interaction (handles browser autoplay blocking)
+- Game track resumes seamlessly after town-advance sequences (no restart)
 
 ### 9.2 SFX (12 synthesized sounds)
 All SFX are generated in real-time via **Web Audio API** — zero audio files. A-minor harmonic base with ±5% pitch randomization.
@@ -581,63 +699,106 @@ NPC portraits are **CSS pixel art** — no images. Each sprite is defined as an 
 - **Eye blink:** 4s cycle — double blink at 94-99% marks
 - **Expression animations:** `.anim-nervous` (fast shimmer), `.anim-hostile` (slow rise), `.anim-open` (gentle sway)
 
-**28 NPCs** have full pixel art sprite definitions in `npc-sprites.js` (1203 lines).
+**84 NPCs** have full pixel art sprite definitions in `npc-sprites.js` (1202 lines).
 
 ### 10.5 Window Background
-The desk window shows a **Småstad town silhouette:**
-- CSS gradient sky (morning colors)
+The desk window shows a **town-specific silhouette** (determined by `currentTown`):
+
+- CSS gradient sky (shifts by time of day: morning blue-grey → afternoon amber → evening dark)
 - Town silhouette built with `clip-path: polygon(...)`
-- Tiny lit window dots as radial gradients
-- Background shifts by time of day: morning (blue-grey) → afternoon (amber) → evening (dark)
+- Tiny lit window/light dots as radial gradients
+- Town-specific animated effects (see §10.7)
 
 ### 10.6 Transitions
 - **Hard cuts** between screens — no fades (Papers Please style)
 - Brief flash overlay (300ms white/amber) on major transitions
 - Staggered slide-in animations on results screen
 
+### 10.7 Town Visual Identity
+Each town has a comprehensive visual identity applied via CSS class `.town-{id}` on the desk screen:
+
+**Småstad (small town):**
+- Desk surface: warm brown wood
+- Wall/frame: warm beige/cream, wood-colored frame
+- Skyline: residential silhouette (church spire, marketplace, small office buildings)
+- Window lights: warm yellow lamp glow
+- Lead cards: warm cream paper with coffee ring stains
+- Sky gradients: gentle warm morning → amber afternoon → cozy evening
+
+**Industristad (industrial town):**
+- Desk surface: cold steel-grey metal-toned wood
+- Wall/frame: dark industrial concrete, steel-grey frame
+- Skyline: factory chimneys, paper mill, smokestacks, storage silos, crane structures
+- **Animated effects:** 6 chimney smoke wisps (varying animation delays 2.6–3.6s)
+- Window lights: orange/amber furnace glow
+- Lead cards: cooler newsprint-grey with "HEMLIGT" (classified) stamps
+- Boss note: cooler tan tint (Birgit’s style)
+- Sky gradients: hazy/polluted greys and browns
+
+**Kuststad (coastal harbor town):**
+- Desk surface: weathered salt-bleached coastal wood (cool grey-green)
+- Wall/frame: dark coastal concrete, weathered salt-stained frame
+- Skyline: rocky shore, fishing boats/masts, harbor cranes, lighthouse, warehouses, cargo ships, fishing huts
+- **Animated effects:** 4 harbor wave layers (translateX oscillation, 3.5–4.6s)
+- Window lights: navigation lamps, ship portholes, lighthouse beam (warm/red)
+- Lead cards: weathered sea-mist paper (pale grey-blue)
+- Sky gradients: cold North Sea fog, blues and greys
+
+Each town overrides: desk surface color, wall color, window frame, sky gradients (×3 time-of-day), clip-path silhouette, animated effects, light positions, lead card paper color, button accent color, and boss note tint.
+
 ---
 
 ## 11. CONTENT INVENTORY
 
-### 11.1 Stories: 40 total
+### 11.1 Stories: 120 total (40 per town)
 
-**By category:**
-| Category | Count |
-|---|---|
-| Human Interest | 11 |
-| Corruption | 10 |
-| Crime | 7 |
-| Breaking News | 7 |
-| Labor | 5 |
+**Per-town category breakdown:**
 
-**By difficulty:**
-| Difficulty | Count |
-|---|---|
-| Easy | 17 |
-| Medium | 12 |
-| Hard | 11 |
+| Category | Småstad | Industristad | Kuststad | Total |
+|---|---|---|---|---|
+| Human Interest | 11 | — | — | 11+ |
+| Corruption | 10 | — | — | 10+ |
+| Crime | 7 | — | — | 7+ |
+| Breaking News | 7 | — | — | 7+ |
+| Labor | 5 | 13 | — | 18+ |
+| Environment | — | 7 | — | 7+ |
+| Politics | — | 2 | — | 2+ |
+| Other (finance, housing, welfare, health) | — | 4 | — | 4+ |
 
-**By base value:**
-| Base Value | Count |
+*(Industristad and Kuststad use additional categories: environment, politics, finance, housing, welfare, health.)*
+
+**Per-town difficulty breakdown:**
+
+| Difficulty | Per Town (target) |
 |---|---|
-| 2 | 7 |
-| 3 | 3 |
-| 4 | 9 |
-| 5 | 7 |
-| 6 | 6 |
-| 7 | 4 |
-| 8 | 4 |
+| Easy | ~17 |
+| Medium | ~12 |
+| Hard | ~11 |
+
+**Per-town base value breakdown:**
+
+| Base Value | Per Town | ×3 Towns |
+|---|---|---|
+| 2 | 7 | 21 |
+| 3 | 3 | 9 |
+| 4 | 9 | 27 |
+| 5 | 7 | 21 |
+| 6 | 6 | 18 |
+| 7 | 4 | 12 |
+| 8 | 4 | 12 |
 
 **Per story content:**
 - Title, description, lead text, preview text
+- **Town assignment** (smastad / industristad / kuststad)
 - Source type (letter / document / street)
 - Difficulty (easy / medium / hard), base value (2-8), category
 - NPC reference (npc_id, npc_name, npc_title)
 - Interview: opening line + 4 Q1 options + 4 branches (each with Q1 response, expression hint, Q1 note, 3 Q2 options, 3 outcomes)
 - Headlines: 4 tiers × 3 options each (text + tone)
 - Optional: `boss_result_quotes` with positive/negative arrays
+- Optional: `perish: true` on specific Q2 outcomes (instant-perish trigger)
 
-### 11.2 NPCs: 28
+### 11.2 NPCs: 84
 Each NPC has:
 - id, name, role, age
 - default_expression, expressions array
@@ -645,14 +806,17 @@ Each NPC has:
 - clothing_color (CSS class reference)
 - initial_demeanor (hint text when interview starts)
 
-### 11.3 Boss Dialogue
+### 11.3 Boss Dialogue (per town)
+Each town's boss has independent dialogue pools in `boss-dialogue.json`:
 - Desk notes: day-specific pools (3 per day), warning pool (3), danger pool (3), default pool (3)
 - Result quotes: critical (4), bad (4), warning (4), neutral (4), good (4), great (4)
 - Game over: fired text, survived text (barely/decent/dominant)
 - Onboarding: intro, rules, threat, start
 
+× 3 towns = 3 complete boss dialogue sets.
+
 ### 11.4 Day Distribution
-Lead generation per day (how many from each difficulty pool):
+Lead generation per day (how many from each difficulty pool), same pattern per town:
 
 | Day | Easy | Medium | Hard | Character |
 |---|---|---|---|---|
@@ -662,17 +826,30 @@ Lead generation per day (how many from each difficulty pool):
 | 4 | 1 | 2 | 5 | Getting hard |
 | 5 | 0 | 2 | 6 | Final push |
 
-Stories are never repeated within a run (`usedStoryIds` tracked).
+Stories are never repeated within a town run (`usedStoryIds` tracked per town, reset on town advance).
+
+### 11.5 Achievements: 50 total (5 categories)
+
+| Category | Count | Examples |
+|---|---|---|
+| Milestones | 9 | first_byline, survived, press_master, overqualified, front_page_material |
+| Interview Mastery | 8 | soft_touch, silent_treatment, full_arsenal, hidden_gem, bulldozer |
+| Survival | 8 | clean_sweep, comeback_king, perfect_week, veteran (10 weeks), photo_finish |
+| Stories | 12 | stop_the_presses, follow_the_money, pumpkin_pulitzer, journalism_at_its_best |
+| Rookie Mistakes | 8 | five_zeroes, wrong_crowd, speedrun, silence_is_awkward |
+
+Achievements are stored in localStorage as `pop_achievements` (JSON array of unlocked achievement IDs). A trophy button in the persistent UI opens the achievements modal showing all 50 with locked/unlocked state.
 
 ---
 
 ## 12. DATA SCHEMAS (COMPLETE)
 
-### 12.1 stories.json — Array of 40 Story objects
+### 12.1 stories.json — Array of 120 Story objects (40 per town)
 
 ```json
 {
   "id": "string",
+  "town": "smastad|industristad|kuststad",
   "title": "string",
   "description": "string",
   "lead_text": "string",
@@ -680,7 +857,7 @@ Stories are never repeated within a run (`usedStoryIds` tracked).
   "source_type": "letter|document|street",
   "difficulty": "easy|medium|hard",
   "base_value": 2-8,
-  "category": "labor|crime|corruption|human_interest|breaking_news",
+  "category": "labor|crime|corruption|human_interest|breaking_news|environment|politics|finance|housing|welfare|health",
   "npc_id": "string",
   "npc_name": "string",
   "npc_title": "string",
@@ -730,7 +907,7 @@ Stories are never repeated within a run (`usedStoryIds` tracked).
 }
 ```
 
-### 12.2 npcs.json — Array of 28 NPC objects
+### 12.2 npcs.json — Array of 84 NPC objects
 
 ```json
 {
@@ -746,44 +923,48 @@ Stories are never repeated within a run (`usedStoryIds` tracked).
 }
 ```
 
-### 12.3 boss-dialogue.json
+### 12.3 boss-dialogue.json (per-town structure)
 
 ```json
 {
-  "desk_notes": {
-    "day_1": "string",
-    "day_2": ["string"],
-    "day_3": ["string"],
-    "day_4": ["string"],
-    "day_5": ["string"],
-    "warning": ["string"],
-    "danger": ["string"],
-    "default": ["string"]
+  "smastad": {
+    "desk_notes": {
+      "day_1": "string",
+      "day_2": ["string"],
+      "day_3": ["string"],
+      "day_4": ["string"],
+      "day_5": ["string"],
+      "warning": ["string"],
+      "danger": ["string"],
+      "default": ["string"]
+    },
+    "result_quotes": {
+      "critical": ["string"],
+      "bad": ["string"],
+      "warning": ["string"],
+      "neutral": ["string"],
+      "good": ["string"],
+      "great": ["string"]
+    },
+    "gameover_fired": {
+      "text": "string",
+      "name": "Gunnar Ek"
+    },
+    "gameover_survived": {
+      "barely": "string",
+      "decent": "string",
+      "dominant": "string",
+      "name": "Gunnar Ek"
+    },
+    "onboarding": {
+      "intro": "string",
+      "rules": "string",
+      "threat": "string",
+      "start": "string"
+    }
   },
-  "result_quotes": {
-    "critical": ["string"],
-    "bad": ["string"],
-    "warning": ["string"],
-    "neutral": ["string"],
-    "good": ["string"],
-    "great": ["string"]
-  },
-  "gameover_fired": {
-    "text": "string",
-    "name": "Gunnar Ek"
-  },
-  "gameover_survived": {
-    "barely": "string",
-    "decent": "string",
-    "dominant": "string",
-    "name": "Gunnar Ek"
-  },
-  "onboarding": {
-    "intro": "string",
-    "rules": "string",
-    "threat": "string",
-    "start": "string"
-  }
+  "industristad": { "...same structure, Birgit Ståhl..." },
+  "kuststad": { "...same structure, Ragnar Sjöberg..." }
 }
 ```
 
@@ -794,6 +975,9 @@ Stories are never repeated within a run (`usedStoryIds` tracked).
   "phase": "start|onboarding|transition|desk|interview|publish|sleep|results|gameover",
   "day": 0-5,
   "deficit": "number",
+  "currentTown": "smastad|industristad|kuststad",
+  "townIndex": 0-2,
+  "townHistory": [{ "townId", "deficit", "dayHistory", "survived": true }],
   "todayLeads": ["storyId"],
   "selectedLead": "storyId|null",
   "interviewPhase": 0-2,
@@ -822,6 +1006,43 @@ Stories are never repeated within a run (`usedStoryIds` tracked).
 | `pop_run_count` | number | Total runs started |
 | `pop_best_score` | number | Highest total score across all runs |
 | `pop_highscores` | JSON array | All completed run records (max 50) |
+| `pop_save` | JSON object | Saved game state (full state snapshot for resume) |
+| `pop_achievements` | JSON array | Unlocked achievement IDs |
+
+### 12.6 towns.json — Array of 3 Town objects
+
+```json
+{
+  "id": "smastad|industristad|kuststad",
+  "name": "string",
+  "order": 0-2,
+  "newspaper": "string",
+  "competitorName": "string",
+  "bossName": "string",
+  "perishThreshold": -10,
+  "dayZeroDate": "string (e.g., November 10, 1974)",
+  "dates": { "1": "string", "2": "string", "3": "string", "4": "string", "5": "string" },
+  "competitorScoreRanges": {
+    "1": { "min": "number", "max": "number" },
+    "2": { "min": "number", "max": "number" },
+    "3": { "min": "number", "max": "number" },
+    "4": { "min": "number", "max": "number" },
+    "5": { "min": "number", "max": "number" }
+  },
+  "competitorHeadlines": {
+    "strong": ["string"],
+    "average": ["string"],
+    "weak": ["string"]
+  },
+  "farewellSequence": [
+    { "text": "string", "expression": "warm|serious|intense" }
+  ]
+}
+```
+
+### 12.7 Save Data Schema (`pop_save`)
+
+The save is a full snapshot of the game state object (§12.4), written to localStorage after each completed day (skipping Day Zero). On resume, the state is restored and the game continues from the last completed phase. v1 saves (pre-town) are auto-migrated to v2 format on load.
 
 ---
 
@@ -830,9 +1051,9 @@ Stories are never repeated within a run (`usedStoryIds` tracked).
 ### 13.1 Stack
 - **Language:** Vanilla JavaScript (ES6 modules, `import`/`export`)
 - **Markup:** Single `index.html` with empty screen containers
-- **Styling:** 9 CSS files, CSS custom properties, no preprocessor
+- **Styling:** 10 CSS files, CSS custom properties, no preprocessor
 - **Build:** Zero build tools, zero frameworks, zero dependencies
-- **Data:** JSON files fetched at runtime
+- **Data:** JSON files fetched at runtime (stories, NPCs, boss dialogue, towns)
 - **Audio:** 3 MP3 soundtrack files + Web Audio API synthesized SFX
 - **Hosting:** Firebase Hosting (static files)
 
@@ -846,8 +1067,8 @@ js/main.js          ← Entry point, game loop, screen wiring, boot()
     ↓
 js/engine/*         ← Pure game logic (zero DOM access, portable to Godot)
 js/ui/*             ← DOM rendering, event handling, animations
-data/*              ← JSON content files (stories, NPCs, boss dialogue)
-css/*               ← 9 modular CSS files
+data/*              ← JSON content files (stories, NPCs, boss dialogue, towns)
+css/*               ← 10 modular CSS files
 audio/*             ← 3 MP3 soundtrack files
 ```
 
@@ -857,6 +1078,24 @@ audio/*             ← 3 MP3 soundtrack files
 **UI modules** (`js/ui/`) create and manipulate DOM elements, handle events, and call engine functions for game logic.
 
 **Data flow:** `main.js` orchestrates everything — it calls engine functions for logic, UI functions for rendering, and passes data between them.
+
+### 13.4 Achievements System
+- **Engine:** `js/engine/achievements.js` — defines all 44 achievements with trigger conditions, checks against game state
+- **UI:** `js/ui/achievements-ui.js` — renders achievement modal, trophy button, unlock toast notifications
+- **Storage:** `pop_achievements` in localStorage (JSON array of unlocked IDs)
+- **Triggers:** Checked at key game events (day end, interview complete, game over, town advance)
+
+### 13.5 Save/Resume System
+- **Save:** `GameState.saveToLocalStorage()` writes full state snapshot to `pop_save` after each completed day (skips Day Zero)
+- **Load:** `GameState.loadFromLocalStorage()` reads and returns saved state
+- **Restore:** `GameState.restoreFromSave()` merges save into active state, with v1→v2 migration for pre-town saves
+- **Continue button** on start screen: only visible when `hasSave()` returns true
+
+### 13.6 Content Validation Tools
+Python 3 scripts in `tools/` for automated quality checks (stdlib only, no dependencies):
+- `validate.py` — structural validation of stories.json (tier distributions, headline counts, base value spread)
+- `audit_text_lengths.py` — checks all lead_text and description fields against character limits
+- `audit_prd.py` — validates PRD claims against actual codebase (story counts, file inventories, achievement totals)
 
 ---
 
@@ -875,35 +1114,37 @@ audio/*             ← 3 MP3 soundtrack files
 
 | File | Lines | Exports | Description |
 |---|---|---|---|
-| `game-state.js` | ~82 | `createState()`, `resetDay()`, `recordDay()`, `isPerished()`, `hasSurvived()` | Central state object. Pure data, no DOM. Default state includes phase, day, deficit, leads, history, meta. Perish threshold = -10. |
-| `day-generator.js` | ~101 | `generateDayZeroLeads()`, `generateDayLeads()` | Day Zero: 3 easy leads (1 per source type). Days 1-5: 8 leads from difficulty pools (see §11.4). Fisher-Yates shuffle. Avoids used story IDs. |
-| `interview-engine.js` | ~72 | `getQ1Options()`, `getQ2Options()`, `resolveInterview()`, `getHeadlines()` | Lookup table reader. ~30 lines of core logic. resolveInterview returns { tier, points, response, expression, feedback, note }. Points = base_value + (tier×2). |
-| `scoring-engine.js` | ~66 | `calculatePoints()`, `calculateDeficitDelta()`, `applyDeficit()`, `getDeficitSeverity()`, `getDeficitFillPercent()`, `getPerishDistance()` | All math functions. Deficit threshold = -10. Severity: safe (>-3), warning (-3 to -7), danger (<-7). |
-| `competitor-ai.js` | ~79 | `generateCompetitorScore()`, `getCompetitorHeadline()`, `getCompetitorName()` | Random score in day-specific range. 3 headline pools (strong/average/weak). Competitor name: "Regionbladet". |
-| `data-loader.js` | ~62 | `loadAllData()`, `loadStories()`, `loadNPCs()`, `loadBossDialogue()`, `getStory()`, `getNPC()` | Fetches and caches JSON data. Parallel Promise.all loading. |
-| `audio-manager.js` | ~176 | `play()`, `stop()`, `retryPlay()`, `toggleMute()`, `isMuted()`, `getActiveTrack()` | Multi-track audio with 3-second crossfade. Perish track custom loops at 18s via timeupdate event. Mute persisted to localStorage. |
-| `sfx-engine.js` | ~417 | `play()`, `warmUp()` | 12 synthesized SFX via Web Audio API. All real-time generated. Catalogue: tick, click, select, deselect, stamp, note, reveal, tension, relief, slam, ambientTick, reject. |
+| `game-state.js` | ~208 | `createState()`, `resetDay()`, `recordDay()`, `isPerished()`, `hasSurvived()`, `advanceToNextTown()`, `saveToLocalStorage()`, `loadFromLocalStorage()`, `clearSave()`, `hasSave()`, `restoreFromSave()` | Central state object with town progression (currentTown, townIndex, townHistory). Save/restore system with v1→v2 migration. Perish threshold = -10. |
+| `day-generator.js` | ~105 | `generateDayZeroLeads()`, `generateDayLeads()` | Day Zero: 3 easy leads (1 per source type). Days 1-5: 8 leads from difficulty pools (see §11.4). Fisher-Yates shuffle. Avoids used story IDs. Town-scoped story filtering. |
+| `interview-engine.js` | ~88 | `getQ1Options()`, `getQ2Options()`, `resolveInterview()`, `getHeadlines()` | Lookup table reader. resolveInterview returns { tier, points, response, expression, feedback, note, perish }. Points = base_value + (tier×2). |
+| `scoring-engine.js` | ~72 | `calculatePoints()`, `calculateDeficitDelta()`, `applyDeficit()`, `getDeficitSeverity()`, `getDeficitFillPercent()`, `getPerishDistance()` | All math functions. Deficit threshold = -10. Severity: safe (>-3), warning (-3 to -7), danger (<-7). |
+| `competitor-ai.js` | ~92 | `generateCompetitorScore()`, `getCompetitorHeadline()`, `getCompetitorName()` | Per-town competitor with town-specific score ranges and headline pools. Uses townConfig for all values. |
+| `data-loader.js` | ~99 | `loadAllData()`, `loadStories()`, `loadNPCs()`, `loadBossDialogue()`, `loadTowns()`, `getStory()`, `getNPC()`, `getTownConfig()`, `getNextTown()`, `getStoriesByTown()` | Fetches and caches all JSON data. Parallel Promise.all loading. Town-aware filtering and lookup. |
+| `audio-manager.js` | ~190 | `play()`, `stop()`, `retryPlay()`, `toggleMute()`, `isMuted()`, `getActiveTrack()` | Multi-track audio with 3-second crossfade. Perish track custom loops at 18s via timeupdate event. Mute persisted to localStorage. |
+| `sfx-engine.js` | ~416 | `play()`, `warmUp()` | 12 synthesized SFX via Web Audio API. All real-time generated. Catalogue: tick, click, select, deselect, stamp, note, reveal, tension, relief, slam, ambientTick, reject. |
+| `achievements.js` | ~309* | `CATEGORIES`, `getAll()`, `getTotal()`, `loadUnlocked()`, `saveUnlocked()`, `checkAchievements()` | 44 achievement definitions across 5 categories. Trigger-based checking at game events. localStorage persistence. |
 
 ### 14.3 JavaScript — UI (`js/ui/`)
 
 | File | Lines | Exports | Description |
 |---|---|---|---|
-| `screen-manager.js` | ~74 | `init()`, `switchTo()`, `getCurrent()`, `flash()` | Manages 8 screen divs. Hard cut transitions (no fades). Show/hide via `.active` class. Toggles HUD bar visibility. Flash overlay for emphasis. |
-| `onboarding.js` | ~320 | `start()`, `getPlayerName()` | 13-step narrative sequence. Handles diploma (name input), job ads, rejections, acceptance, boss meeting, title card. Boss steps reuse persistent portrait frame. Title card word-by-word slam animation. |
-| `desk-screen.js` | ~300 | `render()` | Renders 8 lead cards with source badges, headlines, lead text, NPC info. Card flair system (coffee stains, stamps, clips). Selection/deselection with SFX. INVESTIGATE stamp. Day Zero fly-in boss note modal. |
-| `interview-screen.js` | ~530 | `start()` | Full interview flow: Q1→Q2→result. Typewriter dialogue system. Notesheet with tier-colored dots. Feedback system: tier borders, points badges, feedback lines. Portrait tint and body animation. Expression hint updates. |
-| `publish-screen.js` | ~175 | `render()`, `showSleep()` | Headline selection (currently bypassed by main.js — auto-picks first headline). Sleep phase: deficit change display, mood text, continue button. Date display: November 10-15, 1974. |
-| `results-screen.js` | ~270 | `render()` | Two-phase reveal. Phase 1: scoring breakdown with dot meters. Phase 2: side-by-side newspaper comparison, deficit update, boss sticky note fly-in. Staggered animations. |
-| `transition-screen.js` | ~80 | `show()` | Day header with day number, name, date, deficit color, mood text. 3-second auto-advance. |
-| `gameover-screen.js` | ~150 | `showPerished()`, `showSurvived()` | Both endings. Stats grid. Cold epilogue text. Perished: varies by days survived. Survived: varies by deficit severity. |
-| `components.js` | ~135 | `buildWeekStrip()`, `updateWeekStrip()`, `updateDeficitMeter()`, `updateClock()`, `updateWindowSky()`, `getDeficitColor()` | Persistent HUD updates. Deficit color interpolation (lerpColor between RGB values). Week strip day coloring. Clock phase mapping. |
-| `npc-sprites.js` | ~1203 | `renderSprite()` | 28 CSS pixel art NPC definitions. Each sprite = array of {x,y,w,h,cls,style} pixel blocks. Renders as absolutely-positioned divs inside a 120×160 container. Includes sprite-body wrapper for animations. |
+| `screen-manager.js` | ~99 | `init()`, `switchTo()`, `getCurrent()`, `flash()` | Manages screen divs. Hard cut transitions (no fades). Show/hide via `.active` class. Toggles HUD bar visibility. Flash overlay for emphasis. |
+| `onboarding.js` | ~716 | `start()`, `getPlayerName()`, `startFarewell()` | 13-step narrative sequence. Handles diploma (name input), job ads, rejections, acceptance, boss meeting, title card. Also handles farewell cutscenes between towns and new-town onboarding. |
+| `desk-screen.js` | ~422 | `render()` | Renders 8 lead cards with source badges, headlines, lead text, NPC info. Card flair system (coffee stains, stamps, clips). Selection/deselection with SFX. INVESTIGATE stamp. Day Zero fly-in boss note modal. Town-specific CSS class application. |
+| `interview-screen.js` | ~659 | `start()` | Full interview flow: Q1→Q2→result. Typewriter dialogue system. Notesheet with tier-colored dots. Feedback system: tier borders, points badges, feedback lines. Portrait tint and body animation. Instant-perish handling (FIRED stamp). |
+| `publish-screen.js` | ~218 | `render()`, `showSleep()` | Headline selection (currently bypassed by main.js — auto-picks first headline). Sleep phase: deficit change display, mood text, continue button. Per-town date display. |
+| `results-screen.js` | ~358 | `render()` | Two-phase reveal. Phase 1: scoring breakdown with dot meters. Phase 2: side-by-side newspaper comparison (per-town mastheads), deficit update, boss sticky note fly-in. Staggered animations. |
+| `transition-screen.js` | ~144 | `show()` | Day header with day number, name, date, deficit color, mood text. 3-second auto-advance. Town-aware date display. |
+| `gameover-screen.js` | ~227 | `showPerished()`, `showSurvived()` | Both endings. Stats grid. Cold epilogue text. Perished: varies by days survived. Survived: varies by deficit severity. Town-advance callback for non-final towns. |
+| `components.js` | ~133 | `buildWeekStrip()`, `updateWeekStrip()`, `updateDeficitMeter()`, `updateClock()`, `updateWindowSky()`, `getDeficitColor()` | Persistent HUD updates. Deficit color interpolation (lerpColor between RGB values). Week strip day coloring. Clock phase mapping. |
+| `npc-sprites.js` | ~1202 | `renderSprite()` | 84 CSS pixel art NPC definitions. Each sprite = array of {x,y,w,h,cls,style} pixel blocks. Renders as absolutely-positioned divs inside a 120×160 container. Includes sprite-body wrapper for animations. |
+| `achievements-ui.js` | ~309 | `addAchievementButton()`, `showAchievements()`, `showUnlockToast()` | Trophy button, achievements modal (grid of 44 achievements with locked/unlocked state), unlock toast notification. |
 
 ### 14.4 JavaScript — Main
 
 | File | Lines | Description |
 |---|---|---|
-| `main.js` | ~740 | Entry point. `boot()` initializes everything: scales canvas, loads data, wires start screen buttons, builds HUD. Game flow functions: `startNewRun()`, `startTutorial()`, `startDayZero()` (with 4 sub-functions), `startDay()`, `showDesk()`, `startInterview()`, `showPublish()`, `showResults()`, `showGameOver()`, `showEnding()`. Boss quote logic: `getBossNote()`, `getBossQuote()`, `getStoryBossQuote()`. Utility: name prompt modal, highscore board, mute button, `pickUnused()` for avoiding repeat quotes, `injectName()` for {name} replacement. |
+| `main.js` | ~1148 | Entry point. `boot()` initializes everything: scales canvas, loads data, wires start screen buttons (New Game, Continue, Tutorial), builds HUD. Game flow functions: `startNewRun()`, `startTutorial()`, `resumeSavedGame()`, `startDayZero()`, `startDay()`, `showDesk()`, `startInterview()`, `showPublish()`, `showResults()`, `showGameOver()`, `showEnding()`, `showSurvivedThenAdvance()`, `showTownAdvance()`. Town-aware functions: `getTownConfig()`, `getBossDialogue()`, `getTownStories()`. Boss quote logic: `getBossNote()`, `getBossQuote()`, `getStoryBossQuote()`. Utility: name prompt modal, highscore board, mute button, `pickUnused()` for avoiding repeat quotes, `injectName()` for {name} replacement. |
 
 ### 14.5 CSS Files
 
@@ -912,20 +1153,22 @@ audio/*             ← 3 MP3 soundtrack files
 | `variables.css` (~314 lines) | CSS custom properties, reset, game wrapper/canvas scaling, screen management, flash overlay, shared button styles, stamp animation, film grain overlay, cursor styles, typewriter cursor |
 | `components.css` | HUD bar, deficit meter, week strip, game clock, mute button, highscore modal, name prompt modal |
 | `onboarding.css` | Diploma, job ads (prestigious vs shabby), rejection letters, acceptance letter, boss meeting layout, title card animation |
-| `desk.css` | Desk layout, window (sky gradient + town silhouette), boss note, lead cards grid, lead card flair (coffee/stamp/clip), source badges, action bar, fly-in note modal |
+| `desk.css` | Desk layout, window (sky gradient + town silhouette), boss note, lead cards grid, lead card flair (coffee/stamp/clip), source badges, action bar, fly-in note modal. **Town-specific overrides** for Småstad, Industristad, Kuststad (desk surface, wall, sky, silhouette, animated effects, lights, card paper color). |
 | `interview.css` | Two-panel layout, NPC portrait, expression hint, dialogue log, question buttons (archetype dots), tier-colored borders, points badges, feedback lines, notesheet (lined paper + red margin), tier-colored dots, portrait tint overlays |
 | `publish.css` | Newspaper preview, headline choices, publish button, sleep container, deficit change display |
 | `results.css` | Side-by-side newspaper cards, scoring breakdown, deficit update, boss sticky note, slide-in animations |
 | `transition.css` | Day transition layout, text sizes, deficit display, mood text |
 | `sprites.css` (~190 lines) | Base pixel block, sprite container, sprite-body idle sway, eye blink, skin/hair/eye/clothes/accessory color classes, expression body animations (nervous/hostile/open), fallback placeholder |
+| `achievements.css` | Achievement modal grid, trophy button, unlock toast notification, locked/unlocked states |
 
 ### 14.6 Data Files
 
 | File | Size | Content |
 |---|---|---|
-| `data/stories.json` | ~10,000 lines | 40 complete story objects with full interview trees |
-| `data/npcs.json` | ~600 lines | 28 NPC profiles |
-| `data/boss-dialogue.json` | 95 lines | Boss quotes for desk, results, game over, onboarding |
+| `data/stories.json` | ~28,000 lines | 120 complete story objects (40 per town) with full interview trees |
+| `data/npcs.json` | ~1320 lines | 84 NPC profiles |
+| `data/boss-dialogue.json` | ~285 lines | Per-town boss quotes (3 towns × desk/results/gameover/onboarding pools) |
+| `data/towns.json` | ~350 lines | 3 town configs (competitors, score ranges, farewell sequences, dates) |
 
 ### 14.7 Audio Files
 
@@ -983,13 +1226,14 @@ No build step needed. ES modules work directly in modern browsers.
 
 ## 17. ROADMAP & FUTURE FEATURES
 
+See `ROADMAP.md` for the full roadmap. Key future milestones:
+
 ### v1.1 — Replayability
 - Randomization variables: NPC names, detail swaps, amounts, dates rotate each run
 - Seeded PRNG: same seed = same run, shareable
 - Daily challenge mode: seed = today's date, one attempt only
-- High score tracking improvements
 - 5th Q1 archetype: Gentle Challenge
-- 4th Q2 option per Q1 path (12→20 paths/story, 800 total outcomes)
+- 4th Q2 option per Q1 path (12→20 paths/story)
 
 ### v1.2 — Depth
 - Trust-conditional Q2 branching (HIGH/MEDIUM/LOW trust modifies responses)
@@ -999,10 +1243,10 @@ No build step needed. ES modules work directly in modern browsers.
 
 ### v2.0 — Meta-Progression
 - 4 journalist characters (The Rookie, The Charmer, The Bulldog, The Networker)
-- 4 towns (Småstad, Industristad, Kuststad, Huvudstad District)
-- Per-combination leaderboards (4×4 = 16)
+- 4th town: Huvudstad District (high-stakes politics, hardest)
+- Per-combination leaderboards (4 characters × 4 towns = 16)
 - Character-specific onboarding
-- Sound design expansion
+- Story journal / clipping archive (review past stories across runs)
 - Cross-story threads (Day 1 mill accident → Day 3 land deal)
 
 ### v3.0 — Complexity
@@ -1012,4 +1256,4 @@ No build step needed. ES modules work directly in modern browsers.
 
 ---
 
-*Generated from complete source code analysis of Press or Perish, commit 5c460aa, February 2026.*
+*Generated from complete source code analysis of Press or Perish, March 2026.*

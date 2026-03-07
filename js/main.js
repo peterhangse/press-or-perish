@@ -70,6 +70,15 @@ async function boot() {
     console.log(`Loaded ${gameData.stories.length} stories, ${gameData.npcs.length} NPCs, ${gameData.towns.length} towns`);
   } catch (e) {
     console.error('Failed to load game data:', e);
+    const canvas = document.getElementById('game-canvas');
+    if (canvas) {
+      canvas.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;background:var(--paper,#e8dfc8);color:var(--ink,#1a1208);font-family:var(--font-body,'Courier Prime',monospace);font-size:14px;text-align:center;padding:20px;">
+        <div>
+          <p style="font-size:18px;margin-bottom:8px;">⚠ Failed to load game data.</p>
+          <p>Please refresh the page to try again.</p>
+        </div>
+      </div>`;
+    }
     return;
   }
 

@@ -437,6 +437,13 @@ function startInterview(story) {
     state.q2Choice = result.q2Index;
     state.baseValue = story.base_value;
 
+    // Instant perish — boss fires you on the spot
+    if (result.perish) {
+      GameState.recordDay(state);
+      showGameOver();
+      return;
+    }
+
     // Move to publish
     showPublish(story, result);
   }, { townConfig: getTownConfig() });

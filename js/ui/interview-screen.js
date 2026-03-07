@@ -361,32 +361,63 @@ function handleQ2(q1Archetype, q2Index, questionText) {
       // Continue button
       const continueBtn = document.createElement('button');
       continueBtn.className = 'btn-paper';
-      continueBtn.textContent = 'Write article →';
-      continueBtn.style.marginTop = '6px';
-      continueBtn.addEventListener('click', () => {
-        if (onComplete) {
-          SFX.play('stamp');
-          // Rubber stamp flash
-          const container = document.getElementById('screen-interview');
-          const stamp = document.createElement('div');
-          stamp.className = 'stamp-flash green';
-          stamp.textContent = 'FILED';
-          container.appendChild(stamp);
+
+      if (result.perish) {
+        // Instant perish — boss fires you, no article written
+        continueBtn.textContent = '...';
+        continueBtn.style.marginTop = '6px';
+        continueBtn.addEventListener('click', () => {
+          if (onComplete) {
+            SFX.play('slam');
+            const container = document.getElementById('screen-interview');
+            const stamp = document.createElement('div');
+            stamp.className = 'stamp-flash red';
+            stamp.textContent = 'FIRED';
+            container.appendChild(stamp);
+
+            setTimeout(() => {
+              onComplete({
+                tier: result.tier,
+                points: result.points,
+                q1Bonus: result.q1Bonus,
+                q2Bonus: result.q2Bonus,
+                perish: true,
+                headlines: [],
+                q1Archetype,
+                q2Index,
+              });
+            }, 600);
+          }
+        });
+      } else {
+        continueBtn.textContent = 'Write article →';
+        continueBtn.style.marginTop = '6px';
+        continueBtn.addEventListener('click', () => {
+          if (onComplete) {
+            SFX.play('stamp');
+            // Rubber stamp flash
+            const container = document.getElementById('screen-interview');
+            const stamp = document.createElement('div');
+            stamp.className = 'stamp-flash green';
+            stamp.textContent = 'FILED';
+            container.appendChild(stamp);
         
-          setTimeout(() => {
-            const headlines = InterviewEngine.getHeadlines(currentStory, result.tier);
-            onComplete({
-              tier: result.tier,
-              points: result.points,
-              q1Bonus: result.q1Bonus,
-              q2Bonus: result.q2Bonus,
-              headlines,
-              q1Archetype,
-              q2Index,
-            });
-          }, 350);
-        }
-      });
+            setTimeout(() => {
+              const headlines = InterviewEngine.getHeadlines(currentStory, result.tier);
+              onComplete({
+                tier: result.tier,
+                points: result.points,
+                q1Bonus: result.q1Bonus,
+                q2Bonus: result.q2Bonus,
+                perish: result.perish,
+                headlines,
+                q1Archetype,
+                q2Index,
+              });
+            }, 350);
+          }
+        });
+      }
       questions.appendChild(continueBtn);
     });
   }, 1000);

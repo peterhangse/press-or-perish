@@ -67,6 +67,7 @@ export function resolveInterview(story, q1Archetype, q2Index) {
     feedback: outcome.feedback || '',
     note: outcome.note || '',
     q1Response: branch.q1_response,
+    perish: outcome.perish || false,
   };
 }
 

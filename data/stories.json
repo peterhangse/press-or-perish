@@ -7317,9 +7317,9 @@
     "difficulty": "medium",
     "base_value": 5,
     "category": "corruption",
-    "npc_id": "karl_lindstrom",
-    "npc_name": "Karl Lindström",
-    "npc_title": "Municipal worker, technical services",
+    "npc_id": "tomas_falk",
+    "npc_name": "Tomas Falk",
+    "npc_title": "Technical administrator, municipality",
     "interview": {
       "opening_line": "I have the inventory list. It doesn't match what's actually in the storage depot.",
       "q1_options": [
@@ -7952,6 +7952,7 @@
           "outcomes": [
             {
               "tier": 0,
+              "perish": true,
               "response": "The rule of law? *cold stare* You're lecturing ME about ethics? In MY newsroom? Interview's over. Get back to your desk.",
               "expression": "hostile",
               "feedback": "Terminated. You moralized your own boss.",
@@ -9093,9 +9094,9 @@
     "difficulty": "medium",
     "base_value": 5,
     "category": "breaking_news",
-    "npc_id": "karl_lindstrom",
-    "npc_name": "Karl Lindström",
-    "npc_title": "Municipal worker, technical services",
+    "npc_id": "arvid_magnusson",
+    "npc_name": "Arvid Magnusson",
+    "npc_title": "Neighbour and witness",
     "interview": {
       "opening_line": "My neighbor had a heart attack at three in the morning. The dispatch center said: 'The ambulance is not in service. Call a taxi.'",
       "q1_options": [

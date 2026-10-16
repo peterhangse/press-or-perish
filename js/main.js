@@ -1063,9 +1063,20 @@ function returnToStart() {
 }
 
 /**
+ * Dev mode: local server (localhost/127.0.0.1) or ?dev in the URL.
+ * Players on press-or-perish.web.app never see dev tools.
+ */
+function isDevMode() {
+  const host = location.hostname;
+  return host === 'localhost' || host === '127.0.0.1' || host === ''
+    || new URLSearchParams(location.search).has('dev');
+}
+
+/**
  * Add dev-mode skip button (below mute) for jumping to a specific town
  */
 function addDevButtons() {
+  if (!isDevMode()) return;
   const wrapper = document.getElementById('game-wrapper');
   const btn = document.createElement('button');
   btn.id = 'dev-skip-btn';

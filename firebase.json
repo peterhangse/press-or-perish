@@ -8,7 +8,9 @@
       "infra/**",
       "README.md",
       "Dockerfile",
-      "*.md"
+      "*.md",
+      "musik_audio/**",
+      "tools/**"
     ],
     "headers": [
       {

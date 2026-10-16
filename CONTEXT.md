@@ -42,6 +42,13 @@ i 1970-talets Småland. Spelaren är nyutexaminerad reporter som måste överlev
 - `publish-screen.js` (rubrikval + sömn) är **implementerad men förbikopplad** —
   main.js auto-pickar rubrik 0 och hoppar direkt till resultat. Död kod idag.
 - Dag 0/tutorial (onboarding 13 steg), räknas inte på deficit.
+- Intervjun visar NPC:ns namn och titel från storyn (`npc_name`/`npc_title`),
+  samma text som lead-kortet. `npcs.json` ger sprite, demeanor och reservroll.
+  Samma NPC kan ha olika roller i olika stories (t.ex. Gunnar Ek som bonde).
+- Dev-knappen "⚙ Skip to town" visas bara i dev-läge: localhost/127.0.0.1
+  eller `?dev` i URL:en (`isDevMode()` i main.js).
+- `prefers-reduced-motion: reduce` hanteras globalt i `css/variables.css`:
+  animationer hoppar till slutläget, flash-overlay stängs av.
 - 50 achievements, 1 440 intervjuutfall totalt.
 
 ## Regler/kontrakt (viktigt!)
@@ -59,4 +66,8 @@ i 1970-talets Småland. Spelaren är nyutexaminerad reporter som måste överlev
 - Lokalt: `python3 -m http.server 8000` (kräver modern webbläsare, ES-moduler).
 - Deploy: push till `main` → GitHub Actions (`firebase-hosting-merge.yml`)
   deployar live automatiskt till https://press-or-perish.web.app.
-- Firebase-projekt `press-or-perish`, publicerar från reporoten (ignorerar `*.md`).
+- Firebase-projekt `press-or-perish`, publicerar från reporoten (ignorerar `*.md`,
+  dolda filer, `musik_audio/` och `tools/`).
+- Cache-busting: höj `?v=<n>` i `index.html` när CSS/JS ändras (nu `v=14`).
+- `tools/validate.py` är trasig mot nuvarande `npcs.json` (förväntar dict per
+  stad, filen är en lista) — känt fel, inte rättat.

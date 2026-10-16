@@ -1,6 +1,6 @@
-<!-- PRD_VERSION: 2.0 | STORIES: 120 | NPCS: 84 | TOWNS: 3 | ACHIEVEMENTS: 50 | UPDATED: 2026-03-07 -->
+<!-- PRD_VERSION: 2.0 | STORIES: 120 | NPCS: 84 | TOWNS: 3 | ACHIEVEMENTS: 50 | UPDATED: 2026-10-16 -->
 # PRESS OR PERISH — Complete Product Requirements Document
-## Version 2.0 · Last updated: 7 March 2026
+## Version 2.0 · Last updated: 16 October 2026
 
 ---
 
@@ -553,6 +553,7 @@ Visible on desk, interview, publish, and results screens. Sits above the 640×36
 ### 8.6 Screen: Interview
 - Two-panel layout (see §3.3 and §5)
 - Left: portrait, info, notesheet
+- NPC name and title come from the story (`npc_name`, `npc_title`), the same text as the desk lead card; `npcs.json` supplies the sprite, demeanor and fallback role. One NPC can have different roles in different stories.
 - Right: story header, dialogue log, question buttons
 
 ### 8.7 Screen: Publish/Sleep
@@ -713,6 +714,7 @@ The desk window shows a **town-specific silhouette** (determined by `currentTown
 - **Hard cuts** between screens — no fades (Papers Please style)
 - Brief flash overlay (300ms white/amber) on major transitions
 - Staggered slide-in animations on results screen
+- `prefers-reduced-motion: reduce` turns animations into instant end states and removes the flash overlay (global rule in `variables.css`)
 
 ### 10.7 Town Visual Identity
 Each town has a comprehensive visual identity applied via CSS class `.town-{id}` on the desk screen:

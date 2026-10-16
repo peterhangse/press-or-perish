@@ -361,3 +361,24 @@ button {
     display: none;
   }
 }
+
+/* ============================================
+   REDUCED MOTION
+   Respects the OS/browser setting "reduce motion": no flashes, no slams,
+   no looping ambient motion. Animations jump to their end state, so every
+   element still ends up visible where it should be, and animationend /
+   transitionend still fire for the JS flow.
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  #flash-overlay.flash {
+    animation: none !important;
+  }
+}

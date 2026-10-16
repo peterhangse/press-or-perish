@@ -21,7 +21,15 @@ let disabledQ1 = [];  // archetypes to gray out (Day Zero tutorial)
  * @param {Array}  [options.disabledArchetypes] - Q1 archetypes to gray out
  * @param {Object} [options.townConfig] - Town config for visual theming
  */
-export function start(story, npc, callback, options = {}) {
+export function start(story, baseNpc, callback, options = {}) {
+  // The same NPC can appear in several stories with different roles, so the
+  // story's own name/title (also shown on the desk lead card) take precedence
+  // over the generic entry in npcs.json.
+  const npc = {
+    ...baseNpc,
+    name: story.npc_name || baseNpc.name,
+    title: story.npc_title || baseNpc.title || baseNpc.role || '',
+  };
   currentStory = story;
   currentNPC = npc;
   onComplete = callback;

@@ -54,7 +54,7 @@ for (const [name, choose] of Object.entries(MODELS)) {
     for (const t of TOWNS) {
       const used = []; let deficit = 0; let carry = null;
       for (let day = 1; day <= 5; day++) {
-        const leads = generateDayLeads(day, byTown[t], used, carry);
+        const leads = generateDayLeads(day, byTown[t], used, carry, cfg[t].leadsPerDay || 8);
         const { story, a, i } = choose(leads);
         used.push(story.id);
         const r = resolveInterview(story, a, i);

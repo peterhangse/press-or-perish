@@ -9,6 +9,7 @@
     "bossFullName": "Gunnar Ek",
     "bossTitle": "Editor-in-Chief",
     "perishThreshold": -10,
+    "leadsPerDay": 4,
     "cssClass": "town-smastad",
     "dates": [
       "November 11, 1974",
@@ -74,6 +75,7 @@
     "bossFullName": "Birgit Ståhl",
     "bossTitle": "Editor-in-Chief",
     "perishThreshold": -10,
+    "leadsPerDay": 6,
     "cssClass": "town-industristad",
     "dates": [
       "November 18, 1974",
@@ -165,6 +167,7 @@
     "bossFullName": "Ragnar Sjöberg",
     "bossTitle": "Editor-in-Chief",
     "perishThreshold": -10,
+    "leadsPerDay": 8,
     "cssClass": "town-kuststad",
     "dates": [
       "November 25, 1974",

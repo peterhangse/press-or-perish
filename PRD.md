@@ -147,7 +147,7 @@ Completed town history (deficit, day records, survived status) is preserved in `
 - Auto-advances after 3 seconds with an ambient tick SFX
 
 ### 3.2 Morning Desk
-The desk is the core selection screen. It presents **8 lead story cards** in a grid layout:
+The desk is the core selection screen. It presents **4 / 6 / 8 lead story cards** (Småstad / Industristad / Kuststad) in a grid layout:
 
 **Layout:**
 - **Top bar:** A window showing the current town's silhouette (sky gradient, buildings as CSS clip-path, tiny lit windows), plus a **boss sticky note** with today's directive
@@ -832,7 +832,7 @@ Each town's boss has independent dialogue pools in `boss-dialogue.json`:
 × 3 towns = 3 complete boss dialogue sets.
 
 ### 11.4 Day Distribution
-Lead generation per day (how many from each difficulty pool), same pattern per town:
+Leads on the desk per day are set per town (`leadsPerDay` in towns.json): **Småstad 4, Industristad 6, Kuststad 8**. The difficulty mix below is for an 8-lead desk and is scaled down for smaller desks (largest remainder, `scaleMix()` in day-generator.js), e.g. Småstad day 1 = 3 easy + 1 medium, day 5 = 1 medium + 3 hard. Cards get larger on smaller desks (2×2 and 3×2 grids).
 
 | Day | Easy | Medium | Hard | Character |
 |---|---|---|---|---|

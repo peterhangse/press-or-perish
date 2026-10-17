@@ -29,8 +29,9 @@ i 1970-talets Småland. Spelaren är nyutexaminerad reporter som måste överlev
 
 ## Mekanik (dagsslinga)
 
-1. **Dagövergång** (~3 s) → 2. **Desk** (08:15): välj 1 av 8 lead-kort (svårighet
-   stiger per dag) → 3. **Intervju** (12:00): Q1 = 1 av 4 arketyper
+1. **Dagövergång** (~3 s) → 2. **Desk** (08:15): välj 1 lead-kort av 4
+   (Småstad), 6 (Industristad) eller 8 (Kuststad) — `leadsPerDay` i towns.json;
+   svårighetsmixen skalas ner (`scaleMix`) → 3. **Intervju** (12:00): Q1 = 1 av 4 arketyper
    (friendly/direct/pressure/silence) → NPC-svar → Q2 = 3 storyspecifika
    följdfrågor → tier 0–3. **Deterministisk lookup**:
    `story.interview.branches[q1].outcomes[q2]` = `{tier, response, perish?, perish_reason?}`.
@@ -84,7 +85,7 @@ balanserade med `node tools/simulate_balance.mjs` (kör spelets egen motor).
   deployar live automatiskt till https://press-or-perish.web.app.
 - Firebase-projekt `press-or-perish`, publicerar från reporoten (ignorerar `*.md`,
   dolda filer, `musik_audio/` och `tools/`).
-- Cache-busting: höj `?v=<n>` i `index.html` när CSS/JS ändras (nu `v=15`).
+- Cache-busting: höj `?v=<n>` i `index.html` när CSS/JS ändras (nu `v=16`).
   OBS: bara index.html-länkarna har `?v`; moduler importeras utan, så
   `firebase.json` sätter no-cache på JS.
 - `tools/validate.py` körs igen (Industristad-kontroller + hela spelet: unika

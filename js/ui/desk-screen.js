@@ -95,7 +95,7 @@ export function render(leads, day, bossNote, callback, townConfig, opts = {}) {
 
   // Lead cards grid
   const grid = document.createElement('div');
-  grid.className = 'desk-leads';
+  grid.className = `desk-leads count-${leads.length}`;
 
   leads.forEach((lead, i) => {
     const card = document.createElement('div');

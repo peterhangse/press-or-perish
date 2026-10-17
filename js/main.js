@@ -438,7 +438,8 @@ function showDesk() {
     .map(id => townStories.find(s => s.id === id))
     .filter(Boolean);
   if (leads.length === 0) {
-    leads = DayGenerator.generateDayLeads(state.day, townStories, state.usedStoryIds, state.carryOverLeadId);
+    const count = getTownConfig()?.leadsPerDay || 8;
+    leads = DayGenerator.generateDayLeads(state.day, townStories, state.usedStoryIds, state.carryOverLeadId, count);
     state.todayLeads = leads.map(l => l.id);
     GameState.saveToLocalStorage(state);
   }

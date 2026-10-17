@@ -9,6 +9,7 @@
     "bossFullName": "Gunnar Ek",
     "bossTitle": "Editor-in-Chief",
     "perishThreshold": -10,
+    "leadsPerDay": 4,
     "cssClass": "town-smastad",
     "dates": [
       "November 11, 1974",
@@ -19,11 +20,11 @@
     ],
     "dayZeroDate": "November 10, 1974",
     "competitorScoreRanges": {
-      "1": { "min": 6, "max": 9 },
-      "2": { "min": 7, "max": 10 },
+      "1": { "min": 5, "max": 8 },
+      "2": { "min": 6, "max": 9 },
       "3": { "min": 8, "max": 11 },
-      "4": { "min": 8, "max": 12 },
-      "5": { "min": 9, "max": 12 }
+      "4": { "min": 9, "max": 12 },
+      "5": { "min": 10, "max": 12 }
     },
     "competitorHeadlines": {
       "strong": [
@@ -74,6 +75,7 @@
     "bossFullName": "Birgit Ståhl",
     "bossTitle": "Editor-in-Chief",
     "perishThreshold": -10,
+    "leadsPerDay": 6,
     "cssClass": "town-industristad",
     "dates": [
       "November 18, 1974",
@@ -84,11 +86,11 @@
     ],
     "dayZeroDate": "November 17, 1974",
     "competitorScoreRanges": {
-      "1": { "min": 7, "max": 10 },
-      "2": { "min": 8, "max": 11 },
-      "3": { "min": 8, "max": 12 },
-      "4": { "min": 9, "max": 12 },
-      "5": { "min": 9, "max": 13 }
+      "1": { "min": 6, "max": 9 },
+      "2": { "min": 7, "max": 10 },
+      "3": { "min": 9, "max": 12 },
+      "4": { "min": 10, "max": 13 },
+      "5": { "min": 11, "max": 13 }
     },
     "competitorHeadlines": {
       "strong": [
@@ -165,6 +167,7 @@
     "bossFullName": "Ragnar Sjöberg",
     "bossTitle": "Editor-in-Chief",
     "perishThreshold": -10,
+    "leadsPerDay": 8,
     "cssClass": "town-kuststad",
     "dates": [
       "November 25, 1974",
@@ -175,11 +178,11 @@
     ],
     "dayZeroDate": "November 24, 1974",
     "competitorScoreRanges": {
-      "1": { "min": 7, "max": 10 },
-      "2": { "min": 8, "max": 11 },
-      "3": { "min": 9, "max": 12 },
-      "4": { "min": 9, "max": 13 },
-      "5": { "min": 10, "max": 13 }
+      "1": { "min": 6, "max": 9 },
+      "2": { "min": 7, "max": 10 },
+      "3": { "min": 8, "max": 11 },
+      "4": { "min": 10, "max": 13 },
+      "5": { "min": 11, "max": 14 }
     },
     "competitorHeadlines": {
       "strong": [

@@ -355,6 +355,88 @@ const ACHIEVEMENTS = [
     check: (ctx) => ctx.storyId === 'jättepumpan' && ctx.tier === 3,
   },
 
+  // Industristad & Kuststad stories
+  {
+    id: 'swiss_account',
+    name: 'The Swiss Account',
+    description: 'Follow the Bergström money all the way to a Swiss bank',
+    category: 'stories',
+    trigger: 'day_end',
+    check: (ctx) => ctx.storyId === 'bergstroms_konto' && ctx.tier === 3,
+  },
+  {
+    id: 'per_directive',
+    name: 'Per Directive',
+    description: 'Prove the fatal shortcut was ordered from above',
+    category: 'stories',
+    trigger: 'day_end',
+    check: (ctx) => ctx.storyId === 'dodsolyckan' && ctx.tier === 3,
+  },
+  {
+    id: 'the_list',
+    name: 'The List',
+    description: 'Get your hands on the mill\'s blacklist',
+    category: 'stories',
+    trigger: 'day_end',
+    check: (ctx) => ctx.storyId === 'svarta_listan' && ctx.tier === 3,
+  },
+  {
+    id: 'same_paper_stock',
+    name: 'Same Paper Stock',
+    description: 'Trace the rigged council vote back to the mill',
+    category: 'stories',
+    trigger: 'day_end',
+    check: (ctx) => ctx.storyId === 'kommunvalet' && ctx.tier === 3,
+  },
+  {
+    id: 'three_months_before',
+    name: 'Three Months Before',
+    description: 'Read what he wrote before the silent deaths caught up with him',
+    category: 'stories',
+    trigger: 'day_end',
+    check: (ctx) => ctx.storyId === 'tysta_dodsfall' && ctx.tier === 3,
+  },
+  {
+    id: 'duplicate_logs',
+    name: 'Duplicate Logs',
+    description: 'Find the lighthouse logbooks hidden in Malmö',
+    category: 'stories',
+    trigger: 'day_end',
+    check: (ctx) => ctx.storyId === 'fyrmastaren' && ctx.q1Archetype === 'silence' && ctx.q2Index === 2 && ctx.tier === 3,
+  },
+  {
+    id: 'on_tape',
+    name: 'On Tape',
+    description: 'Get the blackmail threat on cassette',
+    category: 'stories',
+    trigger: 'day_end',
+    check: (ctx) => ctx.storyId === 'kommunradet' && ctx.q1Archetype === 'direct' && ctx.q2Index === 2 && ctx.tier === 3,
+  },
+  {
+    id: 'fifteen_percent',
+    name: 'Fifteen Percent',
+    description: 'Learn who takes a cut of every fraudulent claim',
+    category: 'stories',
+    trigger: 'day_end',
+    check: (ctx) => ctx.storyId === 'sekreterarens_varning' && ctx.q1Archetype === 'silence' && ctx.q2Index === 2 && ctx.tier === 3,
+  },
+  {
+    id: 'the_ledger_page',
+    name: 'The Ledger Page',
+    description: 'Find the page that names them all',
+    category: 'stories',
+    trigger: 'day_end',
+    check: (ctx) => ctx.storyId === 'skroten' && ctx.q1Archetype === 'silence' && ctx.q2Index === 2 && ctx.tier === 3,
+  },
+  {
+    id: 'the_doctors_journal',
+    name: 'The Doctor\'s Journal',
+    description: 'Get the toxicology report into print',
+    category: 'stories',
+    trigger: 'day_end',
+    check: (ctx) => ctx.storyId === 'doktorns_journal' && ctx.tier === 3,
+  },
+
   // ═══════════════════════════════════
   //  ROOKIE MISTAKES (8)
   // ═══════════════════════════════════

@@ -30,6 +30,14 @@ export function showPerished(opts) {
   sub.textContent = `${opts.paperName || 'Småstad Paper'} can no longer afford to keep you. ${opts.bossName || 'Gunnar'} gave you a chance, ${opts.playerName || 'kid'}. You failed.`;
   container.appendChild(sub);
 
+  // Why you were fired (instant perish from an interview)
+  if (opts.cause) {
+    const cause = document.createElement('div');
+    cause.className = 'gameover-cause';
+    cause.textContent = opts.cause;
+    container.appendChild(cause);
+  }
+
   // Cold epilogue
   const epilogue = document.createElement('div');
   epilogue.className = 'gameover-epilogue';

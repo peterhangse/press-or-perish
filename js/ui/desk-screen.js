@@ -16,8 +16,10 @@ let onInvestigate = null;
  * @param {Object} bossNote - { text, name } boss note for today
  * @param {Function} callback - Called with selected story when player investigates
  * @param {Object} [townConfig] - Optional town config for visual theming
+ * @param {Object} [opts]
+ * @param {string} [opts.carryOverId] - Lead passed on yesterday that is still open
  */
-export function render(leads, day, bossNote, callback, townConfig) {
+export function render(leads, day, bossNote, callback, townConfig, opts = {}) {
   currentLeads = leads;
   selectedIndex = null;
   onInvestigate = callback;
@@ -93,12 +95,24 @@ export function render(leads, day, bossNote, callback, townConfig) {
 
   // Lead cards grid
   const grid = document.createElement('div');
-  grid.className = 'desk-leads';
+  grid.className = `desk-leads count-${leads.length}`;
 
   leads.forEach((lead, i) => {
     const card = document.createElement('div');
     card.className = 'lead-card';
     card.dataset.index = i;
+    // Keyboard: cards are focusable and act like buttons (Enter/Space, or keys 1–8)
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `${i + 1}. ${lead.title}`);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.stopPropagation();
+        if (selectedIndex === i) document.querySelector('.desk-investigate-btn')?.click();
+        else selectLead(i);
+      }
+    });
 
     // Paper aging — each card gets a noticeably different paper tone
     const paperColors = townConfig?.id === 'industristad'
@@ -162,6 +176,21 @@ export function render(leads, day, bossNote, callback, townConfig) {
       npcLine.textContent = `Source: ${lead.npc_name}${npcTitle}`;
     }
 
+    const keyHint = document.createElement('span');
+    keyHint.className = 'lead-key';
+    keyHint.setAttribute('aria-hidden', 'true');
+    keyHint.textContent = String(i + 1);
+    card.appendChild(keyHint);
+
+    // A lead passed on yesterday that is still open
+    if (opts.carryOverId && lead.id === opts.carryOverId) {
+      const still = document.createElement('div');
+      still.className = 'lead-still-open';
+      still.textContent = 'STILL OPEN';
+      card.appendChild(still);
+      card.classList.add('carry-over');
+    }
+
     card.appendChild(badge);
     card.appendChild(headline);
     card.appendChild(leadText);
@@ -183,10 +212,12 @@ export function render(leads, day, bossNote, callback, townConfig) {
 
   const investigateBtn = document.createElement('button');
   investigateBtn.className = 'desk-investigate-btn';
+  investigateBtn.dataset.primary = 'true';
   investigateBtn.textContent = 'INVESTIGATE';
   investigateBtn.disabled = true;
   investigateBtn.addEventListener('click', () => {
-    if (selectedIndex !== null && onInvestigate) {
+    if (selectedIndex !== null && onInvestigate && !investigateBtn.dataset.sent) {
+      investigateBtn.dataset.sent = 'true'; // guard against double clicks
       SFX.play('stamp');
       // Rubber stamp flash — Papers Please style
       showStamp(container, 'ASSIGNED');

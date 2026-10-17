@@ -370,15 +370,27 @@ button {
    transitionend still fire for the JS flow.
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  :root:not(.motion-on) *,
+  :root:not(.motion-on) *::before,
+  :root:not(.motion-on) *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  #flash-overlay.flash {
+  :root:not(.motion-on) #flash-overlay.flash {
     animation: none !important;
   }
+}
+/* Same, when switched on in the game's settings */
+:root.reduce-motion *,
+:root.reduce-motion *::before,
+:root.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+:root.reduce-motion #flash-overlay.flash {
+  animation: none !important;
 }

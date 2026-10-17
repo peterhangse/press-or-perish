@@ -1190,3 +1190,11 @@
     6px 8px 0 rgba(40, 60, 50, 0.08),
     -2px 14px 0 rgba(40, 60, 50, 0.06);
 }
+
+/* Smaller desks (towns.json leadsPerDay): fewer, larger cards */
+.desk-leads.count-4 {
+  grid-template-columns: repeat(2, minmax(0, 250px));
+}
+.desk-leads.count-6 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}

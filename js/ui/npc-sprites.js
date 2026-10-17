@@ -194,6 +194,81 @@ const SPRITES = {
     ],
   },
 
+  // ── BIRGIT STÅHL — Editor-in-chief, Industristad Paper. Steel-grey bun, wire glasses, dark suit ──
+  birgit_stahl: {
+    bg: 'background:linear-gradient(180deg,#14161a 0%,#101216 60%,#14120e 100%)',
+    pixels: [
+      // Hair — tight steel-grey bun
+      { x: 6, y: 0, w: 3, h: 1, cls: 'h-silver' },
+      { x: 3, y: 1, w: 9, h: 1, cls: 'h-silver' },
+      { x: 2, y: 2, w: 2, h: 3, cls: 'h-silver' },
+      { x: 11, y: 2, w: 2, h: 3, cls: 'h-silver' },
+      // Head
+      { x: 4, y: 2, w: 7, h: 6, cls: 's-pale' },
+      { x: 3, y: 4, w: 1, h: 3, cls: 's-pale' },
+      { x: 11, y: 4, w: 1, h: 3, cls: 's-pale' },
+      // Wire glasses
+      { x: 4, y: 4, w: 3, h: 2, cls: 'x-glasses' },
+      { x: 8, y: 4, w: 3, h: 2, cls: 'x-glasses' },
+      // Eyes — level, unimpressed
+      { x: 5, y: 4, w: 1, h: 1, cls: 'e-white' },
+      { x: 5, y: 5, w: 1, h: 1, cls: 'e-dark' },
+      { x: 9, y: 4, w: 1, h: 1, cls: 'e-white' },
+      { x: 9, y: 5, w: 1, h: 1, cls: 'e-dark' },
+      // Straight brows
+      { x: 4, y: 3, w: 3, h: 1, cls: 'h-grey' },
+      { x: 8, y: 3, w: 3, h: 1, cls: 'h-grey' },
+      // Nose + thin mouth
+      { x: 7, y: 5, w: 1, h: 2, cls: 's-mid' },
+      { x: 6, y: 7, w: 3, h: 1, style: 'background:#8a5048' },
+      // Neck
+      { x: 6, y: 8, w: 3, h: 2, cls: 's-pale' },
+      // Body — dark suit, white collar, brooch
+      { x: 2, y: 10, w: 11, h: 8, cls: 'c-suit-dark' },
+      { x: 5, y: 10, w: 5, h: 2, cls: 'c-shirt-white' },
+      { x: 7, y: 11, w: 1, h: 1, style: 'background:#9aa0a8' },
+      { x: 1, y: 11, w: 2, h: 7, cls: 'c-suit-dark' },
+      { x: 12, y: 11, w: 2, h: 7, cls: 'c-suit-dark' },
+      { x: 2, y: 17, w: 11, h: 1, cls: 'x-shadow' },
+    ],
+  },
+
+  // ── RAGNAR SJÖBERG — Editor-in-chief, Kuststad Paper. Weathered, grey beard, navy sweater ──
+  ragnar_sjoberg: {
+    bg: 'background:linear-gradient(180deg,#121a20 0%,#0e141a 60%,#141210 100%)',
+    pixels: [
+      // Hair — thin, windswept grey
+      { x: 4, y: 0, w: 7, h: 1, cls: 'h-grey' },
+      { x: 3, y: 1, w: 9, h: 1, cls: 'h-grey' },
+      { x: 3, y: 2, w: 1, h: 2, cls: 'h-grey' },
+      { x: 11, y: 2, w: 1, h: 2, cls: 'h-grey' },
+      // Head — weathered skin
+      { x: 4, y: 2, w: 7, h: 5, cls: 's-worn' },
+      // Eyes — narrowed against the wind
+      { x: 5, y: 4, w: 2, h: 1, cls: 'e-white' },
+      { x: 6, y: 4, w: 1, h: 1, cls: 'e-blue' },
+      { x: 8, y: 4, w: 2, h: 1, cls: 'e-white' },
+      { x: 9, y: 4, w: 1, h: 1, cls: 'e-blue' },
+      // Heavy brows
+      { x: 4, y: 3, w: 3, h: 1, cls: 'h-silver' },
+      { x: 8, y: 3, w: 3, h: 1, cls: 'h-silver' },
+      // Nose
+      { x: 7, y: 5, w: 1, h: 1, cls: 's-mid' },
+      // Full grey beard
+      { x: 4, y: 6, w: 7, h: 2, cls: 'h-silver' },
+      { x: 5, y: 8, w: 5, h: 1, cls: 'h-silver' },
+      { x: 6, y: 6, w: 3, h: 1, style: 'background:#6a4a3a' },
+      // Neck
+      { x: 6, y: 9, w: 3, h: 1, cls: 's-worn' },
+      // Body — navy roll-neck sweater
+      { x: 2, y: 10, w: 11, h: 8, cls: 'c-suit-navy' },
+      { x: 5, y: 10, w: 5, h: 1, style: 'background:#2a3a52' },
+      { x: 1, y: 11, w: 2, h: 7, cls: 'c-suit-navy' },
+      { x: 12, y: 11, w: 2, h: 7, cls: 'c-suit-navy' },
+      { x: 2, y: 17, w: 11, h: 1, cls: 'x-shadow' },
+    ],
+  },
+
   // ── INGA JOHANSSON — Retired nurse, knits, avoids eye contact ──
   inga_johansson: {
     bg: 'background:linear-gradient(180deg,#1e1a14 0%,#181410 60%,#120e0a 100%)',
@@ -1116,6 +1191,11 @@ const SPRITES = {
  * @param {string} npcId - NPC ID to look up
  * @param {HTMLElement} container - DOM element to render into
  */
+/** True if a hand-made sprite exists for this id */
+export function hasSprite(npcId) {
+  return !!SPRITES[npcId];
+}
+
 export function renderSprite(npcId, container) {
   const sprite = SPRITES[npcId];
   if (!sprite) {

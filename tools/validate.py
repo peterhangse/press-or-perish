@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate all Industristad stories against PRD requirements."""
+"""Validate Industristad stories against PRD requirements, plus whole-game data checks."""
 import json, os
 from collections import Counter
 
@@ -52,7 +52,11 @@ for s in ind:
             tiers = [o['tier'] for o in outs]
             if tiers != [1,2,3]:
                 issues.append(f"{sid}/{arch}: tiers {tiers} != [1,2,3]")
-    if len(s.get('headlines', [])) != 3:
+    h = s.get('headlines', [])
+    if isinstance(h, dict):
+        if not all(f'tier_{i}' in h for i in range(4)):
+            issues.append(f"{sid}: headlines missing tier_0..tier_3")
+    elif len(h) != 3:
         issues.append(f"{sid}: headlines != 3")
 
 if issues:
@@ -68,7 +72,8 @@ print(f"\nCategory spread: {dict(cats)}")
 
 # NPC usage
 npc_usage = Counter(s['npc_id'] for s in ind)
-ind_npcs = npcs.get('industristad', [])
+# npcs.json is a list of NPC objects with a 'town' field
+ind_npcs = [n for n in npcs if n.get('town') == 'industristad'] if isinstance(npcs, list) else npcs.get('industristad', [])
 print(f"\nNPC usage ({len(npc_usage)} unique / {len(ind_npcs)} available):")
 for npc, count in npc_usage.most_common(10):
     print(f"  {npc}: {count}x")
@@ -86,5 +91,21 @@ if missing:
         print(f"  ISSUE: {m}")
 else:
     print("  PASS: All required fields present")
+
+# Whole-game checks (all towns)
+print("\nWhole game:")
+ids = Counter(s['id'] for s in stories)
+dupes = [i for i, c in ids.items() if c > 1]
+print(f"  Unique story IDs: {'PASS' if not dupes else 'FAIL ' + str(dupes)}")
+npc_ids = {n['id'] for n in npcs} if isinstance(npcs, list) else set()
+unknown = sorted({s['npc_id'] for s in stories} - npc_ids) if npc_ids else []
+print(f"  Every story NPC exists in npcs.json: {'PASS' if not unknown else 'FAIL ' + str(unknown)}")
+perish = [(s['id'], a, i, o) for s in stories for a, b in s['interview']['branches'].items()
+          for i, o in enumerate(b['outcomes']) if o.get('perish')]
+no_reason = [f"{sid}/{a}/{i}" for sid, a, i, o in perish if not o.get('perish_reason')]
+print(f"  Instant-perish outcomes: {len(perish)} — reasons: {'PASS' if not no_reason else 'FAIL missing ' + str(no_reason)}")
+valid_diff = {'easy', 'medium', 'hard', 'expert', 'elite'}
+bad_diff = [s['id'] for s in stories if s.get('difficulty') not in valid_diff]
+print(f"  Difficulty values: {'PASS' if not bad_diff else 'FAIL ' + str(bad_diff)}")
 
 print("\n=== VALIDATION COMPLETE ===")

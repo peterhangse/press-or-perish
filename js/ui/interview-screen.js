@@ -6,11 +6,24 @@ import * as InterviewEngine from '../engine/interview-engine.js';
 import * as ScreenManager from './screen-manager.js';
 import { renderSprite } from './npc-sprites.js';
 import * as SFX from '../engine/sfx-engine.js';
+import * as Settings from '../engine/settings.js';
 
 let currentStory = null;
 let currentNPC = null;
 let onComplete = null;
-let disabledQ1 = [];  // archetypes to gray out (Day Zero tutorial)
+let disabledQ1 = [];  // archetypes to gray out (Day Zero tutorial / resumed interview)
+let hooks = {};       // { onQ1(archetype), onResolved(result) } — used for saving progress
+let activeTypewriter = null; // { finish() } while a line is being typed
+
+/**
+ * Finish the line currently being typed (click, Enter or Space).
+ * @returns {boolean} true if a typewriter was running
+ */
+export function completeTypewriter() {
+  if (!activeTypewriter) return false;
+  activeTypewriter.finish();
+  return true;
+}
 
 /**
  * Start an interview
@@ -20,6 +33,9 @@ let disabledQ1 = [];  // archetypes to gray out (Day Zero tutorial)
  * @param {Object} [options] - Optional settings
  * @param {Array}  [options.disabledArchetypes] - Q1 archetypes to gray out
  * @param {Object} [options.townConfig] - Town config for visual theming
+ * @param {string} [options.npcMemory] - Line shown when the source remembers an earlier meeting
+ * @param {Function} [options.onQ1] - Called with the archetype as soon as Q1 is chosen
+ * @param {Function} [options.onResolved] - Called with the result as soon as Q2 is chosen
  */
 export function start(story, baseNpc, callback, options = {}) {
   // The same NPC can appear in several stories with different roles, so the
@@ -34,6 +50,8 @@ export function start(story, baseNpc, callback, options = {}) {
   currentNPC = npc;
   onComplete = callback;
   disabledQ1 = options.disabledArchetypes || [];
+  hooks = { onQ1: options.onQ1, onResolved: options.onResolved, allowPerish: options.allowPerish !== false };
+  activeTypewriter = null;
 
   const container = document.getElementById('screen-interview');
   container.innerHTML = '';
@@ -49,7 +67,7 @@ export function start(story, baseNpc, callback, options = {}) {
   layout.className = 'interview-layout';
 
   // Left panel — NPC
-  const left = buildLeftPanel(npc);
+  const left = buildLeftPanel(npc, options.npcMemory);
   layout.appendChild(left);
 
   // Right panel — dialogue + questions
@@ -73,6 +91,8 @@ export function start(story, baseNpc, callback, options = {}) {
   const dialogue = document.createElement('div');
   dialogue.className = 'interview-dialogue';
   dialogue.id = 'interview-dialogue';
+  // Click the dialogue to finish the line being typed
+  dialogue.addEventListener('click', () => completeTypewriter());
 
   // NPC opening line — typewriter word-by-word (1s delay for screen to settle)
   setTimeout(() => {
@@ -81,6 +101,7 @@ export function start(story, baseNpc, callback, options = {}) {
       const questions = document.getElementById('interview-questions');
       const startBtn = document.createElement('button');
       startBtn.className = 'btn-paper';
+      startBtn.dataset.primary = 'true';
       startBtn.textContent = 'Start Interview';
       startBtn.style.alignSelf = 'center';
       startBtn.addEventListener('click', () => {
@@ -89,7 +110,7 @@ export function start(story, baseNpc, callback, options = {}) {
       });
       questions.appendChild(startBtn);
     });
-  }, 1000);
+  }, pauseMs());
   right.appendChild(dialogue);
 
   // Questions area
@@ -105,7 +126,7 @@ export function start(story, baseNpc, callback, options = {}) {
 /**
  * Build the left NPC panel
  */
-function buildLeftPanel(npc) {
+function buildLeftPanel(npc, memory) {
   const left = document.createElement('div');
   left.className = 'interview-left';
 
@@ -134,6 +155,13 @@ function buildLeftPanel(npc) {
   left.appendChild(title);
   left.appendChild(hint);
 
+  if (memory) {
+    const mem = document.createElement('div');
+    mem.className = 'npc-memory';
+    mem.textContent = memory;
+    left.appendChild(mem);
+  }
+
   // Notesheet — bullet points appear as you gather info
   const notesheet = document.createElement('div');
   notesheet.className = 'interview-notesheet';
@@ -159,9 +187,10 @@ function showQ1Options() {
   label.textContent = 'Opening Question';
   questions.appendChild(label);
 
-  const q1Options = InterviewEngine.getQ1Options(currentStory);
+  // Presentation order is shuffled every interview so position never gives the answer away
+  const q1Options = InterviewEngine.shuffled(InterviewEngine.getQ1Options(currentStory));
 
-  q1Options.forEach(option => {
+  q1Options.forEach((option, pos) => {
     const btn = document.createElement('button');
     btn.className = 'question-btn';
 
@@ -186,6 +215,7 @@ function showQ1Options() {
 
     textWrap.appendChild(text);
     textWrap.appendChild(arch);
+    btn.appendChild(keyHint(pos));
     btn.appendChild(dot);
     btn.appendChild(textWrap);
 
@@ -201,6 +231,7 @@ function showQ1Options() {
  */
 function handleQ1(archetype, questionText) {
   SFX.play('click');
+  if (hooks.onQ1) hooks.onQ1(archetype);
   const dialogue = document.getElementById('interview-dialogue');
   const questions = document.getElementById('interview-questions');
 
@@ -261,7 +292,7 @@ function handleQ1(archetype, questionText) {
       // Show Q2 options
       showQ2Options(archetype);
     });
-  }, 1000);
+  }, pauseMs());
 }
 
 /**
@@ -276,9 +307,12 @@ function showQ2Options(q1Archetype) {
   label.textContent = 'Follow-up Question';
   questions.appendChild(label);
 
-  const q2Options = InterviewEngine.getQ2Options(currentStory, q1Archetype);
+  // Keep each option's original index (the lookup key) but shuffle what the player sees
+  const q2Options = InterviewEngine.shuffled(
+    InterviewEngine.getQ2Options(currentStory, q1Archetype).map((option, index) => ({ option, index }))
+  );
 
-  q2Options.forEach((option, index) => {
+  q2Options.forEach(({ option, index }, pos) => {
     const btn = document.createElement('button');
     btn.className = 'question-btn';
 
@@ -292,6 +326,7 @@ function showQ2Options(q1Archetype) {
     text.textContent = option.text;
 
     textWrap.appendChild(text);
+    btn.appendChild(keyHint(pos));
     btn.appendChild(dot);
     btn.appendChild(textWrap);
 
@@ -320,6 +355,9 @@ function handleQ2(q1Archetype, q2Index, questionText) {
 
   // Resolve the interview via lookup table
   const result = InterviewEngine.resolveInterview(currentStory, q1Archetype, q2Index);
+  if (!hooks.allowPerish) result.perish = false; // e.g. the tutorial day never fires you
+  // Commit immediately — the answer is final even if the page is reloaded now
+  if (hooks.onResolved) hooks.onResolved({ ...result, q1Archetype, q2Index });
 
   // Typewrite NPC response, then show result (1s pause to let the question land)
   setTimeout(() => {
@@ -369,6 +407,7 @@ function handleQ2(q1Archetype, q2Index, questionText) {
       // Continue button
       const continueBtn = document.createElement('button');
       continueBtn.className = 'btn-paper';
+      continueBtn.dataset.primary = 'true';
 
       if (result.perish) {
         // Instant perish — boss fires you, no article written
@@ -428,7 +467,7 @@ function handleQ2(q1Archetype, q2Index, questionText) {
       }
       questions.appendChild(continueBtn);
     });
-  }, 1000);
+  }, pauseMs());
 }
 
 /**
@@ -477,21 +516,53 @@ function typewriteDialogue(container, speaker, text, type, onDone) {
 
   const words = text.split(' ');
   let i = 0;
+  let timer = null;
+  let done = false;
+
+  function finish() {
+    if (done) return;
+    done = true;
+    clearTimeout(timer);
+    textEl.textContent = text;
+    textEl.classList.remove('typewriter-cursor');
+    container.scrollTop = container.scrollHeight;
+    activeTypewriter = null;
+    if (onDone) onDone();
+  }
+
+  const ms = Settings.msPerWord();
+  if (ms <= 0) { finish(); return; }
+  activeTypewriter = { finish };
 
   function nextWord() {
+    if (done) return;
     if (i < words.length) {
       textEl.textContent += (i > 0 ? ' ' : '') + words[i];
       i++;
       SFX.play('tick');
       container.scrollTop = container.scrollHeight;
-      setTimeout(nextWord, 100 + Math.random() * 60);
+      timer = setTimeout(nextWord, ms * (0.8 + Math.random() * 0.4));
     } else {
-      // Remove cursor
-      textEl.classList.remove('typewriter-cursor');
-      if (onDone) onDone();
+      finish();
     }
   }
   nextWord();
+}
+
+/** Pause before a reply starts — shorter when the player has sped up the text */
+function pauseMs() {
+  return Settings.get('textSpeed') === 'normal' ? 1000 : 300;
+}
+
+/**
+ * Small number label so questions can be answered with the 1–4 keys
+ */
+function keyHint(pos) {
+  const k = document.createElement('span');
+  k.className = 'question-key';
+  k.setAttribute('aria-hidden', 'true');
+  k.textContent = String(pos + 1);
+  return k;
 }
 
 /**
@@ -521,11 +592,11 @@ function getQ1Feedback(archetype, success) {
     }
   } else {
     switch (archetype) {
-      case 'friendly': return 'Too soft — they\'re comfortable but not saying anything useful.';
-      case 'direct':   return 'Too blunt — they\'ve closed up. Surface facts only.';
-      case 'pressure': return 'The pressure backfired — they\'re defensive now.';
-      case 'silence':  return 'The silence fell flat — they\'re not biting.';
-      default:         return 'Wrong read — this approach isn\'t getting through.';
+      case 'friendly': return 'Too soft — they\'re comfortable, but they won\'t give you the whole story.';
+      case 'direct':   return 'Too blunt — they\'re holding the worst of it back.';
+      case 'pressure': return 'The pressure backfired — they\'re defensive now. The full story is out of reach.';
+      case 'silence':  return 'The silence fell flat — they won\'t fill it with the whole truth.';
+      default:         return 'Wrong read — this approach won\'t get you the full story.';
     }
   }
 }

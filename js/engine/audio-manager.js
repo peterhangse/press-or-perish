@@ -2,6 +2,8 @@
  * AUDIO MANAGER — Multi-track audio: title, game (looped), perish/survive
  */
 
+import * as Settings from './settings.js';
+
 const FADE_DURATION = 3;       // seconds for fade in/out
 const TITLE_VOLUME = 0.3;     // title screen music
 const GAME_VOLUME = 0.25;     // in-game background loop
@@ -50,7 +52,38 @@ function getTrack(name) {
 }
 
 // Restore mute preference on load
-muted = localStorage.getItem('pop_muted') === 'true';
+try { muted = localStorage.getItem('pop_muted') === 'true'; } catch { muted = false; }
+
+/** Target volume for a track: its base level scaled by the music volume setting. */
+function targetVolume(track) {
+  const scale = Settings.get('musicVolume');
+  return track.maxVolume * (typeof scale === 'number' ? scale : 1);
+}
+
+/** Apply the current music volume setting to the playing track. */
+function applyMusicVolume() {
+  if (!activeTrack || muted) return;
+  const track = tracks[activeTrack];
+  if (!track) return;
+  clearTrackFade(track);
+  track.el.volume = targetVolume(track);
+}
+Settings.onChange((key) => { if (key === 'musicVolume') applyMusicVolume(); });
+
+// Pause music while the tab is hidden, resume when it comes back
+let pausedByVisibility = false;
+if (typeof document !== 'undefined') {
+  document.addEventListener('visibilitychange', () => {
+    const track = activeTrack && tracks[activeTrack];
+    if (!track) return;
+    if (document.hidden) {
+      if (!track.el.paused) { track.el.pause(); pausedByVisibility = true; }
+    } else if (pausedByVisibility) {
+      pausedByVisibility = false;
+      track.el.play().catch(() => {});
+    }
+  });
+}
 
 /**
  * Play a named track with fade-in. Fades out any currently active track first.
@@ -116,14 +149,15 @@ function fadeInTrack(name) {
   const track = tracks[name];
   if (!track) return;
   clearTrackFade(track);
-  const step = track.maxVolume / (FADE_DURATION * 20);
+  const target = targetVolume(track);
+  const step = Math.max(target, 0.001) / (FADE_DURATION * 20);
   track.fadeInterval = setInterval(() => {
     if (muted) { track.el.volume = 0; clearTrackFade(track); return; }
-    if (track.el.volume + step >= track.maxVolume) {
-      track.el.volume = track.maxVolume;
+    if (track.el.volume + step >= target) {
+      track.el.volume = target;
       clearTrackFade(track);
     } else {
-      track.el.volume = Math.min(track.el.volume + step, track.maxVolume);
+      track.el.volume = Math.min(track.el.volume + step, target);
     }
   }, 50);
 }
@@ -161,7 +195,7 @@ function clearTrackFade(track) {
  */
 function toggleMute() {
   muted = !muted;
-  localStorage.setItem('pop_muted', muted);
+  try { localStorage.setItem('pop_muted', muted); } catch { /* ignore */ }
   // Apply to all tracks
   Object.values(tracks).forEach(track => {
     if (muted) {
@@ -169,7 +203,7 @@ function toggleMute() {
     } else if (activeTrack) {
       const active = tracks[activeTrack];
       if (active === track) {
-        track.el.volume = track.maxVolume;
+        track.el.volume = targetVolume(track);
       }
     }
   });

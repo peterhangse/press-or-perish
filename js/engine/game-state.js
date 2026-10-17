@@ -25,12 +25,18 @@ const DEFAULT_STATE = {
   headlineChosen: null,  // headline index (0-2)
   competitorScore: 0,    // AI competitor points today
   baseValue: 0,          // story base news value
+  dayResolved: null,     // { tier, points, q1Bonus, q2Bonus, perish, q1Archetype, q2Index } once Q2 is answered
+  deficitBefore: 0,      // deficit at the start of today (for the results screen)
+  scoop: null,           // { storyId, title } — a lead you passed on that the competitor ran today
+  carryOverLeadId: null, // a lead you passed on yesterday that is still open today
+  perishCause: null,     // text explaining an instant firing
 
   // History
   dayHistory: [],  // [{day, storyId, tier, points, competitorScore, deficit, headline}]
   usedStoryIds: [], // prevent repeats
   usedBossQuotes: [], // prevent repeat boss quotes within a week
   usedBossNotes: [],  // prevent repeat boss desk notes within a week
+  npcMemory: {},      // { npcId: { title, tier, expression } } — sources remember earlier meetings this run
 
   // Meta
   runNumber: 0,
@@ -59,6 +65,10 @@ export function resetDay(state) {
   state.headlineChosen = null;
   state.competitorScore = 0;
   state.baseValue = 0;
+  state.dayResolved = null;
+  state.deficitBefore = state.deficit;
+  state.scoop = null;
+  state.perishCause = null;
 }
 
 /**
@@ -115,17 +125,20 @@ export function advanceToNextTown(state, nextTownId) {
   state.usedStoryIds = [];
   state.usedBossQuotes = [];
   state.usedBossNotes = [];
+  state.carryOverLeadId = null;
   resetDay(state);
 }
 
 // — Save / Load (localStorage) —
 
 const SAVE_KEY = 'pop_save';
-const SAVE_VERSION = 2;
+const SAVE_VERSION = 3;
 
 /**
  * Persist current run state to localStorage.
- * Call at the start of each day (1–5). Skips Day Zero.
+ * Called at every commitment point of a day (day start, leads dealt, lead
+ * picked, opening question, answer resolved) so a reload can never undo a
+ * decision or re-deal the desk. Skips Day Zero.
  */
 export function saveToLocalStorage(state) {
   if (state.day < 1) return; // don't save tutorial
@@ -143,6 +156,16 @@ export function saveToLocalStorage(state) {
     currentTown: state.currentTown,
     townIndex: state.townIndex,
     townHistory: state.townHistory,
+    npcMemory: state.npcMemory,
+    carryOverLeadId: state.carryOverLeadId,
+    // Progress within the current day
+    todayLeads: state.todayLeads,
+    selectedLead: state.selectedLead,
+    q1Choice: state.q1Choice,
+    dayResolved: state.dayResolved,
+    competitorScore: state.competitorScore,
+    deficitBefore: state.deficitBefore,
+    scoop: state.scoop,
   };
   try {
     localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
@@ -160,13 +183,25 @@ export function loadFromLocalStorage() {
     const raw = localStorage.getItem(SAVE_KEY);
     if (!raw) return null;
     const data = JSON.parse(raw);
-    // Accept current version or v1 (pre-town) saves
-    if (!data || (data.saveVersion !== SAVE_VERSION && data.saveVersion !== 1)) return null;
-    // Migrate v1 saves: add town fields with defaults
+    if (!data || ![1, 2, SAVE_VERSION].includes(data.saveVersion)) return null;
+    // v1 → v2: add town fields with defaults
     if (data.saveVersion === 1) {
       data.currentTown = data.currentTown || 'smastad';
       data.townIndex = data.townIndex || 0;
       data.townHistory = data.townHistory || [];
+      data.saveVersion = 2;
+    }
+    // v2 → v3: in-day progress fields (a v2 save was always written at day start)
+    if (data.saveVersion === 2) {
+      data.npcMemory = {};
+      data.carryOverLeadId = null;
+      data.todayLeads = [];
+      data.selectedLead = null;
+      data.q1Choice = null;
+      data.dayResolved = null;
+      data.competitorScore = 0;
+      data.deficitBefore = data.deficit;
+      data.scoop = null;
       data.saveVersion = SAVE_VERSION;
     }
     return data;
@@ -180,14 +215,14 @@ export function loadFromLocalStorage() {
  * Remove saved game from localStorage.
  */
 export function clearSave() {
-  localStorage.removeItem(SAVE_KEY);
+  try { localStorage.removeItem(SAVE_KEY); } catch { /* ignore */ }
 }
 
 /**
  * Check if a saved game exists.
  */
 export function hasSave() {
-  return !!localStorage.getItem(SAVE_KEY);
+  try { return !!localStorage.getItem(SAVE_KEY); } catch { return false; }
 }
 
 /**
@@ -205,4 +240,32 @@ export function restoreFromSave(state, saveData) {
   state.currentTown = saveData.currentTown || 'smastad';
   state.townIndex = saveData.townIndex || 0;
   state.townHistory = saveData.townHistory || [];
+  state.npcMemory = saveData.npcMemory || {};
+  state.carryOverLeadId = saveData.carryOverLeadId || null;
+  state.todayLeads = saveData.todayLeads || [];
+  state.selectedLead = saveData.selectedLead || null;
+  state.q1Choice = saveData.q1Choice || null;
+  state.dayResolved = saveData.dayResolved || null;
+  state.competitorScore = saveData.competitorScore || 0;
+  state.deficitBefore = saveData.deficitBefore ?? saveData.deficit;
+  state.scoop = saveData.scoop || null;
+}
+
+/**
+ * Remember how a meeting with a source went, so they recognise the reporter later in the run.
+ */
+export function rememberNpc(state, npcId, storyTitle, tier, expression) {
+  if (!npcId) return;
+  state.npcMemory[npcId] = { title: storyTitle, tier, expression };
+}
+
+/**
+ * Line shown in the interview when the source has met the reporter before (or null).
+ */
+export function npcMemoryLine(state, npcId) {
+  const m = state.npcMemory?.[npcId];
+  if (!m) return null;
+  if (m.tier >= 2) return `Remembers you from "${m.title}" — you listened last time.`;
+  if (['hostile', 'defiant'].includes(m.expression)) return `Remembers you from "${m.title}" — and hasn't forgotten how that went.`;
+  return `Recognises you from "${m.title}".`;
 }

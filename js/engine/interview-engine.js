@@ -30,15 +30,36 @@ export function getQ2Options(story, q1Archetype) {
 }
 
 /**
+ * Tier a branch must be able to reach for the opening question to count as
+ * the right approach. 3 = only approaches that can uncover the full story
+ * earn the +2. (Was 2, which made almost every opening question a success.)
+ */
+export const Q1_BONUS_MIN_TIER = 3;
+
+/**
  * Compute Q1 bonus based on branch quality.
- * If the chosen archetype's branch has ANY outcome with tier >= 2,
- * the approach was good and earns +2. Otherwise 0.
+ * If the chosen archetype's branch can reach tier Q1_BONUS_MIN_TIER,
+ * the approach was right and earns +2. Otherwise 0.
  */
 export function computeQ1Bonus(story, q1Archetype) {
   const branch = story.interview.branches[q1Archetype];
   if (!branch || !branch.outcomes) return 0;
   const maxTier = Math.max(...branch.outcomes.map(o => o.tier));
-  return maxTier >= 2 ? 2 : 0;
+  return maxTier >= Q1_BONUS_MIN_TIER ? 2 : 0;
+}
+
+/**
+ * Shuffle helper for presentation order (pure, returns a new array).
+ * @param {Array} arr
+ * @param {Function} [rand] - random function, defaults to Math.random
+ */
+export function shuffled(arr, rand = Math.random) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
 
 /**
@@ -68,6 +89,7 @@ export function resolveInterview(story, q1Archetype, q2Index) {
     note: outcome.note || '',
     q1Response: branch.q1_response,
     perish: outcome.perish || false,
+    perishReason: outcome.perish_reason || '',
   };
 }
 

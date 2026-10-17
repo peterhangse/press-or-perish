@@ -60,6 +60,7 @@ export function render(opts) {
   // "Go to sleep" button — transitions to Phase 2
   const sleepBtn = document.createElement('button');
   sleepBtn.className = 'btn-paper results-sleep-btn';
+  sleepBtn.dataset.primary = 'true';
   sleepBtn.textContent = 'Go to sleep';
   sleepBtn.addEventListener('click', () => {
     SFX.play('click');
@@ -105,6 +106,13 @@ function showPhase2(wrapper, opts) {
     false
   );
   theirs.classList.add('results-slide-in-right');
+  // Scoop: they ran a lead you passed on (you never see what it was worth to you)
+  if (opts.scoopNote) {
+    const scoop = document.createElement('div');
+    scoop.className = 'results-scoop';
+    scoop.textContent = opts.scoopNote;
+    theirs.insertBefore(scoop, theirs.querySelector('.results-paper-score'));
+  }
   comparison.appendChild(theirs);
   setTimeout(() => SFX.play('reveal'), 600);
 
@@ -189,6 +197,7 @@ function showPhase2(wrapper, opts) {
   // Continue button
   const btn = document.createElement('button');
   btn.className = 'btn-paper results-continue';
+  btn.dataset.primary = 'true';
   if (opts.isDayZero) {
     btn.textContent = 'Begin for real →';
   } else {

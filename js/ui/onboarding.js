@@ -4,6 +4,14 @@
 
 import * as ScreenManager from './screen-manager.js';
 import * as SFX from '../engine/sfx-engine.js';
+import { renderSprite, hasSprite } from './npc-sprites.js';
+
+/** 'Birgit Ståhl' → 'birgit_stahl' (sprite id) */
+function bossSpriteId(name = '') {
+  return name.toLowerCase()
+    .replace(/[åä]/g, 'a').replace(/ö/g, 'o')
+    .replace(/[^a-z]+/g, '_').replace(/^_|_$/g, '');
+}
 
 // Onboarding sequence steps
 const SEQUENCE = [
@@ -578,10 +586,19 @@ function showStep(container, sequence) {
 
       const portrait = document.createElement('div');
       portrait.className = 'boss-portrait';
-      const placeholder = document.createElement('div');
-      placeholder.className = 'pixel-placeholder';
-      placeholder.dataset.initials = step.initials || 'GE';
-      portrait.appendChild(placeholder);
+      // Pixel portrait when the boss has a sprite, initials otherwise
+      const spriteId = bossSpriteId(step.name);
+      if (hasSprite(spriteId)) {
+        const inner = document.createElement('div');
+        inner.className = 'boss-sprite';
+        renderSprite(spriteId, inner);
+        portrait.appendChild(inner);
+      } else {
+        const placeholder = document.createElement('div');
+        placeholder.className = 'pixel-placeholder';
+        placeholder.dataset.initials = step.initials || 'GE';
+        portrait.appendChild(placeholder);
+      }
 
       const nameTag = document.createElement('div');
       nameTag.className = 'boss-name-tag';

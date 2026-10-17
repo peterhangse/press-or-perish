@@ -138,7 +138,9 @@
               "response": "Are you threatening me? We're done here. Leave.",
               "expression": "hostile",
               "feedback": "Interview terminated. You got no information at all.",
-              "note": "Are you threatening me. We're done here"
+              "note": "Are you threatening me. We're done here",
+              "perish": true,
+              "perish_reason": "You threatened an injured worker. Karl's union rep called Gunnar within the hour, and Småstad Paper can't afford a reporter the mill workers won't talk to."
             },
             {
               "tier": 2,
@@ -7956,7 +7958,8 @@
               "response": "The rule of law? *cold stare* You're lecturing ME about ethics? In MY newsroom? Interview's over. Get back to your desk.",
               "expression": "hostile",
               "feedback": "Terminated. You moralized your own boss.",
-              "note": "Get back to your desk"
+              "note": "Get back to your desk",
+              "perish_reason": "You lectured Gunnar about the rule of law — in his own newsroom. He cleared your desk before lunch."
             },
             {
               "tier": 2,
@@ -19705,7 +19708,9 @@
               "response": "I don't know anything about Lindqvist's finances. I drive a ferry. You want corruption, ask someone else. I just want to do my job.",
               "expression": "hostile",
               "feedback": "Complete shutdown. You accused without evidence and he retreated.",
-              "note": "Complete shutdown"
+              "note": "Complete shutdown",
+              "perish": true,
+              "perish_reason": "You accused the harbor master of taking bribes — with nothing to back it up. Bengt repeated your question at the harbor café, and by evening Lindqvist's lawyer had called Ragnar."
             },
             {
               "tier": 2,
@@ -20825,7 +20830,7 @@
     }
   },
   {
-    "id": "strejkhotet",
+    "id": "strejkhotet_kust",
     "title": "The Strike Threat",
     "description": "Dock workers are threatening to strike over safety conditions. The union representative says management is ignoring their demands.",
     "lead_text": "The dock crane hasn't been inspected in two years. The platform is cracked.",
@@ -21581,7 +21586,7 @@
     }
   },
   {
-    "id": "forsakringsfusket",
+    "id": "forsakringsfusket_kust",
     "title": "The Insurance Job",
     "description": "A fishing boat sank under suspicious circumstances. The insurance claim was filed before the salvage report was complete.",
     "lead_text": "Svensson's boat sank in flat calm. Insurance paid in two weeks. Something's off.",

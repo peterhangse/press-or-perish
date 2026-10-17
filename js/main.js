@@ -21,6 +21,10 @@ import * as AudioManager from './engine/audio-manager.js';
 import * as SFX from './engine/sfx-engine.js';
 import * as Achievements from './engine/achievements.js';
 import * as AchievementsUI from './ui/achievements-ui.js';
+import * as InterviewEngine from './engine/interview-engine.js';
+import * as Settings from './engine/settings.js';
+import * as SettingsUI from './ui/settings-ui.js';
+import * as Keyboard from './ui/keyboard.js';
 
 // — Game data cache —
 let gameData = null;
@@ -101,6 +105,10 @@ async function boot() {
   // Add achievements button (visible across all screens)
   AchievementsUI.addAchievementButton();
 
+  // Settings (gear) button + keyboard controls
+  SettingsUI.addSettingsButton();
+  Keyboard.init();
+
   // Add dev skip buttons
   addDevButtons();
 
@@ -120,6 +128,10 @@ async function boot() {
       revealEl.classList.add('visible');
       if (muteBtn) muteBtn.style.display = '';
       AchievementsUI.showButton();
+      SettingsUI.showButton();
+      document.getElementById('btn-continue')?.offsetParent
+        ? document.getElementById('btn-continue').focus()
+        : document.getElementById('btn-new-run')?.focus();
       // Show dev buttons
       const devBtn = document.getElementById('dev-skip-btn');
       if (devBtn) devBtn.style.display = '';
@@ -128,6 +140,7 @@ async function boot() {
 
   // Wire onboarding complete event
   document.addEventListener('onboarding-complete', (e) => {
+    try { localStorage.setItem('pop_intro_seen', 'true'); } catch { /* ignore */ }
     const name = e.detail?.playerName || '';
     if (name) {
       state.playerName = name;
@@ -179,12 +192,27 @@ function scaleCanvas() {
   // Update the CSS custom property — everything keyed to --canvas-w adapts
   document.documentElement.style.setProperty('--canvas-w', newW + 'px');
   wrapper.style.transform = `translate(-50%, -50%) scale(${s})`;
+
+  // Larger text automatically when the game is drawn small (phones)
+  SettingsUI.applyDisplaySettings(s);
 }
 
 /**
  * Start a new run (skip onboarding + day zero)
  */
 function startNewRun() {
+  // First time ever: New Game plays the story intro + tutorial day instead of skipping it
+  let firstTime = false;
+  try {
+    firstTime = !localStorage.getItem('pop_intro_seen') && !localStorage.getItem('pop_run_count');
+  } catch { /* storage unavailable — treat as returning player */ }
+  if (firstTime) {
+    GameState.clearSave();
+    refreshContinueButton();
+    startTutorial();
+    return;
+  }
+
   // Clear any existing save — fresh run
   GameState.clearSave();
   refreshContinueButton();
@@ -290,7 +318,7 @@ function startDayZeroInterview(story) {
     state.q2Choice = result.q2Index;
     state.baseValue = story.base_value || 0;
     showDayZeroPublish(story, result);
-  }, { disabledArchetypes: ['pressure', 'silence'], townConfig: getTownConfig() });
+  }, { disabledArchetypes: ['pressure', 'silence'], townConfig: getTownConfig(), allowPerish: false });
 }
 
 /** Day Zero publish — same as normal but leads to competitor shock */
@@ -376,15 +404,16 @@ function showDayZeroResults(story, interviewResult) {
 
 /**
  * Start a new day
+ * @param {number} dayNum
+ * @param {Object} [opts]
+ * @param {boolean} [opts.resume] - keep today's saved progress (leads already dealt)
  */
-function startDay(dayNum) {
+function startDay(dayNum, opts = {}) {
   state.day = dayNum;
-  GameState.resetDay(state);
+  if (!opts.resume) GameState.resetDay(state);
 
-  // Auto-save at the start of each real day (skip Day Zero)
-  if (dayNum >= 1) {
-    GameState.saveToLocalStorage(state);
-  }
+  // Save at the start of each real day (skip Day Zero)
+  if (dayNum >= 1) GameState.saveToLocalStorage(state);
 
   // Update persistent UI
   Components.updateWeekStrip(state.day, state.dayHistory);
@@ -394,7 +423,6 @@ function startDay(dayNum) {
   // Show day transition
   ScreenManager.switchTo('transition', true);
   TransitionScreen.show(state.day, state.deficit, () => {
-    // After transition, show desk
     showDesk();
   }, { townConfig: getTownConfig() });
 }
@@ -403,10 +431,17 @@ function startDay(dayNum) {
  * Show the morning desk with leads
  */
 function showDesk() {
-  // Generate today's leads (filtered by current town)
   const townStories = getTownStories();
-  const leads = DayGenerator.generateDayLeads(state.day, townStories, state.usedStoryIds);
-  state.todayLeads = leads.map(l => l.id);
+
+  // Re-use today's leads if they were already dealt (reloading must not re-deal the desk)
+  let leads = (state.todayLeads || [])
+    .map(id => townStories.find(s => s.id === id))
+    .filter(Boolean);
+  if (leads.length === 0) {
+    leads = DayGenerator.generateDayLeads(state.day, townStories, state.usedStoryIds, state.carryOverLeadId);
+    state.todayLeads = leads.map(l => l.id);
+    GameState.saveToLocalStorage(state);
+  }
 
   // Get boss note for today
   const bossNote = getBossNote(state.day, state.deficit);
@@ -416,7 +451,17 @@ function showDesk() {
   Components.updateClock('desk');
   DeskScreen.render(leads, state.day, bossNote, (selectedStory) => {
     startInterview(selectedStory);
-  }, getTownConfig());
+  }, getTownConfig(), { carryOverId: state.carryOverLeadId });
+}
+
+/** Build the NPC object for a story (falls back to the story's own fields) */
+function npcFor(story) {
+  return DataLoader.getNPC(gameData.npcs, story.npc_id) || {
+    id: story.npc_id,
+    name: story.npc_name || 'Unknown',
+    title: story.npc_title || '',
+    initial_demeanor: 'Guarded',
+  };
 }
 
 /**
@@ -424,64 +469,100 @@ function showDesk() {
  */
 function startInterview(story) {
   state.selectedLead = story.id;
-  state.usedStoryIds.push(story.id);
+  if (!state.usedStoryIds.includes(story.id)) state.usedStoryIds.push(story.id);
+  GameState.saveToLocalStorage(state);
 
-  // Find NPC for this story
-  const npc = DataLoader.getNPC(gameData.npcs, story.npc_id) || {
-    id: story.npc_id,
-    name: story.npc_name || 'Unknown',
-    title: story.npc_title || '',
-    initial_demeanor: 'Guarded',
-  };
+  // Resumed after a reload with the opening question already asked: only that approach is open
+  const locked = state.q1Choice;
+  const disabled = locked ? ['friendly', 'direct', 'pressure', 'silence'].filter(a => a !== locked) : [];
 
   // Switch to interview
   ScreenManager.switchTo('interview', true);
   Components.updateClock('interview');
 
-  InterviewScreen.start(story, npc, (result) => {
-    // Interview complete — store results
-    state.tierReached = result.tier;
-    state.pointsEarned = result.points;
-    state.q1Choice = result.q1Archetype;
-    state.q2Choice = result.q2Index;
-    state.baseValue = story.base_value;
-
-    // Instant perish — boss fires you on the spot
-    if (result.perish) {
-      GameState.recordDay(state);
+  InterviewScreen.start(story, npcFor(story), (result) => {
+    // Player clicked "Write article" (or "..." after being fired)
+    if (state.dayResolved?.perish) {
+      checkAndShowAchievements('day_end');
       showGameOver();
       return;
     }
-
-    // Move to publish
-    showPublish(story, result);
-  }, { townConfig: getTownConfig() });
+    showPublish(story);
+  }, {
+    townConfig: getTownConfig(),
+    disabledArchetypes: disabled,
+    npcMemory: GameState.npcMemoryLine(state, story.npc_id),
+    onQ1: (archetype) => {
+      state.q1Choice = archetype;
+      GameState.saveToLocalStorage(state);
+    },
+    onResolved: (result) => resolveDay(story, result),
+  });
 }
 
 /**
- * Show the publish/headline screen
+ * Settle the day the moment the follow-up question is answered.
+ * Competitor score, scoop and deficit are decided and saved here, so a reload
+ * cannot undo the answer.
  */
-function showPublish(story, interviewResult) {
-  // Generate competitor score
-  state.competitorScore = CompetitorAI.generateCompetitorScore(state.day, getTownConfig());
-
-  // Headline scoring disabled — auto-pick first headline
-  state.headlineChosen = 0;
+function resolveDay(story, result) {
+  state.dayResolved = {
+    tier: result.tier,
+    points: result.points,
+    q1Bonus: result.q1Bonus,
+    q2Bonus: result.q2Bonus,
+    perish: !!result.perish,
+    q1Archetype: result.q1Archetype,
+    q2Index: result.q2Index,
+  };
+  state.tierReached = result.tier;
+  state.pointsEarned = result.points;
+  state.q1Choice = result.q1Archetype;
+  state.q2Choice = result.q2Index;
+  state.baseValue = story.base_value;
+  state.headlineChosen = 0; // headline choice is not part of the game (publish screen bypassed)
   state.headlineBonus = 0;
+  GameState.rememberNpc(state, story.npc_id, story.title, result.tier, result.expression);
+
+  // Instant perish — the run ends now, whatever happens next
+  if (result.perish) {
+    state.perishCause = result.perishReason || null;
+    GameState.recordDay(state);
+    GameState.clearSave();
+    return;
+  }
+
+  // Competitor: base score, plus a scoop if you passed on a stronger lead
+  const townStories = getTownStories();
+  const offered = state.todayLeads.map(id => townStories.find(s => s.id === id)).filter(Boolean);
+  const scoopStory = CompetitorAI.findScoop(offered, story);
+  state.competitorScore = CompetitorAI.generateCompetitorScore(state.day, getTownConfig())
+    + (scoopStory ? CompetitorAI.SCOOP_RULES.bonus : 0);
+  state.scoop = scoopStory
+    ? { storyId: scoopStory.id, title: scoopStory.title, headline: InterviewEngine.getHeadlines(scoopStory, 2)?.[0]?.text || scoopStory.title }
+    : null;
+  const carry = CompetitorAI.findCarryOver(offered, story, scoopStory?.id);
+  state.carryOverLeadId = carry ? carry.id : null;
 
   // Calculate deficit
+  state.deficitBefore = state.deficit;
   const delta = ScoringEngine.calculateDeficitDelta(state.pointsEarned, state.competitorScore);
-  const deficitBefore = state.deficit;
   state.deficit = ScoringEngine.applyDeficit(state.deficit, delta);
-
-  // Record in history
   GameState.recordDay(state);
 
-  // Check daily achievements
-  checkAndShowAchievements('day_end');
+  if (GameState.isPerished(state)) {
+    GameState.clearSave(); // fired — reloading can't bring the run back
+  } else {
+    GameState.saveToLocalStorage(state);
+  }
+}
 
-  // Skip sleep screen — go straight to results
-  showResults(story, interviewResult, deficitBefore);
+/**
+ * After "Write article": achievements, then the results screen
+ */
+function showPublish(story) {
+  checkAndShowAchievements('day_end');
+  showResults(story, state.dayResolved, state.deficitBefore);
 }
 
 /**
@@ -493,15 +574,18 @@ function showResults(story, interviewResult, deficitBefore) {
   Components.updateDeficitMeter(deficitBefore);
   Components.updateWeekStrip(state.day, state.dayHistory);
 
-  const playerHeadlineText = interviewResult.headlines[state.headlineChosen]?.text || story.title;
+  const headlines = InterviewEngine.getHeadlines(story, interviewResult.tier) || [];
+  const playerHeadlineText = headlines[state.headlineChosen || 0]?.text || story.title;
   const tc = getTownConfig();
-  const competitorHeadline = CompetitorAI.getCompetitorHeadline(state.competitorScore, tc);
+  const competitorHeadline = state.scoop?.headline
+    || CompetitorAI.getCompetitorHeadline(state.competitorScore, tc);
 
   ResultsScreen.render({
     playerHeadline: playerHeadlineText,
-    playerScore: state.pointsEarned,
+    playerScore: interviewResult.points,
     competitorScore: state.competitorScore,
     competitorHeadline,
+    scoopNote: state.scoop ? `The lead you passed on: "${state.scoop.title}"` : '',
     deficitBefore,
     deficitAfter: state.deficit,
     baseValue: story.base_value,
@@ -509,9 +593,9 @@ function showResults(story, interviewResult, deficitBefore) {
     q1Bonus: interviewResult.q1Bonus || 0,
     q2Bonus: interviewResult.q2Bonus || 0,
     headlineBonus: state.headlineBonus || 0,
-    tier: state.tierReached,
+    tier: interviewResult.tier,
     day: state.day,
-    bossQuote: getStoryBossQuote(story, state.tierReached) || getBossQuote(state.deficit, state.day),
+    bossQuote: getStoryBossQuote(story, interviewResult.tier) || getBossQuote(state.deficit, state.day),
     paperName: tc?.newspaperName || 'Småstad Paper',
     bossName: tc?.bossName || 'Gunnar',
     competitorName: tc?.competitorName || 'Regionbladet',
@@ -560,6 +644,7 @@ function showGameOver() {
 
   const perishRunStats = getRunStats();
   GameOverScreen.showPerished({
+    cause: state.perishCause || '',
     finalDeficit: state.deficit,
     daysCompleted: state.day,
     dayHistory: state.dayHistory,
@@ -937,8 +1022,20 @@ function resumeSavedGame() {
   // Switch to game soundtrack (looped)
   AudioManager.play('game');
 
-  // Jump straight to the saved day
-  startDay(saveData.day);
+  Components.updateWeekStrip(state.day, state.dayHistory);
+  Components.updateDeficitMeter(state.dayResolved ? state.deficitBefore : state.deficit);
+
+  // Pick up exactly where the save left off
+  const story = state.selectedLead ? getTownStories().find(s => s.id === state.selectedLead) : null;
+  if (story && state.dayResolved) {
+    // The day was already settled — show its results again
+    showResults(story, state.dayResolved, state.deficitBefore);
+  } else if (story) {
+    // A lead was picked: back into the same interview (opening question locked if already asked)
+    startInterview(story);
+  } else {
+    startDay(saveData.day, { resume: true });
+  }
 }
 
 /**

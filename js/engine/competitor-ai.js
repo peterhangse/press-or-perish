@@ -34,6 +34,37 @@ export function generateCompetitorScore(day, townConfig) {
 }
 
 /**
+ * Scoops: when you pass on a strong lead that is worth more than the one you
+ * chose, the competitor runs it and gets a small boost. You only ever see
+ * their headline — never what the story was worth.
+ */
+export const SCOOP_RULES = { minBase: 6, bonus: 1, carryOverMinBase: 4 };
+
+/**
+ * Find the lead the competitor runs today (or null).
+ * @param {Array} offered - today's lead story objects
+ * @param {Object} chosen - the story the player picked
+ */
+export function findScoop(offered, chosen) {
+  const passed = offered.filter(s =>
+    s.id !== chosen.id &&
+    s.base_value >= SCOOP_RULES.minBase &&
+    s.base_value > chosen.base_value);
+  if (!passed.length) return null;
+  const best = Math.max(...passed.map(s => s.base_value));
+  return pickRandom(passed.filter(s => s.base_value === best));
+}
+
+/**
+ * Pick one decent lead the player passed on that stays open tomorrow (or null).
+ */
+export function findCarryOver(offered, chosen, scoopId) {
+  const passed = offered.filter(s =>
+    s.id !== chosen.id && s.id !== scoopId && s.base_value >= SCOOP_RULES.carryOverMinBase);
+  return passed.length ? pickRandom(passed) : null;
+}
+
+/**
  * Get competitor headline text (flavor)
  * @param {number} score - Competitor's score today
  * @param {Object} [townConfig] - Town config with competitorHeadlines

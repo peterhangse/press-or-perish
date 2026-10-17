@@ -4,7 +4,8 @@
  *
  * Day 1-2: mostly easy leads (base 2-4)
  * Day 3:   mix of easy + medium (base 3-6)
- * Day 4-5: hard leads dominate (base 5-8)
+ * Day 4-5: hard leads dominate (base 5-8); 'expert' and 'elite' stories
+ *          (Kuststad's toughest) join the hard pool on these days
  *
  * 8 leads per day, 3 source types mixed
  */
@@ -33,15 +34,20 @@ export function generateDayZeroLeads(allStories) {
  * @param {number} day - Current day (1-5)
  * @param {Array} allStories - Full stories array (already filtered by town)
  * @param {Array} usedIds - Already-used story IDs this run
+ * @param {string} [carryOverId] - A lead passed on yesterday that is still open; always dealt again
  * @returns {Array} 8 story objects for today's desk
  */
-export function generateDayLeads(day, allStories, usedIds) {
-  const available = allStories.filter(s => !usedIds.includes(s.id));
+export function generateDayLeads(day, allStories, usedIds, carryOverId = null) {
+  const carryOver = carryOverId
+    ? allStories.find(s => s.id === carryOverId && !usedIds.includes(s.id))
+    : null;
+  const available = allStories.filter(s => !usedIds.includes(s.id) && s !== carryOver);
 
   // Difficulty pools
+  const topTier = day >= 4 ? ['hard', 'expert', 'elite'] : ['hard'];
   const easy   = available.filter(s => s.difficulty === 'easy');
   const medium = available.filter(s => s.difficulty === 'medium');
-  const hard   = available.filter(s => s.difficulty === 'hard');
+  const hard   = available.filter(s => topTier.includes(s.difficulty));
 
   let pool;
   switch (day) {
@@ -64,14 +70,13 @@ export function generateDayLeads(day, allStories, usedIds) {
       pool = buildPool(easy, 3, medium, 3, hard, 2);
   }
 
-  // Ensure exactly 8 leads, fill gaps from any pool
-  while (pool.length < 8) {
-    const filler = available.find(s => !pool.includes(s));
-    if (filler) pool.push(filler);
-    else break;
-  }
+  // Ensure exactly 8 leads, fill gaps from any pool (random, not file order)
+  const fillers = shuffle(available.filter(s => !pool.includes(s)));
+  while (pool.length < 8 && fillers.length) pool.push(fillers.pop());
 
-  return shuffle(pool).slice(0, 8);
+  const leads = shuffle(pool).slice(0, carryOver ? 7 : 8);
+  if (carryOver) leads.splice(Math.floor(Math.random() * (leads.length + 1)), 0, carryOver);
+  return leads;
 }
 
 /**

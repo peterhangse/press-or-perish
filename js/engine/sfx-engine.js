@@ -7,14 +7,39 @@
  */
 
 import { isMuted } from './audio-manager.js';
+import * as Settings from './settings.js';
 
 // ─── Shared context ──────────────────────────────────────────
 let ctx = null;
+let master = null; // master gain, scaled by the SFX volume setting
 
 function getCtx() {
-  if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
-  if (ctx.state === 'suspended') ctx.resume();
+  if (!ctx) {
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    master = ctx.createGain();
+    master.gain.value = sfxVolume();
+    master.connect(ctx.destination);
+  }
+  if (ctx.state === 'suspended' && !document.hidden) ctx.resume();
   return ctx;
+}
+
+function sfxVolume() {
+  const v = Settings.get('sfxVolume');
+  return typeof v === 'number' ? v : 1;
+}
+
+Settings.onChange((key) => {
+  if (key === 'sfxVolume' && master) master.gain.value = sfxVolume();
+});
+
+// Suspend synthesized audio while the tab is hidden
+if (typeof document !== 'undefined') {
+  document.addEventListener('visibilitychange', () => {
+    if (!ctx) return;
+    if (document.hidden) ctx.suspend().catch(() => {});
+    else ctx.resume().catch(() => {});
+  });
 }
 
 // ─── Helpers ─────────────────────────────────────────────────
@@ -28,7 +53,7 @@ function rnd(freq) {
 function gain(ac, vol) {
   const g = ac.createGain();
   g.gain.value = vol;
-  g.connect(ac.destination);
+  g.connect(master || ac.destination);
   return g;
 }
 
@@ -402,7 +427,7 @@ const catalogue = {
  * @param {string} name - key from catalogue
  */
 export function play(name) {
-  if (isMuted()) return;
+  if (isMuted() || sfxVolume() <= 0) return;
   const fn = catalogue[name];
   if (fn) fn();
 }
